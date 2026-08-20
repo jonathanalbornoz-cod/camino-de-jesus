@@ -2,7 +2,7 @@
    Comparando precios — caché offline de la app.
    Vive en la raíz del proyecto para alcanzar también a ../comun/.
 --------------------------------------------------------------- */
-var CACHE = "comparando-precios-v1";
+var CACHE = "comparando-precios-v2";
 
 var ARCHIVOS = [
   "./app/",
@@ -12,7 +12,13 @@ var ARCHIVOS = [
   "./comun/estilos.css",
   "./comun/comparador.js",
   "./comun/interfaz.js",
-  "./web/index.html"
+  "./comun/grafica.js",
+  "./comun/fuentes.js",
+  "./datos/catalogo.js",
+  "./web/index.html",
+  "./web/ofertas.html",
+  "./web/ofertas.css",
+  "./web/ofertas.js"
 ];
 
 self.addEventListener("install", function (evento) {

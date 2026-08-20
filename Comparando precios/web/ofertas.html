@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ofertas de electrónica — Comparando precios</title>
+  <meta name="description" content="Ofertas de artículos electrónicos comparadas tienda por tienda: precios, historial con gráfica y reseñas consolidadas." />
+  <link rel="stylesheet" href="../comun/estilos.css" />
+  <link rel="stylesheet" href="ofertas.css" />
+</head>
+<body>
+  <header class="barra-superior">
+    <div class="contenedor">
+      <span aria-hidden="true">🏷️</span>
+      <h1>Comparando precios</h1>
+      <nav>
+        <a href="index.html">Inicio</a>
+        <a href="../app/">App</a>
+        <a href="#fuentes">Fuentes</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="aviso-demo">
+    <div class="contenedor">
+      <strong>Datos de demostración.</strong>
+      Los precios, existencias y valoraciones de esta página son inventados para
+      mostrar cómo funcionaría la comparación. No son precios reales de las
+      tiendas nombradas. Los enlaces llevan al buscador de cada tienda.
+    </div>
+  </div>
+
+  <main class="contenedor">
+    <section class="cifras" aria-label="Resumen del catálogo">
+      <div class="cifra tarjeta">
+        <div class="cifra-etiqueta">Artículos</div>
+        <div class="cifra-valor" id="cifra-articulos">—</div>
+        <div class="cifra-nota" id="cifra-articulos-nota"></div>
+      </div>
+      <div class="cifra tarjeta">
+        <div class="cifra-etiqueta">Ofertas activas</div>
+        <div class="cifra-valor" id="cifra-ofertas">—</div>
+        <div class="cifra-nota">precios por debajo del de lista</div>
+      </div>
+      <div class="cifra tarjeta">
+        <div class="cifra-etiqueta">Tiendas comparadas</div>
+        <div class="cifra-valor" id="cifra-tiendas">—</div>
+        <div class="cifra-nota" id="cifra-tiendas-nota"></div>
+      </div>
+      <div class="cifra tarjeta">
+        <div class="cifra-etiqueta">Mayor descuento</div>
+        <div class="cifra-valor" id="cifra-descuento">—</div>
+        <div class="cifra-nota" id="cifra-descuento-nota"></div>
+      </div>
+    </section>
+
+    <form class="filtros" id="filtros" autocomplete="off" role="search">
+      <div class="campo campo-buscar">
+        <label for="f-buscar">Buscar</label>
+        <input type="search" id="f-buscar" placeholder="Ej.: audífonos, Samsung, SSD" />
+      </div>
+      <div class="campo">
+        <label for="f-categoria">Categoría</label>
+        <select id="f-categoria"></select>
+      </div>
+      <div class="campo">
+        <label for="f-tienda">Tienda</label>
+        <select id="f-tienda"></select>
+      </div>
+      <div class="campo">
+        <label for="f-orden">Ordenar por</label>
+        <select id="f-orden">
+          <option value="descuento">Mayor descuento</option>
+          <option value="precio">Menor precio</option>
+          <option value="nota">Mejor valorados</option>
+          <option value="nombre">Nombre</option>
+        </select>
+      </div>
+    </form>
+
+    <p class="conteo" id="conteo" role="status"></p>
+    <section class="rejilla" id="rejilla" aria-label="Artículos en oferta"></section>
+
+    <section class="detalle" id="detalle" hidden aria-live="polite"></section>
+
+    <section class="bloque fuentes" id="fuentes">
+      <h3>De dónde saldrían los precios reales</h3>
+      <p class="sub">
+        Cada tienda tiene su propia vía legal para entregar precios. Las marcadas
+        como «sin API» solo se pueden integrar por su programa de afiliados o por
+        un acuerdo directo.
+      </p>
+      <div style="overflow-x:auto">
+        <table id="tabla-fuentes">
+          <thead>
+            <tr><th>Tienda</th><th>País</th><th>Acceso</th><th>Cómo se conecta</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="contenedor">
+      Comparando precios — proyecto de Jonathan Albornoz ·
+      <a href="index.html">Inicio</a> ·
+      <a href="../app/">App</a>
+      <p id="pie-generado"></p>
+    </div>
+  </footer>
+
+  <script src="../comun/comparador.js"></script>
+  <script src="../comun/grafica.js"></script>
+  <script src="../comun/fuentes.js"></script>
+  <script src="../datos/catalogo.js"></script>
+  <script src="ofertas.js"></script>
+</body>
+</html>

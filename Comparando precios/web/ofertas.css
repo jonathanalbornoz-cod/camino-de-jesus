@@ -1,0 +1,277 @@
+/* ---------------------------------------------------------------
+   Comparando precios — estilos de la página de ofertas.
+   Se apoya en comun/estilos.css (tokens, tarjetas, botones).
+--------------------------------------------------------------- */
+.contenedor { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 20px; }
+
+/* ---- Barra superior ---- */
+.barra-superior {
+  background: var(--verde);
+  color: #fff;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+}
+.barra-superior .contenedor {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+.barra-superior h1 { font-size: 1.15rem; }
+.barra-superior nav { margin-left: auto; display: flex; gap: 14px; }
+.barra-superior a { color: #fff; text-decoration: none; font-size: 0.9rem; opacity: 0.92; }
+.barra-superior a:hover { text-decoration: underline; }
+
+/* ---- Aviso de datos inventados ---- */
+.aviso-demo {
+  background: #fff4d6;
+  border-bottom: 1px solid #f0d99b;
+  color: #6b4e00;
+  font-size: 0.9rem;
+}
+.aviso-demo .contenedor { padding-top: 10px; padding-bottom: 10px; }
+.aviso-demo strong { color: #513a00; }
+
+/* ---- Cifras de cabecera ---- */
+.cifras {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(2, 1fr);
+  margin: 22px 0;
+}
+@media (min-width: 720px) { .cifras { grid-template-columns: repeat(4, 1fr); } }
+.cifra { padding: 14px 16px; }
+.cifra-etiqueta { font-size: 0.82rem; color: var(--gris); }
+.cifra-valor { font-size: 1.7rem; font-weight: 700; line-height: 1.15; }
+.cifra-nota { font-size: 0.8rem; color: var(--gris); }
+
+/* ---- Filtros: una sola fila sobre el contenido ---- */
+.filtros {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  margin-bottom: 18px;
+}
+.filtros .campo { margin-bottom: 0; flex: 1 1 170px; min-width: 0; }
+.filtros .campo-buscar { flex: 2 1 260px; }
+
+/* ---- Catálogo ---- */
+.conteo { color: var(--gris); font-size: 0.9rem; margin-bottom: 10px; }
+.pista-desliza { color: var(--gris); font-size: 0.82rem; margin-top: 6px; }
+.rejilla {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+.producto {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 16px;
+  text-align: left;
+  cursor: pointer;
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  border-radius: var(--radio);
+  box-shadow: 0 6px 20px var(--sombra);
+  transition: transform 0.12s ease, box-shadow 0.12s ease;
+}
+.producto:hover, .producto:focus-visible {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 26px rgba(20, 30, 45, 0.16);
+  outline: none;
+  border-color: var(--verde-claro);
+}
+.producto.elegido { border-color: var(--verde); box-shadow: 0 0 0 2px rgba(31, 138, 95, 0.25); }
+.producto-tapa {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 116px;
+  border-radius: 10px;
+  background: #f2f5f8;
+}
+.producto-tapa svg { width: 78px; height: 78px; }
+.insignia {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background: var(--rojo);
+  color: #fff;
+  font-size: 0.76rem;
+  font-weight: 700;
+  border-radius: 999px;
+  padding: 3px 9px;
+}
+.producto-marca { font-size: 0.78rem; color: var(--gris); text-transform: uppercase; letter-spacing: 0.04em; }
+.producto-nombre { font-weight: 700; font-size: 0.98rem; }
+.producto-precios { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.precio-actual { font-size: 1.35rem; font-weight: 700; }
+.precio-lista { color: var(--gris); text-decoration: line-through; font-size: 0.9rem; }
+.producto-pie {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.83rem;
+  color: var(--gris);
+  margin-top: auto;
+}
+.producto-pie .chispa { margin-left: auto; }
+
+/* ---- Estrellas ---- */
+.estrellas { color: #eda100; letter-spacing: 1px; }
+.estrellas-vacia { color: #d8d8d2; }
+
+/* ---- Detalle ---- */
+.detalle { margin-top: 34px; scroll-margin-top: 70px; }
+.detalle[hidden] { display: none; }
+.detalle-cabecera {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-bottom: 18px;
+}
+.detalle-cabecera .producto-tapa { width: 130px; height: 130px; flex: none; }
+.detalle-titulo { flex: 1 1 260px; min-width: 0; }
+.detalle-titulo h2 { font-size: 1.5rem; }
+.hero-precio { font-size: 2.6rem; font-weight: 700; line-height: 1.1; }
+.hero-desde { font-size: 0.85rem; color: var(--gris); }
+.cerrar-detalle { margin-left: auto; }
+
+.especificaciones { display: grid; gap: 6px 18px; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); margin-top: 12px; }
+.especificacion { display: flex; justify-content: space-between; gap: 10px; border-bottom: 1px dashed var(--linea); padding: 4px 0; font-size: 0.9rem; }
+.especificacion span:first-child { color: var(--gris); flex: none; }
+.especificacion span:last-child { text-align: right; }
+
+.bloque { margin-top: 22px; }
+.bloque h3 { font-size: 1.12rem; margin-bottom: 4px; }
+.bloque .sub { color: var(--gris); font-size: 0.88rem; margin-bottom: 12px; }
+
+/* ---- Comparación lado a lado ---- */
+.columnas {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+  scroll-snap-type: x proximity;
+}
+.columna {
+  flex: 0 0 192px;
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--linea);
+  border-radius: 12px;
+  padding: 14px;
+  background: var(--papel);
+}
+.columna.mejor { border-color: var(--verde); background: #f2fbf6; }
+.columna-tienda { display: flex; align-items: center; gap: 8px; font-weight: 700; font-size: 0.92rem; }
+.sello {
+  width: 26px; height: 26px; flex: none;
+  border-radius: 7px;
+  display: grid; place-items: center;
+  color: #fff; font-size: 0.78rem; font-weight: 700;
+}
+.columna-precio { font-size: 1.3rem; font-weight: 700; margin-top: 10px; }
+.columna-envio { font-size: 0.8rem; color: var(--gris); }
+.columna-medida { height: 6px; border-radius: 3px; background: #eef1f4; margin: 10px 0 8px; overflow: hidden; }
+.columna-medida span { display: block; height: 100%; border-radius: 3px; background: var(--gris); }
+.columna.mejor .columna-medida span { background: var(--verde); }
+.columna-dato { font-size: 0.82rem; color: var(--gris); display: flex; justify-content: space-between; gap: 6px; padding: 2px 0; }
+.columna .ir {
+  margin-top: 10px;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--verde);
+  border: 1px solid var(--linea);
+  border-radius: 8px;
+  padding: 7px 8px;
+}
+.columna.mejor .ir { background: var(--verde); color: #fff; border-color: var(--verde); }
+
+/* ---- Estados (siempre con ícono y palabra, nunca solo color) ---- */
+.estado-etiqueta { font-size: 0.8rem; font-weight: 600; display: inline-flex; align-items: center; gap: 5px; }
+.estado-bueno { color: #0a7a0a; }
+.estado-medio { color: #8a6100; }
+.estado-malo { color: #b23232; }
+
+/* ---- Gráfica ---- */
+.grafica { position: relative; }
+.grafica-lienzo { position: relative; }
+.leyenda { display: flex; flex-wrap: wrap; gap: 14px; margin-bottom: 8px; }
+.leyenda-item { display: inline-flex; align-items: center; gap: 6px; font-size: 0.85rem; color: var(--tinta); }
+.leyenda-linea { width: 14px; height: 3px; border-radius: 2px; flex: none; }
+.globo {
+  position: absolute;
+  top: 6px;
+  transform: translateX(-50%);
+  background: var(--papel);
+  border: 1px solid var(--linea);
+  border-radius: 10px;
+  box-shadow: 0 8px 22px var(--sombra);
+  padding: 8px 10px;
+  pointer-events: none;
+  z-index: 3;
+  min-width: 132px;
+}
+.globo-fecha { font-size: 0.76rem; color: var(--gris); margin-bottom: 4px; }
+.globo-fila { display: flex; align-items: center; gap: 6px; font-size: 0.85rem; white-space: nowrap; }
+.globo-fila strong { font-variant-numeric: tabular-nums; }
+.globo-nombre { color: var(--gris); }
+.grafica-tabla-boton { margin-top: 10px; }
+.grafica-tabla { margin-top: 10px; overflow-x: auto; }
+.grafica-tabla table { border-collapse: collapse; width: 100%; font-size: 0.85rem; }
+.grafica-tabla th, .grafica-tabla td { border-bottom: 1px solid var(--linea); padding: 5px 8px; text-align: right; font-variant-numeric: tabular-nums; }
+.grafica-tabla tr th:first-child { text-align: left; font-weight: 600; color: var(--gris); }
+
+.resumen-precios { display: flex; gap: 18px; flex-wrap: wrap; margin-top: 12px; }
+.resumen-precios div { font-size: 0.88rem; color: var(--gris); }
+.resumen-precios strong { display: block; font-size: 1.05rem; color: var(--tinta); }
+
+/* ---- Reseñas ---- */
+.resenas { display: grid; gap: 20px; }
+@media (min-width: 780px) { .resenas { grid-template-columns: 220px 1fr; } }
+.nota-global { text-align: center; }
+.nota-global .cifra-valor { font-size: 3rem; }
+.barras { display: grid; gap: 6px; }
+.barra-fila { display: flex; align-items: center; gap: 10px; font-size: 0.85rem; }
+.barra-etiqueta { width: 54px; color: var(--gris); flex: none; }
+.barra-pista { flex: 1; height: 10px; background: #eef1f4; border-radius: 5px; overflow: hidden; }
+.barra-relleno { display: block; height: 100%; background: #2a78d6; border-radius: 5px; }
+.barra-valor { width: 94px; text-align: right; white-space: nowrap; font-variant-numeric: tabular-nums; color: var(--gris); flex: none; }
+
+.por-tienda { display: grid; gap: 8px; margin-top: 6px; }
+.por-tienda-fila { display: flex; align-items: center; gap: 10px; font-size: 0.88rem; }
+.por-tienda-fila .nombre { width: 108px; flex: none; }
+.temas { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+.tema {
+  font-size: 0.85rem;
+  border-radius: 999px;
+  padding: 5px 12px;
+  border: 1px solid var(--linea);
+  background: #f7f9fa;
+}
+.tema-pro { border-color: #bde6cf; background: #f2fbf6; }
+.tema-contra { border-color: #f3ccc8; background: #fdf4f3; }
+.tema b { font-weight: 700; }
+
+/* ---- Fuentes ---- */
+.fuentes table { border-collapse: collapse; width: 100%; font-size: 0.88rem; }
+.fuentes th, .fuentes td { text-align: left; border-bottom: 1px solid var(--linea); padding: 8px 10px; vertical-align: top; }
+.fuentes th { color: var(--gris); font-weight: 600; }
+.pastilla { font-size: 0.76rem; font-weight: 700; border-radius: 999px; padding: 2px 8px; white-space: nowrap; }
+.pastilla-oficial { background: #e6f6ec; color: #0a6b34; }
+.pastilla-afiliados { background: #fff4d6; color: #7a5800; }
+.pastilla-ninguna { background: #f1f2f4; color: #5a5f68; }
+
+footer { border-top: 1px solid var(--linea); margin-top: 40px; padding: 22px 0 40px; color: var(--gris); font-size: 0.88rem; }
+footer a { color: var(--verde); }
