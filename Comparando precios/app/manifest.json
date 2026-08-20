@@ -1,0 +1,20 @@
+{
+  "name": "Comparando precios",
+  "short_name": "Precios",
+  "description": "Compara el precio real por kilo, litro o unidad antes de comprar.",
+  "lang": "es",
+  "start_url": "./index.html",
+  "scope": "../",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f6f8fa",
+  "theme_color": "#1f8a5f",
+  "icons": [
+    {
+      "src": "icono.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ]
+}

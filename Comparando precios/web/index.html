@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Comparando precios — descubre cuál sale más barato de verdad</title>
+  <meta name="description" content="Compara el precio real por kilo, litro o unidad de cualquier producto. Sin cuentas, sin instalar nada." />
+  <link rel="stylesheet" href="../comun/estilos.css" />
+  <style>
+    .contenedor { width: 100%; max-width: 860px; margin: 0 auto; padding: 0 20px; }
+
+    .portada {
+      background: linear-gradient(155deg, #1f8a5f 0%, #34b57c 55%, #7bd6a8 100%);
+      color: #fff;
+      padding: 56px 0 44px;
+      text-align: center;
+    }
+    .portada h1 { font-size: clamp(1.9rem, 5vw, 2.8rem); margin-bottom: 12px; }
+    .portada p { font-size: 1.05rem; max-width: 34em; margin: 0 auto; opacity: 0.95; }
+    .enlaces { margin-top: 22px; display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .enlace {
+      display: inline-block;
+      text-decoration: none;
+      font-weight: 700;
+      border-radius: 10px;
+      padding: 12px 20px;
+    }
+    .enlace-claro { background: #fff; color: var(--verde); }
+    .enlace-borde { border: 2px solid rgba(255, 255, 255, 0.8); color: #fff; }
+
+    main { padding: 36px 0 56px; }
+    section + section { margin-top: 40px; }
+    h2 { font-size: 1.4rem; margin-bottom: 14px; }
+
+    .comparador { display: grid; gap: 18px; }
+    @media (min-width: 760px) {
+      .comparador { grid-template-columns: 1fr 1fr; align-items: start; }
+    }
+
+    .ventajas { list-style: none; display: grid; gap: 14px; }
+    @media (min-width: 620px) { .ventajas { grid-template-columns: repeat(3, 1fr); } }
+    .ventaja h3 { font-size: 1rem; margin-bottom: 6px; }
+    .ventaja p { color: var(--gris); font-size: 0.94rem; }
+
+    footer {
+      border-top: 1px solid var(--linea);
+      padding: 22px 0;
+      color: var(--gris);
+      font-size: 0.88rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <header class="portada">
+    <div class="contenedor">
+      <h1>Comparando precios</h1>
+      <p>
+        El envase grande no siempre es el más barato. Escribe lo que cuesta y
+        cuánto trae, y te decimos cuál conviene de verdad por kilo, litro o unidad.
+      </p>
+      <div class="enlaces">
+        <a class="enlace enlace-claro" href="#comparador">Probar ahora</a>
+        <a class="enlace enlace-borde" href="../app/">Abrir la app</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="contenedor">
+    <section id="comparador">
+      <h2>Compara aquí mismo</h2>
+      <div class="comparador" id="cp-raiz"></div>
+    </section>
+
+    <section>
+      <h2>Por qué sirve</h2>
+      <ul class="ventajas">
+        <li class="ventaja tarjeta">
+          <h3>Precio real</h3>
+          <p>Lleva todo a la misma medida: gramos a kilos, mililitros a litros y packs a unidades.</p>
+        </li>
+        <li class="ventaja tarjeta">
+          <h3>Sin cuentas ni datos</h3>
+          <p>Todo se calcula en tu navegador. Tu lista se guarda solo en tu dispositivo.</p>
+        </li>
+        <li class="ventaja tarjeta">
+          <h3>También en el supermercado</h3>
+          <p>La app funciona sin internet una vez abierta, para usarla frente a la góndola.</p>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Cómo se usa</h2>
+      <ol class="tarjeta" style="padding-left: 40px;">
+        <li>Escribe el nombre del producto y su precio total.</li>
+        <li>Indica cuánto trae y en qué unidad (g, kg, ml, L, unidades, m o cm).</li>
+        <li>Si es un pack, pon cuántos envases incluye.</li>
+        <li>Agrega el siguiente producto: la lista se ordena del más barato al más caro.</li>
+      </ol>
+    </section>
+  </main>
+
+  <footer>
+    <div class="contenedor">
+      Comparando precios — proyecto de Jonathan Albornoz.
+      <a href="../app/">Versión app</a>
+    </div>
+  </footer>
+
+  <script src="../comun/comparador.js"></script>
+  <script src="../comun/interfaz.js"></script>
+  <script>
+    Comparador.definirMoneda("$");
+    Interfaz.montar({ raiz: "#cp-raiz", clave: "comparando-precios-web" });
+  </script>
+</body>
+</html>

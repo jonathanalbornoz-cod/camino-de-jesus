@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Comparando precios">
+  <rect width="512" height="512" rx="112" fill="#1f8a5f"/>
+  <g fill="none" stroke="#ffffff" stroke-width="26" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M256 108v72"/>
+    <path d="M120 180h272"/>
+    <path d="M256 180v224"/>
+    <path d="M120 180 76 300h88z"/>
+    <path d="M392 180l-44 120h88z"/>
+    <path d="M186 404h140"/>
+  </g>
+  <circle cx="256" cy="96" r="26" fill="#ffd873"/>
+</svg>
