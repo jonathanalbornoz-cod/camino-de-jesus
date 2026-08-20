@@ -128,4 +128,7 @@ consultando cada producto una o dos veces al día y acumulando los resultados.
 - Comparar el precio con impuestos y aduana para las compras fuera del país.
 - Guardar favoritos y una lista de deseos.
 
+El registro de lo que se hizo en cada sesión, las decisiones tomadas y lo que
+quedó pendiente está en [BITACORA.md](BITACORA.md).
+
 Proyecto de Jonathan Albornoz.
