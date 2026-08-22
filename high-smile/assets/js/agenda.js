@@ -1,10 +1,10 @@
 /**
- * Sonrisa Pacífico · Formulario de agendamiento
+ * High Smile · Formulario de agendamiento
  * -------------------------------------------------------------
  * Principios aplicados:
  *  - `const` por defecto; `let` solo donde hay reasignación real.
  *  - Minimización de datos: se pide lo mínimo para poder contactar al paciente.
- *  - Sin envíos a terceros: la demo no expone datos a ningún servidor externo.
+ *  - Sin envíos a terceros: el formulario no expone datos a ningún servidor externo.
  *  - Todo lo que escribe el usuario se inserta con textContent (nunca innerHTML),
  *    de modo que no es posible inyectar HTML ni scripts.
  */
@@ -14,8 +14,8 @@
   const formulario = document.getElementById('form-cita');
   if (!formulario) { return; }
 
-  const CLAVE_ALMACEN = 'sp_datos_paciente';
-  const WHATSAPP = '573185554477';
+  const CLAVE_ALMACEN = 'hs_datos_paciente';
+  const WHATSAPP = '573158253729';
   const SALTO = String.fromCharCode(10);
 
   const pasos = Array.from(formulario.querySelectorAll('.paso-form'));
@@ -34,6 +34,8 @@
   /* ---------------------------------------------------------------
    * Utilidades
    * ------------------------------------------------------------- */
+  const traducir = (clave) => (window.HighSmile ? window.HighSmile.t(clave) : clave);
+
   const contenedorDe = (elemento) => elemento.closest('[data-campo]');
 
   const marcarError = (elemento, hayError) => {
@@ -52,7 +54,10 @@
 
   const valorRadio = (nombre) => {
     const marcado = formulario.querySelector('input[name="' + nombre + '"]:checked');
-    return marcado ? marcado.value : '';
+    if (!marcado) { return ''; }
+
+    const etiqueta = marcado.nextElementSibling;
+    return etiqueta ? limpiar(etiqueta.textContent) : marcado.value;
   };
 
   /* en-CA entrega el formato AAAA-MM-DD, ideal para <input type="date">. */
@@ -63,7 +68,9 @@
     if (partes.length !== 3) { return iso; }
 
     const fecha = new Date(Number(partes[0]), Number(partes[1]) - 1, Number(partes[2]));
-    return new Intl.DateTimeFormat('es-CO', {
+    const region = window.HighSmile && window.HighSmile.idioma() === 'en' ? 'en-GB' : 'es-CO';
+
+    return new Intl.DateTimeFormat(region, {
       weekday: 'long', day: 'numeric', month: 'long', year: 'numeric'
     }).format(fecha);
   };
@@ -82,7 +89,7 @@
 
       const partes = valor.split('-');
       const fecha = new Date(Number(partes[0]), Number(partes[1]) - 1, Number(partes[2]));
-      return fecha.getDay() !== 0; /* los domingos la clínica está cerrada */
+      return fecha.getDay() !== 0; /* los domingos no hay atención */
     },
     autorizacion: (valor, elemento) => elemento.checked
   };
@@ -110,31 +117,29 @@
   /* ---------------------------------------------------------------
    * Resumen (se construye con nodos de texto: a prueba de inyecciones)
    * ------------------------------------------------------------- */
-  const datosActuales = () => ({
-    'Nombre': limpiar(formulario.nombre.value),
-    'Celular': soloDigitos(formulario.telefono.value).replace(/^57/, ''),
-    'Correo': limpiar(formulario.correo.value) || 'No registrado',
-    'Paciente': valorRadio('paciente'),
-    'Servicio': formulario.servicio.value,
-    'Sede': valorRadio('sede'),
-    'Fecha preferida': fechaLegible(formulario.fecha.value),
-    'Franja': valorRadio('franja'),
-    'Notas': limpiar(formulario.notas.value) || 'Sin notas'
-  });
+  const datosActuales = () => [
+    ['resumen.nombre', limpiar(formulario.nombre.value)],
+    ['resumen.celular', soloDigitos(formulario.telefono.value).replace(/^57/, '')],
+    ['resumen.correo', limpiar(formulario.correo.value) || traducir('resumen.vacio.correo')],
+    ['resumen.paciente', valorRadio('paciente')],
+    ['resumen.servicio', limpiar(formulario.servicio.options[formulario.servicio.selectedIndex].textContent)],
+    ['resumen.fecha', fechaLegible(formulario.fecha.value)],
+    ['resumen.franja', valorRadio('franja')],
+    ['resumen.notas', limpiar(formulario.notas.value) || traducir('resumen.vacio.notas')]
+  ];
 
   const pintarResumen = (lista) => {
     if (!lista) { return; }
 
-    const datos = datosActuales();
     lista.textContent = '';
 
-    Object.keys(datos).forEach((etiqueta) => {
+    datosActuales().forEach((par) => {
       const fila = document.createElement('li');
       const titulo = document.createElement('span');
       const valor = document.createElement('strong');
 
-      titulo.textContent = etiqueta;
-      valor.textContent = datos[etiqueta];
+      titulo.textContent = traducir(par[0]);
+      valor.textContent = par[1];
 
       fila.appendChild(titulo);
       fila.appendChild(valor);
@@ -174,7 +179,7 @@
       aleatorios.forEach((valor, i) => { aleatorios[i] = Math.floor(Math.random() * 4294967295); });
     }
 
-    return 'SP-' + Array.from(aleatorios, (n) => alfabeto[n % alfabeto.length]).join('');
+    return 'HS-' + Array.from(aleatorios, (n) => alfabeto[n % alfabeto.length]).join('');
   };
 
   /* ---------------------------------------------------------------
@@ -222,11 +227,10 @@
    * Envío de la solicitud
    * ------------------------------------------------------------- */
   const mensajeWhatsapp = (codigo) => {
-    const datos = datosActuales();
-    const lineas = ['Hola Sonrisa Pacifico, solicite una cita desde la web.', 'Codigo: ' + codigo];
+    const lineas = [traducir('wa.saludo'), traducir('wa.codigo') + ' ' + codigo];
 
-    Object.keys(datos).forEach((etiqueta) => {
-      lineas.push(etiqueta + ': ' + datos[etiqueta]);
+    datosActuales().forEach((par) => {
+      lineas.push(traducir(par[0]) + ': ' + par[1]);
     });
 
     return 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(lineas.join(SALTO));
@@ -284,7 +288,8 @@
     } else if (accion === 'borrar') {
       borrarLocal();
       formulario.reset();
-      boton.textContent = 'Datos borrados de este dispositivo';
+      boton.textContent = traducir('form.borrado');
+      boton.removeAttribute('data-i18n');
       boton.disabled = true;
     }
   });
@@ -300,6 +305,12 @@
   formulario.addEventListener('blur', (evento) => {
     if (evento.target.name && REGLAS[evento.target.name]) { validarCampo(evento.target); }
   }, true);
+
+  /* Si el visitante cambia de idioma, se repinta el resumen visible. */
+  document.addEventListener('hs:idioma', () => {
+    if (!formulario.hidden && pasoActual === pasos.length - 1) { pintarResumen(resumen); }
+    if (confirmacion && !confirmacion.hidden) { pintarResumen(resumenFinal); }
+  });
 
   /* ---------------------------------------------------------------
    * Arranque

@@ -1,10 +1,10 @@
 /**
- * Sonrisa Pacífico · Comportamiento general del sitio
+ * High Smile · Comportamiento general del sitio
  * -------------------------------------------------------------
  * Reglas del proyecto:
  *  - `const` por defecto; `let` solo cuando el valor debe reasignarse.
- *  - Sin dependencias externas ni peticiones a terceros.
- *  - Nada de datos personales en este archivo.
+ *  - Sin dependencias externas ni peticiones automáticas a terceros.
+ *  - El mapa de Google solo se carga cuando el visitante lo autoriza.
  */
 (function () {
   'use strict';
@@ -12,9 +12,6 @@
   /* Marca que el JS está activo: sin esta clase el CSS no oculta nada. */
   document.documentElement.classList.add('con-js');
 
-  /* ---------------------------------------------------------------
-   * Utilidades
-   * ------------------------------------------------------------- */
   const $ = (selector, contexto) => (contexto || document).querySelector(selector);
   const $$ = (selector, contexto) => Array.from((contexto || document).querySelectorAll(selector));
 
@@ -53,15 +50,13 @@
   };
 
   /* ---------------------------------------------------------------
-   * Sombra de la cabecera al hacer scroll
+   * Borde de la cabecera al hacer scroll
    * ------------------------------------------------------------- */
   const activarCabecera = () => {
     const cabecera = $('#cabecera');
     if (!cabecera) { return; }
 
-    const actualizar = () => {
-      cabecera.classList.toggle('esta-fija', window.scrollY > 12);
-    };
+    const actualizar = () => { cabecera.classList.toggle('esta-fija', window.scrollY > 12); };
 
     actualizar();
     window.addEventListener('scroll', actualizar, { passive: true });
@@ -96,57 +91,6 @@
   };
 
   /* ---------------------------------------------------------------
-   * Testimonios rotativos
-   * ------------------------------------------------------------- */
-  const activarTestimonios = () => {
-    const seccion = $('.testimonios');
-    if (!seccion) { return; }
-
-    const tarjetas = $$('.testimonio', seccion);
-    const puntos = $$('.punto', seccion);
-    if (tarjetas.length === 0) { return; }
-
-    let indiceActual = 0;
-    let temporizador = 0;
-
-    const mostrar = (indice) => {
-      indiceActual = (indice + tarjetas.length) % tarjetas.length;
-
-      tarjetas.forEach((tarjeta, i) => {
-        const esActiva = i === indiceActual;
-        tarjeta.classList.toggle('esta-activo', esActiva);
-        tarjeta.hidden = !esActiva;
-      });
-
-      puntos.forEach((punto, i) => {
-        punto.setAttribute('aria-selected', String(i === indiceActual));
-      });
-    };
-
-    const detener = () => { window.clearInterval(temporizador); };
-    const arrancar = () => {
-      detener();
-      temporizador = window.setInterval(() => { mostrar(indiceActual + 1); }, 7000);
-    };
-
-    puntos.forEach((punto) => {
-      punto.addEventListener('click', () => {
-        mostrar(Number(punto.dataset.indice));
-        arrancar();
-      });
-    });
-
-    seccion.addEventListener('mouseenter', detener);
-    seccion.addEventListener('mouseleave', arrancar);
-    seccion.addEventListener('focusin', detener);
-
-    mostrar(0);
-
-    const prefiereMenosMovimiento = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!prefiereMenosMovimiento) { arrancar(); }
-  };
-
-  /* ---------------------------------------------------------------
    * Animación de entrada de las secciones
    * ------------------------------------------------------------- */
   const activarRevelado = () => {
@@ -165,60 +109,70 @@
           observador.unobserve(entrada.target);
         }
       });
-    }, { threshold: 0.15 });
+    }, { threshold: 0.12 });
 
     elementos.forEach((elemento) => { observador.observe(elemento); });
   };
 
   /* ---------------------------------------------------------------
-   * Estado «Abierto / Cerrado» según la hora de Cali (America/Bogota)
+   * Fotos de la clínica
+   * Cada marco declara `data-foto="nombre"`. Si existe el archivo
+   * assets/img/galeria/<nombre>.<ext>, se muestra en lugar del marco vacío.
+   * Así basta con copiar las fotos en esa carpeta: no hay que tocar el HTML.
+   * Mientras no existan, la consola registra un 404 por intento: es esperado.
    * ------------------------------------------------------------- */
-  const HORARIO = {
-    /* dia: [minutoApertura, minutoCierre] en minutos desde medianoche */
-    1: [420, 1140], 2: [420, 1140], 3: [420, 1140], 4: [420, 1140], 5: [420, 1140],
-    6: [480, 840],
-    0: null
-  };
+  const EXTENSIONES = ['jpg', 'png', 'webp'];
 
-  const horaEnCali = () => {
-    const formateador = new Intl.DateTimeFormat('es-CO', {
-      timeZone: 'America/Bogota',
-      weekday: 'short',
-      hour: '2-digit',
-      minute: '2-digit',
-      hour12: false
-    });
+  const buscarFoto = (marco) => {
+    const nombre = marco.dataset.foto;
+    const vacio = $('.marco__vacio', marco);
+    const alternativo = vacio ? vacio.textContent.trim() : '';
 
-    const partes = formateador.formatToParts(new Date());
-    const valor = (tipo) => {
-      const parte = partes.find((p) => p.type === tipo);
-      return parte ? parte.value : '';
+    const probar = (indice) => {
+      if (indice >= EXTENSIONES.length) { return; }
+
+      const ruta = 'assets/img/galeria/' + nombre + '.' + EXTENSIONES[indice];
+      const imagen = new Image();
+
+      imagen.onload = () => {
+        imagen.alt = alternativo;
+        marco.insertBefore(imagen, marco.firstChild);
+        if (vacio) { vacio.remove(); }
+      };
+      imagen.onerror = () => { probar(indice + 1); };
+      imagen.src = ruta;
     };
 
-    const dias = { dom: 0, lun: 1, mar: 2, mié: 3, mie: 3, jue: 4, vie: 5, sáb: 6, sab: 6 };
-    const claveDia = valor('weekday').toLowerCase().replace('.', '').slice(0, 3);
-
-    return {
-      dia: typeof dias[claveDia] === 'number' ? dias[claveDia] : new Date().getDay(),
-      minutos: (Number(valor('hour')) * 60) + Number(valor('minute'))
-    };
+    probar(0);
   };
 
-  const activarEstado = () => {
-    const contenedor = $('[data-estado]');
+  const activarFotos = () => { $$('[data-foto]').forEach(buscarFoto); };
+
+  /* ---------------------------------------------------------------
+   * Mapa bajo consentimiento
+   * El iframe de Google solo se crea cuando el visitante lo pide, así
+   * que hasta entonces no se hace ninguna petición a terceros.
+   * ------------------------------------------------------------- */
+  const activarMapa = () => {
+    const contenedor = $('[data-mapa]');
     if (!contenedor) { return; }
 
-    const texto = $('[data-estado-texto]', contenedor);
-    const ahora = horaEnCali();
-    const franja = HORARIO[ahora.dia];
-    const abierto = Boolean(franja) && ahora.minutos >= franja[0] && ahora.minutos < franja[1];
+    const boton = $('[data-mapa-cargar]', contenedor);
+    const aviso = $('[data-mapa-aviso]', contenedor);
+    if (!boton) { return; }
 
-    contenedor.classList.toggle('estado--cerrado', !abierto);
-    if (!texto) { return; }
+    boton.addEventListener('click', () => {
+      const marco = document.createElement('iframe');
 
-    texto.textContent = abierto
-      ? 'Abierto ahora · te atendemos hoy mismo'
-      : 'Cerrado ahora · agenda en línea las 24 horas';
+      marco.src = contenedor.dataset.mapaUrl;
+      marco.title = contenedor.dataset.mapaTitulo || 'Mapa';
+      marco.loading = 'lazy';
+      marco.referrerPolicy = 'no-referrer';
+      marco.setAttribute('allowfullscreen', '');
+
+      contenedor.appendChild(marco);
+      if (aviso) { aviso.remove(); }
+    });
   };
 
   /* ---------------------------------------------------------------
@@ -229,9 +183,9 @@
     activarMenu();
     activarCabecera();
     activarFaq();
-    activarTestimonios();
     activarRevelado();
-    activarEstado();
+    activarFotos();
+    activarMapa();
   };
 
   if (document.readyState === 'loading') {
