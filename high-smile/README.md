@@ -11,13 +11,15 @@ brief entregado por la clínica.
 | Dato | Valor |
 |---|---|
 | Nombre | High Smile Clínica Odontológica |
-| Dirección | Calle 14 #84a-05, Santiago de Cali, Valle del Cauca, Colombia |
-| WhatsApp / teléfono | +57 315 825 3729 |
+| Dirección | Calle 14 #84a-05, Edificio Benessere, consultorio 310 · Santiago de Cali |
+| WhatsApp | +57 315 825 3729 |
+| Teléfono | +57 300 523 9827 |
 | Correo | highsmilecali@gmail.com |
 | Instagram | [@highsmile_co](https://www.instagram.com/highsmile_co/) |
 | Facebook | [High Smile Clínica Odontológica](https://www.facebook.com/people/High-Smile-Cl%C3%ADnica-Odontol%C3%B3gica/61579892912629/) |
 | Eslogan | Cuidamos tu sonrisa con detalle y confianza |
-| Especialidades | Ortodoncia · Periodoncia · Implantes · Diseño de sonrisa |
+| Especialidades | Ortodoncia · Periodoncia · Implantología oral · Rehabilitación oral · Cirugía oral y maxilofacial · Endodoncia · Diseño de sonrisa · Limpieza dental |
+| Trayectoria | 10 años de experiencia · más de 3.000 pacientes |
 
 ---
 
@@ -39,21 +41,47 @@ Sin frameworks, sin `npm install`, sin dependencias externas: HTML, CSS y JavaSc
 
 ---
 
-## 3. Pendientes para la clínica
+## 3. Fotos e imágenes
 
-1. **Fotos.** Ver `assets/img/galeria/LEEME.md`: basta copiar las imágenes con el nombre
-   indicado y aparecen solas, sin tocar el código. Mientras no existan, se ve un marco con
-   un icono (y la consola del navegador registra un 404 por cada intento: es lo esperado).
-2. **Horario.** El sitio dice «atención con cita previa» porque el brief no traía horarios.
-   En cuanto los envíen se agregan al pie, a la barra superior y al panel de la agenda.
-3. **Textos.** La redacción es una propuesta a partir del brief; conviene que la clínica la
-   revise, sobre todo la política de privacidad antes de publicarla.
-4. **Logotipo.** El de `assets/img/logo.svg` es una reconstrucción del monograma en SVG
-   (se ve nítido a cualquier tamaño). Si tienen el original vectorial, reemplácenlo.
+Las imágenes que envió la clínica ya están en el sitio:
+
+| Archivo | Origen | Dónde aparece |
+|---|---|---|
+| `clinica.jpg` | Pieza «Sonríe con alegría colombiana» | Imagen principal del inicio |
+| `galeria-1.jpg` | Antes y después «Natural y sana» | Galería |
+| `galeria-2.jpg` | Pieza «Transforma tu sonrisa» | Galería |
+| `galeria-3.jpg` | Banner de especialidades y experiencia | Galería |
+| `galeria-4.jpg` | Foto de paciente | Galería |
+
+**Para agregar más fotos** basta con copiarlas en `assets/img/galeria/` con el nombre
+`galeria-5.jpg` y `galeria-6.jpg`: los dos marcos que hoy dicen «Próximamente» las
+muestran solas, sin tocar el código. Para pasar de seis, se duplica en `index.html` un
+bloque `<div class="marco" data-foto="galeria-7">…` y se añade su texto alternativo en
+`assets/js/i18n.js`. Detalles y tamaños recomendados en `assets/img/galeria/LEEME.md`.
+
+La galería es un mosaico por columnas: cada imagen conserva su proporción original, así
+que conviven publicaciones verticales de Instagram, banners horizontales y fotos cuadradas
+sin recortes.
 
 ---
 
-## 4. Idiomas
+## 4. Pendientes para la clínica
+
+1. **Confirmar el número principal.** El brief traía el 315 825 3729 y las piezas gráficas
+   el 300 523 9827. Hoy el sitio usa **315 825 3729 para los enlaces de WhatsApp** y muestra
+   el 300 523 9827 como teléfono. Si debe ser al revés, es un cambio de un minuto.
+2. **Horario.** El sitio dice «atención con cita previa» porque no había horarios en el
+   material. En cuanto los envíen se agregan a la barra superior, a contacto y a la agenda.
+3. **Fotos propias del consultorio y del equipo.** Las piezas actuales son material de
+   redes; una foto real del consultorio y del equipo daría más confianza que un flyer.
+4. **Textos.** La redacción es una propuesta a partir del brief y de las piezas gráficas;
+   conviene que la clínica la revise, sobre todo la política de privacidad.
+5. **Logotipo.** El de `assets/img/logo.svg` es una reconstrucción del monograma en SVG. Si
+   tienen el original vectorial, reemplácenlo.
+
+---
+
+## 5. Idiomas
 
 El selector **ES / EN** está en la cabecera de las tres páginas.
 
@@ -68,7 +96,7 @@ Para cambiar un texto: busca su clave (por ejemplo `hero.titulo1`) en `i18n.js` 
 
 ---
 
-## 5. Mapa
+## 6. Mapa
 
 La sección **Ubicación** muestra el mapa de Google centrado en la dirección de la clínica,
 pero **no lo carga hasta que el visitante pulsa «Cargar el mapa»**: así ningún tercero recibe
@@ -80,7 +108,7 @@ URL en el atributo `data-mapa-url` de `index.html`.
 
 ---
 
-## 6. Cómo verlo
+## 7. Cómo verlo
 
 **Servidor local** (recomendado):
 
@@ -95,7 +123,7 @@ python3 -m http.server 8080
 
 ---
 
-## 7. Seguridad y privacidad
+## 8. Seguridad y privacidad
 
 - **Content Security Policy** restrictiva en cada página y en `_headers`. La única excepción es
   `frame-src` para el mapa, y solo se usa tras el consentimiento del visitante.
@@ -118,7 +146,7 @@ python3 -m http.server 8080
 
 ---
 
-## 8. Convenciones de código
+## 9. Convenciones de código
 
 - **`const` por defecto, `let` solo por excepción:** en todo el JavaScript hay dos `let`
   (`pasoActual` en el formulario e `idiomaActual` en el traductor), los únicos valores que

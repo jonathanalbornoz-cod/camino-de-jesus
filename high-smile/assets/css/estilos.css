@@ -248,10 +248,26 @@ a:hover { text-decoration-color: var(--blanco); }
 .tarjeta__icono svg { width: 30px; height: 30px; }
 .enlace-tarjeta { text-decoration: none; color: inherit; display: block; }
 
-/* ---------- Galería ---------- */
-.galeria { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.galeria .marco { aspect-ratio: 1 / 1; }
+/* ---------- Galería ----------
+   Columnas tipo mosaico: cada foto conserva su proporción original, así las
+   publicaciones verticales de Instagram y los banners horizontales conviven
+   sin recortes. */
+.galeria { columns: 3; column-gap: 1rem; }
+.galeria .marco { aspect-ratio: auto; min-height: 240px; margin-bottom: 1rem; break-inside: avoid; }
+.galeria .marco img { height: auto; }
+.galeria .marco__vacio { position: static; min-height: 240px; }
 .galeria__pie { font-size: .78rem; color: var(--gris); letter-spacing: .1em; margin-top: 1.6rem; }
+
+/* ---------- Datos destacados ---------- */
+.credenciales { border: 1px solid var(--borde); }
+.credencial { display: flex; gap: 1.2rem; align-items: baseline; padding: 1.6rem; border-bottom: 1px solid var(--borde); }
+.credencial:last-child { border-bottom: 0; }
+.credencial__valor { font-size: 2rem; font-weight: 200; line-height: 1; min-width: 4.5ch; }
+.credencial__texto { color: var(--texto-suave); font-size: .95rem; }
+.cita {
+  border-left: 1px solid var(--blanco); padding: .2rem 0 .2rem 1.4rem; margin: 0 0 1.8rem;
+  font-size: 1.05rem; font-weight: 200; line-height: 1.6; color: var(--texto);
+}
 
 /* ---------- Mapa con consentimiento ---------- */
 .mapa {
@@ -409,6 +425,7 @@ a:hover { text-decoration-color: var(--blanco); }
 /* ---------- Responsive ---------- */
 @media (max-width: 1000px) {
   .heroe__grid, .contacto__grid, .agenda__grid { grid-template-columns: 1fr; }
+  .galeria { columns: 2; }
   .rejilla--4 { grid-template-columns: repeat(2, 1fr); }
   .pie__grid { grid-template-columns: repeat(2, 1fr); }
   .panel-lateral { position: static; }
@@ -429,7 +446,8 @@ a:hover { text-decoration-color: var(--blanco); }
 @media (max-width: 700px) {
   .rejilla--2, .rejilla--3, .rejilla--4, .campo--dos, .opciones, .pie__grid { grid-template-columns: 1fr; }
   .cifras { grid-template-columns: repeat(2, 1fr); }
-  .galeria { grid-template-columns: repeat(2, 1fr); }
+  .galeria { columns: 1; }
+  .credencial { flex-direction: column; gap: .3rem; }
   .barra-info__inner { justify-content: center; text-align: center; }
   .heroe__acciones .boton { width: 100%; }
   .flotante span { display: none; }

@@ -49,6 +49,7 @@
     <symbol id="i-imagen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="m4 17 5-5 4.5 4.5L16.5 14l3.5 3"/></symbol>
     <symbol id="i-corazon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-9.3A4.2 4.2 0 0 1 12 7a4.2 4.2 0 0 1 7 3.7C19 15.6 12 20 12 20z"/></symbol>
     <symbol id="i-escudo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.6-3 7.8-7 9.2-4-1.4-7-4.6-7-9.2V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-sonrisa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3.8 9.6c2.5-1.2 5.2-1.8 8.2-1.8s5.7.6 8.2 1.8c-.9 5.2-4 8.4-8.2 8.4S4.7 14.8 3.8 9.6z"/><path d="M4.4 12.4h15.2M9.2 8v4.2M14.8 8v4.2"/></symbol>
     <symbol id="i-lupa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
   </defs>
 </svg>
@@ -191,23 +192,43 @@
         <div class="rejilla rejilla--4">
           <article class="tarjeta revelar">
             <div class="tarjeta__icono"><svg aria-hidden="true"><use href="#i-brackets"></use></svg></div>
-            <h3 data-i18n="serv.ortodoncia.titulo">Ortodoncia</h3>
-            <p data-i18n="serv.ortodoncia.texto">Alineación y mordida corregidas con controles periódicos y seguimiento del avance.</p>
+            <h3 data-i18n="serv.ortodoncia.titulo">-</h3>
+            <p data-i18n="serv.ortodoncia.texto">-</p>
           </article>
           <article class="tarjeta revelar">
             <div class="tarjeta__icono"><svg aria-hidden="true"><use href="#i-encia"></use></svg></div>
-            <h3 data-i18n="serv.periodoncia.titulo">Periodoncia</h3>
-            <p data-i18n="serv.periodoncia.texto">Salud de encías y hueso: la base que sostiene una sonrisa duradera.</p>
+            <h3 data-i18n="serv.periodoncia.titulo">-</h3>
+            <p data-i18n="serv.periodoncia.texto">-</p>
           </article>
           <article class="tarjeta revelar">
             <div class="tarjeta__icono"><svg aria-hidden="true"><use href="#i-implante"></use></svg></div>
-            <h3 data-i18n="serv.implantes.titulo">Implantes</h3>
-            <p data-i18n="serv.implantes.texto">Recupera piezas perdidas con soluciones fijas, funcionales y naturales.</p>
+            <h3 data-i18n="serv.implantes.titulo">-</h3>
+            <p data-i18n="serv.implantes.texto">-</p>
+          </article>
+          <article class="tarjeta revelar">
+            <div class="tarjeta__icono"><svg aria-hidden="true"><use href="#i-diente"></use></svg></div>
+            <h3 data-i18n="serv.rehabilitacion.titulo">-</h3>
+            <p data-i18n="serv.rehabilitacion.texto">-</p>
+          </article>
+          <article class="tarjeta revelar">
+            <div class="tarjeta__icono"><svg aria-hidden="true"><use href="#i-escudo"></use></svg></div>
+            <h3 data-i18n="serv.cirugia.titulo">-</h3>
+            <p data-i18n="serv.cirugia.texto">-</p>
+          </article>
+          <article class="tarjeta revelar">
+            <div class="tarjeta__icono"><svg aria-hidden="true"><use href="#i-lupa"></use></svg></div>
+            <h3 data-i18n="serv.endodoncia.titulo">-</h3>
+            <p data-i18n="serv.endodoncia.texto">-</p>
+          </article>
+          <article class="tarjeta revelar">
+            <div class="tarjeta__icono"><svg aria-hidden="true"><use href="#i-sonrisa"></use></svg></div>
+            <h3 data-i18n="serv.diseno.titulo">-</h3>
+            <p data-i18n="serv.diseno.texto">-</p>
           </article>
           <article class="tarjeta revelar">
             <div class="tarjeta__icono"><svg aria-hidden="true"><use href="#i-brillo"></use></svg></div>
-            <h3 data-i18n="serv.diseno.titulo">Diseño de sonrisa</h3>
-            <p data-i18n="serv.diseno.texto">Armonía entre dientes, encía y rostro, planificada contigo antes de empezar.</p>
+            <h3 data-i18n="serv.limpieza.titulo">-</h3>
+            <p data-i18n="serv.limpieza.texto">-</p>
           </article>
         </div>
 
@@ -223,10 +244,22 @@
     <!-- ================= La clínica ================= -->
     <section class="seccion seccion--gris seccion--linea" id="clinica">
       <div class="contenedor heroe__grid">
-        <div class="marco marco--ancho revelar" data-foto="consultorio">
-          <div class="marco__vacio">
-            <svg aria-hidden="true"><use href="#i-imagen"></use></svg>
-            <span data-i18n="foto.consultorio">Foto del consultorio</span>
+        <div class="credenciales revelar">
+          <div class="credencial">
+            <span class="credencial__valor">10</span>
+            <span class="credencial__texto" data-i18n="cred.1">años de experiencia brindando la oportunidad de sonreír.</span>
+          </div>
+          <div class="credencial">
+            <span class="credencial__valor">3.000</span>
+            <span class="credencial__texto" data-i18n="cred.2">pacientes con casos clínicos, de Colombia y de otros países.</span>
+          </div>
+          <div class="credencial">
+            <span class="credencial__valor">8</span>
+            <span class="credencial__texto" data-i18n="cred.3">especialidades bajo un mismo techo, sin remitirte a otra clínica.</span>
+          </div>
+          <div class="credencial">
+            <span class="credencial__valor">310</span>
+            <span class="credencial__texto" data-i18n="cred.4">consultorio en el Edificio Benessere, Calle 14 #84a-05, Cali.</span>
           </div>
         </div>
 
@@ -243,7 +276,9 @@
             espacio pensado para que la visita al odontólogo deje de dar nervios.
           </p>
 
-          <ul class="contacto-lista mt-lg">
+          <blockquote class="cita mt-lg" data-i18n="clinica.cita">Nuestro compromiso es garantizar que cada tratamiento parta desde el bienestar, la funcionalidad, la estética y la naturalidad.</blockquote>
+
+          <ul class="contacto-lista">
             <li>
               <svg aria-hidden="true"><use href="#i-lupa"></use></svg>
               <span>
@@ -433,6 +468,13 @@
               </span>
             </li>
             <li>
+              <svg aria-hidden="true"><use href="#i-tel"></use></svg>
+              <span>
+                <span class="contacto-lista__titulo" data-i18n="contacto.telefono">Teléfono</span>
+                <a href="tel:+573005239827">+57 300 523 9827</a>
+              </span>
+            </li>
+            <li>
               <svg aria-hidden="true"><use href="#i-correo"></use></svg>
               <span>
                 <span class="contacto-lista__titulo" data-i18n="contacto.correo">Correo</span>
@@ -540,6 +582,7 @@
           <h3 data-i18n="pie.contacto">Contacto</h3>
           <ul>
             <li><a href="https://wa.me/573158253729" target="_blank" rel="noopener noreferrer">WhatsApp 315 825 3729</a></li>
+            <li><a href="tel:+573005239827">Tel. +57 300 523 9827</a></li>
             <li><a href="mailto:highsmilecali@gmail.com">highsmilecali@gmail.com</a></li>
             <li><a href="https://www.instagram.com/highsmile_co/" target="_blank" rel="noopener noreferrer">Instagram @highsmile_co</a></li>
             <li><a href="https://www.facebook.com/people/High-Smile-Cl%C3%ADnica-Odontol%C3%B3gica/61579892912629/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
