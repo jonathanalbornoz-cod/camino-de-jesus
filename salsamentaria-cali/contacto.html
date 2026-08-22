@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="es-CO">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- ===== Seguridad: sin recursos externos y sin envíos a terceros ===== -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'; object-src 'none'" />
+  <meta name="referrer" content="no-referrer" />
+
+  <title>Agendá tu cita · Salsamentaría La Sazón Caleña (Cali)</title>
+  <meta name="description" content="Reservá tu turno, tu pedido para recoger o tu asesoría de asado en la Salsamentaría La Sazón Caleña, barrio Tequendama, Cali. Contacto directo por WhatsApp, teléfono y correo." />
+  <meta name="theme-color" content="#c1121f" />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23c1121f'/%3E%3Ctext x='50' y='70' font-size='58' text-anchor='middle'%3E%F0%9F%A5%A9%3C/text%3E%3C/svg%3E" />
+  <link rel="stylesheet" href="assets/css/estilos.css" />
+</head>
+<body>
+  <a class="salto-contenido" href="#contenido">Saltar al contenido principal</a>
+
+  <div class="barra-aviso">
+    <div class="contenedor">
+      <span class="estado-tienda">
+        <span class="punto" id="punto-estado"></span>
+        <span id="estado-texto">Consultando horario…</span>
+      </span>
+      <span>📞 <a href="tel:+576025550142">(602) 555 0142</a></span>
+      <span>💬 <a href="https://wa.me/573155550198" target="_blank" rel="noopener noreferrer">WhatsApp 315 555 0198</a></span>
+      <span>📍 Calle 9 # 44-15, Tequendama · Cali</span>
+    </div>
+  </div>
+
+  <header class="cabecera">
+    <div class="contenedor">
+      <a class="marca" href="index.html">
+        <span class="marca__icono" aria-hidden="true">🥩</span>
+        <span>
+          <span class="marca__nombre">La Sazón Caleña</span>
+          <span class="marca__lema">Salsamentaría · Cali</span>
+        </span>
+      </a>
+
+      <nav class="navegacion" id="menu-principal" aria-label="Navegación principal">
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="index.html#productos">Productos</a></li>
+          <li><a href="index.html#visitanos">Horarios y ubicación</a></li>
+          <li><a href="contacto.html" aria-current="page">Contacto y citas</a></li>
+          <li><a href="privacidad.html">Privacidad</a></li>
+        </ul>
+      </nav>
+
+      <div class="acciones-cabecera">
+        <a class="boton boton--principal boton--pequeno" href="#formulario-cita">📅 Agendar ahora</a>
+        <button class="boton-menu" id="boton-menu" type="button"
+                aria-expanded="false" aria-controls="menu-principal" aria-label="Abrir menú">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido">
+
+    <!-- ===================== Portada de la landing ===================== -->
+    <section class="portada">
+      <div class="contenedor">
+        <div>
+          <span class="etiqueta">Contacto y agendamiento</span>
+          <h1>Reservá tu turno y <em>recogé sin filas</em>.</h1>
+          <p class="portada__texto">
+            Contanos qué necesitás, elegí el día y la hora, y te confirmamos por WhatsApp
+            con tu código de reserva. Si preferís hablar con una persona, acá tenés todos
+            nuestros canales: contestamos rapidito.
+          </p>
+          <div class="portada__botones">
+            <a class="boton boton--principal" href="#formulario-cita">📅 Llenar el formulario</a>
+            <a class="boton boton--contorno" href="https://wa.me/573155550198" target="_blank" rel="noopener noreferrer">💬 Prefiero WhatsApp</a>
+          </div>
+        </div>
+
+        <aside class="tarjeta-flotante">
+          <h2>¿Cómo funciona?</h2>
+          <p class="pequeno">Tres pasos y listo, sin crear contraseñas ni descargar nada.</p>
+          <ul class="lista-contacto">
+            <li><a href="#formulario-cita"><span class="emoji" aria-hidden="true">1️⃣</span><span><b>Dejá tus datos</b><small>Nombre y un teléfono de contacto</small></span></a></li>
+            <li><a href="#formulario-cita"><span class="emoji" aria-hidden="true">2️⃣</span><span><b>Elegí servicio, día y hora</b><small>Solo mostramos horas disponibles</small></span></a></li>
+            <li><a href="#mis-citas"><span class="emoji" aria-hidden="true">3️⃣</span><span><b>Guardá tu código</b><small>Con él cambiás o cancelás cuando quieras</small></span></a></li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <!-- ===================== Contacto directo ===================== -->
+    <section class="seccion" id="contacto-directo">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <span class="etiqueta">Hablemos</span>
+          <h2>Escogé el canal que más te guste</h2>
+          <p>Atendemos dentro del horario de la tienda. Fuera de ese horario dejá tu mensaje y te respondemos apenas abrimos.</p>
+        </div>
+
+        <div class="rejilla-contacto">
+          <a class="tarjeta-contacto" href="https://wa.me/573155550198?text=Hola%20La%20Saz%C3%B3n%20Cale%C3%B1a%2C%20quiero%20agendar%20un%20pedido"
+             target="_blank" rel="noopener noreferrer">
+            <span class="emoji" aria-hidden="true">💬</span>
+            <b>WhatsApp</b>
+            <span>315 555 0198 · el más rápido</span>
+          </a>
+          <a class="tarjeta-contacto" href="tel:+576025550142">
+            <span class="emoji" aria-hidden="true">📞</span>
+            <b>Teléfono fijo</b>
+            <span>(602) 555 0142 · mostrador</span>
+          </a>
+          <a class="tarjeta-contacto" href="mailto:hola@lasazoncalena.co?subject=Pedido%20empresarial">
+            <span class="emoji" aria-hidden="true">✉️</span>
+            <b>Correo</b>
+            <span>hola@lasazoncalena.co</span>
+          </a>
+          <a class="tarjeta-contacto" href="index.html#visitanos">
+            <span class="emoji" aria-hidden="true">📍</span>
+            <b>Visitanos</b>
+            <span>Calle 9 # 44-15, local 2, Tequendama</span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===================== Formulario de cita ===================== -->
+    <section class="seccion seccion--gris" id="formulario-cita">
+      <div class="contenedor">
+        <div class="encabezado-seccion">
+          <span class="etiqueta">Agendamiento</span>
+          <h2>Agendá tu cita o registrá tu pedido</h2>
+          <p>Toma menos de un minuto. Los campos con <strong>*</strong> son obligatorios.</p>
+        </div>
+
+        <div class="dos-columnas dos-columnas--formulario">
+          <!-- novalidate: la validación la hacemos nosotros para dar mensajes claros -->
+          <form class="formulario" id="form-cita" novalidate autocomplete="on">
+            <div id="zona-mensajes" role="status" aria-live="polite"></div>
+
+            <fieldset>
+              <legend><span class="paso" aria-hidden="true">1</span> Tus datos</legend>
+              <div class="campos">
+                <div class="campo">
+                  <label for="nombre">Nombre y apellido *</label>
+                  <input type="text" id="nombre" name="nombre" maxlength="60"
+                         autocomplete="name" placeholder="Ej.: Ana María Rivas" required />
+                  <span class="error" id="error-nombre"></span>
+                </div>
+                <div class="campo">
+                  <label for="telefono">Celular o teléfono *
+                    <span class="ayuda">Solo para confirmarte la cita</span>
+                  </label>
+                  <input type="tel" id="telefono" name="telefono" maxlength="20"
+                         inputmode="tel" autocomplete="tel" placeholder="Ej.: 315 555 0198" required />
+                  <span class="error" id="error-telefono"></span>
+                </div>
+                <div class="campo campo--ancho">
+                  <label for="correo">Correo electrónico <span class="ayuda">Opcional. Solo si querés la confirmación escrita.</span></label>
+                  <input type="email" id="correo" name="correo" maxlength="80"
+                         autocomplete="email" placeholder="ana@correo.com" />
+                  <span class="error" id="error-correo"></span>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span class="paso" aria-hidden="true">2</span> ¿Qué necesitás?</legend>
+              <div class="opciones-servicio" id="opciones-servicio"></div>
+              <span class="error" id="error-servicio"></span>
+            </fieldset>
+
+            <fieldset>
+              <legend><span class="paso" aria-hidden="true">3</span> Día y hora</legend>
+              <div class="campos">
+                <div class="campo">
+                  <label for="fecha">Fecha *</label>
+                  <input type="date" id="fecha" name="fecha" required />
+                  <span class="error" id="error-fecha"></span>
+                </div>
+                <div class="campo">
+                  <label for="hora">Hora * <span class="ayuda" id="ayuda-hora">Elegí primero la fecha</span></label>
+                  <select id="hora" name="hora" required>
+                    <option value="">Seleccioná una hora</option>
+                  </select>
+                  <span class="error" id="error-hora"></span>
+                </div>
+                <div class="campo">
+                  <label for="personas-cita">¿Para cuántas personas? <span class="ayuda">Nos ayuda a calcular cantidades</span></label>
+                  <input type="number" id="personas-cita" name="personas" min="1" max="200" value="6" />
+                  <span class="error" id="error-personas-cita"></span>
+                </div>
+                <div class="campo">
+                  <label for="barrio">Barrio <span class="ayuda">Para domicilios en Cali</span></label>
+                  <select id="barrio" name="barrio">
+                    <option value="">No aplica / recojo en tienda</option>
+                    <option>Tequendama</option>
+                    <option>San Fernando</option>
+                    <option>El Templete</option>
+                    <option>Centenario</option>
+                    <option>Granada</option>
+                    <option>Ciudad Jardín</option>
+                    <option>Otro barrio de Cali</option>
+                  </select>
+                  <span class="error" id="error-barrio"></span>
+                </div>
+                <div class="campo campo--ancho">
+                  <label for="notas">Contanos los detalles <span class="ayuda">Cortes, gramajes, alergias, hora de entrega… (máximo 400 caracteres)</span></label>
+                  <textarea id="notas" name="notas" maxlength="400"
+                            placeholder="Ej.: 3 libras de punta de anca en corte grueso y 12 chorizos para las 6 p.m."></textarea>
+                  <span class="error" id="error-notas"></span>
+                </div>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span class="paso" aria-hidden="true">4</span> Privacidad</legend>
+
+              <label class="consentimiento" for="consentimiento">
+                <input type="checkbox" id="consentimiento" name="consentimiento" required />
+                <span>
+                  <b>Autorizo el tratamiento de mis datos *</b><br />
+                  Acepto que usen mi nombre y teléfono <b>únicamente</b> para gestionar esta cita,
+                  conforme a la <a href="privacidad.html">política de privacidad</a> y a la
+                  Ley 1581 de 2012 de protección de datos personales.
+                </span>
+              </label>
+              <span class="error" id="error-consentimiento"></span>
+
+              <label class="consentimiento" for="novedades">
+                <input type="checkbox" id="novedades" name="novedades" />
+                <span>
+                  <b>Quiero enterarme de las promos (opcional)</b><br />
+                  Máximo un mensaje al mes con las ofertas de la semana. Podés salir cuando quieras.
+                </span>
+              </label>
+
+              <p class="aviso-privacidad">
+                <span aria-hidden="true">🔒</span>
+                <span>
+                  <b>Este formulario no envía tus datos a ningún servidor.</b>
+                  En esta demostración la reserva se guarda <b>solo en tu dispositivo</b>
+                  (almacenamiento local del navegador) y podés borrarla cuando quieras desde
+                  “Mis citas guardadas”. No usamos cookies, ni analítica, ni rastreadores externos.
+                </span>
+              </p>
+            </fieldset>
+
+            <button class="boton boton--principal boton--bloque" type="submit">📅 Confirmar mi cita</button>
+          </form>
+
+          <aside>
+            <div class="tarjeta">
+              <h3><span aria-hidden="true">🕒</span> Horario para agendar</h3>
+              <table class="tabla-horarios" id="tabla-horarios">
+                <caption class="solo-lectores">Horario semanal de atención</caption>
+                <tbody>
+                  <tr data-dia="1"><th scope="row">Lunes</th><td>7:00 – 20:00</td></tr>
+                  <tr data-dia="2"><th scope="row">Martes</th><td>7:00 – 20:00</td></tr>
+                  <tr data-dia="3"><th scope="row">Miércoles</th><td>7:00 – 20:00</td></tr>
+                  <tr data-dia="4"><th scope="row">Jueves</th><td>7:00 – 20:00</td></tr>
+                  <tr data-dia="5"><th scope="row">Viernes</th><td>7:00 – 21:00</td></tr>
+                  <tr data-dia="6"><th scope="row">Sábado</th><td>7:00 – 21:00</td></tr>
+                  <tr data-dia="0"><th scope="row">Domingo y festivos</th><td>8:00 – 14:00</td></tr>
+                </tbody>
+              </table>
+              <p class="aviso-privacidad">
+                <span aria-hidden="true">⏱️</span>
+                <span>Agendá con al menos <b>2 horas</b> de anticipación y hasta <b>60 días</b> adelante.</span>
+              </p>
+            </div>
+
+            <div class="tarjeta" id="mis-citas">
+              <h3><span aria-hidden="true">📋</span> Mis citas guardadas</h3>
+              <p class="aviso-privacidad">
+                <span aria-hidden="true">📱</span>
+                <span>Solo se ven en <b>este</b> navegador y en <b>este</b> dispositivo. Nadie más las puede consultar.</span>
+              </p>
+              <ul class="lista-citas" id="lista-citas"></ul>
+              <p id="sin-citas" class="aviso-vacio">Todavía no tenés citas guardadas en este dispositivo.</p>
+              <button class="boton boton--contorno boton--pequeno boton--bloque" type="button" id="borrar-todo" hidden>
+                🗑️ Borrar todos mis datos de este dispositivo
+              </button>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="contenedor">
+      <div class="pie__rejilla">
+        <div>
+          <span class="marca__nombre">🥩 La Sazón Caleña</span>
+          <p class="pie__texto">Salsamentaría de barrio desde 2008. Embutidos artesanales, quesos del Valle y carnes frescas en Tequendama, Cali.</p>
+        </div>
+        <div>
+          <h4>Navegación</h4>
+          <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="index.html#productos">Productos</a></li>
+            <li><a href="index.html#preguntas">Preguntas frecuentes</a></li>
+            <li><a href="privacidad.html">Privacidad</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <ul>
+            <li><a href="tel:+576025550142">📞 (602) 555 0142</a></li>
+            <li><a href="https://wa.me/573155550198" target="_blank" rel="noopener noreferrer">💬 315 555 0198</a></li>
+            <li><a href="mailto:hola@lasazoncalena.co">✉️ hola@lasazoncalena.co</a></li>
+            <li>📍 Calle 9 # 44-15, local 2</li>
+          </ul>
+        </div>
+        <div>
+          <h4>Horario</h4>
+          <ul>
+            <li>Lunes a jueves: 7:00 a.m. – 8:00 p.m.</li>
+            <li>Viernes y sábado: 7:00 a.m. – 9:00 p.m.</li>
+            <li>Domingo y festivos: 8:00 a.m. – 2:00 p.m.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="pie__legal">
+        <span>© <span id="anio">2026</span> Salsamentaría La Sazón Caleña · Sitio de demostración</span>
+        <span><a href="privacidad.html">Política de privacidad y tratamiento de datos</a></span>
+      </div>
+    </div>
+  </footer>
+
+  <div class="flotante">
+    <a href="https://wa.me/573155550198" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp">💬 <span>WhatsApp</span></a>
+  </div>
+
+  <script src="assets/js/comun.js"></script>
+  <script src="assets/js/agenda.js"></script>
+</body>
+</html>
