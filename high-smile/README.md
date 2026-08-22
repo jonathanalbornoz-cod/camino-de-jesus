@@ -53,7 +53,7 @@ Las imágenes que envió la clínica ya están en el sitio:
 | `galeria-2.jpg` | Antes y después «Natural y sana» | Galería |
 | `galeria-3.jpg` | Paciente infantil en el consultorio | Galería |
 | `galeria-4.jpg` | Pieza «Transforma tu sonrisa» | Galería |
-| `galeria-5.jpg` | Banner de especialidades y experiencia | Galería |
+| `galeria-5.jpg` | Antes y después de un diseño de sonrisa | Galería |
 | `galeria-6.jpg` | Pieza «Sonríe con alegría colombiana» | Galería |
 
 **Para agregar más fotos:** cópialas en `assets/img/galeria/` como `galeria-7.jpg`,
