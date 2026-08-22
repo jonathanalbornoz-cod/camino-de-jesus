@@ -7,7 +7,10 @@ Copia aquí las fotos y la página las publica sola: **no hay que tocar el códi
 | Archivo | Dónde aparece | Proporción recomendada |
 |---|---|---|
 | `clinica.jpg` | Imagen principal del inicio | vertical 4:5 · 1200 × 1500 px |
+| `consultorio.jpg` | Sección «La clínica» | vertical 4:5 · 1200 × 1500 px |
 | `galeria-1.jpg` … `galeria-24.jpg` | Galería, en ese orden | cualquiera (el mosaico respeta la proporción) |
+
+Hoy están ocupados del 1 al 6: la siguiente foto va como `galeria-7.jpg`.
 
 Se aceptan `.jpg`, `.jpeg`, `.png` y `.webp`.
 

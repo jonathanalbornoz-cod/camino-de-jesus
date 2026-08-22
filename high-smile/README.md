@@ -45,16 +45,19 @@ Sin frameworks, sin `npm install`, sin dependencias externas: HTML, CSS y JavaSc
 
 Las imágenes que envió la clínica ya están en el sitio:
 
-| Archivo | Origen | Dónde aparece |
+| Archivo | Qué muestra | Dónde aparece |
 |---|---|---|
-| `clinica.jpg` | Pieza «Sonríe con alegría colombiana» | Imagen principal del inicio |
-| `galeria-1.jpg` | Antes y después «Natural y sana» | Galería |
-| `galeria-2.jpg` | Pieza «Transforma tu sonrisa» | Galería |
-| `galeria-3.jpg` | Banner de especialidades y experiencia | Galería |
-| `galeria-4.jpg` | Foto de paciente | Galería |
+| `clinica.jpg` | El equipo frente al logo de la clínica | Imagen principal del inicio |
+| `consultorio.jpg` | Odontólogo durante un tratamiento | Sección «La clínica» |
+| `galeria-1.jpg` | Sonrisa natural después del tratamiento | Galería |
+| `galeria-2.jpg` | Antes y después «Natural y sana» | Galería |
+| `galeria-3.jpg` | Paciente infantil en el consultorio | Galería |
+| `galeria-4.jpg` | Pieza «Transforma tu sonrisa» | Galería |
+| `galeria-5.jpg` | Banner de especialidades y experiencia | Galería |
+| `galeria-6.jpg` | Pieza «Sonríe con alegría colombiana» | Galería |
 
-**Para agregar más fotos:** cópialas en `assets/img/galeria/` como `galeria-5.jpg`,
-`galeria-6.jpg`… hasta `galeria-24.jpg`. La galería se arma sola con los archivos que
+**Para agregar más fotos:** cópialas en `assets/img/galeria/` como `galeria-7.jpg`,
+`galeria-8.jpg`… hasta `galeria-24.jpg`. La galería se arma sola con los archivos que
 existan y no hay que tocar el HTML; se puede hacer desde la web de GitHub con
 **Add file → Upload files**. Numéralas seguidas: el recorrido se detiene tras tres números
 consecutivos sin archivo, para no pedir imágenes inexistentes. Los tamaños recomendados y
@@ -73,11 +76,9 @@ sin recortes.
    el 300 523 9827 como teléfono. Si debe ser al revés, es un cambio de un minuto.
 2. **Horario.** El sitio dice «atención con cita previa» porque no había horarios en el
    material. En cuanto los envíen se agregan a la barra superior, a contacto y a la agenda.
-3. **Fotos propias del consultorio y del equipo.** Las piezas actuales son material de
-   redes; una foto real del consultorio y del equipo daría más confianza que un flyer.
-4. **Textos.** La redacción es una propuesta a partir del brief y de las piezas gráficas;
+3. **Textos.** La redacción es una propuesta a partir del brief y de las piezas gráficas;
    conviene que la clínica la revise, sobre todo la política de privacidad.
-5. **Logotipo.** El de `assets/img/logo.svg` es una reconstrucción del monograma en SVG. Si
+4. **Logotipo.** El de `assets/img/logo.svg` es una reconstrucción del monograma en SVG. Si
    tienen el original vectorial, reemplácenlo.
 
 ---
