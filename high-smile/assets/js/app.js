@@ -125,6 +125,11 @@
   const CARPETA = 'assets/img/galeria/';
   const EXTENSIONES = ['jpg', 'jpeg', 'png', 'webp'];
 
+  /* Los navegadores guardan las imágenes en caché por su dirección. Si se
+     reemplaza una foto conservando el nombre, hay que subir este número para
+     que todo el mundo vea la nueva y no la que tenía guardada. */
+  const VERSION_FOTOS = '2';
+
   const cargarImagen = (nombre, alExistir, alFaltar) => {
     const probar = (indice) => {
       if (indice >= EXTENSIONES.length) {
@@ -135,7 +140,7 @@
       const imagen = new Image();
       imagen.onload = () => { alExistir(imagen); };
       imagen.onerror = () => { probar(indice + 1); };
-      imagen.src = CARPETA + nombre + '.' + EXTENSIONES[indice];
+      imagen.src = CARPETA + nombre + '.' + EXTENSIONES[indice] + '?v=' + VERSION_FOTOS;
     };
 
     probar(0);

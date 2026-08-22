@@ -25,6 +25,13 @@ cuando encuentra tres seguidos sin archivo. Un hueco suelto no molesta, pero un 
 3. Escribe un mensaje corto y pulsa **Commit changes**.
 4. En uno o dos minutos GitHub Pages publica el cambio.
 
+## Si reemplazas una foto conservando el nombre
+
+Los navegadores guardan las imágenes por su dirección, así que quien ya visitó la página
+seguiría viendo la anterior. Para forzar la actualización, sube el número de
+`VERSION_FOTOS` en `assets/js/app.js` (por ejemplo de `'2'` a `'3'`). Con una foto nueva
+que estrena nombre no hace falta.
+
 ## Recomendaciones
 
 - Usa fotos propias de la clínica o con autorización de los pacientes.
