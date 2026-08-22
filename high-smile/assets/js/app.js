@@ -116,37 +116,77 @@
 
   /* ---------------------------------------------------------------
    * Fotos de la clínica
-   * Cada marco declara `data-foto="nombre"`. Si existe el archivo
-   * assets/img/galeria/<nombre>.<ext>, se muestra en lugar del marco vacío.
-   * Así basta con copiar las fotos en esa carpeta: no hay que tocar el HTML.
-   * Mientras no existan, la consola registra un 404 por intento: es esperado.
+   * Cada marco fijo declara `data-foto="nombre"` y la galería declara
+   * `data-galeria="24"`: se buscan los archivos
+   * assets/img/galeria/<nombre>.<ext> y se muestran los que existan.
+   * Así, para publicar una foto nueva basta con copiarla en esa carpeta;
+   * no hay que tocar el HTML. Las que no existen no dejan hueco.
    * ------------------------------------------------------------- */
-  const EXTENSIONES = ['jpg', 'png', 'webp'];
+  const CARPETA = 'assets/img/galeria/';
+  const EXTENSIONES = ['jpg', 'jpeg', 'png', 'webp'];
 
-  const buscarFoto = (marco) => {
-    const nombre = marco.dataset.foto;
-    const vacio = $('.marco__vacio', marco);
-    const alternativo = vacio ? vacio.textContent.trim() : '';
-
+  const cargarImagen = (nombre, alExistir, alFaltar) => {
     const probar = (indice) => {
-      if (indice >= EXTENSIONES.length) { return; }
+      if (indice >= EXTENSIONES.length) {
+        if (alFaltar) { alFaltar(); }
+        return;
+      }
 
-      const ruta = 'assets/img/galeria/' + nombre + '.' + EXTENSIONES[indice];
       const imagen = new Image();
-
-      imagen.onload = () => {
-        imagen.alt = alternativo;
-        marco.insertBefore(imagen, marco.firstChild);
-        if (vacio) { vacio.remove(); }
-      };
+      imagen.onload = () => { alExistir(imagen); };
       imagen.onerror = () => { probar(indice + 1); };
-      imagen.src = ruta;
+      imagen.src = CARPETA + nombre + '.' + EXTENSIONES[indice];
     };
 
     probar(0);
   };
 
-  const activarFotos = () => { $$('[data-foto]').forEach(buscarFoto); };
+  /* Marcos fijos del inicio (por ejemplo la imagen principal). */
+  const activarFotos = () => {
+    $$('[data-foto]').forEach((marco) => {
+      const vacio = $('.marco__vacio', marco);
+
+      cargarImagen(marco.dataset.foto, (imagen) => {
+        imagen.alt = vacio ? vacio.textContent.trim() : '';
+        marco.insertBefore(imagen, marco.firstChild);
+        if (vacio) { vacio.remove(); }
+      });
+    });
+  };
+
+  /* Galería: se recorren los números en orden (galeria-1, galeria-2, …) y se
+     publica cada foto encontrada. El recorrido se detiene tras dos números
+     seguidos sin archivo, para no pedir imágenes que no existen. */
+  const HUECOS_MAXIMOS = 2;
+
+  const activarGaleria = () => {
+    const galeria = $('[data-galeria]');
+    if (!galeria) { return; }
+
+    const total = Number(galeria.dataset.galeria) || 12;
+
+    const escanear = (numero, huecos) => {
+      if (numero > total || huecos > HUECOS_MAXIMOS) { return; }
+
+      const marco = document.createElement('div');
+      marco.className = 'marco';
+      marco.hidden = true;
+      galeria.appendChild(marco);
+
+      cargarImagen('galeria-' + numero, (imagen) => {
+        imagen.setAttribute('data-i18n-alt', 'foto.' + numero);
+        imagen.alt = window.HighSmile ? window.HighSmile.t('foto.' + numero) : '';
+        marco.appendChild(imagen);
+        marco.hidden = false;
+        escanear(numero + 1, 0);
+      }, () => {
+        marco.remove();
+        escanear(numero + 1, huecos + 1);
+      });
+    };
+
+    escanear(1, 0);
+  };
 
   /* ---------------------------------------------------------------
    * Mapa bajo consentimiento
@@ -185,6 +225,7 @@
     activarFaq();
     activarRevelado();
     activarFotos();
+    activarGaleria();
     activarMapa();
   };
 

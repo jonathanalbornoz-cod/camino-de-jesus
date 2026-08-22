@@ -53,11 +53,12 @@ Las imágenes que envió la clínica ya están en el sitio:
 | `galeria-3.jpg` | Banner de especialidades y experiencia | Galería |
 | `galeria-4.jpg` | Foto de paciente | Galería |
 
-**Para agregar más fotos** basta con copiarlas en `assets/img/galeria/` con el nombre
-`galeria-5.jpg` y `galeria-6.jpg`: los dos marcos que hoy dicen «Próximamente» las
-muestran solas, sin tocar el código. Para pasar de seis, se duplica en `index.html` un
-bloque `<div class="marco" data-foto="galeria-7">…` y se añade su texto alternativo en
-`assets/js/i18n.js`. Detalles y tamaños recomendados en `assets/img/galeria/LEEME.md`.
+**Para agregar más fotos:** cópialas en `assets/img/galeria/` como `galeria-5.jpg`,
+`galeria-6.jpg`… hasta `galeria-24.jpg`. La galería se arma sola con los archivos que
+existan y no hay que tocar el HTML; se puede hacer desde la web de GitHub con
+**Add file → Upload files**. Numéralas seguidas: el recorrido se detiene tras tres números
+consecutivos sin archivo, para no pedir imágenes inexistentes. Los tamaños recomendados y
+cómo escribir el texto alternativo están en `assets/img/galeria/LEEME.md`.
 
 La galería es un mosaico por columnas: cada imagen conserva su proporción original, así
 que conviven publicaciones verticales de Instagram, banners horizontales y fotos cuadradas

@@ -53,7 +53,6 @@
  "serv.periodoncia.texto": "Salud de encías y hueso: la base que sostiene una sonrisa duradera.",
  "serv.implantes.texto": "Recupera piezas perdidas con soluciones fijas, funcionales y naturales.",
  "serv.diseno.texto": "Armonía entre dientes, encía y rostro, planificada contigo antes de empezar.",
- "foto.consultorio": "Foto del consultorio",
  "clinica.rotulo": "La clínica",
  "clinica.titulo": "Odontología con detalle, en el corazón de Cali",
  "clinica.p1": "High Smile reúne odontología general y estética en un mismo consultorio: periodoncia, implantología, ortodoncia, cirugía oral y maxilofacial, endodoncia y diseño de sonrisa.",
@@ -75,12 +74,6 @@
  "galeria.rotulo": "Galería",
  "galeria.titulo": "Nuestro trabajo, en imágenes",
  "galeria.entradilla": "Casos, publicaciones y equipo. Encuentra más contenido y resultados en nuestras redes.",
- "foto.uno": "Antes y después: una sonrisa natural y sana",
- "foto.dos": "Transforma tu sonrisa con nosotros",
- "foto.tres": "Especialidades y experiencia de High Smile",
- "foto.cuatro": "Pacientes de High Smile",
- "foto.cinco": "Próximamente",
- "foto.seis": "Próximamente",
  "mapa.rotulo": "Ubicación",
  "mapa.titulo": "Estamos en Santiago de Cali",
  "mapa.direccion": "Calle 14 #84a-05, Edificio Benessere, consultorio 310. Santiago de Cali, Valle del Cauca, Colombia",
@@ -251,7 +244,31 @@
  "cred.2": "pacientes con casos clínicos, de Colombia y de otros países.",
  "cred.3": "especialidades bajo un mismo techo, sin remitirte a otra clínica.",
  "cred.4": "consultorio en el Edificio Benessere, Calle 14 #84a-05, Cali.",
- "contacto.telefono": "Teléfono"
+ "contacto.telefono": "Teléfono",
+ "foto.1": "Antes y después: una sonrisa natural y sana",
+ "foto.2": "Transforma tu sonrisa con nosotros: servicios de High Smile",
+ "foto.3": "Especialidades y experiencia de High Smile",
+ "foto.4": "Paciente de High Smile",
+ "foto.5": "High Smile · fotografía 5 de la clínica",
+ "foto.6": "High Smile · fotografía 6 de la clínica",
+ "foto.7": "High Smile · fotografía 7 de la clínica",
+ "foto.8": "High Smile · fotografía 8 de la clínica",
+ "foto.9": "High Smile · fotografía 9 de la clínica",
+ "foto.10": "High Smile · fotografía 10 de la clínica",
+ "foto.11": "High Smile · fotografía 11 de la clínica",
+ "foto.12": "High Smile · fotografía 12 de la clínica",
+ "foto.13": "High Smile · fotografía 13 de la clínica",
+ "foto.14": "High Smile · fotografía 14 de la clínica",
+ "foto.15": "High Smile · fotografía 15 de la clínica",
+ "foto.16": "High Smile · fotografía 16 de la clínica",
+ "foto.17": "High Smile · fotografía 17 de la clínica",
+ "foto.18": "High Smile · fotografía 18 de la clínica",
+ "foto.19": "High Smile · fotografía 19 de la clínica",
+ "foto.20": "High Smile · fotografía 20 de la clínica",
+ "foto.21": "High Smile · fotografía 21 de la clínica",
+ "foto.22": "High Smile · fotografía 22 de la clínica",
+ "foto.23": "High Smile · fotografía 23 de la clínica",
+ "foto.24": "High Smile · fotografía 24 de la clínica"
 },
     en: {
  "meta.inicio.titulo": "High Smile | Dental Clinic in Cali · Orthodontics, implants and smile design",
@@ -294,7 +311,6 @@
  "serv.periodoncia.texto": "Healthy gums and bone: the foundation of a lasting smile.",
  "serv.implantes.texto": "Replace missing teeth with fixed, functional and natural-looking solutions.",
  "serv.diseno.texto": "Harmony between teeth, gums and face, planned with you before we begin.",
- "foto.consultorio": "Treatment room photo",
  "clinica.rotulo": "The clinic",
  "clinica.titulo": "Dentistry with attention to detail, in the heart of Cali",
  "clinica.p1": "High Smile brings general and cosmetic dentistry together in one practice: periodontics, implantology, orthodontics, oral and maxillofacial surgery, endodontics and smile design.",
@@ -316,12 +332,6 @@
  "galeria.rotulo": "Gallery",
  "galeria.titulo": "Our work, in pictures",
  "galeria.entradilla": "Cases, posts and team. Find more content and results on our social media.",
- "foto.uno": "Before and after: a natural, healthy smile",
- "foto.dos": "Transform your smile with us",
- "foto.tres": "High Smile specialities and experience",
- "foto.cuatro": "High Smile patients",
- "foto.cinco": "Coming soon",
- "foto.seis": "Coming soon",
  "mapa.rotulo": "Location",
  "mapa.titulo": "We are in Santiago de Cali",
  "mapa.direccion": "Calle 14 #84a-05, Benessere Building, office 310. Santiago de Cali, Valle del Cauca, Colombia",
@@ -492,7 +502,31 @@
  "cred.2": "patients with clinical cases, from Colombia and other countries.",
  "cred.3": "specialities under one roof, with no referrals elsewhere.",
  "cred.4": "office in the Benessere Building, Calle 14 #84a-05, Cali.",
- "contacto.telefono": "Phone"
+ "contacto.telefono": "Phone",
+ "foto.1": "Before and after: a natural, healthy smile",
+ "foto.2": "Transform your smile with us: High Smile services",
+ "foto.3": "High Smile specialities and experience",
+ "foto.4": "High Smile patient",
+ "foto.5": "High Smile · clinic photo 5",
+ "foto.6": "High Smile · clinic photo 6",
+ "foto.7": "High Smile · clinic photo 7",
+ "foto.8": "High Smile · clinic photo 8",
+ "foto.9": "High Smile · clinic photo 9",
+ "foto.10": "High Smile · clinic photo 10",
+ "foto.11": "High Smile · clinic photo 11",
+ "foto.12": "High Smile · clinic photo 12",
+ "foto.13": "High Smile · clinic photo 13",
+ "foto.14": "High Smile · clinic photo 14",
+ "foto.15": "High Smile · clinic photo 15",
+ "foto.16": "High Smile · clinic photo 16",
+ "foto.17": "High Smile · clinic photo 17",
+ "foto.18": "High Smile · clinic photo 18",
+ "foto.19": "High Smile · clinic photo 19",
+ "foto.20": "High Smile · clinic photo 20",
+ "foto.21": "High Smile · clinic photo 21",
+ "foto.22": "High Smile · clinic photo 22",
+ "foto.23": "High Smile · clinic photo 23",
+ "foto.24": "High Smile · clinic photo 24"
 }
   };
 
@@ -543,6 +577,9 @@
     });
     document.querySelectorAll('[data-i18n-aria]').forEach((nodo) => {
       nodo.setAttribute('aria-label', traducir(nodo.dataset.i18nAria));
+    });
+    document.querySelectorAll('[data-i18n-alt]').forEach((nodo) => {
+      nodo.setAttribute('alt', traducir(nodo.dataset.i18nAlt));
     });
 
     document.querySelectorAll('[data-idioma]').forEach((boton) => {
