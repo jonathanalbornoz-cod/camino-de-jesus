@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Endodoncia">
+  <title>Endodoncia</title>
+  <g fill="none" stroke="#f3f3f3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+
+    <path d="M60 22c8-6 18-7 25-2 7 5 9 15 7 25-2 9-6 17-8 26-1 7-2 14-6 20-2 3-6 4-8 1-2-4-3-9-4-14-1-4-2-8-6-8s-5 4-6 8c-1 5-2 10-4 14-2 3-6 2-8-1-4-6-5-13-6-20-2-9-6-17-8-26-2-10 0-20 7-25 7-5 17-4 25 2z"/>
+    <path d="M60 40v34" opacity=".55"/>
+    <path d="M52 92c1-9 3-18 4-26m12 26c-1-9-3-18-4-26" opacity=".45"/>
+    <path d="M60 40l14-14" stroke-width="1.6"/>
+    <path d="M72 24l6-6 2 2-6 6z"/>
+  </g>
+</svg>

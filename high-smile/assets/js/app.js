@@ -3,8 +3,8 @@
  * -------------------------------------------------------------
  * Reglas del proyecto:
  *  - `const` por defecto; `let` solo cuando el valor debe reasignarse.
- *  - Sin dependencias externas ni peticiones automáticas a terceros.
- *  - El mapa de Google solo se carga cuando el visitante lo autoriza.
+ *  - Sin dependencias externas ni peticiones automáticas a terceros,
+ *    salvo el mapa de Google que la clínica pidió ver cargado.
  */
 (function () {
   'use strict';
@@ -14,6 +14,8 @@
 
   const $ = (selector, contexto) => (contexto || document).querySelector(selector);
   const $$ = (selector, contexto) => Array.from((contexto || document).querySelectorAll(selector));
+
+  const traducir = (clave) => (window.HighSmile ? window.HighSmile.t(clave) : clave);
 
   /* ---------------------------------------------------------------
    * Año actual en el pie de página
@@ -116,19 +118,16 @@
 
   /* ---------------------------------------------------------------
    * Fotos de la clínica
-   * Cada marco fijo declara `data-foto="nombre"` y la galería declara
-   * `data-galeria="24"`: se buscan los archivos
-   * assets/img/galeria/<nombre>.<ext> y se muestran los que existan.
-   * Así, para publicar una foto nueva basta con copiarla en esa carpeta;
-   * no hay que tocar el HTML. Las que no existen no dejan hueco.
+   * Se buscan los archivos de assets/img/ y se muestran los que existan,
+   * así publicar una foto nueva es copiarla en la carpeta.
    * ------------------------------------------------------------- */
-  const CARPETA = 'assets/img/galeria/';
-  const EXTENSIONES = ['jpg', 'jpeg', 'png', 'webp'];
+  const CARPETA = 'assets/img/';
+  const EXTENSIONES = ['jpg', 'png', 'webp'];
 
   /* Los navegadores guardan las imágenes en caché por su dirección. Si se
      reemplaza una foto conservando el nombre, hay que subir este número para
      que todo el mundo vea la nueva y no la que tenía guardada. */
-  const VERSION_FOTOS = '3';
+  const VERSION_FOTOS = '4';
 
   const cargarImagen = (nombre, alExistir, alFaltar) => {
     const probar = (indice) => {
@@ -146,7 +145,7 @@
     probar(0);
   };
 
-  /* Marcos fijos del inicio (por ejemplo la imagen principal). */
+  /* Marcos sueltos, como las fotos del equipo. */
   const activarFotos = () => {
     $$('[data-foto]').forEach((marco) => {
       const vacio = $('.marco__vacio', marco);
@@ -159,65 +158,157 @@
     });
   };
 
-  /* Galería: se recorren los números en orden (galeria-1, galeria-2, …) y se
-     publica cada foto encontrada. El recorrido se detiene tras dos números
-     seguidos sin archivo, para no pedir imágenes que no existen. */
-  const HUECOS_MAXIMOS = 2;
+  /* ---------------------------------------------------------------
+   * Carruseles
+   * Cada uno declara `data-carrusel="clinica"` y busca las fotos
+   * assets/img/fotos/clinica-1, clinica-2, … El recorrido se detiene tras
+   * dos números seguidos sin archivo, para no pedir imágenes inexistentes.
+   * ------------------------------------------------------------- */
+  const HUECOS_MAXIMOS = 1;
 
-  const activarGaleria = () => {
-    const galeria = $('[data-galeria]');
-    if (!galeria) { return; }
+  const textoAlternativo = (prefijo, numero) => {
+    const especifico = traducir('foto.' + prefijo + '.' + numero);
+    return especifico === 'foto.' + prefijo + '.' + numero ? traducir('foto.' + prefijo) : especifico;
+  };
 
-    const total = Number(galeria.dataset.galeria) || 12;
+  const montarCarrusel = (carrusel) => {
+    const prefijo = carrusel.dataset.carrusel;
+    const total = Number(carrusel.dataset.total) || 12;
+    const pista = $('.carrusel__pista', carrusel);
+    const puntos = $('.carrusel__puntos', carrusel);
+    if (!pista) { return; }
+
+    const irA = (indice) => {
+      const diapositiva = pista.children[indice];
+      if (diapositiva) { pista.scrollTo({ left: diapositiva.offsetLeft - pista.offsetLeft, behavior: 'smooth' }); }
+    };
+
+    const marcarPunto = () => {
+      if (!puntos) { return; }
+
+      const ancho = pista.children.length > 0 ? pista.children[0].offsetWidth + 16 : 1;
+      const actual = Math.round(pista.scrollLeft / ancho);
+
+      $$('button', puntos).forEach((punto, i) => {
+        punto.setAttribute('aria-selected', String(i === actual));
+      });
+    };
+
+    const agregarPunto = (indice) => {
+      if (!puntos) { return; }
+
+      const punto = document.createElement('button');
+      punto.type = 'button';
+      punto.className = 'carrusel__punto';
+      punto.setAttribute('role', 'tab');
+      punto.setAttribute('aria-selected', String(indice === 0));
+      punto.addEventListener('click', () => { irA(indice); });
+      puntos.appendChild(punto);
+    };
 
     const escanear = (numero, huecos) => {
       if (numero > total || huecos > HUECOS_MAXIMOS) { return; }
 
-      const marco = document.createElement('div');
-      marco.className = 'marco';
-      marco.hidden = true;
-      galeria.appendChild(marco);
+      cargarImagen('fotos/' + prefijo + '-' + numero, (imagen) => {
+        const diapositiva = document.createElement('div');
+        diapositiva.className = 'carrusel__diapositiva';
 
-      cargarImagen('galeria-' + numero, (imagen) => {
-        imagen.setAttribute('data-i18n-alt', 'foto.' + numero);
-        imagen.alt = window.HighSmile ? window.HighSmile.t('foto.' + numero) : '';
-        marco.appendChild(imagen);
-        marco.hidden = false;
+        imagen.setAttribute('data-i18n-alt', 'foto.' + prefijo + '.' + numero);
+        imagen.alt = textoAlternativo(prefijo, numero);
+        imagen.loading = 'lazy';
+
+        diapositiva.appendChild(imagen);
+        pista.appendChild(diapositiva);
+        agregarPunto(pista.children.length - 1);
+
         escanear(numero + 1, 0);
       }, () => {
-        marco.remove();
         escanear(numero + 1, huecos + 1);
       });
     };
 
+    $$('[data-ir]', carrusel).forEach((boton) => {
+      boton.addEventListener('click', () => {
+        const ancho = pista.children.length > 0 ? pista.children[0].offsetWidth + 16 : 300;
+        pista.scrollBy({ left: ancho * Number(boton.dataset.ir), behavior: 'smooth' });
+      });
+    });
+
+    pista.addEventListener('scroll', marcarPunto, { passive: true });
     escanear(1, 0);
   };
 
+  const activarCarruseles = () => { $$('[data-carrusel]').forEach(montarCarrusel); };
+
   /* ---------------------------------------------------------------
-   * Mapa bajo consentimiento
-   * El iframe de Google solo se crea cuando el visitante lo pide, así
-   * que hasta entonces no se hace ninguna petición a terceros.
+   * Envío de fotos del paciente
+   * Las imágenes no salen del dispositivo: solo se previsualizan y se
+   * preparan los mensajes de WhatsApp y de correo para que el paciente
+   * las adjunte. Un envío automático necesitaría un servidor propio.
    * ------------------------------------------------------------- */
-  const activarMapa = () => {
-    const contenedor = $('[data-mapa]');
-    if (!contenedor) { return; }
+  const activarFotosPaciente = () => {
+    const zona = $('#campos-fotos');
+    if (!zona) { return; }
 
-    const boton = $('[data-mapa-cargar]', contenedor);
-    const aviso = $('[data-mapa-aviso]', contenedor);
-    if (!boton) { return; }
+    const enlaceWa = $('#fotos-whatsapp');
+    const enlaceCorreo = $('#fotos-correo');
+    const salto = String.fromCharCode(10);
 
-    boton.addEventListener('click', () => {
-      const marco = document.createElement('iframe');
+    const elegidas = () => $$('[data-foto-campo]', zona)
+      .filter((entrada) => entrada.files && entrada.files.length > 0)
+      .map((entrada) => {
+        const etiqueta = entrada.closest('.soltar');
+        const titulo = etiqueta ? $('.soltar__titulo', etiqueta) : null;
+        return titulo ? titulo.textContent.trim() : '';
+      });
 
-      marco.src = contenedor.dataset.mapaUrl;
-      marco.title = contenedor.dataset.mapaTitulo || 'Mapa';
-      marco.loading = 'lazy';
-      marco.referrerPolicy = 'no-referrer';
-      marco.setAttribute('allowfullscreen', '');
+    const actualizarEnlaces = () => {
+      const lista = elegidas();
+      const lineas = [traducir('fotos.mensaje')];
 
-      contenedor.appendChild(marco);
-      if (aviso) { aviso.remove(); }
+      if (lista.length > 0) {
+        lineas.push(traducir('fotos.mensaje.adjunto') + ' ' + lista.join(', ') + '.');
+      }
+
+      if (enlaceWa) {
+        enlaceWa.href = 'https://wa.me/573158253729?text=' + encodeURIComponent(lineas.join(salto));
+      }
+      if (enlaceCorreo) {
+        enlaceCorreo.href = 'mailto:highsmilecali@gmail.com?subject=' +
+          encodeURIComponent(traducir('fotos.asunto')) + '&body=' + encodeURIComponent(lineas.join(salto));
+      }
+    };
+
+    $$('[data-foto-campo]', zona).forEach((entrada) => {
+      entrada.addEventListener('change', () => {
+        const etiqueta = entrada.closest('.soltar');
+        const archivo = entrada.files && entrada.files[0];
+        const anterior = etiqueta ? $('.soltar__vista', etiqueta) : null;
+
+        if (anterior) {
+          URL.revokeObjectURL(anterior.src);
+          anterior.remove();
+        }
+
+        if (!archivo || !etiqueta) {
+          if (etiqueta) { etiqueta.removeAttribute('data-lista'); }
+          actualizarEnlaces();
+          return;
+        }
+
+        const vista = document.createElement('img');
+        vista.className = 'soltar__vista';
+        vista.alt = '';
+        vista.src = URL.createObjectURL(archivo);
+
+        etiqueta.insertBefore(vista, etiqueta.firstChild);
+        etiqueta.setAttribute('data-lista', 'true');
+        actualizarEnlaces();
+      });
     });
+
+    document.addEventListener('hs:idioma', actualizarEnlaces);
+    actualizarEnlaces();
   };
 
   /* ---------------------------------------------------------------
@@ -230,8 +321,8 @@
     activarFaq();
     activarRevelado();
     activarFotos();
-    activarGaleria();
-    activarMapa();
+    activarCarruseles();
+    activarFotosPaciente();
   };
 
   if (document.readyState === 'loading') {

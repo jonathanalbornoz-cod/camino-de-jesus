@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Implantología oral">
+  <title>Implantología oral</title>
+  <g fill="none" stroke="#f3f3f3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+
+    <path d="M42 20c5-5 12-7 18-7s13 2 18 7c5 5 6 13 3 19-2 4-6 6-11 6H50c-5 0-9-2-11-6-3-6-2-14 3-19z"/>
+    <path d="M60 45v58"/>
+    <path d="M50 54h20M51 63h18M53 72h14M55 81h10M57 90h6" />
+    <path d="M30 42c-4 6-5 14-3 21m66-21c4 6 5 14 3 21" opacity=".4"/>
+  </g>
+</svg>

@@ -38,35 +38,22 @@
     <symbol id="i-imagen" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4.5" width="18" height="15" rx="2"/><circle cx="8.5" cy="9.5" r="1.6"/><path d="m4 17 5-5 4.5 4.5L16.5 14l3.5 3"/></symbol>
     <symbol id="i-corazon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20s-7-4.4-7-9.3A4.2 4.2 0 0 1 12 7a4.2 4.2 0 0 1 7 3.7C19 15.6 12 20 12 20z"/></symbol>
     <symbol id="i-escudo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5.5c0 4.6-3 7.8-7 9.2-4-1.4-7-4.6-7-9.2V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-sonrisa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M3.8 9.6c2.5-1.2 5.2-1.8 8.2-1.8s5.7.6 8.2 1.8c-.9 5.2-4 8.4-8.2 8.4S4.7 14.8 3.8 9.6z"/><path d="M4.4 12.4h15.2M9.2 8v4.2M14.8 8v4.2"/></symbol>
+    <symbol id="i-izquierda" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12H5M11 6l-6 6 6 6"/></symbol>
+    <symbol id="i-subir" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M12 16V4M8 8l4-4 4 4"/><path d="M4 15v3.5A2.5 2.5 0 0 0 6.5 21h11a2.5 2.5 0 0 0 2.5-2.5V15"/></symbol>
+    <symbol id="i-avion" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><path d="M10.5 13.5 3 11l18-6.5-6.5 18-2.5-7.5z"/><path d="m10.5 13.5 4-4"/></symbol>
+    <symbol id="i-sol" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.2 5.2l1.4 1.4M17.4 17.4l1.4 1.4M18.8 5.2l-1.4 1.4M6.6 17.4l-1.4 1.4"/></symbol>
+    <symbol id="i-idiomas" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M3.5 9.5h17M3.5 14.5h17M12 3c-2.6 3-2.6 15 0 18M12 3c2.6 3 2.6 15 0 18"/></symbol>
+    <symbol id="i-agenda" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="m9 15 2 2 4-4"/></symbol>
     <symbol id="i-lupa" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6.5"/><path d="m16 16 4.5 4.5"/></symbol>
   </defs>
 </svg>
 
-  <!-- ================= Barra de información ================= -->
-  <div class="barra-info">
-    <div class="contenedor barra-info__inner">
-      <p class="barra-info__dato sin-margen">
-        <svg aria-hidden="true"><use href="#i-mapa"></use></svg>
-        <span data-i18n="barra.direccion">Calle 14 #84a-05 · Santiago de Cali, Colombia</span>
-      </p>
-      <p class="barra-info__dato sin-margen">
-        <svg aria-hidden="true"><use href="#i-chat"></use></svg>
-        <span data-i18n="barra.cita">Atención con cita previa</span>
-        <span aria-hidden="true">·</span>
-        <a href="https://wa.me/573158253729" target="_blank" rel="noopener noreferrer">WhatsApp 315 825 3729</a>
-      </p>
-    </div>
-  </div>
-
   <!-- ================= Cabecera ================= -->
   <header class="cabecera" id="cabecera">
     <div class="contenedor cabecera__inner">
-      <a class="marca" href="index.html">
-        <img src="assets/img/logo.svg" alt="High Smile" width="38" height="38" />
-        <span>
-          <span class="marca__nombre">High Smile</span>
-          <span class="marca__sub" data-i18n="marca.sub">Clínica odontológica</span>
-        </span>
+      <a class="marca" href="index.html" aria-label="High Smile">
+        <img src="assets/img/logo-horizontal.png" alt="High Smile · Clínica odontológica" width="180" height="77" />
       </a>
 
       <button class="menu-boton" type="button" id="menu-boton" aria-expanded="false" aria-controls="nav-principal">
@@ -77,9 +64,11 @@
       <nav class="nav" id="nav-principal" aria-label="High Smile">
         <ul class="nav__lista">
           <li><a class="nav__enlace" href="index.html#servicios" data-i18n="nav.servicios">Servicios</a></li>
-          <li><a class="nav__enlace" href="index.html#clinica" data-i18n="nav.clinica">La clínica</a></li>
-          <li><a class="nav__enlace" href="index.html#galeria" data-i18n="nav.galeria">Galería</a></li>
-          <li><a class="nav__enlace" href="index.html#ubicacion" data-i18n="nav.ubicacion">Ubicación</a></li>
+          <li><a class="nav__enlace" href="index.html#clinica" data-i18n="nav.clinica">Reseña clínica</a></li>
+          <li><a class="nav__enlace" href="index.html#casos" data-i18n="nav.casos">Casos de éxito</a></li>
+          <li><a class="nav__enlace" href="index.html#pacientes" data-i18n="nav.antes">Antes y después</a></li>
+          <li><a class="nav__enlace" href="index.html#equipo" data-i18n="nav.equipo">Nuestro equipo</a></li>
+          <li><a class="nav__enlace" href="index.html#turismo" data-i18n="nav.turismo">Turismo dental</a></li>
           <li><a class="nav__enlace" href="index.html#contacto" data-i18n="nav.contacto">Contacto</a></li>
           <li><a class="boton boton--solido" href="agenda.html" data-i18n="cta.agendar">Agendar valoración</a></li>
         </ul>
@@ -90,7 +79,7 @@
         <button class="idioma__boton" type="button" data-idioma="en" aria-pressed="false">EN</button>
       </div>
 
-      <a class="boton boton--solido" href="agenda.html" data-i18n="cta.agendar">Agendar valoración</a>
+      <a class="boton boton--solido cabecera__cta" href="agenda.html" data-i18n="cta.agendar">Agendar valoración</a>
     </div>
   </header>
 
@@ -148,7 +137,8 @@
           <li data-i18n="priv.5.a">HTTPS obligatorio y política upgrade-insecure-requests.</li>
           <li data-i18n="priv.5.b">Content Security Policy restrictiva: solo se cargan recursos de este mismo dominio.</li>
           <li data-i18n="priv.5.c">Sin cookies, sin analítica y sin pixeles de redes sociales.</li>
-          <li data-i18n="priv.5.d">El mapa de Google solo se carga si tú pulsas «Cargar el mapa»; mientras tanto no se hace ninguna petición a terceros.</li>
+          <li data-i18n="priv.5.d">El único recurso externo de la página es el mapa de la sección de contacto, servido por Google Maps; el resto se carga desde este mismo dominio.</li>
+          <li data-i18n="priv.5.h">Las fotos que eliges para una valoración a distancia no se suben a ningún servidor: se previsualizan en tu dispositivo y las adjuntas tú mismo al mensaje de WhatsApp o de correo.</li>
           <li data-i18n="priv.5.e">Enlaces externos con rel="noopener noreferrer" y política de referrer restringida.</li>
           <li data-i18n="priv.5.f">Lo que escribes se muestra como texto plano, lo que evita inyecciones de código (XSS).</li>
           <li data-i18n="priv.5.g">Validación de todos los campos antes de procesar la solicitud.</li>
@@ -185,14 +175,10 @@
     <div class="contenedor">
       <div class="pie__grid">
         <div>
-          <a class="marca" href="index.html">
-            <img src="assets/img/logo.svg" alt="High Smile" width="38" height="38" />
-            <span>
-              <span class="marca__nombre">High Smile</span>
-              <span class="marca__sub" data-i18n="marca.sub">Clínica odontológica</span>
-            </span>
+          <a class="marca" href="index.html" aria-label="High Smile">
+            <img src="assets/img/logo-horizontal.png" alt="High Smile · Clínica odontológica" width="180" height="77" />
           </a>
-          <p class="pie__texto" data-i18n="pie.lema">Cuidamos tu sonrisa con detalle y confianza. Ortodoncia, periodoncia, implantes y diseño de sonrisa en Cali.</p>
+          <p class="pie__texto" data-i18n="pie.lema">Odontología general y estética en Santiago de Cali. Ortodoncia, periodoncia, implantología, rehabilitación oral, cirugía maxilofacial, endodoncia, diseño de sonrisa y limpieza dental.</p>
         </div>
 
         <div>
@@ -200,17 +186,19 @@
           <ul>
             <li><a href="index.html#servicios" data-i18n="serv.ortodoncia.titulo">Ortodoncia</a></li>
             <li><a href="index.html#servicios" data-i18n="serv.periodoncia.titulo">Periodoncia</a></li>
-            <li><a href="index.html#servicios" data-i18n="serv.implantes.titulo">Implantes</a></li>
+            <li><a href="index.html#servicios" data-i18n="serv.implantes.titulo">Implantología oral</a></li>
             <li><a href="index.html#servicios" data-i18n="serv.diseno.titulo">Diseño de sonrisa</a></li>
+            <li><a href="index.html#servicios" data-i18n="serv.limpieza.titulo">Limpieza dental</a></li>
           </ul>
         </div>
 
         <div>
           <h3 data-i18n="pie.clinica">Clínica</h3>
           <ul>
-            <li><a href="index.html#clinica" data-i18n="nav.clinica">La clínica</a></li>
-            <li><a href="index.html#galeria" data-i18n="nav.galeria">Galería</a></li>
-            <li><a href="index.html#ubicacion" data-i18n="nav.ubicacion">Ubicación</a></li>
+            <li><a href="index.html#clinica" data-i18n="nav.clinica">Reseña clínica</a></li>
+            <li><a href="index.html#casos" data-i18n="nav.casos">Casos de éxito</a></li>
+            <li><a href="index.html#equipo" data-i18n="nav.equipo">Nuestro equipo</a></li>
+            <li><a href="index.html#turismo" data-i18n="nav.turismo">Turismo dental</a></li>
             <li><a href="agenda.html" data-i18n="cta.agendar">Agendar valoración</a></li>
             <li><a href="privacidad.html" data-i18n="nav.privacidad">Privacidad</a></li>
           </ul>
@@ -223,8 +211,7 @@
             <li><a href="tel:+573005239827">Tel. +57 300 523 9827</a></li>
             <li><a href="mailto:highsmilecali@gmail.com">highsmilecali@gmail.com</a></li>
             <li><a href="https://www.instagram.com/highsmile_co/" target="_blank" rel="noopener noreferrer">Instagram @highsmile_co</a></li>
-            <li><a href="https://www.facebook.com/people/High-Smile-Cl%C3%ADnica-Odontol%C3%B3gica/61579892912629/" target="_blank" rel="noopener noreferrer">Facebook</a></li>
-            <li data-i18n="barra.direccion">Calle 14 #84a-05 · Santiago de Cali, Colombia</li>
+            <li data-i18n="barra.direccion">Calle 14 #84a-05 · Edificio Benessere, consultorio 310 · Cali</li>
           </ul>
         </div>
       </div>

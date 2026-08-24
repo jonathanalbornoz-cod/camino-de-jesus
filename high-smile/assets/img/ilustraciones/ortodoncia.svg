@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Ortodoncia">
+  <title>Ortodoncia</title>
+  <g fill="none" stroke="#f3f3f3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+
+    <path d="M18 46c14-11 27-16 42-16s28 5 42 16" opacity=".55"/>
+    <path d="M22 52c12-9 24-13 38-13s26 4 38 13"/>
+    <path d="M30 62v-9m15 11v-11m15 12v-12m15 11v-11m15 9v-9" opacity=".5"/>
+    <rect x="25" y="52" width="10" height="10" rx="2"/>
+    <rect x="40" y="50" width="10" height="10" rx="2"/>
+    <rect x="55" y="49" width="10" height="10" rx="2"/>
+    <rect x="70" y="50" width="10" height="10" rx="2"/>
+    <rect x="85" y="52" width="10" height="10" rx="2"/>
+    <path d="M25 57h70" stroke-width="1.8"/>
+    <path d="M34 78c8 5 17 8 26 8s18-3 26-8" opacity=".5"/>
+  </g>
+</svg>
