@@ -12,8 +12,9 @@ logotipo oficial de la clínica.
 |---|---|
 | Nombre | High Smile Clínica Odontológica |
 | Dirección | Calle 14 #84a-05, Edificio Benessere, consultorio 310 · Santiago de Cali |
-| WhatsApp | +57 315 825 3729 |
+| WhatsApp (canal principal) | +57 315 825 3729 |
 | Teléfono | +57 300 523 9827 |
+| Atención | Solo con cita previa (la clínica no publica horario fijo) |
 | Correo | highsmilecali@gmail.com |
 | Instagram | [@highsmile_co](https://www.instagram.com/highsmile_co/) |
 | Facebook | [High Smile Clínica Odontológica](https://www.facebook.com/people/High-Smile-Cl%C3%ADnica-Odontol%C3%B3gica/61579892912629/) |
@@ -32,7 +33,7 @@ logotipo oficial de la clínica.
 | Reseña clínica | Quiénes son, método de trabajo y carrusel de fotos de la clínica |
 | Casos de éxito | Carrusel de antes y después |
 | Antes y después | Carrusel con los pacientes que terminaron su tratamiento |
-| Nuestro equipo | Fotos y funciones de cada integrante |
+| Nuestro equipo | Cuatro perfiles con foto o retrato ilustrado, especialidad y años de experiencia |
 | Turismo dental | Por qué tratarse en Cali, cómo se organiza el viaje y qué ver en la ciudad |
 | Preguntas frecuentes | Agendamiento, provisionales y definitivos, tiempos de entrega, cuidados y miedo al odontólogo |
 | Contacto | Canales, mapa de Google cargado directamente y envío de fotos para valoración a distancia |
@@ -55,7 +56,7 @@ Además: `agenda.html` (formulario de agendamiento en tres pasos) y `privacidad.
 | `assets/js/agenda.js` | Formulario por pasos con validaciones |
 | `assets/img/logo-*.png` | Logotipos oficiales (horizontal blanco y negro, vertical blanco) |
 | `assets/img/fotos/` | Fotografías de la clínica · ver `LEEME.md` dentro de la carpeta |
-| `assets/img/ilustraciones/` | Dibujos SVG de los ocho servicios y de los íconos de Cali |
+| `assets/img/ilustraciones/` | Dibujos SVG: los ocho servicios, los íconos de Cali y dos retratos del equipo |
 | `_headers` | Cabeceras de seguridad para hostings que las permiten |
 
 Sin frameworks, sin `npm install`, sin dependencias externas: HTML, CSS y JavaScript puro.
@@ -75,22 +76,28 @@ en cualquier pantalla. Se pueden reemplazar por fotografías cuando la clínica 
 
 ---
 
-## 5. Pendientes para la clínica
+## 5. Datos de ejemplo y pendientes
 
-1. **Nombres del equipo.** La sección «Nuestro equipo» muestra las funciones de cada
-   integrante, no sus nombres: publicar nombres o años de experiencia inventados para
-   profesionales reales sería engañoso para los pacientes. En cuanto envíen los datos
-   verdaderos se reemplazan en un minuto.
-2. **Confirmar el número principal.** El brief traía el 315 825 3729 y las piezas gráficas
-   el 300 523 9827. Hoy el sitio usa **315 825 3729 para los enlaces de WhatsApp** y muestra
-   el 300 523 9827 como teléfono.
-3. **Horario.** El sitio dice «atención con cita previa» porque no había horarios en el
-   material entregado.
-4. **Envío automático de las fotos.** Hoy la página prepara el mensaje y el paciente adjunta
-   las imágenes en WhatsApp o en el correo. Para que lleguen solas a
-   highsmilecali@gmail.com hace falta un servicio de formularios o un backend propio: es un
-   cambio pequeño, pero implica contratar ese servicio.
-5. **Textos.** La redacción es una propuesta; conviene que la clínica la revise, sobre todo
+**Equipo (datos de ejemplo).** La clínica pidió perfiles de muestra mientras llegan los
+definitivos, así que los cuatro integrantes que aparecen —nombres, especialidades y años de
+experiencia— **son inventados para esta versión de presentación**. Dos usan fotografías
+reales de la clínica y dos, retratos ilustrados. La propia sección lo advierte al pie.
+
+Para reemplazarlos por los reales:
+
+1. Cambia el texto en `assets/js/i18n.js`, claves `equipo.1.*` … `equipo.4.*` (en español y
+   en inglés).
+2. Copia la fotografía en `assets/img/fotos/` como `equipo-1.jpg` … `equipo-4.jpg`.
+3. En `index.html`, cambia el bloque `perfil__foto--ilustracion` por
+   `<div class="perfil__foto marco" data-foto="fotos/equipo-3">…` para que use la foto.
+4. Sube `VERSION_FOTOS` en `assets/js/app.js`.
+
+**Pendientes reales:**
+
+1. **Envío automático de las fotos del paciente.** Hoy la página prepara el mensaje y el
+   paciente adjunta las imágenes en WhatsApp o en el correo. Para que lleguen solas a
+   highsmilecali@gmail.com hace falta un servicio de formularios o un backend propio.
+2. **Textos.** La redacción es una propuesta; conviene que la clínica la revise, sobre todo
    la política de privacidad.
 
 ---
