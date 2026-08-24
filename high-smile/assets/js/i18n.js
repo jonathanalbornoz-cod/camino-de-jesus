@@ -81,7 +81,7 @@
  "equipo.2.nombre": "Dr. Mateo Restrepo Salazar",
  "equipo.2.rol": "Cirugía oral, maxilofacial e implantología",
  "equipo.2.texto": "Realiza las cirugías y la colocación de implantes, con planificación previa y control posoperatorio de cada paciente.",
- "equipo.3.foto": "Odontólogo de High Smile",
+ "equipo.3.foto": "Retrato ilustrado de la Dra. Camila Herrera Lozano",
  "equipo.3.nombre": "Dra. Camila Herrera Lozano",
  "equipo.3.rol": "Ortodoncia y odontología general",
  "equipo.3.texto": "Lleva los tratamientos de ortodoncia y los controles preventivos, con seguimiento mes a mes del avance.",
@@ -292,11 +292,12 @@
  "equipo.4.nombre": "Laura Marcela Caicedo",
  "equipo.4.rol": "Coordinación de pacientes y turismo dental",
  "equipo.4.anios": "5 años de experiencia",
- "equipo.4.texto": "Organiza la agenda, resuelve dudas por WhatsApp y coordina los viajes de quienes llegan de otras ciudades.",
+ "equipo.4.texto": "Organiza la agenda y resuelve tus dudas por WhatsApp o por correo.",
  "foto.clinica.6": "El equipo de High Smile en la clínica",
  "foto.cali.1": "El monumento a Cristo Rey sobre la ciudad de Cali",
  "foto.cali.2": "La Torre de Cali iluminada al anochecer",
- "foto.cali.3": "Un cholado caleño con frutas y hielo raspado"
+ "foto.cali.3": "Un cholado caleño con frutas y hielo raspado",
+ "equipo.4.foto": "Retrato ilustrado de Laura Marcela Caicedo"
 },
     en: {
  "meta.inicio.titulo": "High Smile | Dental Clinic in Cali · High function and aesthetics",
@@ -367,7 +368,7 @@
  "equipo.2.nombre": "Dr Mateo Restrepo Salazar",
  "equipo.2.rol": "Oral and maxillofacial surgery, implantology",
  "equipo.2.texto": "Performs the surgery and places the implants, with prior planning and post-operative follow-up for every patient.",
- "equipo.3.foto": "High Smile dentist",
+ "equipo.3.foto": "Illustrated portrait of Dr Camila Herrera Lozano",
  "equipo.3.nombre": "Dr Camila Herrera Lozano",
  "equipo.3.rol": "Orthodontics and general dentistry",
  "equipo.3.texto": "Runs the orthodontic treatments and preventive check-ups, tracking progress month by month.",
@@ -578,11 +579,12 @@
  "equipo.4.nombre": "Laura Marcela Caicedo",
  "equipo.4.rol": "Patient care and dental tourism",
  "equipo.4.anios": "5 years of experience",
- "equipo.4.texto": "Organises the diary, answers questions on WhatsApp and coordinates the trips of patients coming from other cities.",
+ "equipo.4.texto": "Organises the diary and answers your questions on WhatsApp or by email.",
  "foto.clinica.6": "The High Smile team at the clinic",
  "foto.cali.1": "The Cristo Rey monument above the city of Cali",
  "foto.cali.2": "The Torre de Cali lit up at dusk",
- "foto.cali.3": "A cholado from Cali with fruit and shaved ice"
+ "foto.cali.3": "A cholado from Cali with fruit and shaved ice",
+ "equipo.4.foto": "Illustrated portrait of Laura Marcela Caicedo"
 }
   };
 
