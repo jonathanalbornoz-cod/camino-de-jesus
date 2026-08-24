@@ -56,7 +56,7 @@ Además: `agenda.html` (formulario de agendamiento en tres pasos) y `privacidad.
 | `assets/js/agenda.js` | Formulario por pasos con validaciones |
 | `assets/img/logo-*.png` | Logotipos oficiales (horizontal blanco y negro, vertical blanco) |
 | `assets/img/fotos/` | Fotografías de la clínica · ver `LEEME.md` dentro de la carpeta |
-| `assets/img/ilustraciones/` | Dibujos SVG: los ocho servicios, los íconos de Cali y dos retratos del equipo |
+| `assets/img/ilustraciones/` | Dibujos SVG: los ocho servicios y dos retratos del equipo |
 | `_headers` | Cabeceras de seguridad para hostings que las permiten |
 
 Sin frameworks, sin `npm install`, sin dependencias externas: HTML, CSS y JavaScript puro.
@@ -70,9 +70,18 @@ Las fotos que envió la clínica están reducidas para web (las originales pesab
 explicado en `assets/img/fotos/LEEME.md`: basta con copiarlas en esa carpeta con el nombre
 que corresponde y la página las publica sola.
 
-Las ilustraciones de los servicios y de Cali (Cristo Rey, la Torre de Cali y los cholados)
-son dibujos vectoriales hechos para el sitio: pesan menos de 1 KB cada uno y se ven nítidos
-en cualquier pantalla. Se pueden reemplazar por fotografías cuando la clínica las tenga.
+Las tres imágenes de turismo dental —Cristo Rey, la Torre de Cali y los cholados— son
+fotografías (`cali-1.jpg`, `cali-2.jpg`, `cali-3.jpg`), recortadas para quitarles el marco
+que traían y ajustadas a 900 × 675 px.
+
+> Conviene confirmar los derechos de uso de esas tres fotos de la ciudad antes de publicar
+> el sitio: si no son propias, lo más seguro es reemplazarlas por fotografías de la clínica
+> o por imágenes con licencia comercial. Basta con sobrescribir los archivos y subir
+> `VERSION_FOTOS`.
+
+Las ilustraciones de los ocho servicios y los dos retratos del equipo son dibujos
+vectoriales hechos para el sitio: pesan menos de 1 KB cada uno y se ven nítidos en cualquier
+pantalla.
 
 ---
 

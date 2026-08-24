@@ -462,10 +462,15 @@ a:hover { text-decoration-color: var(--blanco); }
 .perfil p { color: var(--texto-suave); font-size: .93rem; }
 
 /* ---------- Turismo dental ---------- */
-.icono-cali { margin: 0; text-align: center; border: 1px solid var(--borde); padding: 2rem 1.6rem; }
-.icono-cali img { width: 84px; height: 84px; margin: 0 auto 1.2rem; opacity: .9; }
-.icono-cali strong { display: block; font-weight: 400; font-size: 1.05rem; margin-bottom: .5rem; }
-.icono-cali span { color: var(--texto-suave); font-size: .9rem; }
+.tarjeta-cali {
+  margin: 0; border: 1px solid var(--borde); background: var(--superficie); overflow: hidden;
+  transition: border-color var(--transicion), transform var(--transicion);
+}
+.tarjeta-cali:hover { border-color: var(--borde-fuerte); transform: translateY(-3px); }
+.tarjeta-cali__foto { aspect-ratio: 4 / 3; border: 0; border-bottom: 1px solid var(--borde); }
+.tarjeta-cali figcaption { padding: 1.5rem 1.5rem 1.7rem; }
+.tarjeta-cali strong { display: block; font-weight: 400; font-size: 1.05rem; margin-bottom: .5rem; }
+.tarjeta-cali span { color: var(--texto-suave); font-size: .9rem; }
 
 /* ---------- Envío de fotos ---------- */
 .soltar {

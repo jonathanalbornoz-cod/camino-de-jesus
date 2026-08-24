@@ -293,7 +293,10 @@
  "equipo.4.rol": "Coordinación de pacientes y turismo dental",
  "equipo.4.anios": "5 años de experiencia",
  "equipo.4.texto": "Organiza la agenda, resuelve dudas por WhatsApp y coordina los viajes de quienes llegan de otras ciudades.",
- "foto.clinica.6": "El equipo de High Smile en la clínica"
+ "foto.clinica.6": "El equipo de High Smile en la clínica",
+ "foto.cali.1": "El monumento a Cristo Rey sobre la ciudad de Cali",
+ "foto.cali.2": "La Torre de Cali iluminada al anochecer",
+ "foto.cali.3": "Un cholado caleño con frutas y hielo raspado"
 },
     en: {
  "meta.inicio.titulo": "High Smile | Dental Clinic in Cali · High function and aesthetics",
@@ -576,7 +579,10 @@
  "equipo.4.rol": "Patient care and dental tourism",
  "equipo.4.anios": "5 years of experience",
  "equipo.4.texto": "Organises the diary, answers questions on WhatsApp and coordinates the trips of patients coming from other cities.",
- "foto.clinica.6": "The High Smile team at the clinic"
+ "foto.clinica.6": "The High Smile team at the clinic",
+ "foto.cali.1": "The Cristo Rey monument above the city of Cali",
+ "foto.cali.2": "The Torre de Cali lit up at dusk",
+ "foto.cali.3": "A cholado from Cali with fruit and shaved ice"
 }
   };
 

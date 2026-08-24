@@ -10,7 +10,8 @@ Copia aquí las fotos y la página las publica sola: **no hay que tocar el códi
 | `clinica-1.jpg` … `clinica-12.jpg` | Carrusel de «Reseña clínica» |
 | `caso-1.jpg` … `caso-12.jpg` | Carrusel de «Casos de éxito» (antes y después) |
 | `paciente-1.jpg` … `paciente-12.jpg` | Carrusel de «Antes y después · pacientes» |
-| `equipo-1.jpg`, `equipo-2.jpg`, `equipo-3.jpg` | Fotos de «Nuestro equipo» |
+| `equipo-1.jpg` … `equipo-4.jpg` | Fotos de «Nuestro equipo» |
+| `cali-1.jpg`, `cali-2.jpg`, `cali-3.jpg` | Turismo dental: Cristo Rey, Torre de Cali y cholados (horizontal 4:3) |
 
 Se aceptan `.jpg`, `.png` y `.webp`.
 
