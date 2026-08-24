@@ -454,11 +454,7 @@ a:hover { text-decoration-color: var(--blanco); }
   color: var(--texto-suave); margin-bottom: .3rem;
 }
 .perfil__anios { font-size: .82rem; color: var(--gris); margin-bottom: .9rem; }
-.perfil__foto--ilustracion {
-  aspect-ratio: 4 / 5; border: 1px solid var(--borde); background: var(--superficie);
-  display: grid; place-items: center; margin-bottom: 1.4rem;
-}
-.perfil__foto--ilustracion img { width: 72%; height: auto; opacity: .85; }
+
 .perfil p { color: var(--texto-suave); font-size: .93rem; }
 
 /* ---------- Turismo dental ---------- */

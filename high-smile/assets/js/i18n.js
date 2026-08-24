@@ -81,7 +81,7 @@
  "equipo.2.nombre": "Dr. Mateo Restrepo Salazar",
  "equipo.2.rol": "Cirugía oral, maxilofacial e implantología",
  "equipo.2.texto": "Realiza las cirugías y la colocación de implantes, con planificación previa y control posoperatorio de cada paciente.",
- "equipo.3.foto": "Retrato ilustrado de la Dra. Camila Herrera Lozano",
+ "equipo.3.foto": "Dra. Camila Herrera Lozano, odontóloga de High Smile",
  "equipo.3.nombre": "Dra. Camila Herrera Lozano",
  "equipo.3.rol": "Ortodoncia y odontología general",
  "equipo.3.texto": "Lleva los tratamientos de ortodoncia y los controles preventivos, con seguimiento mes a mes del avance.",
@@ -282,9 +282,7 @@
  "foto.caso.3": "Antes y después de una rehabilitación estética",
  "foto.paciente": "Paciente de High Smile",
  "foto.paciente.1": "Paciente de High Smile en la clínica",
- "foto.paciente.2": "Paciente de High Smile después de su tratamiento",
- "foto.paciente.3": "Paciente de High Smile en la sala de espera",
- "foto.paciente.4": "Sonrisa natural después del tratamiento",
+ "foto.paciente.2": "Sonrisa natural después del tratamiento",
  "priv.5.h": "Las fotos que eliges para una valoración a distancia no se suben a ningún servidor: se previsualizan en tu dispositivo y las adjuntas tú mismo al mensaje de WhatsApp o de correo.",
  "equipo.1.anios": "12 años de experiencia",
  "equipo.2.anios": "9 años de experiencia",
@@ -297,7 +295,7 @@
  "foto.cali.1": "El monumento a Cristo Rey sobre la ciudad de Cali",
  "foto.cali.2": "La Torre de Cali iluminada al anochecer",
  "foto.cali.3": "Un cholado caleño con frutas y hielo raspado",
- "equipo.4.foto": "Retrato ilustrado de Laura Marcela Caicedo"
+ "equipo.4.foto": "Laura Marcela Caicedo, coordinación de pacientes"
 },
     en: {
  "meta.inicio.titulo": "High Smile | Dental Clinic in Cali · High function and aesthetics",
@@ -368,7 +366,7 @@
  "equipo.2.nombre": "Dr Mateo Restrepo Salazar",
  "equipo.2.rol": "Oral and maxillofacial surgery, implantology",
  "equipo.2.texto": "Performs the surgery and places the implants, with prior planning and post-operative follow-up for every patient.",
- "equipo.3.foto": "Illustrated portrait of Dr Camila Herrera Lozano",
+ "equipo.3.foto": "Dr Camila Herrera Lozano, High Smile dentist",
  "equipo.3.nombre": "Dr Camila Herrera Lozano",
  "equipo.3.rol": "Orthodontics and general dentistry",
  "equipo.3.texto": "Runs the orthodontic treatments and preventive check-ups, tracking progress month by month.",
@@ -569,9 +567,7 @@
  "foto.caso.3": "Before and after an aesthetic rehabilitation",
  "foto.paciente": "A High Smile patient",
  "foto.paciente.1": "A High Smile patient at the clinic",
- "foto.paciente.2": "A High Smile patient after treatment",
- "foto.paciente.3": "A High Smile patient in the waiting room",
- "foto.paciente.4": "A natural smile after treatment",
+ "foto.paciente.2": "A natural smile after treatment",
  "priv.5.h": "The photos you choose for a remote consultation are not uploaded to any server: they are previewed on your device and you attach them yourself to the WhatsApp or email message.",
  "equipo.1.anios": "12 years of experience",
  "equipo.2.anios": "9 years of experience",
@@ -584,7 +580,7 @@
  "foto.cali.1": "The Cristo Rey monument above the city of Cali",
  "foto.cali.2": "The Torre de Cali lit up at dusk",
  "foto.cali.3": "A cholado from Cali with fruit and shaved ice",
- "equipo.4.foto": "Illustrated portrait of Laura Marcela Caicedo"
+ "equipo.4.foto": "Laura Marcela Caicedo, patient care"
 }
   };
 

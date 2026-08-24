@@ -4,6 +4,11 @@ Sitio web en **español e inglés** para High Smile Clínica Odontológica, en S
 Portada horizontal a pantalla completa, paleta **negro dominante, blanco y gris**, y el
 logotipo oficial de la clínica.
 
+> **Versión de muestra para presentación interna.** Los cuatro perfiles del equipo usan
+> nombres inventados sobre fotografías del material de la clínica. Antes de publicar el sitio
+> al público hay que reemplazarlos por los nombres, cargos y fotografías reales de cada
+> integrante, con su autorización.
+
 ---
 
 ## 1. Datos de la clínica usados en el sitio
@@ -33,7 +38,7 @@ logotipo oficial de la clínica.
 | Reseña clínica | Quiénes son, método de trabajo y carrusel de fotos de la clínica |
 | Casos de éxito | Carrusel de antes y después |
 | Antes y después | Carrusel con los pacientes que terminaron su tratamiento |
-| Nuestro equipo | Cuatro perfiles con foto o retrato ilustrado, especialidad y años de experiencia |
+| Nuestro equipo | Cuatro perfiles con fotografía, especialidad y años de experiencia |
 | Turismo dental | Por qué tratarse en Cali, cómo se organiza el viaje y qué ver en la ciudad |
 | Preguntas frecuentes | Agendamiento, provisionales y definitivos, tiempos de entrega, cuidados y miedo al odontólogo |
 | Contacto | Canales, mapa de Google cargado directamente y envío de fotos para valoración a distancia |
@@ -56,7 +61,7 @@ Además: `agenda.html` (formulario de agendamiento en tres pasos) y `privacidad.
 | `assets/js/agenda.js` | Formulario por pasos con validaciones |
 | `assets/img/logo-*.png` | Logotipos oficiales (horizontal blanco y negro, vertical blanco) |
 | `assets/img/fotos/` | Fotografías de la clínica · ver `LEEME.md` dentro de la carpeta |
-| `assets/img/ilustraciones/` | Dibujos SVG: los ocho servicios y dos retratos del equipo |
+| `assets/img/ilustraciones/` | Dibujos SVG de los ocho servicios |
 | `_headers` | Cabeceras de seguridad para hostings que las permiten |
 
 Sin frameworks, sin `npm install`, sin dependencias externas: HTML, CSS y JavaScript puro.
@@ -79,34 +84,38 @@ que traían y ajustadas a 900 × 675 px.
 > o por imágenes con licencia comercial. Basta con sobrescribir los archivos y subir
 > `VERSION_FOTOS`.
 
-Las ilustraciones de los ocho servicios y los dos retratos del equipo son dibujos
-vectoriales hechos para el sitio: pesan menos de 1 KB cada uno y se ven nítidos en cualquier
-pantalla.
+Las ilustraciones de los ocho servicios son dibujos vectoriales hechos para el sitio: pesan
+menos de 1 KB cada uno y se ven nítidos en cualquier pantalla.
 
 ---
 
 ## 5. Datos de ejemplo y pendientes
 
-**Equipo (datos de ejemplo).** La clínica pidió perfiles de muestra mientras llegan los
-definitivos, así que los cuatro integrantes que aparecen —nombres, especialidades y años de
-experiencia— **son inventados para esta versión de presentación**. Dos usan fotografías
-reales de la clínica y dos, retratos ilustrados. La propia sección lo advierte al pie.
+**Equipo (datos de ejemplo).** Los cuatro integrantes que aparecen —nombres, especialidades
+y años de experiencia— **son inventados para esta versión de presentación interna**, sobre
+fotografías del material que entregó la clínica. La propia sección lo advierte al pie.
+
+| Perfil (ejemplo) | Foto | Archivo |
+|---|---|---|
+| Dra. Valeria Ospina Arboleda | odontóloga frente al manifiesto | `equipo-2.jpg` |
+| Dr. Mateo Restrepo Salazar | odontólogo en el consultorio | `equipo-3.jpg` |
+| Dra. Camila Herrera Lozano | retrato frente al logo | `equipo-4.jpg` |
+| Laura Marcela Caicedo | retrato en la sala de espera | `equipo-5.jpg` |
 
 Para reemplazarlos por los reales:
 
 1. Cambia el texto en `assets/js/i18n.js`, claves `equipo.1.*` … `equipo.4.*` (en español y
    en inglés).
-2. Copia la fotografía en `assets/img/fotos/` como `equipo-1.jpg` … `equipo-4.jpg`.
-3. En `index.html`, cambia el bloque `perfil__foto--ilustracion` por
-   `<div class="perfil__foto marco" data-foto="fotos/equipo-3">…` para que use la foto.
-4. Sube `VERSION_FOTOS` en `assets/js/app.js`.
+2. Sobrescribe la fotografía en `assets/img/fotos/` (`equipo-2.jpg` … `equipo-5.jpg`).
+3. Sube `VERSION_FOTOS` en `assets/js/app.js`.
 
 **Pendientes reales:**
 
-1. **Envío automático de las fotos del paciente.** Hoy la página prepara el mensaje y el
+1. **Nombres y fotos reales del equipo** antes de cualquier publicación al público.
+2. **Envío automático de las fotos del paciente.** Hoy la página prepara el mensaje y el
    paciente adjunta las imágenes en WhatsApp o en el correo. Para que lleguen solas a
    highsmilecali@gmail.com hace falta un servicio de formularios o un backend propio.
-2. **Textos.** La redacción es una propuesta; conviene que la clínica la revise, sobre todo
+3. **Textos.** La redacción es una propuesta; conviene que la clínica la revise, sobre todo
    la política de privacidad.
 
 ---
