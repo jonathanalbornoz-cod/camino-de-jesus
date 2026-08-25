@@ -67,17 +67,60 @@ document.addEventListener('keydown', (e) => {
 });
 
 // =========================
-// FORM HONEYPOT
+// ENVIO DE FORMULARIOS
 // =========================
-const form = document.querySelector('.contact-form');
-if (form) {
-    form.addEventListener('submit', (e) => {
+// Los formularios apuntan a enviar.php. Aqui se interceptan para mostrar el
+// resultado sin recargar; si el navegador no ejecuta este script, el envio
+// normal sigue funcionando.
+document.querySelectorAll('.contact-form, .pqrs-form').forEach((form) => {
+    const aviso = form.querySelector('.form-feedback');
+    const boton = form.querySelector('button[type="submit"]');
+
+    form.addEventListener('submit', async (e) => {
         const honeypot = form.querySelector('.honeypot');
         if (honeypot && honeypot.value !== '') {
             e.preventDefault();
-            console.log('Bot detectado');
+            return;
+        }
+        if (!aviso || !window.fetch) return;
+
+        e.preventDefault();
+        const textoBoton = boton ? boton.textContent : '';
+        if (boton) { boton.disabled = true; }
+        aviso.className = 'form-feedback enviando';
+        aviso.textContent = t('form_sending', 'Enviando...');
+
+        try {
+            const res = await fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { 'Accept': 'application/json', 'X-Requested-With': 'XMLHttpRequest' }
+            });
+            const datos = await res.json();
+            if (datos.ok) {
+                aviso.className = 'form-feedback ok';
+                aviso.textContent = t('form_ok', datos.mensaje);
+                form.reset();
+            } else {
+                aviso.className = 'form-feedback error';
+                aviso.textContent = datos.mensaje || t('form_error', 'No pudimos enviar el mensaje.');
+            }
+        } catch (err) {
+            aviso.className = 'form-feedback error';
+            aviso.textContent = t('form_error', 'No pudimos enviar el mensaje. Escríbenos por WhatsApp.');
+        } finally {
+            if (boton) { boton.disabled = false; boton.textContent = textoBoton; }
         }
     });
+});
+
+/** Texto en el idioma activo, con alternativa si la clave no existe. */
+function t(clave, alternativa) {
+    // translations.js declara la variable con const, asi que no cuelga de window.
+    if (typeof translations === 'undefined') return alternativa;
+    const idioma = localStorage.getItem('lang') || 'es';
+    const tabla = translations[idioma] || translations.es || {};
+    return tabla[clave] || alternativa;
 }
 
 // =========================

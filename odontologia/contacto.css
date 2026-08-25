@@ -825,3 +825,36 @@
 .map-actions .btn-map-link {
     margin-top: 0;
 }
+
+/* ==================== AVISO DE ENVIO DEL FORMULARIO ==================== */
+.form-feedback {
+    margin: 0 0 1rem;
+    padding: 0;
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.5;
+    text-align: center;
+}
+
+.form-feedback:empty {
+    display: none;
+}
+
+.form-feedback.enviando {
+    color: var(--text);
+    opacity: 0.7;
+}
+
+.form-feedback.ok {
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    background: rgba(63, 174, 108, 0.12);
+    color: #2b7a4b;
+}
+
+.form-feedback.error {
+    padding: 0.85rem 1rem;
+    border-radius: 12px;
+    background: rgba(229, 84, 75, 0.12);
+    color: #b23b33;
+}

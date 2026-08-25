@@ -265,18 +265,19 @@
                 <h2 data-i18n="cnt_form_h2">Agenda tu valoración</h2>
                 <p data-i18n="cnt_form_sub">Completa el formulario y te contactaremos en las próximas 24 horas.</p>
                 
-                <form class="contact-form style-form">
+                <form class="contact-form style-form" action="enviar.php" method="post">
+                    <input type="hidden" name="formulario" value="cita">
                     <input type="text" name="website" class="honeypot" style="display:none;">
                     
                     <!-- Row 1: Name | Phone -->
                     <div class="form-row">
                         <div class="form-group">
                             <label for="nombre_c" data-i18n="idx_form_name">Nombre completo</label>
-                            <input type="text" id="nombre_c" data-i18n="idx_form_name" placeholder="Tu nombre" required>
+                            <input type="text" id="nombre_c" name="nombre" data-i18n="idx_form_name" placeholder="Tu nombre" required>
                         </div>
                         <div class="form-group">
                             <label for="telefono_c" data-i18n="idx_form_tel">Número de teléfono</label>
-                            <input type="tel" id="telefono_c" data-i18n="idx_form_tel" placeholder="Tu celular" required>
+                            <input type="tel" id="telefono_c" name="telefono" data-i18n="idx_form_tel" placeholder="Tu celular" required>
                         </div>
                     </div>
 
@@ -284,11 +285,11 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="email_c" data-i18n="idx_form_email">Correo electrónico</label>
-                            <input type="email" id="email_c" data-i18n="idx_form_email" placeholder="Tu correo" required>
+                            <input type="email" id="email_c" name="email" data-i18n="idx_form_email" placeholder="Tu correo" required>
                         </div>
                         <div class="form-group">
                             <label for="asunto_c" data-i18n="idx_form_subject">Asunto</label>
-                            <input type="text" id="asunto_c" data-i18n="idx_form_subject_plh" placeholder="Motivo de tu consulta" required>
+                            <input type="text" id="asunto_c" name="asunto" data-i18n="idx_form_subject_plh" placeholder="Motivo de tu consulta" required>
                         </div>
                     </div>
 
@@ -296,11 +297,11 @@
                     <div class="form-row">
                         <div class="form-group">
                             <label for="fecha_c" data-i18n="idx_form_date">Fecha preferida de cita</label>
-                            <input type="date" id="fecha_c" required>
+                            <input type="date" id="fecha_c" name="fecha" required>
                         </div>
                         <div class="form-group">
                             <label for="servicio_c" data-i18n="idx_form_service">Tipo de Tratamiento</label>
-                            <select id="servicio_c" required>
+                            <select id="servicio_c" name="servicio" required>
                                 <option value="" disabled selected data-i18n="idx_form_service_opt0">Selecciona un servicio</option>
                                 <option value="estetica" data-i18n="footer_serv_1">Diseño de Sonrisa</option>
                                 <option value="implantes" data-i18n="footer_serv_2">Implantes Dentales</option>
@@ -314,8 +315,10 @@
                     <!-- Row 4: Message -->
                     <div class="form-group">
                         <label for="mensaje_c" data-i18n="idx_form_msg">¿En qué podemos ayudarte?</label>
-                        <textarea id="mensaje_c" rows="4" data-i18n="idx_form_msg" placeholder="Cuéntanos sobre el tratamiento que deseas..." required></textarea>
+                        <textarea id="mensaje_c" name="mensaje" rows="4" data-i18n="idx_form_msg" placeholder="Cuéntanos sobre el tratamiento que deseas..." required></textarea>
                     </div>
+
+                    <p class="form-feedback" role="status" aria-live="polite"></p>
 
                     <button type="submit" class="btn-primary full-width" data-i18n="cnt_form_btn">
                         ENVIAR MENSAJE
@@ -361,23 +364,24 @@
                 Tu opinión es fundamental para nosotros. Déjanos tus comentarios, peticiones, quejas, reclamos o sugerencias.
             </p>
 
-            <form class="pqrs-form style-form mx-auto">
+            <form class="pqrs-form style-form mx-auto" action="enviar.php" method="post">
+                <input type="hidden" name="formulario" value="pqrs">
                 <input type="text" name="website_pqrs" class="honeypot" style="display:none;">
                 
                 <div class="form-row">
                     <div class="form-group text-left">
                         <label for="pqrs_nombre" data-i18n="pqrs_lbl1">Nombre Completo</label>
-                        <input type="text" id="pqrs_nombre" data-i18n="pqrs_lbl1" placeholder="Tu nombre" required>
+                        <input type="text" id="pqrs_nombre" name="nombre" data-i18n="pqrs_lbl1" placeholder="Tu nombre" required>
                     </div>
                     <div class="form-group text-left">
                         <label for="pqrs_email" data-i18n="pqrs_lbl2">Correo Electrónico</label>
-                        <input type="email" id="pqrs_email" data-i18n="pqrs_lbl2" placeholder="Tu correo" required>
+                        <input type="email" id="pqrs_email" name="email" data-i18n="pqrs_lbl2" placeholder="Tu correo" required>
                     </div>
                 </div>
 
                 <div class="form-group text-left">
                     <label for="pqrs_tipo" data-i18n="pqrs_lbl3">Tipo de Solicitud</label>
-                    <select id="pqrs_tipo" required>
+                    <select id="pqrs_tipo" name="tipo_solicitud" required>
                         <option value="" disabled selected data-i18n="pqrs_opt0">Selecciona una opción</option>
                         <option value="peticion" data-i18n="pqrs_opt1">Petición</option>
                         <option value="queja" data-i18n="pqrs_opt2">Queja</option>
@@ -389,8 +393,10 @@
 
                 <div class="form-group text-left">
                     <label for="pqrs_mensaje" data-i18n="pqrs_lbl4">Comentario / Descripción</label>
-                    <textarea id="pqrs_mensaje" rows="4" data-i18n="pqrs_txt_plh" placeholder="Escribe aquí tu solicitud..." required></textarea>
+                    <textarea id="pqrs_mensaje" name="mensaje" rows="4" data-i18n="pqrs_txt_plh" placeholder="Escribe aquí tu solicitud..." required></textarea>
                 </div>
+
+                <p class="form-feedback" role="status" aria-live="polite"></p>
 
                 <button type="submit" class="btn-primary full-width" data-i18n="pqrs_btn">
                     Enviar PQRS
