@@ -203,8 +203,6 @@ a:hover { text-decoration-color: var(--blanco); }
   transition: color var(--transicion);
 }
 .nav__enlace:hover, .nav__enlace[aria-current="page"] { color: var(--blanco); }
-/* «Contacto» se escribe tal cual, no en versalitas como el resto del menú. */
-.nav__enlace--normal { text-transform: none; letter-spacing: .04em; }
 .cabecera .boton { padding: .7rem 1.1rem; font-size: .68rem; letter-spacing: .1em; white-space: nowrap; }
 .nav__lista .boton { display: none; }
 /* El botón suelto de la cabecera solo cabe en pantallas anchas. */
