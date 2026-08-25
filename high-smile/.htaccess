@@ -1,0 +1,65 @@
+# ============================================================================
+# High Smile · configuración para Hostinger (Apache / LiteSpeed)
+# ----------------------------------------------------------------------------
+# Este archivo sustituye a `_headers`, que solo entienden Netlify y Cloudflare.
+# Va en la raíz de public_html, junto a index.html.
+# ============================================================================
+
+# ---------------------------------------------------------------- HTTPS
+# Fuerza el candado. Antes de activarlo, comprueba en hPanel que el
+# certificado SSL del dominio ya esté emitido; si no, la página no abrirá.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{HTTPS} !=on
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+</IfModule>
+
+# ---------------------------------------------------------------- Cabeceras
+<IfModule mod_headers.c>
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; font-src 'self'; connect-src 'none'; frame-src https://www.google.com https://maps.google.com; object-src 'none'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; upgrade-insecure-requests"
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set X-Frame-Options "DENY"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "geolocation=(), camera=(), microphone=(), payment=(), interest-cohort=()"
+  Header always set Cross-Origin-Opener-Policy "same-origin"
+  Header always set Cross-Origin-Resource-Policy "same-origin"
+
+  # Versión de muestra: se pide a los buscadores que no la indexen.
+  # Cuando el sitio sea el definitivo, borra esta línea, la etiqueta
+  # <meta name="robots"> de las tres páginas y el archivo robots.txt.
+  Header always set X-Robots-Tag "noindex, nofollow"
+</IfModule>
+
+# ---------------------------------------------------------------- Compresión
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml application/javascript image/svg+xml
+</IfModule>
+
+# ---------------------------------------------------------------- Caché
+# Las fotos y las fuentes se piden con nombre fijo, así que se guardan un año;
+# el HTML no se guarda, para que cualquier cambio de texto se vea al momento.
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType image/jpeg      "access plus 1 year"
+  ExpiresByType image/png       "access plus 1 year"
+  ExpiresByType image/webp      "access plus 1 year"
+  ExpiresByType image/svg+xml   "access plus 1 year"
+  ExpiresByType font/woff2      "access plus 1 year"
+  ExpiresByType text/css        "access plus 7 days"
+  ExpiresByType application/javascript "access plus 7 days"
+  ExpiresByType text/html       "access plus 0 seconds"
+</IfModule>
+
+# ---------------------------------------------------------------- Varios
+DirectoryIndex index.html
+ErrorDocument 404 /index.html
+Options -Indexes
+
+# No se sirven archivos internos del proyecto. robots.txt sí, claro.
+<FilesMatch "^(README\.md|_headers|\.nojekyll|OFL-.*\.txt)$">
+  <IfModule mod_authz_core.c>
+    Require all denied
+  </IfModule>
+</FilesMatch>

@@ -8,6 +8,10 @@ logotipo oficial de la clínica.
 > nombres inventados sobre fotografías del material de la clínica. Antes de publicar el sitio
 > al público hay que reemplazarlos por los nombres, cargos y fotografías reales de cada
 > integrante, con su autorización.
+>
+> Por eso las tres páginas van con `noindex`, y `robots.txt` y `.htaccess` piden lo mismo:
+> así Google no muestra en sus resultados nombres inventados asociados a una clínica real.
+> Los pasos para quitar esos candados están al final de `DESPLIEGUE-HOSTINGER.md`.
 
 ---
 
@@ -77,7 +81,10 @@ Además: `agenda.html` (formulario de agendamiento en tres pasos) y `privacidad.
 | `assets/img/fotos/` | Fotografías de la clínica · ver `LEEME.md` dentro de la carpeta |
 | `assets/img/ilustraciones/` | Dibujos SVG de los ocho servicios |
 | `assets/fonts/` | Las dos tipografías del sitio, con sus licencias |
-| `_headers` | Cabeceras de seguridad para hostings que las permiten |
+| `_headers` | Cabeceras de seguridad para Netlify y Cloudflare Pages |
+| `.htaccess` | Lo mismo para Hostinger y cualquier Apache o LiteSpeed |
+| `robots.txt` | Pide a los buscadores que no indexen esta versión de muestra |
+| `DESPLIEGUE-HOSTINGER.md` | Guía paso a paso para publicar en Hostinger |
 
 Sin frameworks, sin `npm install`, sin dependencias externas: HTML, CSS y JavaScript puro.
 
@@ -187,6 +194,11 @@ python3 -m http.server 8080
 
 **GitHub Pages:** con Pages configurado sobre esta rama y carpeta `/ (root)`, el sitio queda en
 `https://<usuario>.github.io/camino-de-jesus/high-smile/`
+
+**Hostinger:** todo el proceso está en [`DESPLIEGUE-HOSTINGER.md`](DESPLIEGUE-HOSTINGER.md).
+En resumen: vaciar `public_html`, subir el contenido de esta carpeta y activar el SSL. Las
+rutas del sitio son relativas, así que funciona igual en la raíz de un dominio que dentro de
+una subcarpeta, sin tocar nada.
 
 ---
 

@@ -1,0 +1,6 @@
+# Versión de muestra para presentación interna: no debe indexarse.
+# Cuando el sitio sea el definitivo, reemplaza este archivo por:
+#   User-agent: *
+#   Allow: /
+User-agent: *
+Disallow: /
