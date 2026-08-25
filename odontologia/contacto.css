@@ -817,3 +817,11 @@
         font-size: 1rem;
     }
 }
+.map-actions {
+    margin: 1.25rem 0 0;
+    text-align: center;
+}
+
+.map-actions .btn-map-link {
+    margin-top: 0;
+}
