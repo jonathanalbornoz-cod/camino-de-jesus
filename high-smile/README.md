@@ -39,9 +39,14 @@ logotipo oficial de la clínica.
 | Casos de éxito | Carrusel de antes y después |
 | Antes y después | Carrusel con los pacientes que terminaron su tratamiento |
 | Nuestro equipo | Cuatro perfiles con fotografía, especialidad y años de experiencia |
-| Turismo dental | Por qué tratarse en Cali, cómo se organiza el viaje y qué ver en la ciudad |
 | Preguntas frecuentes | Agendamiento, provisionales y definitivos, tiempos de entrega, cuidados y miedo al odontólogo |
-| Contacto | Canales, mapa de Google cargado directamente y envío de fotos para valoración a distancia |
+| Contacto | Canales, mapa de Google cargado directamente y dos desplegables: **Turismo dental** y **Valoración a distancia** |
+
+**Los dos desplegables de contacto.** Turismo dental y el envío de fotos ocupaban antes dos
+bloques enteros y alargaban mucho la página, así que ahora viven plegados dentro de Contacto:
+se abren con un clic, de a uno o los dos a la vez, y la página quedó unos 1.900 px más corta.
+El enlace «Turismo dental» del menú sigue funcionando: lleva al bloque y lo abre solo, venga
+del menú, del pie de página o de otra página del sitio.
 
 Además: `agenda.html` (formulario de agendamiento en tres pasos) y `privacidad.html`
 (política de privacidad y habeas data).

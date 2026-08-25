@@ -312,6 +312,56 @@ a:hover { text-decoration-color: var(--blanco); }
 .horario li:last-child { border-bottom: 0; }
 .horario span:first-child { color: var(--texto-suave); }
 
+/* ---------- Desplegables de contacto ----------
+   Turismo dental y valoración a distancia viven plegados dentro de la sección
+   de contacto: la página deja de ser interminable y quien los necesita los
+   abre de a uno o los dos a la vez. */
+.desplegables { display: grid; gap: 1rem; }
+
+.desplegable { border: 1px solid var(--borde); background: var(--superficie); }
+.desplegable__cabecera { margin: 0; font-size: 1rem; font-weight: 300; }
+
+.desplegable__boton {
+  width: 100%; text-align: left; background: none; border: 0; font: inherit; color: var(--texto);
+  padding: clamp(1.2rem, 2.4vw, 1.8rem) clamp(1.2rem, 3vw, 2.2rem);
+  cursor: pointer; display: flex; align-items: center; gap: 1.2rem;
+  transition: background var(--transicion), color var(--transicion);
+}
+.desplegable__boton:hover { background: var(--superficie-2); color: var(--blanco); }
+.desplegable__boton::after {
+  content: "+"; margin-left: auto; font-size: 1.6rem; font-weight: 200; line-height: 1;
+  color: var(--texto-suave); transition: transform var(--transicion);
+}
+.desplegable__boton[aria-expanded="true"]::after { transform: rotate(45deg); color: var(--blanco); }
+
+.desplegable__icono { width: 26px; height: 26px; flex: 0 0 auto; color: var(--blanco); }
+.desplegable__texto { display: grid; gap: .25rem; min-width: 0; }
+.desplegable__titulo { font-size: 1.15rem; font-weight: 400; letter-spacing: .01em; }
+.desplegable__resumen { color: var(--texto-suave); font-size: .9rem; line-height: 1.5; }
+
+.desplegable__panel {
+  padding: 0 clamp(1.2rem, 3vw, 2.2rem) clamp(1.8rem, 3vw, 2.6rem);
+  border-top: 1px solid var(--borde);
+  padding-top: clamp(1.8rem, 3vw, 2.4rem);
+}
+.desplegable__panel[hidden] { display: none; }
+.desplegable__panel h4 { font-size: 1.15rem; font-weight: 400; letter-spacing: .01em; }
+.desplegable__panel .desplegable__intro { font-size: clamp(1.5rem, 2.6vw, 2rem); font-weight: 200; }
+.desplegable__panel .entradilla { margin-inline: auto; }
+.desplegable__panel .centrado .linea-fina { margin-inline: auto; }
+
+/* Las tarjetas de dentro ya viven sobre una superficie: se distinguen con
+   el fondo base para que no queden dos grises encima. */
+.desplegable__panel .tarjeta,
+.desplegable__panel .soltar { background: var(--negro-2); }
+
+@media (max-width: 600px) {
+  .desplegable__boton { gap: .9rem; }
+  .desplegable__icono { width: 22px; height: 22px; }
+  .desplegable__titulo { font-size: 1.02rem; }
+  .desplegable__resumen { font-size: .84rem; }
+}
+
 /* ---------- Preguntas frecuentes ---------- */
 .faq { max-width: 860px; margin-inline: auto; border-top: 1px solid var(--borde); }
 .faq__item { border-bottom: 1px solid var(--borde); }

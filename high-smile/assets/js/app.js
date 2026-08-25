@@ -241,6 +241,56 @@
   const activarCarruseles = () => { $$('[data-carrusel]').forEach(montarCarrusel); };
 
   /* ---------------------------------------------------------------
+   * Desplegables de la sección de contacto
+   * Turismo dental y valoración a distancia se guardan plegados para que
+   * la página no se alargue. Se abren de forma independiente, y un enlace
+   * con el ancla del bloque (index.html#turismo) lo abre y lo deja a la
+   * vista, venga del menú o de otra página.
+   * ------------------------------------------------------------- */
+  const abrirDesplegable = (bloque, abierto) => {
+    const boton = $('.desplegable__boton', bloque);
+    const panel = $('.desplegable__panel', bloque);
+    if (!boton || !panel) { return; }
+
+    boton.setAttribute('aria-expanded', String(abierto));
+    panel.hidden = !abierto;
+  };
+
+  const activarDesplegables = () => {
+    const bloques = $$('[data-desplegable]');
+    if (bloques.length === 0) { return; }
+
+    bloques.forEach((bloque) => {
+      const boton = $('.desplegable__boton', bloque);
+      if (!boton) { return; }
+
+      boton.addEventListener('click', () => {
+        abrirDesplegable(bloque, boton.getAttribute('aria-expanded') !== 'true');
+      });
+    });
+
+    const atenderAncla = () => {
+      const ancla = window.location.hash.slice(1);
+      const destino = ancla ? document.getElementById(ancla) : null;
+      if (!destino || !destino.hasAttribute('data-desplegable')) { return; }
+
+      abrirDesplegable(destino, true);
+      destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    /* Un clic repetido sobre el mismo enlace no cambia el hash y no dispara
+       `hashchange`, así que también se atiende el clic. */
+    document.addEventListener('click', (evento) => {
+      if (evento.target.closest && evento.target.closest('a[href*="#"]')) {
+        window.setTimeout(atenderAncla, 0);
+      }
+    });
+
+    window.addEventListener('hashchange', atenderAncla);
+    atenderAncla();
+  };
+
+  /* ---------------------------------------------------------------
    * Envío de fotos del paciente
    * Las imágenes no salen del dispositivo: solo se previsualizan y se
    * preparan los mensajes de WhatsApp y de correo para que el paciente
@@ -322,6 +372,7 @@
     activarRevelado();
     activarFotos();
     activarCarruseles();
+    activarDesplegables();
     activarFotosPaciente();
   };
 
