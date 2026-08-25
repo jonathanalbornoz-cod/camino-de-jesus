@@ -372,7 +372,23 @@
             <p class="section-subtitle" data-i18n="idx_test_sub">Historias reales de confianza y transformación</p>
         </div>
 
-        <div class="experience-carousel-wrapper">
+        <div class="experiences-layout">
+
+            <!-- Testimonio en video -->
+            <figure class="experience-video">
+                <div class="video-vertical-wrapper">
+                    <video id="video-nosotros" class="video-vertical" muted loop playsinline
+                           preload="none" poster="imagenes/evidencia-1-portada.jpg">
+                        <source src="imagenes/EVIDENCIA_1.mp4" type="video/mp4">
+                    </video>
+                    <div class="video-play-overlay" id="play-overlay">
+                        <i class="fas fa-play"></i>
+                    </div>
+                </div>
+                <figcaption data-i18n="idx_test_video_cap">Testimonio en video &mdash; Alineadores invisibles</figcaption>
+            </figure>
+
+            <div class="experience-carousel-wrapper">
             <div class="experience-carousel" id="experienceCarousel">
                 
                 <div class="experience-slide active">
@@ -524,6 +540,7 @@
                     <span class="especialidad" data-i18n="nos_team4_spec">Ortodoncista</span>
                 </div>
             </div>
+        </div>
         </div>
     </div>
 </section>
