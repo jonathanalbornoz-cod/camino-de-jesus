@@ -312,6 +312,53 @@ a:hover { text-decoration-color: var(--blanco); }
 .horario li:last-child { border-bottom: 0; }
 .horario span:first-child { color: var(--texto-suave); }
 
+/* ---------- Menú desplegable de «Contacto» ----------
+   Turismo dental y la valoración a distancia se consultan desde la cabecera:
+   el panel cae por debajo de la barra, ocupa el ancho completo y hace scroll
+   por dentro, así el contenido deja de alargar la página. */
+.nav__contacto { position: static; }
+.nav__desplegar {
+  background: none; border: 0; font: inherit; cursor: pointer;
+  display: inline-flex; align-items: center; gap: .45rem;
+}
+.nav__desplegar::after {
+  content: ""; width: 6px; height: 6px; margin-top: -3px;
+  border-right: 1px solid currentColor; border-bottom: 1px solid currentColor;
+  transform: rotate(45deg); transition: transform var(--transicion);
+}
+.nav__desplegar[aria-expanded="true"] { color: var(--blanco); }
+.nav__desplegar[aria-expanded="true"]::after { transform: rotate(-135deg); margin-top: 2px; }
+
+.megamenu {
+  position: absolute; top: 100%; left: 0; right: 0; z-index: 61;
+  background: var(--negro); border-bottom: 1px solid var(--borde);
+  box-shadow: 0 26px 44px rgba(0, 0, 0, .6);
+  max-height: calc(100vh - 5.5rem); overflow-y: auto;
+  animation: aparecer .25s ease;
+}
+.megamenu[hidden] { display: none; }
+.megamenu__interior { display: grid; gap: 1.4rem; padding: 1.8rem 0 2.4rem; }
+.megamenu__cabecera { display: flex; align-items: flex-start; gap: 1.5rem; }
+.megamenu__intro { flex: 1 1 auto; margin: 0; color: var(--texto-suave); font-size: .95rem; max-width: 72ch; }
+.megamenu__cerrar {
+  flex: 0 0 auto; margin-left: auto; background: none; border: 1px solid var(--borde); border-radius: var(--radio);
+  color: var(--texto-suave); font: inherit; font-size: .7rem; letter-spacing: .09em;
+  text-transform: uppercase; padding: .5rem .8rem; cursor: pointer;
+  display: inline-flex; align-items: center; gap: .5rem;
+  transition: color var(--transicion), border-color var(--transicion);
+}
+.megamenu__cerrar::after { content: "\00d7"; font-size: 1.15rem; line-height: 1; }
+.megamenu__cerrar:hover { color: var(--blanco); border-color: var(--borde-fuerte); }
+.megamenu__pie { display: flex; flex-wrap: wrap; gap: .8rem; margin: 0; }
+
+/* Accesos a los dos bloques desde la propia sección de contacto. */
+.contacto__accesos { display: flex; flex-wrap: wrap; gap: .8rem; margin: 0; }
+
+@media (max-width: 700px) {
+  .megamenu__interior { padding: 1.2rem 0 1.8rem; }
+  .megamenu__pie .boton, .contacto__accesos .boton { width: 100%; justify-content: center; }
+}
+
 /* ---------- Desplegables de contacto ----------
    Turismo dental y valoración a distancia viven plegados dentro de la sección
    de contacto: la página deja de ser interminable y quien los necesita los

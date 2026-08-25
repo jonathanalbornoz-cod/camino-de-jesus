@@ -79,8 +79,12 @@
           <li><a class="nav__enlace" href="index.html#casos" data-i18n="nav.casos">Casos de éxito</a></li>
           <li><a class="nav__enlace" href="index.html#pacientes" data-i18n="nav.antes">Antes y después</a></li>
           <li><a class="nav__enlace" href="index.html#equipo" data-i18n="nav.equipo">Nuestro equipo</a></li>
-          <li><a class="nav__enlace" href="index.html#turismo" data-i18n="nav.turismo">Turismo dental</a></li>
-          <li><a class="nav__enlace" href="index.html#contacto" data-i18n="nav.contacto">Contacto</a></li>
+          <li class="nav__contacto">
+            <button class="nav__enlace nav__desplegar" type="button" id="menu-contacto-boton"
+                    aria-expanded="false" aria-controls="menu-contacto">
+              <span data-i18n="nav.contacto">Contacto</span>
+            </button>
+          </li>
           <li><a class="boton boton--solido" href="agenda.html" data-i18n="cta.agendar">Agendar valoración</a></li>
         </ul>
       </nav>
@@ -91,6 +95,173 @@
       </div>
 
       <a class="boton boton--solido cabecera__cta" href="agenda.html" data-i18n="cta.agendar">Agendar valoración</a>
+    </div>
+
+    <!-- ---------- Menú desplegable de «Contacto» ----------
+         Turismo dental y la valoración a distancia se consultan desde aquí: así no
+         alargan la página y quedan a un clic desde cualquier punto del sitio. -->
+    <div class="megamenu" id="menu-contacto" role="region" aria-labelledby="menu-contacto-boton" hidden>
+      <div class="contenedor megamenu__interior">
+        <div class="megamenu__cabecera">
+          <p class="megamenu__intro" data-i18n="menu.intro">Abre lo que necesites: te orientamos con unas fotos antes de la primera cita y organizamos tu viaje si vienes de otra ciudad.</p>
+          <button class="megamenu__cerrar" type="button" data-cerrar-menu data-i18n="menu.cerrar">Cerrar</button>
+        </div>
+        <div class="desplegables">
+
+          <article class="desplegable" id="turismo" data-desplegable>
+            <h3 class="desplegable__cabecera">
+              <button class="desplegable__boton" type="button" id="boton-turismo" aria-expanded="false" aria-controls="panel-turismo">
+                <svg class="desplegable__icono" aria-hidden="true"><use href="#i-avion"></use></svg>
+                <span class="desplegable__texto">
+                  <span class="desplegable__titulo" data-i18n="turismo.rotulo">Turismo dental</span>
+                  <span class="desplegable__resumen" data-i18n="turismo.resumen">¿Vienes de otra ciudad o de otro país? Así planeamos el viaje, la agenda y qué ver en Cali.</span>
+                </span>
+              </button>
+            </h3>
+            <div class="desplegable__panel" id="panel-turismo" role="region" aria-labelledby="boton-turismo" hidden>
+              <div class="centrado mb-xl">
+                <h4 class="desplegable__intro" data-i18n="turismo.titulo">Tu tratamiento en Cali, con todo resuelto</h4>
+                <hr class="linea-fina" />
+                <p class="entradilla" data-i18n="turismo.entradilla">
+                  Atendemos pacientes de otras ciudades y de otros países. Planificamos el tratamiento
+                  antes de que viajes para que tu tiempo en Cali rinda al máximo.
+                </p>
+              </div>
+
+              <div class="rejilla rejilla--3 mb-xl">
+                <article class="tarjeta">
+                  <div class="tarjeta__icono"><svg aria-hidden="true"><use href="#i-agenda"></use></svg></div>
+                  <h4 data-i18n="turismo.1.titulo">Plan antes de viajar</h4>
+                  <p data-i18n="turismo.1.texto">Envíanos tus fotos y radiografías por WhatsApp: recibes propuesta de tratamiento, número de sesiones y presupuesto antes de comprar el tiquete.</p>
+                </article>
+                <article class="tarjeta">
+                  <div class="tarjeta__icono"><svg aria-hidden="true"><use href="#i-avion"></use></svg></div>
+                  <h4 data-i18n="turismo.2.titulo">Agenda concentrada</h4>
+                  <p data-i18n="turismo.2.texto">Organizamos las citas en los días que estés en la ciudad y coordinamos las especialidades para no repetir viajes.</p>
+                </article>
+                <article class="tarjeta">
+                  <div class="tarjeta__icono"><svg aria-hidden="true"><use href="#i-idiomas"></use></svg></div>
+                  <h4 data-i18n="turismo.3.titulo">Atención en dos idiomas</h4>
+                  <p data-i18n="turismo.3.texto">Te acompañamos en español o en inglés, desde la primera consulta hasta los controles a distancia cuando regreses a casa.</p>
+                </article>
+              </div>
+
+              <div class="centrado mb-lg">
+                <h4 class="desplegable__intro" data-i18n="turismo.cali.titulo">Y ya que vienes, esto es Cali</h4>
+                <p class="entradilla" data-i18n="turismo.cali.texto">
+                  La capital del Valle del Cauca recibe con clima cálido todo el año, salsa a cualquier
+                  hora y una cocina callejera que vale el viaje aparte.
+                </p>
+              </div>
+
+              <div class="rejilla rejilla--3">
+                <figure class="tarjeta-cali">
+                  <div class="tarjeta-cali__foto marco" data-foto="fotos/cali-1">
+                    <div class="marco__vacio"><svg aria-hidden="true"><use href="#i-imagen"></use></svg><span data-i18n="foto.cali.1">Cristo Rey, Cali</span></div>
+                  </div>
+                  <figcaption>
+                    <strong data-i18n="turismo.cali.1.titulo">Cristo Rey</strong>
+                    <span data-i18n="turismo.cali.1.texto">El mirador de la ciudad, a 1.400 metros: Cali completa a tus pies al atardecer.</span>
+                  </figcaption>
+                </figure>
+                <figure class="tarjeta-cali">
+                  <div class="tarjeta-cali__foto marco" data-foto="fotos/cali-2">
+                    <div class="marco__vacio"><svg aria-hidden="true"><use href="#i-imagen"></use></svg><span data-i18n="foto.cali.2">Torre de Cali, Cali</span></div>
+                  </div>
+                  <figcaption>
+                    <strong data-i18n="turismo.cali.2.titulo">Torre de Cali</strong>
+                    <span data-i18n="turismo.cali.2.texto">La silueta más reconocible del centro, punto de partida para recorrer el río y San Antonio.</span>
+                  </figcaption>
+                </figure>
+                <figure class="tarjeta-cali">
+                  <div class="tarjeta-cali__foto marco" data-foto="fotos/cali-3">
+                    <div class="marco__vacio"><svg aria-hidden="true"><use href="#i-imagen"></use></svg><span data-i18n="foto.cali.3">Cholados, Cali</span></div>
+                  </div>
+                  <figcaption>
+                    <strong data-i18n="turismo.cali.3.titulo">Cholados</strong>
+                    <span data-i18n="turismo.cali.3.texto">Hielo raspado con frutas del Pacífico: el postre caleño que hay que probar (y cepillarse después).</span>
+                  </figcaption>
+                </figure>
+              </div>
+              <p class="centrado mt-xl">
+                <a class="boton boton--linea" href="https://wa.me/573158253729?text=Hola%20High%20Smile%2C%20vengo%20de%20otra%20ciudad%20y%20quiero%20planear%20mi%20tratamiento" target="_blank" rel="noopener noreferrer">
+                  <span data-i18n="turismo.cta">Planear mi viaje odontológico</span>
+                  <svg aria-hidden="true"><use href="#i-flecha"></use></svg>
+                </a>
+              </p>
+            </div>
+          </article>
+
+          <article class="desplegable" id="valoracion" data-desplegable>
+            <h3 class="desplegable__cabecera">
+              <button class="desplegable__boton" type="button" id="boton-valoracion" aria-expanded="false" aria-controls="panel-valoracion">
+                <svg class="desplegable__icono" aria-hidden="true"><use href="#i-subir"></use></svg>
+                <span class="desplegable__texto">
+                  <span class="desplegable__titulo" data-i18n="fotos.rotulo">Valoración a distancia</span>
+                  <span class="desplegable__resumen" data-i18n="fotos.resumen">Envíanos tres fotos de tu boca y te orientamos antes de la primera cita.</span>
+                </span>
+              </button>
+            </h3>
+            <div class="desplegable__panel" id="panel-valoracion" role="region" aria-labelledby="boton-valoracion" hidden>
+              <div id="fotos-paciente">
+                <h4 data-i18n="fotos.titulo">Envíanos las fotos de tu boca</h4>
+                <p data-i18n="fotos.texto">
+                  Con una foto frontal y dos laterales podemos orientarte antes de la primera cita. Es el
+                  primer paso habitual para quienes nos escriben desde otra ciudad o desde el exterior.
+                </p>
+
+                <div class="rejilla rejilla--3 mt-lg" id="campos-fotos">
+                  <label class="soltar" for="foto-frontal">
+                    <input type="file" id="foto-frontal" accept="image/*" data-foto-campo />
+                    <svg aria-hidden="true"><use href="#i-subir"></use></svg>
+                    <span class="soltar__titulo" data-i18n="fotos.frontal">Sonrisa de frente</span>
+                    <span class="soltar__ayuda" data-i18n="fotos.elegir">Toca para elegir la foto</span>
+                  </label>
+                  <label class="soltar" for="foto-derecha">
+                    <input type="file" id="foto-derecha" accept="image/*" data-foto-campo />
+                    <svg aria-hidden="true"><use href="#i-subir"></use></svg>
+                    <span class="soltar__titulo" data-i18n="fotos.derecha">Lateral derecha</span>
+                    <span class="soltar__ayuda" data-i18n="fotos.elegir">Toca para elegir la foto</span>
+                  </label>
+                  <label class="soltar" for="foto-izquierda">
+                    <input type="file" id="foto-izquierda" accept="image/*" data-foto-campo />
+                    <svg aria-hidden="true"><use href="#i-subir"></use></svg>
+                    <span class="soltar__titulo" data-i18n="fotos.izquierda">Lateral izquierda</span>
+                    <span class="soltar__ayuda" data-i18n="fotos.elegir">Toca para elegir la foto</span>
+                  </label>
+                </div>
+
+                <p class="aviso mt-lg" data-i18n="fotos.aviso">
+                  Las fotos se quedan en tu dispositivo: esta página no las sube a ningún servidor. Al
+                  pulsar un botón se abre WhatsApp o tu correo con el mensaje listo y tú adjuntas las
+                  imágenes que acabas de elegir.
+                </p>
+
+                <div class="form-acciones acciones--izquierda">
+                  <a class="boton boton--solido" id="fotos-whatsapp" href="https://wa.me/573158253729" target="_blank" rel="noopener noreferrer">
+                    <svg aria-hidden="true"><use href="#i-chat"></use></svg>
+                    <span data-i18n="fotos.wa">Enviar por WhatsApp</span>
+                  </a>
+                  <a class="boton boton--sutil" id="fotos-correo" href="mailto:highsmilecali@gmail.com">
+                    <svg aria-hidden="true"><use href="#i-correo"></use></svg>
+                    <span data-i18n="fotos.correo">Enviar por correo</span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </article>
+        </div>
+        <p class="megamenu__pie">
+          <a class="boton boton--linea" href="index.html#contacto">
+            <span data-i18n="menu.canales">Canales, dirección y mapa</span>
+            <svg aria-hidden="true"><use href="#i-flecha"></use></svg>
+          </a>
+          <a class="boton boton--solido" href="https://wa.me/573158253729?text=Hola%20High%20Smile%2C%20quiero%20agendar%20una%20valoraci%C3%B3n" target="_blank" rel="noopener noreferrer">
+            <svg aria-hidden="true"><use href="#i-chat"></use></svg>
+            <span data-i18n="menu.wa">Escribir por WhatsApp</span>
+          </a>
+        </p>
+      </div>
     </div>
   </header>
 
@@ -515,154 +686,18 @@
           </div>
         </div>
 
-        <!-- ---------- Desplegables: turismo dental y valoración a distancia ----------
-             Los dos bloques viven plegados para que la página no se alargue. Un enlace
-             con el ancla del bloque (index.html#turismo) lo abre y lo deja a la vista. -->
-        <div class="desplegables revelar">
-
-          <article class="desplegable" id="turismo" data-desplegable>
-            <h3 class="desplegable__cabecera">
-              <button class="desplegable__boton" type="button" id="boton-turismo" aria-expanded="false" aria-controls="panel-turismo">
-                <svg class="desplegable__icono" aria-hidden="true"><use href="#i-avion"></use></svg>
-                <span class="desplegable__texto">
-                  <span class="desplegable__titulo" data-i18n="turismo.rotulo">Turismo dental</span>
-                  <span class="desplegable__resumen" data-i18n="turismo.resumen">¿Vienes de otra ciudad o de otro país? Así planeamos el viaje, la agenda y qué ver en Cali.</span>
-                </span>
-              </button>
-            </h3>
-            <div class="desplegable__panel" id="panel-turismo" role="region" aria-labelledby="boton-turismo" hidden>
-              <div class="centrado mb-xl">
-                <h4 class="desplegable__intro" data-i18n="turismo.titulo">Tu tratamiento en Cali, con todo resuelto</h4>
-                <hr class="linea-fina" />
-                <p class="entradilla" data-i18n="turismo.entradilla">
-                  Atendemos pacientes de otras ciudades y de otros países. Planificamos el tratamiento
-                  antes de que viajes para que tu tiempo en Cali rinda al máximo.
-                </p>
-              </div>
-
-              <div class="rejilla rejilla--3 mb-xl">
-                <article class="tarjeta">
-                  <div class="tarjeta__icono"><svg aria-hidden="true"><use href="#i-agenda"></use></svg></div>
-                  <h4 data-i18n="turismo.1.titulo">Plan antes de viajar</h4>
-                  <p data-i18n="turismo.1.texto">Envíanos tus fotos y radiografías por WhatsApp: recibes propuesta de tratamiento, número de sesiones y presupuesto antes de comprar el tiquete.</p>
-                </article>
-                <article class="tarjeta">
-                  <div class="tarjeta__icono"><svg aria-hidden="true"><use href="#i-avion"></use></svg></div>
-                  <h4 data-i18n="turismo.2.titulo">Agenda concentrada</h4>
-                  <p data-i18n="turismo.2.texto">Organizamos las citas en los días que estés en la ciudad y coordinamos las especialidades para no repetir viajes.</p>
-                </article>
-                <article class="tarjeta">
-                  <div class="tarjeta__icono"><svg aria-hidden="true"><use href="#i-idiomas"></use></svg></div>
-                  <h4 data-i18n="turismo.3.titulo">Atención en dos idiomas</h4>
-                  <p data-i18n="turismo.3.texto">Te acompañamos en español o en inglés, desde la primera consulta hasta los controles a distancia cuando regreses a casa.</p>
-                </article>
-              </div>
-
-              <div class="centrado mb-lg">
-                <h4 class="desplegable__intro" data-i18n="turismo.cali.titulo">Y ya que vienes, esto es Cali</h4>
-                <p class="entradilla" data-i18n="turismo.cali.texto">
-                  La capital del Valle del Cauca recibe con clima cálido todo el año, salsa a cualquier
-                  hora y una cocina callejera que vale el viaje aparte.
-                </p>
-              </div>
-
-              <div class="rejilla rejilla--3">
-                <figure class="tarjeta-cali">
-                  <div class="tarjeta-cali__foto marco" data-foto="fotos/cali-1">
-                    <div class="marco__vacio"><svg aria-hidden="true"><use href="#i-imagen"></use></svg><span data-i18n="foto.cali.1">Cristo Rey, Cali</span></div>
-                  </div>
-                  <figcaption>
-                    <strong data-i18n="turismo.cali.1.titulo">Cristo Rey</strong>
-                    <span data-i18n="turismo.cali.1.texto">El mirador de la ciudad, a 1.400 metros: Cali completa a tus pies al atardecer.</span>
-                  </figcaption>
-                </figure>
-                <figure class="tarjeta-cali">
-                  <div class="tarjeta-cali__foto marco" data-foto="fotos/cali-2">
-                    <div class="marco__vacio"><svg aria-hidden="true"><use href="#i-imagen"></use></svg><span data-i18n="foto.cali.2">Torre de Cali, Cali</span></div>
-                  </div>
-                  <figcaption>
-                    <strong data-i18n="turismo.cali.2.titulo">Torre de Cali</strong>
-                    <span data-i18n="turismo.cali.2.texto">La silueta más reconocible del centro, punto de partida para recorrer el río y San Antonio.</span>
-                  </figcaption>
-                </figure>
-                <figure class="tarjeta-cali">
-                  <div class="tarjeta-cali__foto marco" data-foto="fotos/cali-3">
-                    <div class="marco__vacio"><svg aria-hidden="true"><use href="#i-imagen"></use></svg><span data-i18n="foto.cali.3">Cholados, Cali</span></div>
-                  </div>
-                  <figcaption>
-                    <strong data-i18n="turismo.cali.3.titulo">Cholados</strong>
-                    <span data-i18n="turismo.cali.3.texto">Hielo raspado con frutas del Pacífico: el postre caleño que hay que probar (y cepillarse después).</span>
-                  </figcaption>
-                </figure>
-              </div>
-              <p class="centrado mt-xl">
-                <a class="boton boton--linea" href="https://wa.me/573158253729?text=Hola%20High%20Smile%2C%20vengo%20de%20otra%20ciudad%20y%20quiero%20planear%20mi%20tratamiento" target="_blank" rel="noopener noreferrer">
-                  <span data-i18n="turismo.cta">Planear mi viaje odontológico</span>
-                  <svg aria-hidden="true"><use href="#i-flecha"></use></svg>
-                </a>
-              </p>
-            </div>
-          </article>
-
-          <article class="desplegable" id="valoracion" data-desplegable>
-            <h3 class="desplegable__cabecera">
-              <button class="desplegable__boton" type="button" id="boton-valoracion" aria-expanded="false" aria-controls="panel-valoracion">
-                <svg class="desplegable__icono" aria-hidden="true"><use href="#i-subir"></use></svg>
-                <span class="desplegable__texto">
-                  <span class="desplegable__titulo" data-i18n="fotos.rotulo">Valoración a distancia</span>
-                  <span class="desplegable__resumen" data-i18n="fotos.resumen">Envíanos tres fotos de tu boca y te orientamos antes de la primera cita.</span>
-                </span>
-              </button>
-            </h3>
-            <div class="desplegable__panel" id="panel-valoracion" role="region" aria-labelledby="boton-valoracion" hidden>
-              <div id="fotos-paciente">
-                <h4 data-i18n="fotos.titulo">Envíanos las fotos de tu boca</h4>
-                <p data-i18n="fotos.texto">
-                  Con una foto frontal y dos laterales podemos orientarte antes de la primera cita. Es el
-                  primer paso habitual para quienes nos escriben desde otra ciudad o desde el exterior.
-                </p>
-
-                <div class="rejilla rejilla--3 mt-lg" id="campos-fotos">
-                  <label class="soltar" for="foto-frontal">
-                    <input type="file" id="foto-frontal" accept="image/*" data-foto-campo />
-                    <svg aria-hidden="true"><use href="#i-subir"></use></svg>
-                    <span class="soltar__titulo" data-i18n="fotos.frontal">Sonrisa de frente</span>
-                    <span class="soltar__ayuda" data-i18n="fotos.elegir">Toca para elegir la foto</span>
-                  </label>
-                  <label class="soltar" for="foto-derecha">
-                    <input type="file" id="foto-derecha" accept="image/*" data-foto-campo />
-                    <svg aria-hidden="true"><use href="#i-subir"></use></svg>
-                    <span class="soltar__titulo" data-i18n="fotos.derecha">Lateral derecha</span>
-                    <span class="soltar__ayuda" data-i18n="fotos.elegir">Toca para elegir la foto</span>
-                  </label>
-                  <label class="soltar" for="foto-izquierda">
-                    <input type="file" id="foto-izquierda" accept="image/*" data-foto-campo />
-                    <svg aria-hidden="true"><use href="#i-subir"></use></svg>
-                    <span class="soltar__titulo" data-i18n="fotos.izquierda">Lateral izquierda</span>
-                    <span class="soltar__ayuda" data-i18n="fotos.elegir">Toca para elegir la foto</span>
-                  </label>
-                </div>
-
-                <p class="aviso mt-lg" data-i18n="fotos.aviso">
-                  Las fotos se quedan en tu dispositivo: esta página no las sube a ningún servidor. Al
-                  pulsar un botón se abre WhatsApp o tu correo con el mensaje listo y tú adjuntas las
-                  imágenes que acabas de elegir.
-                </p>
-
-                <div class="form-acciones acciones--izquierda">
-                  <a class="boton boton--solido" id="fotos-whatsapp" href="https://wa.me/573158253729" target="_blank" rel="noopener noreferrer">
-                    <svg aria-hidden="true"><use href="#i-chat"></use></svg>
-                    <span data-i18n="fotos.wa">Enviar por WhatsApp</span>
-                  </a>
-                  <a class="boton boton--sutil" id="fotos-correo" href="mailto:highsmilecali@gmail.com">
-                    <svg aria-hidden="true"><use href="#i-correo"></use></svg>
-                    <span data-i18n="fotos.correo">Enviar por correo</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </article>
-        </div>
+        <!-- Los dos bloques viven en el menú «Contacto» de la cabecera; estos accesos
+             abren el menú y despliegan el que corresponda. -->
+        <p class="contacto__accesos revelar">
+          <a class="boton boton--linea" href="index.html#turismo">
+            <svg aria-hidden="true"><use href="#i-avion"></use></svg>
+            <span data-i18n="turismo.rotulo">Turismo dental</span>
+          </a>
+          <a class="boton boton--linea" href="index.html#valoracion">
+            <svg aria-hidden="true"><use href="#i-subir"></use></svg>
+            <span data-i18n="fotos.rotulo">Valoración a distancia</span>
+          </a>
+        </p>
       </div>
     </section>
 

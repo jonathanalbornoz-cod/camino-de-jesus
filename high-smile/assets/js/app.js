@@ -42,6 +42,9 @@
       const abierto = boton.getAttribute('aria-expanded') === 'true';
       boton.setAttribute('aria-expanded', String(!abierto));
       nav.classList.toggle('esta-abierto', !abierto);
+
+      /* El menú lateral y el panel de contacto ocupan el mismo sitio. */
+      if (!abierto) { mostrarMenuContacto(false); }
     });
 
     $$('a', nav).forEach((enlace) => { enlace.addEventListener('click', cerrar); });
@@ -241,6 +244,71 @@
   const activarCarruseles = () => { $$('[data-carrusel]').forEach(montarCarrusel); };
 
   /* ---------------------------------------------------------------
+   * Menú desplegable de «Contacto» en la cabecera
+   * Turismo dental y la valoración a distancia viven dentro de este
+   * panel: se consultan desde cualquier punto del sitio sin que su
+   * contenido alargue la página.
+   * ------------------------------------------------------------- */
+  const mostrarMenuContacto = (abierto) => {
+    const boton = $('#menu-contacto-boton');
+    const panel = $('#menu-contacto');
+    if (!boton || !panel) { return; }
+
+    boton.setAttribute('aria-expanded', String(abierto));
+    panel.hidden = !abierto;
+
+    /* En móvil el menú lateral y este panel ocupan el mismo sitio. */
+    if (abierto) {
+      const nav = $('#nav-principal');
+      const navBoton = $('#menu-boton');
+      if (nav) { nav.classList.remove('esta-abierto'); }
+      if (navBoton) { navBoton.setAttribute('aria-expanded', 'false'); }
+    }
+  };
+
+  const activarMenuContacto = () => {
+    const boton = $('#menu-contacto-boton');
+    const panel = $('#menu-contacto');
+    if (!boton || !panel) { return; }
+
+    boton.addEventListener('click', () => {
+      mostrarMenuContacto(boton.getAttribute('aria-expanded') !== 'true');
+    });
+
+    /* En móvil el botón de la cabecera queda escondido tras cerrarse el menú
+       lateral, así que el panel lleva su propio botón de cierre. */
+    $$('[data-cerrar-menu]', panel).forEach((cerrar) => {
+      cerrar.addEventListener('click', () => {
+        mostrarMenuContacto(false);
+        boton.focus();
+      });
+    });
+
+    document.addEventListener('click', (evento) => {
+      if (panel.hidden || !evento.target.closest) { return; }
+
+      if (!panel.contains(evento.target) && !boton.contains(evento.target)) {
+        mostrarMenuContacto(false);
+        return;
+      }
+
+      /* Un enlace del panel que lleva a la propia página lo cierra al usarlo;
+         los de WhatsApp o correo abren otra pestaña y no lo tocan. */
+      const enlace = evento.target.closest('a[href]');
+      if (enlace && panel.contains(enlace) && enlace.getAttribute('href').indexOf('#') > -1) {
+        mostrarMenuContacto(false);
+      }
+    });
+
+    document.addEventListener('keydown', (evento) => {
+      if (evento.key === 'Escape' && !panel.hidden) {
+        mostrarMenuContacto(false);
+        boton.focus();
+      }
+    });
+  };
+
+  /* ---------------------------------------------------------------
    * Desplegables de la sección de contacto
    * Turismo dental y valoración a distancia se guardan plegados para que
    * la página no se alargue. Se abren de forma independiente, y un enlace
@@ -273,6 +341,9 @@
       const ancla = window.location.hash.slice(1);
       const destino = ancla ? document.getElementById(ancla) : null;
       if (!destino || !destino.hasAttribute('data-desplegable')) { return; }
+
+      /* El bloque vive dentro del menú de la cabecera: primero se abre el menú. */
+      if (destino.closest('#menu-contacto')) { mostrarMenuContacto(true); }
 
       abrirDesplegable(destino, true);
       destino.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -372,6 +443,7 @@
     activarRevelado();
     activarFotos();
     activarCarruseles();
+    activarMenuContacto();
     activarDesplegables();
     activarFotosPaciente();
   };

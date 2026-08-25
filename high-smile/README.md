@@ -40,13 +40,22 @@ logotipo oficial de la clínica.
 | Antes y después | Carrusel con los pacientes que terminaron su tratamiento |
 | Nuestro equipo | Cuatro perfiles con fotografía, especialidad y años de experiencia |
 | Preguntas frecuentes | Agendamiento, provisionales y definitivos, tiempos de entrega, cuidados y miedo al odontólogo |
-| Contacto | Canales, mapa de Google cargado directamente y dos desplegables: **Turismo dental** y **Valoración a distancia** |
+| Contacto | Canales, dirección y mapa de Google cargado directamente |
 
-**Los dos desplegables de contacto.** Turismo dental y el envío de fotos ocupaban antes dos
-bloques enteros y alargaban mucho la página, así que ahora viven plegados dentro de Contacto:
-se abren con un clic, de a uno o los dos a la vez, y la página quedó unos 1.900 px más corta.
-El enlace «Turismo dental» del menú sigue funcionando: lleva al bloque y lo abre solo, venga
-del menú, del pie de página o de otra página del sitio.
+**El menú «Contacto» de la cabecera.** Turismo dental y la valoración a distancia ocupaban
+antes dos bloques enteros de la página. Ahora viven en un panel que baja desde la barra de
+navegación al pulsar **Contacto**: dentro hay dos desplegables con todo su contenido, que se
+abren de a uno o los dos a la vez. El panel hace scroll por dentro y se cierra con su botón
+«Cerrar», con la tecla `Esc` o pulsando fuera.
+
+- La pestaña suelta «Turismo dental» desapareció del menú: su sitio es este panel.
+- El ancla `#turismo` (y la nueva `#valoracion`) sigue funcionando desde donde sea —el pie de
+  página, `agenda.html`, un enlace externo—: abre el panel y despliega el bloque.
+- La sección de contacto conserva dos botones de acceso a los mismos bloques, para quien
+  llegue bajando por la página en vez de por el menú.
+- El menú desplegable solo existe en `index.html`, que es donde vive el contenido; en
+  `agenda.html` y `privacidad.html` la pestaña «Contacto» es un enlace normal a
+  `index.html#contacto`.
 
 Además: `agenda.html` (formulario de agendamiento en tres pasos) y `privacidad.html`
 (política de privacidad y habeas data).
