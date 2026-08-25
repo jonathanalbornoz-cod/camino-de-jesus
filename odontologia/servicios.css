@@ -4,7 +4,7 @@
 
 /* ==================== HERO SERVICIOS ==================== */
 .hero-servicios {
-    background: url('imagenes/hero-servicios.png') center/cover no-repeat;
+    background: url('imagenes/hero-servicios.jpg') center/cover no-repeat;
     background-color: #001f3f;
     min-height: 80vh;
     display: flex;
