@@ -99,12 +99,8 @@ fotografías del material que entregó la clínica. La propia sección lo advier
 |---|---|---|
 | Dra. Valeria Ospina Arboleda | odontóloga frente al manifiesto | `equipo-2.jpg` |
 | Dr. Mateo Restrepo Salazar | odontólogo en el consultorio | `equipo-3.jpg` |
-| Dra. Camila Herrera Lozano | retrato frente al logo (provisional) | `equipo-4.jpg` |
-| Laura Marcela Caicedo | retrato en la sala de espera (provisional) | `equipo-5.jpg` |
-
-> `equipo-4.jpg` y `equipo-5.jpg` son provisionales: repiten dos fotos que también aparecen
-> en el carrusel de «Antes y después». Se reemplazan en cuanto lleguen las fotografías de
-> la odontóloga y de la coordinadora.
+| Dra. Camila Herrera Lozano | retrato en el consultorio | `equipo-4.jpg` |
+| Laura Marcela Caicedo | retrato en la recepción | `equipo-5.jpg` |
 
 Para reemplazarlos por los reales:
 

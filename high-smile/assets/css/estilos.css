@@ -404,6 +404,21 @@ a:hover { text-decoration-color: var(--blanco); }
    turismo dental y envío de fotos.
    ========================================================================== */
 
+/* ---------- Marcos de fotografía ----------
+   Contenedor de proporción fija: la foto se recorta con object-fit para que
+   todas las tarjetas midan lo mismo, sin importar el formato del original. */
+.marco {
+  position: relative; overflow: hidden; aspect-ratio: 4 / 5;
+  border: 1px solid var(--borde); background: var(--superficie);
+}
+.marco img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.marco__vacio {
+  position: absolute; inset: 0; display: grid; place-content: center; gap: .8rem;
+  text-align: center; padding: 1.5rem; color: var(--gris);
+}
+.marco__vacio svg { width: 32px; height: 32px; margin-inline: auto; opacity: .5; }
+.marco__vacio span { font-size: .72rem; letter-spacing: .2em; text-transform: uppercase; }
+
 /* ---------- Tarjetas de servicio ---------- */
 .servicio {
   border: 1px solid var(--borde); padding: 2.2rem 1.6rem; text-align: center;

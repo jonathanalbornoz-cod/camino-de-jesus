@@ -81,7 +81,7 @@
  "equipo.2.nombre": "Dr. Mateo Restrepo Salazar",
  "equipo.2.rol": "Cirugía oral, maxilofacial e implantología",
  "equipo.2.texto": "Realiza las cirugías y la colocación de implantes, con planificación previa y control posoperatorio de cada paciente.",
- "equipo.3.foto": "Dra. Camila Herrera Lozano, odontóloga de High Smile",
+ "equipo.3.foto": "Dra. Camila Herrera Lozano en el consultorio de High Smile",
  "equipo.3.nombre": "Dra. Camila Herrera Lozano",
  "equipo.3.rol": "Ortodoncia y odontología general",
  "equipo.3.texto": "Lleva los tratamientos de ortodoncia y los controles preventivos, con seguimiento mes a mes del avance.",
@@ -295,7 +295,7 @@
  "foto.cali.1": "El monumento a Cristo Rey sobre la ciudad de Cali",
  "foto.cali.2": "La Torre de Cali iluminada al anochecer",
  "foto.cali.3": "Un cholado caleño con frutas y hielo raspado",
- "equipo.4.foto": "Laura Marcela Caicedo, coordinación de pacientes",
+ "equipo.4.foto": "Laura Marcela Caicedo en la recepción de High Smile",
  "foto.paciente.3": "Paciente de High Smile en la sala de espera",
  "foto.paciente.4": "Sonrisa natural después del tratamiento"
 },
@@ -368,7 +368,7 @@
  "equipo.2.nombre": "Dr Mateo Restrepo Salazar",
  "equipo.2.rol": "Oral and maxillofacial surgery, implantology",
  "equipo.2.texto": "Performs the surgery and places the implants, with prior planning and post-operative follow-up for every patient.",
- "equipo.3.foto": "Dr Camila Herrera Lozano, High Smile dentist",
+ "equipo.3.foto": "Dr Camila Herrera Lozano at the High Smile practice",
  "equipo.3.nombre": "Dr Camila Herrera Lozano",
  "equipo.3.rol": "Orthodontics and general dentistry",
  "equipo.3.texto": "Runs the orthodontic treatments and preventive check-ups, tracking progress month by month.",
@@ -582,7 +582,7 @@
  "foto.cali.1": "The Cristo Rey monument above the city of Cali",
  "foto.cali.2": "The Torre de Cali lit up at dusk",
  "foto.cali.3": "A cholado from Cali with fruit and shaved ice",
- "equipo.4.foto": "Laura Marcela Caicedo, patient care",
+ "equipo.4.foto": "Laura Marcela Caicedo at the High Smile front desk",
  "foto.paciente.3": "A High Smile patient in the waiting room",
  "foto.paciente.4": "A natural smile after treatment"
 }
