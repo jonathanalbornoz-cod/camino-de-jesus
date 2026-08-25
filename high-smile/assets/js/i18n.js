@@ -282,7 +282,7 @@
  "foto.caso.3": "Antes y después de una rehabilitación estética",
  "foto.paciente": "Paciente de High Smile",
  "foto.paciente.1": "Paciente de High Smile en la clínica",
- "foto.paciente.2": "Sonrisa natural después del tratamiento",
+ "foto.paciente.2": "Paciente de High Smile después de su tratamiento",
  "priv.5.h": "Las fotos que eliges para una valoración a distancia no se suben a ningún servidor: se previsualizan en tu dispositivo y las adjuntas tú mismo al mensaje de WhatsApp o de correo.",
  "equipo.1.anios": "12 años de experiencia",
  "equipo.2.anios": "9 años de experiencia",
@@ -295,7 +295,9 @@
  "foto.cali.1": "El monumento a Cristo Rey sobre la ciudad de Cali",
  "foto.cali.2": "La Torre de Cali iluminada al anochecer",
  "foto.cali.3": "Un cholado caleño con frutas y hielo raspado",
- "equipo.4.foto": "Laura Marcela Caicedo, coordinación de pacientes"
+ "equipo.4.foto": "Laura Marcela Caicedo, coordinación de pacientes",
+ "foto.paciente.3": "Paciente de High Smile en la sala de espera",
+ "foto.paciente.4": "Sonrisa natural después del tratamiento"
 },
     en: {
  "meta.inicio.titulo": "High Smile | Dental Clinic in Cali · High function and aesthetics",
@@ -567,7 +569,7 @@
  "foto.caso.3": "Before and after an aesthetic rehabilitation",
  "foto.paciente": "A High Smile patient",
  "foto.paciente.1": "A High Smile patient at the clinic",
- "foto.paciente.2": "A natural smile after treatment",
+ "foto.paciente.2": "A High Smile patient after treatment",
  "priv.5.h": "The photos you choose for a remote consultation are not uploaded to any server: they are previewed on your device and you attach them yourself to the WhatsApp or email message.",
  "equipo.1.anios": "12 years of experience",
  "equipo.2.anios": "9 years of experience",
@@ -580,7 +582,9 @@
  "foto.cali.1": "The Cristo Rey monument above the city of Cali",
  "foto.cali.2": "The Torre de Cali lit up at dusk",
  "foto.cali.3": "A cholado from Cali with fruit and shaved ice",
- "equipo.4.foto": "Laura Marcela Caicedo, patient care"
+ "equipo.4.foto": "Laura Marcela Caicedo, patient care",
+ "foto.paciente.3": "A High Smile patient in the waiting room",
+ "foto.paciente.4": "A natural smile after treatment"
 }
   };
 
