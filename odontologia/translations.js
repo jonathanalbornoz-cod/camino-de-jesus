@@ -245,9 +245,8 @@ const translations = {
 
         "sp_5_h3": "Ortodoncia",
         "sp_5_p": "Corrección de la posición dental y maxilar con brackets tradicionales o alineadores invisibles.",
-        "sp_5_li1": "✓ Brackets estéticos",
-        "sp_5_li2": "✓ Ortodoncia invisible",
-        "sp_5_li3": "✓ Resultados duraderos",
+        "sp_5_li1": "✓ Resultados rápidos",
+        "sp_5_li2": "✓ Brackets de autoligado",
 
         "sp_6_h3": "Periodoncia",
         "sp_6_p": "Tratamiento de las encías y tejidos de soporte para prevenir y curar enfermedades periodontales.",
@@ -625,9 +624,8 @@ const translations = {
 
         "sp_5_h3": "Orthodontics",
         "sp_5_p": "Correction of dental and maxillary position with traditional brackets or invisible aligners.",
-        "sp_5_li1": "✓ Aesthetic brackets",
-        "sp_5_li2": "✓ Invisible orthodontics",
-        "sp_5_li3": "✓ Lasting results",
+        "sp_5_li1": "✓ Fast results",
+        "sp_5_li2": "✓ Self-ligating brackets",
 
         "sp_6_h3": "Periodontics",
         "sp_6_p": "Treatment of gums and supporting tissues to prevent and cure periodontal diseases.",
