@@ -1,0 +1,819 @@
+/* =========================================================
+   CONTACT PAGE PREMIUM - ODONTOLOGÍA CIUDAD JARDÍN
+   ========================================================= */
+
+/* ==================== HERO CONTACTO ==================== */
+.hero-contacto {
+    background: url('imagenes/hero-contacto.png') center/cover no-repeat;
+    background-color: #001f3f;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    position: relative;
+}
+
+.hero-contacto .hero-overlay {
+    background: linear-gradient(90deg, rgba(0, 31, 63, 0.9) 0%, rgba(0, 51, 102, 0.7) 100%);
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+.hero-contacto .hero-container {
+    position: relative;
+    z-index: 2;
+    padding-top: 4rem;
+}
+
+.quick-contact-pills {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 2.5rem;
+}
+
+.quick-contact-pills .pill {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 10px 20px;
+    border-radius: 50px;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.quick-contact-pills a.pill:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(255, 255, 255, 0.1);
+}
+
+.quick-contact-pills .pill i {
+    color: var(--accent);
+}
+
+/* ==================== PREPARACIÓN DE CONSULTA ==================== */
+.documentos-section {
+    padding: 7rem 0;
+    background: white;
+}
+
+.documentos-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
+    margin-top: 4rem;
+}
+
+.documento-item {
+    background: #f8fbff;
+    padding: 2.5rem 2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 168, 232, 0.05);
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto auto;
+    gap: 0.5rem 1.2rem;
+    align-items: start;
+    transition: var(--transition);
+}
+
+.documento-item:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(0, 168, 232, 0.15);
+    background: white;
+}
+
+.doc-icon {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+    font-size: 2.2rem;
+    color: var(--accent);
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, rgba(0, 51, 102, 0.06), rgba(0, 168, 232, 0.08));
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition);
+}
+
+.documento-item:hover .doc-icon {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    transform: scale(1.05);
+}
+
+.documento-item h3 {
+    grid-column: 2;
+    grid-row: 1;
+    color: var(--primary);
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.documento-item p {
+    grid-column: 2;
+    grid-row: 2;
+    color: #5a6b7e;
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.documentos-tip {
+    margin-top: 3rem;
+    background: #f0faff;
+    border: 1px dashed var(--accent);
+    padding: 1.2rem 2rem;
+    border-radius: 50px;
+    display: inline-block;
+    color: var(--primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+/* ==================== INFO & FORM SECTION ==================== */
+.contacto-info-section {
+    padding: 7rem 0;
+    background: white;
+    position: relative;
+}
+
+.contact-cta-container {
+    max-width: 1400px;
+    margin: 0 auto 4rem;
+    padding: 0 5%;
+}
+
+/* Highlighted Conversion CTA */
+.contact-cta-highlight {
+    background: linear-gradient(135deg, rgba(0, 51, 102, 0.02) 0%, rgba(0, 168, 232, 0.06) 100%);
+    border: 1px solid rgba(0, 168, 232, 0.15);
+    padding: 3.5rem 2rem;
+    border-radius: var(--radius);
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+}
+
+.contact-cta-highlight::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -10%;
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(0, 168, 232, 0.06) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+.contact-cta-highlight h3 {
+    font-size: 2rem;
+    color: var(--primary);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -0.5px;
+}
+
+.contact-cta-highlight p {
+    font-size: 1.1rem;
+    color: #5a6b7e;
+    max-width: 750px;
+    margin: 0 auto 2.2rem;
+    line-height: 1.7;
+}
+
+.contact-cta-highlight .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 16px 38px;
+    background: var(--accent);
+    color: white !important;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid var(--accent);
+    transition: var(--transition);
+    cursor: pointer;
+    box-shadow: 0 8px 25px rgba(0, 168, 232, 0.2);
+}
+
+.contact-cta-highlight .btn-primary:hover {
+    background: transparent;
+    color: var(--accent) !important;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 168, 232, 0.3);
+}
+
+.contacto-info-section .section-header {
+    margin-bottom: 4rem;
+}
+
+/* Desktop 5-Card Layout (3 in first row, 2 in second row) */
+.info-blocks {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 5%;
+}
+
+#card-location,
+#card-phone,
+#card-email {
+    grid-column: span 2;
+}
+
+#card-hours,
+#card-social {
+    grid-column: span 3;
+}
+
+#card-social {
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    padding: 1.5rem 2.2rem;
+}
+
+#card-social .info-block-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-grow: 1;
+}
+
+#card-social h4 {
+    margin-bottom: 0;
+}
+
+#card-social .social-icons {
+    margin-top: 0;
+}
+
+/* ==================== SECCIÓN 2: FORMULARIO DE AGENDAMIENTO ==================== */
+.booking-section {
+    padding: 8rem 0;
+    background: #f8fbff;
+    border-top: 1px solid rgba(0, 51, 102, 0.05);
+    border-bottom: 1px solid rgba(0, 51, 102, 0.05);
+}
+
+.booking-container {
+    display: grid;
+    grid-template-columns: 3.2fr 6.8fr;
+    gap: 5rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    align-items: start;
+    padding: 0 5%;
+}
+
+/* Benefits Column (30%) */
+.booking-benefits-col {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.benefits-title {
+    font-size: 2.2rem;
+    color: var(--primary);
+    font-weight: 800;
+    margin: 0.5rem 0 1rem 0;
+    line-height: 1.2;
+}
+
+.benefits-desc {
+    font-size: 1rem;
+    color: #5a6b7e;
+    line-height: 1.65;
+    margin: 0 0 1rem 0;
+}
+
+.benefits-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.8rem;
+}
+
+.benefit-item {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+}
+
+.benefit-icon {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    background: rgba(0, 168, 232, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--accent);
+    font-size: 1.3rem;
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.benefit-item:hover .benefit-icon {
+    background: var(--accent);
+    color: white;
+    transform: scale(1.05);
+}
+
+.benefit-text h4 {
+    font-size: 1.1rem;
+    color: var(--primary);
+    font-weight: 700;
+    margin: 0 0 0.4rem 0;
+}
+
+.benefit-text p {
+    font-size: 0.92rem;
+    color: #5a6b7e;
+    margin: 0;
+    line-height: 1.5;
+}
+
+/* Booking Form Column (70%) */
+.booking-form-col {
+    width: 100%;
+}
+
+.info-block {
+    background: white;
+    padding: 2.2rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(0, 168, 232, 0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    transition: var(--transition);
+    height: 100%;
+}
+
+.info-block:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-md);
+    border-color: rgba(0, 168, 232, 0.15);
+}
+
+.info-block .icon-circle {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    box-shadow: 0 8px 20px rgba(0, 168, 232, 0.2);
+    transition: var(--transition);
+}
+
+.info-block:hover .icon-circle {
+    transform: scale(1.1) rotate(10deg);
+}
+
+.info-block-content {
+    width: 100%;
+}
+
+.info-block h4 {
+    font-size: 1.15rem;
+    color: var(--primary);
+    margin-bottom: 0.6rem;
+    font-weight: 700;
+}
+
+.info-block p {
+    font-size: 0.95rem;
+    color: #5a6b7e;
+    line-height: 1.65;
+    margin: 0;
+}
+
+.info-block p a {
+    color: #5a6b7e;
+    text-decoration: none;
+    transition: var(--transition);
+    font-weight: 500;
+}
+
+.info-block p a:hover {
+    color: var(--accent);
+}
+
+/* Optional Maps Link Styling */
+.btn-map-link {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 1rem;
+    font-weight: 700;
+    font-size: 0.88rem;
+    color: var(--accent);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.btn-map-link::after {
+    content: ' →';
+    font-size: 1rem;
+    transition: transform 0.3s;
+}
+
+.btn-map-link:hover {
+    color: var(--primary);
+}
+
+.btn-map-link:hover::after {
+    transform: translateX(4px);
+}
+
+/* Social icons inside red card */
+.info-block .social-icons {
+    display: flex;
+    gap: 0.8rem;
+    margin-top: 0.4rem;
+}
+
+.info-block .social-icons a {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: #f8fbff;
+    border: 1px solid rgba(0, 51, 102, 0.08);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary);
+    font-size: 1.1rem;
+    transition: var(--transition);
+    text-decoration: none;
+}
+
+.info-block .social-icons a:hover {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 15px rgba(0, 168, 232, 0.25);
+}
+
+/* Contact Form Panel (Right side) */
+.contact-form-panel {
+    background: white;
+    padding: 3.5rem 3rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(0, 168, 232, 0.05);
+}
+
+.contact-form-panel h2 {
+    font-size: 2rem;
+    color: var(--primary);
+    font-weight: 800;
+    margin-bottom: 0.5rem;
+}
+
+.contact-form-panel p {
+    font-size: 1rem;
+    color: #5a6b7e;
+    margin-bottom: 2rem;
+}
+
+/* Trust Indicators under subtitle */
+.form-trust-indicators {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 1.5rem;
+    margin-bottom: 2.5rem;
+    background: #f8fbff;
+    padding: 1.5rem;
+    border-radius: 16px;
+    border: 1px solid rgba(0, 168, 232, 0.05);
+}
+
+.trust-indicator {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--primary);
+}
+
+.trust-indicator i {
+    color: #25D366; /* WhatsApp check green */
+    font-size: 1.1rem;
+}
+
+/* General form elements styling */
+.style-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 0.5px;
+}
+
+.style-form input,
+.style-form textarea,
+.style-form select {
+    width: 100%;
+    padding: 16px 20px;
+    border: 2px solid #e2edf7;
+    border-radius: 16px;
+    font-size: 1rem;
+    background: #fbfdff;
+    color: var(--text);
+    outline: none;
+    font-family: 'Montserrat', sans-serif;
+    transition: var(--transition);
+}
+
+.style-form input:focus,
+.style-form textarea:focus,
+.style-form select:focus {
+    border-color: var(--accent);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(0, 168, 232, 0.12);
+}
+
+.style-form textarea {
+    resize: none;
+}
+
+/* Dropdown styling */
+.style-form select {
+    appearance: none;
+    background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2300A8E8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 20px center;
+    background-size: 16px;
+    padding-right: 48px;
+    cursor: pointer;
+}
+
+.style-form .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px 30px;
+    background: var(--primary);
+    color: white !important;
+    border-radius: 50px;
+    font-size: 1rem;
+    font-weight: 700;
+    text-decoration: none;
+    border: 2px solid var(--primary);
+    transition: var(--transition);
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(0, 51, 102, 0.15);
+    margin-top: 1rem;
+}
+
+.style-form .btn-primary:hover {
+    background: transparent;
+    color: var(--primary) !important;
+    border-color: var(--primary);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 51, 102, 0.2);
+}
+
+/* ==================== MAP SECTION ==================== */
+.mapa-section {
+    padding: 7rem 0 0 0;
+    background: white;
+}
+
+.map-header {
+    margin-bottom: 4rem;
+}
+
+.map-header h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--primary);
+    font-weight: 800;
+}
+
+.map-container {
+    width: 100%;
+    height: 480px;
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    border-top: 4px solid var(--accent);
+}
+
+.map-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+}
+
+/* ==================== PQRS SECTION ==================== */
+.pqrs-section {
+    padding: 7rem 0;
+    background: #f8fbff;
+    border-top: 1px solid rgba(0, 51, 102, 0.05);
+}
+
+.pqrs-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.pqrs-container h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    color: var(--primary);
+    font-weight: 800;
+}
+
+.pqrs-form {
+    background: white;
+    padding: 4rem 3.5rem;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow-md);
+    border: 1px solid rgba(0, 168, 232, 0.05);
+    margin-top: 3.5rem;
+}
+
+.pqrs-form .btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    box-shadow: 0 5px 15px rgba(0, 168, 232, 0.15);
+}
+
+.pqrs-form .btn-primary:hover {
+    background: transparent;
+    color: var(--accent) !important;
+    border-color: var(--accent);
+    box-shadow: 0 8px 25px rgba(0, 168, 232, 0.25);
+}
+
+/* ==================== RESPONSIVE CONTACTO ==================== */
+@media (max-width: 992px) {
+    .booking-container {
+        grid-template-columns: 1fr;
+        gap: 4rem;
+    }
+    .info-blocks {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    #card-location, #card-phone, #card-email, #card-hours {
+        grid-column: auto;
+    }
+    #card-social {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-contacto {
+        min-height: auto;
+        padding: 8rem 0 5rem;
+    }
+    
+    .quick-contact-pills {
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+        max-width: 400px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    
+    .quick-contact-pills .pill {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .documentos-section {
+        padding: 5rem 0;
+    }
+    
+    .documentos-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .documento-item {
+        padding: 2rem 1.5rem;
+    }
+    
+    .contacto-info-section,
+    .booking-section {
+        padding: 5rem 0;
+    }
+    .benefits-title {
+        font-size: 1.8rem;
+    }
+    
+    .contact-cta-highlight {
+        padding: 2.5rem 1.5rem;
+    }
+
+    .contact-cta-highlight h3 {
+        font-size: 1.6rem;
+    }
+
+    .info-blocks {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    #card-social {
+        grid-column: auto;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.5rem;
+        padding: 2.2rem;
+    }
+
+    #card-social .info-block-content {
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        width: 100%;
+    }
+
+    #card-social h4 {
+        margin-bottom: 0.6rem;
+    }
+
+    .contact-form-panel {
+        padding: 2.5rem 1.8rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1.6rem;
+    }
+    
+    .form-trust-indicators {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+    }
+
+    .pqrs-section {
+        padding: 5rem 0;
+    }
+    
+    .pqrs-form {
+        padding: 2.5rem 1.5rem;
+        margin-top: 2.5rem;
+    }
+    
+    .map-container {
+        height: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .contact-cta-highlight p {
+        font-size: 1rem;
+    }
+}

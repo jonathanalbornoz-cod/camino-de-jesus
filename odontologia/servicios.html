@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Odontología Ciudad Jardín | Clínica Premium</title>
+
+    <!-- SEO -->
+    <meta name="description" content="Clínica odontológica premium en Ciudad Jardín. Tecnología avanzada, diseño de sonrisa e implantes dentales.">
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="servicios.css">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="imagenes/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="imagenes/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="imagenes/favicon-96x96.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="imagenes/logo-1.png">
+    <link rel="shortcut icon" href="imagenes/logo-1.png" type="image/png">
+</head>
+<body>
+
+    <header class="main-header" id="header">
+    <nav class="navbar container">
+        <a href="#" class="logo">
+            <img src="imagenes/logo-1.png" alt="Odontología Ciudad Jardín">
+        </a>
+
+        <ul class="nav-links" id="nav-links">
+            <button class="close-menu" id="close-menu">✕</button>
+            <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+            <li><a href="nosotros.html" data-i18n="nav_about">Nosotros</a></li>
+            <li><a href="servicios.html" data-i18n="nav_services">Servicios</a></li>
+            <li><a href="contacto.html" data-i18n="nav_contact">Contacto</a></li>
+            <li class="language-switcher">
+                <a href="#" class="lang-btn active" data-lang="es"><img src="https://flagcdn.com/w20/co.png" alt="Español"> ES</a>
+                <a href="#" class="lang-btn" data-lang="en"><img src="https://flagcdn.com/w20/us.png" alt="English"> EN</a>
+            </li>
+        </ul>
+
+        <a href="#contacto" class="nav-cta desktop-btn" data-i18n="nav_agenda">Agenda tu cita</a>
+
+        <div class="menu-toggle" id="mobile-menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </nav>
+</header>
+
+
+<!-- ========================= -->
+<!-- HERO SERVICIOS -->
+<!-- ========================= -->
+<section class="hero hero-servicios" id="servicios">
+    <div class="hero-overlay"></div>
+
+    <div class="container hero-container">
+        <div class="hero-content">
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="premium-badge" data-i18n="serv_hero_badge">
+                <i class="fas fa-tooth"></i> TRATAMIENTOS PREMIUM
+            </div>
+
+            <h1 class="hero-title" data-i18n="serv_hero_title">
+                SONRISAS QUE<br>
+                <span>TRANSFORMAN VIDAS</span>
+            </h1>
+
+            <p class="hero-description" data-i18n="serv_hero_desc">
+                Descubre nuestros tratamientos de excelencia con tecnología de vanguardia, 
+                precisión clínica y resultados estéticos excepcionales.
+            </p>
+
+            <div class="hero-buttons">
+                <a href="#detalle-servicios" class="btn-primary" data-i18n="serv_hero_btn1">
+                    VER TRATAMIENTOS
+                </a>
+                <a href="#galeria" class="btn-secondary" data-i18n="serv_hero_btn2">
+                    VER TRANSFORMACIONES
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- ========================= -->
+<!-- INTRODUCCIÓN SERVICIOS -->
+<!-- ========================= -->
+<section class="servicios-intro">
+    <div class="container text-center">
+        <span class="section-tag" data-i18n="serv_intro_tag">EXCELENCIA CLÍNICA</span>
+        <h2 data-i18n="serv_intro_h2">Tratamientos Diseñados para Resultados Excepcionales</h2>
+        <p class="section-subtitle" data-i18n="serv_intro_p">
+            En Odontología Ciudad Jardín combinamos la última tecnología con un enfoque 
+            personalizado para ofrecerte los mejores resultados en estética y salud oral.
+        </p>
+    </div>
+</section>
+
+<!-- ========================= -->
+<!-- BEFORE & AFTER - DOS PACIENTES -->
+<!-- ========================= -->
+<section class="before-after-multi" id="galeria">
+    <div class="container">
+        
+        <div class="section-header text-center">
+            <span class="section-tag" data-i18n="idx_ba_tag">RESULTADOS REALES</span>
+            <h2 data-i18n="idx_ba_h2">Transformaciones que hablan por sí solas</h2>
+            <p class="section-subtitle" data-i18n="serv_ba_sub">Desliza las barras para ver el cambio real de nuestros pacientes</p>
+        </div>
+
+        <div class="ba-grid">
+            
+            <!-- Paciente 1 -->
+            <div class="ba-item">
+                <div class="image-comparison" id="comparison-1">
+                    <img src="imagenes/1.png" alt="Antes Paciente 1" class="before-img">
+                    <img src="imagenes/2.png" alt="Después Paciente 1" class="after-img">
+                    
+                    <div class="comparison-slider" id="slider-1">
+                        <div class="slider-handle">
+                            <i class="fas fa-arrows-left-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="ba-title" data-i18n="serv_ba_pac1">Paciente 1 • Rehabilitación Oral Completa + Diseño de Sonrisa</h4>
+            </div>
+
+            <!-- Paciente 2 -->
+            <div class="ba-item">
+                <div class="image-comparison" id="comparison-2">
+                    <img src="imagenes/0H3A6398.jpg" alt="Antes Paciente 2" class="before-img">
+                    <img src="imagenes/antes-4.jpg" alt="Después Paciente 2" class="after-img">
+                    
+                    <div class="comparison-slider" id="slider-2">
+                        <div class="slider-handle">
+                            <i class="fas fa-arrows-left-right"></i>
+                        </div>
+                    </div>
+                </div>
+                <h4 class="ba-title" data-i18n="serv_ba_pac2">Paciente 2 • Implantes Dentales + Blanqueamiento</h4>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+<!-- ========================= -->
+<!-- DETALLE DE SERVICIOS -->
+<!-- ========================= -->
+<section class="servicios-detalle" id="detalle-servicios">
+    <div class="container">
+        
+        <div class="section-header text-center">
+            <span class="section-tag" data-i18n="serv_detail_tag">TRATAMIENTOS PREMIUM</span>
+            <h2 data-i18n="serv_detail_h2">Especialidades que nos destacan</h2>
+            <p class="section-subtitle" data-i18n="serv_detail_sub">Tecnología de vanguardia y resultados de alto nivel</p>
+        </div>
+
+        <div class="servicios-lista">
+            
+            <!-- 1. Odontología General -->
+            <div class="servicio-item" id="general">
+                <div class="servicio-icon">
+                    <i class="fa-solid fa-stethoscope"></i>
+                </div>
+                <div class="servicio-info">
+                    <h3 data-i18n="sp_1_h3">Odontología General</h3>
+                    <p data-i18n="sp_1_p">Cuidado integral preventivo y restaurador para mantener la salud oral óptima de toda la familia.</p>
+                    <ul class="servicio-beneficios">
+                        <li data-i18n="sp_1_li1">✓ Limpieza profunda</li>
+                        <li data-i18n="sp_1_li2">✓ Resinas estéticas</li>
+                        <li data-i18n="sp_1_li3">✓ Diagnóstico temprano</li>
+                    </ul>
+                    <a href="https://wa.me/573214655593?text=Hola,%20quisiera%20agendar%20una%20cita%20para%20Odontología%20General." target="_blank" class="btn-link" data-i18n="serv_eval_btn">Solicitar Evaluación <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 2. Endodoncia -->
+            <div class="servicio-item" id="endodoncia">
+                <div class="servicio-icon">
+                    <i class="fa-solid fa-tooth"></i>
+                </div>
+                <div class="servicio-info">
+                    <h3 data-i18n="sp_2_h3">Endodoncia</h3>
+                    <p data-i18n="sp_2_p">Tratamiento de conductos especializado para salvar tus dientes naturales y eliminar el dolor.</p>
+                    <ul class="servicio-beneficios">
+                        <li data-i18n="sp_2_li1">✓ Tratamiento sin dolor</li>
+                        <li data-i18n="sp_2_li2">✓ Tecnología avanzada</li>
+                        <li data-i18n="sp_2_li3">✓ Conservación dental</li>
+                    </ul>
+                    <a href="https://wa.me/573214655593?text=Hola,%20quisiera%20agendar%20una%20cita%20para%20Endodoncia." target="_blank" class="btn-link" data-i18n="serv_eval_btn">Solicitar Evaluación <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 3. Cirugía Oral -->
+            <div class="servicio-item" id="cirugia">
+                <div class="servicio-icon">
+                    <i class="fa-solid fa-syringe"></i>
+                </div>
+                <div class="servicio-info">
+                    <h3 data-i18n="sp_3_h3">Cirugía Oral</h3>
+                    <p data-i18n="sp_3_p">Procedimientos quirúrgicos seguros, desde extracciones complejas hasta cordales, con rápida recuperación.</p>
+                    <ul class="servicio-beneficios">
+                        <li data-i18n="sp_3_li1">✓ Extracción de cordales</li>
+                        <li data-i18n="sp_3_li2">✓ Sedación disponible</li>
+                        <li data-i18n="sp_3_li3">✓ Mínima invasión</li>
+                    </ul>
+                    <a href="https://wa.me/573214655593?text=Hola,%20quisiera%20agendar%20una%20cita%20para%20Cirugía%20Oral." target="_blank" class="btn-link" data-i18n="serv_eval_btn">Solicitar Evaluación <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 4. Odontopediatría -->
+            <div class="servicio-item" id="odontopediatria">
+                <div class="servicio-icon">
+                    <i class="fa-solid fa-child"></i>
+                </div>
+                <div class="servicio-info">
+                    <h3 data-i18n="sp_4_h3">Odontopediatría</h3>
+                    <p data-i18n="sp_4_p">Atención dental especializada y amigable para niños, asegurando sonrisas sanas desde temprana edad.</p>
+                    <ul class="servicio-beneficios">
+                        <li data-i18n="sp_4_li1">✓ Adaptación infantil</li>
+                        <li data-i18n="sp_4_li2">✓ Prevención de caries</li>
+                        <li data-i18n="sp_4_li3">✓ Ambiente divertido</li>
+                    </ul>
+                    <a href="https://wa.me/573214655593?text=Hola,%20quisiera%20agendar%20una%20cita%20para%20Odontopediatría." target="_blank" class="btn-link" data-i18n="serv_eval_btn">Solicitar Evaluación <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 5. Ortodoncia -->
+            <div class="servicio-item" id="ortodoncia">
+                <div class="servicio-icon">
+                    <i class="fa-solid fa-teeth-open"></i>
+                </div>
+                <div class="servicio-info">
+                    <h3 data-i18n="sp_5_h3">Ortodoncia</h3>
+                    <p data-i18n="sp_5_p">Corrección de la posición dental y maxilar con brackets tradicionales o alineadores invisibles.</p>
+                    <ul class="servicio-beneficios">
+                        <li data-i18n="sp_5_li1">✓ Brackets estéticos</li>
+                        <li data-i18n="sp_5_li2">✓ Ortodoncia invisible</li>
+                        <li data-i18n="sp_5_li3">✓ Resultados duraderos</li>
+                    </ul>
+                    <a href="https://wa.me/573214655593?text=Hola,%20quisiera%20agendar%20una%20cita%20para%20Ortodoncia." target="_blank" class="btn-link" data-i18n="serv_eval_btn">Solicitar Evaluación <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 6. Periodoncia -->
+            <div class="servicio-item" id="periodoncia">
+                <div class="servicio-icon">
+                    <i class="fa-solid fa-heart-pulse"></i>
+                </div>
+                <div class="servicio-info">
+                    <h3 data-i18n="sp_6_h3">Periodoncia</h3>
+                    <p data-i18n="sp_6_p">Tratamiento de las encías y tejidos de soporte para prevenir y curar enfermedades periodontales.</p>
+                    <ul class="servicio-beneficios">
+                        <li data-i18n="sp_6_li1">✓ Salud de encías</li>
+                        <li data-i18n="sp_6_li2">✓ Limpiezas profundas</li>
+                        <li data-i18n="sp_6_li3">✓ Injertos gingivales</li>
+                    </ul>
+                    <a href="https://wa.me/573214655593?text=Hola,%20quisiera%20agendar%20una%20cita%20para%20Periodoncia." target="_blank" class="btn-link" data-i18n="serv_eval_btn">Solicitar Evaluación <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 7. Prostodoncia -->
+            <div class="servicio-item" id="prostodoncia">
+                <div class="servicio-icon">
+                    <i class="fa-solid fa-tooth"></i>
+                </div>
+                <div class="servicio-info">
+                    <h3 data-i18n="sp_7_h3">Prostodoncia</h3>
+                    <p data-i18n="sp_7_p">Reemplazo de dientes perdidos o dañados mediante coronas, puentes o prótesis de alta calidad y estética.</p>
+                    <ul class="servicio-beneficios">
+                        <li data-i18n="sp_7_li1">✓ Prótesis estéticas</li>
+                        <li data-i18n="sp_7_li2">✓ Ajuste perfecto</li>
+                        <li data-i18n="sp_7_li3">✓ Materiales premium</li>
+                    </ul>
+                    <a href="https://wa.me/573214655593?text=Hola,%20quisiera%20agendar%20una%20cita%20para%20Prostodoncia." target="_blank" class="btn-link" data-i18n="serv_eval_btn">Solicitar Evaluación <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 8. Estética Dental -->
+            <div class="servicio-item" id="estetica">
+                <div class="servicio-icon">
+                    <i class="fa-solid fa-face-smile-beam"></i>
+                </div>
+                <div class="servicio-info">
+                    <h3 data-i18n="sp_8_h3">Estética Dental</h3>
+                    <p data-i18n="sp_8_p">Transformación completa de tu sonrisa con carillas, blanqueamiento y análisis estético digital.</p>
+                    <ul class="servicio-beneficios">
+                        <li data-i18n="sp_8_li1">✓ Carillas de porcelana</li>
+                        <li data-i18n="sp_8_li2">✓ Blanqueamiento</li>
+                        <li data-i18n="sp_8_li3">✓ Diseño de sonrisa</li>
+                    </ul>
+                    <a href="https://wa.me/573214655593?text=Hola,%20quisiera%20agendar%20una%20cita%20para%20Estética%20Dental." target="_blank" class="btn-link" data-i18n="serv_eval_btn">Solicitar Evaluación <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 9. Implantología -->
+            <div class="servicio-item" id="implantologia">
+                <div class="servicio-icon">
+                    <i class="fa-solid fa-screwdriver"></i>
+                </div>
+                <div class="servicio-info">
+                    <h3 data-i18n="sp_9_h3">Implantología</h3>
+                    <p data-i18n="sp_9_p">Reemplazo permanente de dientes con implantes de titanio y tecnología quirúrgica guiada.</p>
+                    <ul class="servicio-beneficios">
+                        <li data-i18n="sp_9_li1">✓ Implantes de titanio</li>
+                        <li data-i18n="sp_9_li2">✓ Carga inmediata</li>
+                        <li data-i18n="sp_9_li3">✓ Cirugía guiada 3D</li>
+                    </ul>
+                    <a href="https://wa.me/573214655593?text=Hola,%20quisiera%20agendar%20una%20cita%20para%20Implantología." target="_blank" class="btn-link" data-i18n="serv_eval_btn">Solicitar Evaluación <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+            <!-- 10. Odontología Preventiva -->
+            <div class="servicio-item" id="preventiva">
+                <div class="servicio-icon">
+                    <i class="fa-solid fa-shield-halved"></i>
+                </div>
+                <div class="servicio-info">
+                    <h3 data-i18n="sp_10_h3">Odontología Preventiva</h3>
+                    <p data-i18n="sp_10_p">Cuidado proactivo para prevenir caries y enfermedades mediante controles, limpiezas y protección.</p>
+                    <ul class="servicio-beneficios">
+                        <li data-i18n="sp_10_li1">✓ Profilaxis</li>
+                        <li data-i18n="sp_10_li2">✓ Aplicación de flúor</li>
+                        <li data-i18n="sp_10_li3">✓ Sellantes</li>
+                    </ul>
+                    <a href="https://wa.me/573214655593?text=Hola,%20quisiera%20agendar%20una%20cita%20para%20Odontología%20Preventiva." target="_blank" class="btn-link" data-i18n="serv_eval_btn">Solicitar Evaluación <i class="fas fa-arrow-right"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ========================= -->
+<!-- GALERÍA DE RESULTADOS -->
+<!-- ========================= -->
+<section class="galeria-section">
+    <div class="container">
+        <div class="section-header text-center">
+            <span class="section-tag" data-i18n="serv_gal_tag">GALERÍA</span>
+            <h2 data-i18n="serv_gal_h2">No son solo los dientes, es la emoción que transmite nuestra sonrisa</h2>
+            <p class="section-subtitle" data-i18n="serv_gal_sub">Pasa el cursor sobre cada imagen para ver la transformación</p>
+        </div>
+
+        <div class="galeria-grid">
+            
+            <!-- Caso 1 -->
+            <div class="galeria-item">
+                <img src="imagenes/antes-1.jpg" alt="Diseño de Sonrisa" class="img-normal">
+                <img src="imagenes/despues-1.jpg" alt="Diseño de Sonrisa - Resultado" class="img-hover">
+                <div class="galeria-info">
+                    <h4 data-i18n="serv_gal1_h4">Diseño de Sonrisa + Carillas</h4>
+                    <small data-i18n="serv_gal1_small">Paciente 1 • Resultado a los 3 meses</small>
+                </div>
+            </div>
+
+            <!-- Caso 2 -->
+            <div class="galeria-item">
+                <img src="imagenes/antes-2.png" alt="Ortodoncia" class="img-normal">
+                <img src="imagenes/despues-2.jpg" alt="Ortodoncia - Resultado" class="img-hover">
+                <div class="galeria-info">
+                    <h4 data-i18n="serv_gal2_h4">Ortodoncia invisible</h4>
+                    <small data-i18n="serv_gal2_small">Paciente 2 • Resultado a los 4 meses</small>
+                </div>
+            </div>
+
+            <!-- Caso 3 -->
+            <div class="galeria-item">
+                <img src="imagenes/antes-3.jpg" alt="Implantes" class="img-normal">
+                <img src="imagenes/despues-3.jpg" alt="Implantes - Resultado" class="img-hover">
+                <div class="galeria-info">
+                    <h4 data-i18n="serv_gal3_h4">Implantes + Diseño de Sonrisa</h4>
+                    <small data-i18n="serv_gal3_small">Paciente 3 • Resultado a los 6 meses</small>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- ========================= -->
+<!-- FAQ (PREGUNTAS FRECUENTES) -->
+<!-- ========================= -->
+<section class="faq-section">
+    <div class="container">
+        
+        <div class="section-header text-center">
+            <span class="section-tag" data-i18n="faq_tag">PREGUNTAS FRECUENTES</span>
+            <h2 data-i18n="faq_h2">Todo lo que necesitas saber</h2>
+            <p class="section-subtitle" data-i18n="faq_sub">Resolvemos tus dudas más comunes</p>
+        </div>
+
+        <div class="faq-grid">
+            
+            <details class="faq-item">
+                <summary data-i18n="faq_q1">¿Cuánto tiempo duran los resultados del Diseño de Sonrisa?</summary>
+                <div data-i18n="faq_a1"><br><p>Los resultados suelen durar entre 10 y 15 años con el cuidado adecuado. Las carillas de porcelana son altamente resistentes y mantienen su estética por mucho tiempo.</p></div>
+            </details>
+
+            <details class="faq-item">
+                <summary data-i18n="faq_q2">¿Es doloroso el procedimiento de implantes dentales?</summary>
+                <div data-i18n="faq_a2"><br><p>No, por lo general no duele ya que se aplica anestesia local. Sin embargo, para aquellos pacientes que desean un extra de relajación y seguridad, ofrecemos la opción de sedación bajo solicitud. Al terminar, las molestias son mínimas y perfectamente controlables con analgésicos convencionales.</p></div>
+            </details>
+
+            <details class="faq-item">
+                <summary data-i18n="faq_q3">¿Cuánto dura el tratamiento con alineadores transparentes?</summary>
+                <div data-i18n="faq_a3"><br><p>El tiempo promedio es de 8 a 18 meses, dependiendo de la complejidad del caso. Con nuestra tecnología digital podemos mostrarte el resultado final antes de comenzar.</p></div>
+            </details>
+
+            <details class="faq-item">
+                <summary data-i18n="faq_q4">¿Qué métodos de pago aceptan?</summary>
+                <div data-i18n="faq_a4"><br><p>Aceptamos efectivo, tarjetas de crédito y débito, transferencias bancarias y contamos con planes de financiamiento flexibles.</p></div>
+            </details>
+            
+            <details class="faq-item">
+                <summary data-i18n="faq_q5">¿Cuántas citas se necesitan para un Diseño de Sonrisa?</summary>
+                <div data-i18n="faq_a5"><br><p>Generalmente entre 2 y 4 citas. En la primera realizamos diagnóstico digital, fotos y diseño de sonrisa.</p></div>
+            </details>
+
+            <details class="faq-item">
+                <summary data-i18n="faq_q6">¿Ofrecen garantía en los tratamientos?</summary>
+                <div data-i18n="faq_a6"><br><p>Sí. Todos nuestros tratamientos incluyen garantía escrita. La duración varía según el procedimiento (carillas, implantes, rehabilitaciones, etc.).</p></div>
+            </details>
+
+        </div>
+    </div>
+</section>
+
+<!-- ========================= -->
+<!-- CALL TO ACTION FINAL -->
+<!-- ========================= -->
+<section class="cta-section">
+    <div class="container text-center">
+        <h2 data-i18n="serv_cta_h2">¿Listo para transformar tu sonrisa?</h2>
+        <p data-i18n="serv_cta_sub">Agenda tu valoración virtual gratuita y descubre cómo podemos ayudarte a lograr la sonrisa que siempre has deseado.</p>
+        
+        <div class="cta-buttons">
+            <a href="https://wa.me/573214655593" target="_blank" class="btn-whatsapp" data-i18n="serv_cta_btn1">
+                <i class="fab fa-whatsapp"></i> AGENDAR POR WHATSAPP
+            </a>
+            <a href="contacto.html" class="btn-secondary" data-i18n="serv_cta_btn2">
+                Agendar por Formulario
+            </a>
+        </div>
+        
+        <div class="cta-trust">
+            <span class="trust-badge" data-i18n="serv_cta_ben1"><span>✓</span> Diagnóstico digital 3D</span>
+            <span class="trust-badge" data-i18n="serv_cta_ben2"><span>✓</span> Plan de tratamiento personalizado</span>
+        </div>
+        
+        <p class="trust-text" data-i18n="serv_cta_trust">Más de <strong>1500</strong> pacientes confiaron en nosotros. <strong>¡Tú puedes ser el siguiente!</strong></p>
+    </div>
+</section>
+
+<!-- ========================= -->
+    <!-- FOOTER PREMIUM -->
+<!-- ========================= -->
+<footer class="main-footer">
+    <div class="container footer-grid">
+        
+        <!-- Columna 1: Logo + Descripción -->
+        <div class="footer-col">
+            <img src="imagenes/logo-2.png" alt="Odontología Ciudad Jardín" class="footer-logo">
+            <p data-i18n="footer_desc">
+                Clínica odontológica de alto nivel en Ciudad Jardín. 
+                Combinamos tecnología de vanguardia con atención humana y resultados estéticos excepcionales.
+            </p>
+            <div class="footer-contact">
+                <p><strong>📍</strong> Ciudad Jardín, Cali - Valle del Cauca</p>
+                <p><strong>📞</strong> <a href="tel:573157197886">+57 315 719 7886</a></p>
+                <p><strong>📞</strong> <a href="tel:573214655593">+57 321 465 5593</a></p>
+            </div>
+        </div>
+
+        <!-- Columna 2: Navegación -->
+        <div class="footer-col">
+            <h4 data-i18n="footer_nav_title">Navegación</h4>
+            <ul class="footer-links">
+                <li><a href="index.html" data-i18n="nav_home">Inicio</a></li>
+                <li><a href="nosotros.html" data-i18n="nav_about">Nosotros</a></li>
+                <li><a href="servicios.html" data-i18n="nav_services">Servicios</a></li>
+                <li><a href="contacto.html" data-i18n="nav_contact">Contacto</a></li>
+            </ul>
+        </div>
+
+        <!-- Columna 3: Servicios Rápidos -->
+        <div class="footer-col">
+            <h4 data-i18n="footer_serv_title">Servicios</h4>
+            <ul class="footer-links">
+                <li><a href="servicios.html#sonrisa" data-i18n="footer_serv_1">Diseño de Sonrisa</a></li>
+                <li><a href="servicios.html#implantes" data-i18n="footer_serv_2">Implantes Dentales</a></li>
+                <li><a href="servicios.html#digital" data-i18n="footer_serv_3">Ortodoncia Digital</a></li>
+                <li><a href="servicios.html#rehabilitación" data-i18n="footer_serv_4">Rehabilitación Oral</a></li>
+            </ul>
+        </div>
+
+        <!-- Columna 4: Contacto + Redes -->
+        <div class="footer-col">
+            <h4 data-i18n="footer_contact_title">Contáctanos</h4>
+            <div class="social-links">
+                <a href="https://www.instagram.com/odontologiaciudadjardin_?igsh=MThqcnIwaWYxaGo1OA==" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com/profile.php?id=61574815704294&sk=photos" target="_blank" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://wa.me/573214655593" target="_blank" aria-label="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            
+            <div class="footer-schedule">
+                <h5 data-i18n="footer_schedule_title">Horario de Atención</h5>
+                <p data-i18n="footer_schedule_desc">Lunes a Viernes: 8:00 am - 12:00 pm<br>
+                    Lunes a Viernes: 2:00 pm - 5:00 pm<br>
+                   Sábados: 8:00 am - 2:00 pm</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer Bottom -->
+    <div class="footer-bottom">
+        <div class="container">
+            <p data-i18n="footer_rights">© 2026 Odontología Ciudad Jardín • Todos los derechos reservados</p>
+            <p class="developed-by" data-i18n="footer_dev">Desarrollado por <strong>INJOE AGENCIA</strong></p>
+        </div>
+    </div>
+</footer>
+
+
+    <!-- WHATSAPP FLOAT -->
+
+    <div class="whatsapp-container">
+
+        <div class="whatsapp-label" data-i18n="wp_help">
+            ¿Necesitas ayuda? <strong>Escríbenos</strong>
+        </div>
+
+        <a href="https://wa.me/573214655593" target="_blank" class="whatsapp-btn">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+
+    </div>
+
+
+    <!-- JS -->
+    <script src="translations.js"></script>
+    <script src="script.js"></script>
+
+</body>
+</html>
