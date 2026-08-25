@@ -285,8 +285,8 @@ const translations = {
         "serv_gal1_small": "Paciente 1 • Resultado a los 3 días",
         "serv_gal2_h4": "Ortodoncia invisible",
         "serv_gal2_small": "Paciente 2 • Resultado a los 4 meses",
-        "serv_gal3_h4": "Implantes + Diseño de Sonrisa",
-        "serv_gal3_small": "Paciente 3 • Resultado a los 6 meses",
+        "serv_gal3_h4": "Diseño de Sonrisa",
+        "serv_gal3_small": "Paciente 3 • Resultado a los 4 meses",
 
         "faq_tag": "PREGUNTAS FRECUENTES",
         "faq_h2": "Todo lo que necesitas saber",
@@ -664,8 +664,8 @@ const translations = {
         "serv_gal1_small": "Patient 1 • Result at 3 days",
         "serv_gal2_h4": "Invisible orthodontics",
         "serv_gal2_small": "Patient 2 • Result at 4 months",
-        "serv_gal3_h4": "Implants + Smile Design",
-        "serv_gal3_small": "Patient 3 • Result at 6 months",
+        "serv_gal3_h4": "Smile Design",
+        "serv_gal3_small": "Patient 3 • Result at 4 months",
 
         "faq_tag": "FREQUENTLY ASKED QUESTIONS",
         "faq_h2": "Everything you need to know",
