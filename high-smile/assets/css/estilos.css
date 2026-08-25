@@ -1,8 +1,35 @@
 /* ==========================================================================
    High Smile · Clínica Odontológica (Cali)
    Paleta: negro dominante, blanco y grises. Estilo minimalista y elegante.
-   Sin dependencias externas: ninguna fuente, icono ni script de terceros.
+   Tipografía: Jost para títulos y rótulos, Inter para el texto corrido.
+   Las dos van alojadas en este mismo servidor: la página no pide nada a
+   terceros, así que `font-src 'self'` de la CSP se mantiene intacto.
    ========================================================================== */
+
+/* ---------- Tipografía ----------
+   Dos archivos variables (un solo peso cada uno cubre de 200 a 700) con el
+   subconjunto latino, que es el único que necesitan el español y el inglés:
+   73 KB entre los dos. Licencia SIL Open Font License, en assets/fonts/. */
+@font-face {
+  font-family: "Jost";
+  src: url("../fonts/jost.woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+                 U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+                 U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Inter";
+  src: url("../fonts/inter.woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC,
+                 U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+                 U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 :root {
   /* Paleta */
@@ -19,7 +46,10 @@
   --error: #ff6b6b;
   --exito: #7bd88f;
 
-  --fuente: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  /* Si la fuente propia no llegara a cargar, el texto cae en la del sistema. */
+  --sistema: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  --fuente: "Inter", var(--sistema);
+  --fuente-titulos: "Jost", var(--sistema);
   --radio: 4px;
   --radio-sm: 3px;
   --ancho: 1180px;
@@ -42,7 +72,29 @@ body {
 
 img, svg { max-width: 100%; display: block; }
 
-h1, h2, h3, h4 { margin: 0 0 .7rem; font-weight: 200; line-height: 1.15; letter-spacing: -.01em; }
+h1, h2, h3, h4 { margin: 0 0 .7rem; font-family: var(--fuente-titulos); font-weight: 200; line-height: 1.15; letter-spacing: -.01em; }
+
+/* Los rótulos en versalitas, la navegación y los botones también van en Jost:
+   son la voz de marca. El texto corrido se queda en Inter, que se lee mejor
+   en tamaños pequeños y en párrafos largos. */
+.rotulo,
+.boton,
+.nav__enlace,
+.idioma__boton,
+.red,
+.flotante,
+.cifra__texto,
+.contacto-lista__titulo,
+.campo > label, .grupo__titulo,
+.pasos-barra li,
+.resumen li span:first-child,
+.panel-lateral h3,
+.pie h3,
+.marco__vacio span,
+.perfil__rol,
+.soltar__titulo,
+.megamenu__cerrar,
+.desplegable__titulo { font-family: var(--fuente-titulos); }
 h1 { font-size: clamp(2.4rem, 6vw, 4.6rem); }
 h2 { font-size: clamp(1.9rem, 4vw, 3rem); }
 h3 { font-size: 1.15rem; font-weight: 400; letter-spacing: .01em; }
@@ -101,7 +153,8 @@ a:hover { text-decoration-color: var(--blanco); }
 /* ---------- Botones ---------- */
 .boton {
   display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
-  font: inherit; font-size: .92rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase;
+  font-family: var(--fuente-titulos); line-height: inherit;
+  font-size: .92rem; font-weight: 400; letter-spacing: .12em; text-transform: uppercase;
   text-decoration: none; cursor: pointer; padding: 1rem 1.9rem;
   border: 1px solid var(--blanco); background: transparent; color: var(--blanco);
   border-radius: var(--radio); transition: background var(--transicion), color var(--transicion), border-color var(--transicion), opacity var(--transicion);
@@ -118,7 +171,8 @@ a:hover { text-decoration-color: var(--blanco); }
 /* ---------- Selector de idioma ---------- */
 .idioma { display: inline-flex; align-items: center; gap: 0; border: 1px solid var(--borde); border-radius: var(--radio); overflow: hidden; }
 .idioma__boton {
-  font: inherit; font-size: .72rem; letter-spacing: .14em; font-weight: 500;
+  font-family: var(--fuente-titulos); line-height: inherit;
+  font-size: .72rem; letter-spacing: .14em; font-weight: 500;
   background: transparent; color: var(--texto-suave); border: 0; cursor: pointer;
   padding: .35rem .7rem; transition: background var(--transicion), color var(--transicion);
 }
@@ -149,6 +203,8 @@ a:hover { text-decoration-color: var(--blanco); }
   transition: color var(--transicion);
 }
 .nav__enlace:hover, .nav__enlace[aria-current="page"] { color: var(--blanco); }
+/* «Contacto» se escribe tal cual, no en versalitas como el resto del menú. */
+.nav__enlace--normal { text-transform: none; letter-spacing: .04em; }
 .cabecera .boton { padding: .7rem 1.1rem; font-size: .68rem; letter-spacing: .1em; white-space: nowrap; }
 .nav__lista .boton { display: none; }
 /* El botón suelto de la cabecera solo cabe en pantallas anchas. */
@@ -321,8 +377,7 @@ a:hover { text-decoration-color: var(--blanco); }
   background: none; border: 0; cursor: pointer;
   /* Sin el atajo `font`, que borraría el tamaño y el espaciado de .nav__enlace
      y dejaría esta pestaña más grande que las demás. */
-  font-family: inherit; font-weight: inherit; line-height: inherit;
-  text-transform: none; letter-spacing: .04em;
+  font-family: var(--fuente-titulos); font-weight: inherit; line-height: inherit;
   display: inline-flex; align-items: center; gap: .45rem;
 }
 .nav__desplegar::after {
@@ -346,7 +401,8 @@ a:hover { text-decoration-color: var(--blanco); }
 .megamenu__intro { flex: 1 1 auto; margin: 0; color: var(--texto-suave); font-size: .95rem; max-width: 72ch; }
 .megamenu__cerrar {
   flex: 0 0 auto; margin-left: auto; background: none; border: 1px solid var(--borde); border-radius: var(--radio);
-  color: var(--texto-suave); font: inherit; font-size: .7rem; letter-spacing: .09em;
+  color: var(--texto-suave); font-family: var(--fuente-titulos); line-height: inherit;
+  font-size: .7rem; letter-spacing: .09em;
   text-transform: uppercase; padding: .5rem .8rem; cursor: pointer;
   display: inline-flex; align-items: center; gap: .5rem;
   transition: color var(--transicion), border-color var(--transicion);

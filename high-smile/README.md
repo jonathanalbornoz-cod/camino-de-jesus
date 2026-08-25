@@ -76,9 +76,28 @@ Además: `agenda.html` (formulario de agendamiento en tres pasos) y `privacidad.
 | `assets/img/logo-*.png` | Logotipos oficiales (horizontal blanco y negro, vertical blanco) |
 | `assets/img/fotos/` | Fotografías de la clínica · ver `LEEME.md` dentro de la carpeta |
 | `assets/img/ilustraciones/` | Dibujos SVG de los ocho servicios |
+| `assets/fonts/` | Las dos tipografías del sitio, con sus licencias |
 | `_headers` | Cabeceras de seguridad para hostings que las permiten |
 
 Sin frameworks, sin `npm install`, sin dependencias externas: HTML, CSS y JavaScript puro.
+
+### Tipografía
+
+| Uso | Fuente |
+|---|---|
+| Títulos, rótulos, menú y botones | **Jost** (geométrica, en pesos 200–400) |
+| Texto corrido, formularios y datos | **Inter** |
+
+Las dos van **alojadas en este mismo repositorio**, en `assets/fonts/`. No se piden a Google
+ni a ningún otro servidor: la página sigue sin contactar a terceros y la regla `font-src
+'self'` de la CSP se mantiene tal cual. Son archivos variables —un solo archivo cubre de
+peso 200 a 700— con el subconjunto latino, que es todo lo que necesitan el español y el
+inglés: **73 KB entre las dos** (26 KB Jost + 48 KB Inter). Ambas están bajo la SIL Open Font
+License; el texto de la licencia acompaña a cada una en esa misma carpeta.
+
+Para cambiarlas basta con reemplazar los dos `.woff2` y editar las variables `--fuente` y
+`--fuente-titulos` al principio de `assets/css/estilos.css`. Si un archivo no cargara, el
+texto cae en la tipografía del sistema y la página sigue viéndose bien.
 
 ---
 
