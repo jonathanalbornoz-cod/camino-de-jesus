@@ -318,7 +318,11 @@ a:hover { text-decoration-color: var(--blanco); }
    por dentro, así el contenido deja de alargar la página. */
 .nav__contacto { position: static; }
 .nav__desplegar {
-  background: none; border: 0; font: inherit; cursor: pointer;
+  background: none; border: 0; cursor: pointer;
+  /* Sin el atajo `font`, que borraría el tamaño y el espaciado de .nav__enlace
+     y dejaría esta pestaña más grande que las demás. */
+  font-family: inherit; font-weight: inherit; line-height: inherit;
+  text-transform: none; letter-spacing: .04em;
   display: inline-flex; align-items: center; gap: .45rem;
 }
 .nav__desplegar::after {
@@ -471,6 +475,8 @@ a:hover { text-decoration-color: var(--blanco); }
   .nav.esta-abierto { display: block; animation: aparecer .25s ease; }
   .nav__lista { flex-direction: column; align-items: stretch; gap: 0; }
   .nav__enlace { padding: .9rem .2rem; border-bottom: 1px solid var(--borde); }
+  /* En columna, la pestaña con menú ocupa la fila entera como las demás. */
+  .nav__desplegar { width: 100%; justify-content: space-between; }
   .cabecera__inner > .boton { display: none; }
   .nav__lista .boton { display: inline-flex; margin-top: 1.2rem; }
 }
