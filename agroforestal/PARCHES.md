@@ -122,3 +122,33 @@ Un detalle del que depende todo: los radios del filtro llevan `value="on"`, porq
 Angular ata el valor al modelo y no al atributo del DOM. Desde fuera, la única forma de
 saber a qué marca corresponde cada fila es su **texto**, así que los conteos se indexan
 por nombre normalizado. `«Todas»` es la excepción: esa sí trae `value=""`.
+
+---
+
+## 7. Enlaces de Instagram
+
+**Archivos:** `data/settings.json` + `ajustes.js` (no toca el bundle)
+
+Los enlaces no funcionaban porque el usuario guardado era `agroforestalcolombia`, sin el
+«de». La aplicación arma sus enlaces como `instagram.com/<usuario>`, así que los seis de
+la portada —las cinco fotos del feed y «Ver más en Instagram»— llevaban a una cuenta que
+no existe. El usuario correcto es `agroforestaldecolombia`.
+
+Ojo al corregirlo en el futuro: la pieza gráfica de los 50 años y las propias imágenes
+del feed dicen **@AgroforestalColombia**, sin el «de». El perfil real que indicó el
+cliente es `https://www.instagram.com/agroforestaldecolombia/`, así que el material
+impreso lleva el usuario antiguo.
+
+Además:
+
+- **El pie de página no enlazaba.** `@agroforestalcolombia` era texto suelto escrito en
+  el bundle, junto a su icono, sin `<a>` alguno. `ajustes.js` lo convierte en enlace
+  conservando el icono, así que ahora hay acceso a Instagram desde todas las páginas y
+  no sólo desde la portada.
+- **Se normaliza el destino.** La aplicación construye `instagram.com/<usuario>`, sin
+  `www` y sin barra final; los enlaces se reescriben al perfil canónico
+  `https://www.instagram.com/agroforestaldecolombia/`, y todos abren en pestaña nueva.
+
+Queda a propósito sin enlazar el rótulo `@agroforestaldecolombia` que encabeza la
+sección «Síguenos en redes» de la portada: es una etiqueta decorativa, como «EXPLORA LA
+TIENDA» o «CATÁLOGO SELECTO», y justo debajo están las fotos y el botón, que sí enlazan.

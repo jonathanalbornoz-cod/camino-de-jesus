@@ -16,6 +16,9 @@
  *      buscador: encontrar una marca obligaba a recorrer media página. Se le añade un
  *      buscador, el número de productos de cada marca y una altura máxima con scroll.
  *
+ *   4. Los enlaces de Instagram llevaban a una cuenta que no existe y el pie de página
+ *      ni siquiera enlazaba. Se apuntan todos al perfil real.
+ *
  * Se carga como script clásico desde index.html, después de offline-api.js.
  */
 (function () {
@@ -71,15 +74,18 @@
     return a;
   }
 
-  // El número sale de los mismos ajustes que usa la aplicación, para que los dos
-  // botones apunten siempre al mismo sitio.
-  function cargarNumero() {
+  // El número y el usuario de Instagram salen de los mismos ajustes que usa la
+  // aplicación, para que nada apunte a un sitio distinto del suyo.
+  var usuarioIg = null;
+
+  function cargarAjustes() {
     return fetch(raiz() + 'data/settings.json', { cache: 'no-cache' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (s) {
         numero = ((s && s.whatsapp) || '').replace(/[^0-9]/g, '') || null;
+        usuarioIg = ((s && s.instagram) || '').replace(/^@/, '').trim() || null;
       })
-      .catch(function () { numero = null; });
+      .catch(function () { numero = null; usuarioIg = null; });
   }
 
   // En la portada el botón lo pone la aplicación, con su globo de «¿Te ayudo a
@@ -281,6 +287,50 @@
     if (c) compactar(c.lista, '15rem');
   }
 
+  // --- 4. Enlaces de Instagram ---------------------------------------------
+
+  function urlInstagram() {
+    return usuarioIg ? 'https://www.instagram.com/' + usuarioIg + '/' : null;
+  }
+
+  // La aplicación arma sus enlaces como instagram.com/<usuario>, sin www y sin barra
+  // final. Se normalizan al perfil canónico para que todos apunten exactamente igual.
+  function enlazarInstagram() {
+    var url = urlInstagram();
+    if (!url) return;
+
+    [].forEach.call(document.querySelectorAll('a[href*="instagram.com"]'), function (a) {
+      if (a.href === url) return;
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+    });
+
+    // En el pie, la cuenta es texto suelto escrito en el propio bundle: nunca fue un
+    // enlace. Se convierte en uno, conservando el icono que lo acompaña.
+    var pie = document.querySelector('footer');
+    if (!pie || pie.querySelector('.ig-pie')) return;
+
+    var it = document.createTreeWalker(pie, NodeFilter.SHOW_TEXT);
+    var nodo;
+    while ((nodo = it.nextNode())) {
+      if (!/@\s*agroforestal/i.test(nodo.nodeValue)) continue;
+      if (nodo.parentElement.closest('a')) continue;      // ya estaba enlazado
+
+      var a = document.createElement('a');
+      a.className = 'ig-pie';
+      a.href = url;
+      a.target = '_blank';
+      a.rel = 'noopener';
+      a.textContent = '@' + usuarioIg;
+      a.style.cssText = 'color:inherit;text-decoration:none';
+      a.addEventListener('mouseenter', function () { a.style.textDecoration = 'underline'; });
+      a.addEventListener('mouseleave', function () { a.style.textDecoration = 'none'; });
+      nodo.parentNode.replaceChild(a, nodo);
+      break;
+    }
+  }
+
   // --- arranque -------------------------------------------------------------
 
   function iniciar() {
@@ -289,8 +339,9 @@
       montarBuscadorDeMarcas();
       compactarCategorias();
     });
-    cargarNumero().then(function () {
+    cargarAjustes().then(function () {
       revisarBoton();
+      enlazarInstagram();
       // El botón de la aplicación aparece y desaparece al cambiar de ruta. El
       // observador se dispara muchísimo en una SPA, así que se agrupa por fotograma.
       var pendiente = false;
@@ -302,6 +353,7 @@
           revisarBoton();
           montarBuscadorDeMarcas();   // el catálogo se monta y desmonta al navegar
           compactarCategorias();
+          enlazarInstagram();
         });
       }
       new MutationObserver(revisarPronto).observe(document.body, { childList: true, subtree: true });
