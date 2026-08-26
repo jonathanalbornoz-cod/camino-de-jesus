@@ -10,5 +10,9 @@
   "story_image": "storage/branding/ba13cfee-6f6d-4ce9-8f2a-b18aaf84ffe3.jpeg",
   "mascot_image": "storage/branding/efce8d97-fc86-43da-a3fd-9f0c081843a0.png",
   "hero_images": "[\"storage/hero/1629e169-2d7d-42f9-923f-7a10d63a0269.jpeg\", \"storage/hero/2a9b7f26-4069-4f59-ac42-3758681daebe.jpeg\", \"storage/hero/7ddebcba-9566-40c1-91cd-de45f662b4ce.jpeg\", \"storage/hero/80b26d9f-9d67-4db8-b320-ac1855cd2093.jpeg\", \"storage/hero/a1363175-2829-475a-8896-1fcf30140cc3.jpeg\", \"storage/hero/a27fed89-1503-4369-9274-a28afd83cba3.jpeg\", \"storage/hero/b8ab136b-277f-44ac-9732-d347754a24af.jpeg\", \"storage/hero/c9e360f4-246a-47d7-9d16-2a9b612c2806.jpeg\", \"storage/hero/d1d30ede-81ef-4e57-82de-664dab258d51.jpeg\"]",
-  "feed_images": "[\"storage/feed/0cf5e120-e4c3-4ba4-8b01-55175d4746ea.jpeg\", \"storage/feed/75fc9298-16cd-41e0-909e-5c98905a6a1e.jpeg\", \"storage/feed/79dcdeb7-6e5a-445c-9c80-c35282f6f47c.jpeg\", \"storage/feed/c88259c1-72ab-4bd5-9882-317fcd11bf90.jpeg\", \"storage/feed/d9e07a1e-168f-42ed-9f12-790bbb239a5e.jpeg\"]"
+  "feed_images": "[\"storage/feed/0cf5e120-e4c3-4ba4-8b01-55175d4746ea.jpeg\", \"storage/feed/75fc9298-16cd-41e0-909e-5c98905a6a1e.jpeg\", \"storage/feed/79dcdeb7-6e5a-445c-9c80-c35282f6f47c.jpeg\", \"storage/feed/c88259c1-72ab-4bd5-9882-317fcd11bf90.jpeg\", \"storage/feed/d9e07a1e-168f-42ed-9f12-790bbb239a5e.jpeg\"]",
+  "formularios": {
+    "destino": "agroforestalventa@yahoo.com",
+    "endpoint": "https://formsubmit.co/ajax/agroforestalventa@yahoo.com"
+  }
 }

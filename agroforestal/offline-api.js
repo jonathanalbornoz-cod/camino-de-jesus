@@ -6,9 +6,12 @@
  * de modo que la copia publicada no dependa del backend.
  *
  * Regla: si no hay datos locales para una petición, NO se intercepta y sale a la
- * red como siempre. Así los envíos de cotizaciones, el login y cualquier endpoint
- * sin hornear siguen llegando al backend real si algún día acepta este origen,
- * en vez de fallar en silencio o devolver un éxito falso.
+ * red como siempre. Así el login y cualquier endpoint sin hornear siguen llegando
+ * al backend real si algún día acepta este origen, en vez de fallar en silencio o
+ * devolver un éxito falso.
+ *
+ * Excepción: los POST de /quotes y /service-requests se entregan a formularios.js,
+ * que los envía por correo. Si ese archivo no está cargado, salen al backend.
  *
  * Se carga como script clásico antes que los módulos de la app, que van diferidos.
  */
@@ -102,8 +105,19 @@
     return null;
   }
 
-  function resolve(method, path, query) {
-    if (method !== 'GET') return null;               // los POST van al backend real
+  // Los formularios de cliente los envía por correo formularios.js, que devuelve una
+  // promesa con la respuesta ya montada. El resto de POST van al backend real.
+  var FORMULARIOS = { '/quotes': 'cotizacion', '/service-requests': 'servicio' };
+
+  function resolve(method, path, query, body) {
+    if (method === 'POST') {
+      var tipo = FORMULARIOS[path];
+      if (!tipo || typeof window.__agroEnviarFormulario !== 'function') return null;
+      var datos;
+      try { datos = typeof body === 'string' ? JSON.parse(body) : body; } catch (e) { return null; }
+      return window.__agroEnviarFormulario(tipo, datos);
+    }
+    if (method !== 'GET') return null;
 
     if (path === '/settings') return store.settings || null;
     if (path === '/categories') return asList(store.categories) || null;
@@ -169,20 +183,12 @@
       var hit = target && parse(target.url);
       if (!hit) return nativeSend.call(xhr, body);
 
-      ready.then(function () {
-        var payload;
-        try { payload = resolve(target.method, hit.path, hit.query); } catch (e) { payload = null; }
-
-        // Sin datos horneados para esta petición: que salga a la red.
-        if (payload === null || payload === undefined) return nativeSend.call(xhr, body);
-
+      function responder(status, payload) {
         define(xhr, 'readyState', 4);
-        define(xhr, 'status', 200);
-        define(xhr, 'statusText', 'OK');
+        define(xhr, 'status', status);
+        define(xhr, 'statusText', status === 200 ? 'OK' : 'Error');
         define(xhr, 'responseURL', new URL(target.url, document.baseURI).href);
-        define(xhr, 'response', xhr.responseType === 'json' || xhr.responseType === ''
-          ? (xhr.responseType === 'json' ? payload : JSON.stringify(payload))
-          : payload);
+        define(xhr, 'response', xhr.responseType === 'json' ? payload : JSON.stringify(payload));
         define(xhr, 'responseText', JSON.stringify(payload));
         define(xhr, 'getAllResponseHeaders', function () { return 'content-type: application/json\r\n'; });
         define(xhr, 'getResponseHeader', function (name) {
@@ -190,8 +196,23 @@
         });
 
         xhr.dispatchEvent(new Event('readystatechange'));
+        // 'load' también para los errores: Angular decide por el código de estado.
         xhr.dispatchEvent(new ProgressEvent('load'));
         xhr.dispatchEvent(new ProgressEvent('loadend'));
+      }
+
+      ready.then(function () {
+        var pendiente;
+        try { pendiente = resolve(target.method, hit.path, hit.query, body); } catch (e) { pendiente = null; }
+
+        // El envío de formularios es asíncrono; lo demás se resuelve al momento.
+        Promise.resolve(pendiente).then(function (payload) {
+          // Sin datos horneados para esta petición: que salga a la red.
+          if (payload === null || payload === undefined) return nativeSend.call(xhr, body);
+
+          if (payload.__respuesta) return responder(payload.status, payload.body);
+          responder(200, payload);
+        });
       });
     };
 

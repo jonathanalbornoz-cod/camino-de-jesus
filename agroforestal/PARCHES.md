@@ -152,3 +152,59 @@ Además:
 Queda a propósito sin enlazar el rótulo `@agroforestaldecolombia` que encabeza la
 sección «Síguenos en redes» de la portada: es una etiqueta decorativa, como «EXPLORA LA
 TIENDA» o «CATÁLOGO SELECTO», y justo debajo están las fotos y el botón, que sí enlazan.
+
+---
+
+## 8. Envío por correo de las cotizaciones y las solicitudes de servicio
+
+**Archivos:** `formularios.js` (nuevo) + `offline-api.js` + `data/settings.json`
+
+Una página estática no puede enviar correo: no hay servidor que lo haga. Antes esos dos
+formularios los recibía el backend, que era quien mandaba el correo. Ahora los recoge un
+servicio de reenvío y los entrega en `agroforestalventa@yahoo.com`.
+
+`offline-api.js` ya interceptaba las llamadas a la API, pero sólo las de lectura. Ahora
+también atiende los `POST` de `/quotes` y `/service-requests` y se los pasa a
+`formularios.js`. El resto de `POST` —el login y el registro— siguen saliendo al backend
+como siempre: no se envían por correo, porque llevan contraseñas.
+
+### Activación, y qué pasa hasta entonces
+
+La primera vez que alguien envíe algo, el servicio manda un correo de confirmación a
+`agroforestalventa@yahoo.com`. **Hasta que se pulse ese enlace, ningún envío llega.**
+
+Por eso hay plan B: si el servicio rechaza el envío o no responde, se le ofrece al
+cliente mandarlo por correo, por WhatsApp o copiarlo al portapapeles, con todo ya
+redactado, y el formulario conserva lo que escribió. Nunca se muestra un «enviado» que
+no sea cierto: el mensaje de éxito de la aplicación sólo aparece cuando el servicio
+confirma que lo aceptó.
+
+Conviene hacer un envío de prueba nada más publicar, para disparar esa confirmación
+antes de que llegue el primer cliente de la campaña.
+
+### El correo que llega
+
+Los campos van con nombre en español y en orden de lectura, no con los nombres internos
+del formulario. El asunto lleva el nombre de quien escribe y el `responder` apunta a su
+correo, así que se le contesta directamente desde el mensaje.
+
+```
+Asunto: Cotización desde la web — Juan Pérez
+  Nombre, Correo, Teléfono
+  Productos    1. MOTOSIERRA STIHL MS 162 — cantidad: 1
+               2. MOTOSIERRA STIHL MS 212 — cantidad: 1
+  Notas, Enviado desde
+```
+
+Para servicio técnico: tipo de servicio (con su nombre, no el código interno), marca,
+modelo y descripción del problema.
+
+### Cambiar el destinatario
+
+Está en `data/settings.json`, en `formularios`: `destino` es la dirección a la que
+apunta el plan B y `endpoint` la del servicio. Cambiar la dirección es cambiar las dos.
+
+**El correo queda a la vista** en `settings.json` y en la propia petición, así que es
+rastreable por robots de spam. FormSubmit permite sustituirlo por un identificador
+aleatorio que oculta la dirección: si empieza a llegar correo basura, se pide ese
+identificador y se cambia sólo el `endpoint`.
