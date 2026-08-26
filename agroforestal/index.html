@@ -10,7 +10,16 @@
       var path = location.pathname;
       var marker = '/agroforestal/';
       var i = path.indexOf(marker);
-      var root = i >= 0 ? path.slice(0, i + marker.length) : path.replace(/[^/]*$/, '');
+      var root;
+      if (i >= 0) {
+        root = path.slice(0, i + marker.length);          // servido desde la subcarpeta
+      } else if (path === '' || /\/$/.test(path)) {
+        root = path || '/';                                // la propia carpeta
+      } else if (/\.[a-z0-9]+$/i.test(path)) {
+        root = path.replace(/[^/]*$/, '');                 // .../index.html
+      } else {
+        root = '/';                                        // ruta profunda de la SPA en la raiz
+      }
       var base = document.createElement('base');
       base.setAttribute('href', root);
       document.head.insertBefore(base, document.head.firstChild);
@@ -24,6 +33,9 @@
       }
     })();
   </script>
+  <!-- Contenido horneado: responde las llamadas a la API desde data/.
+       Script clásico: se ejecuta antes que los módulos de la app, que van diferidos. -->
+  <script src="offline-api.js"></script>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="Distribuidor oficial STIHL en Cali. Maquinaria agrícola, herramientas y repuestos originales. Servicio técnico certificado desde 1977.">
   <meta name="theme-color" content="#F36821">
