@@ -52,6 +52,16 @@ Cuando cambie el catálogo, se piden los JSON a la API y se vuelven a hornear:
 python3 tools/hornear.py products.json products-pagina2.json posts.json
 ```
 
+La API tiene un tope de 200 productos por página y no lo dice: si se le piden más,
+devuelve 200 sin avisar. Con 276 productos hacen falta dos peticiones, y la segunda
+necesita conservar el mismo `per_page`, porque si cambia el tamaño de página cambia
+también qué productos caen en cada una:
+
+```
+/api/products?per_page=200
+/api/products?per_page=200&page=2
+```
+
 El script fusiona por id, admite varias páginas del mismo recurso y reescribe las URL de
 imagen a las copias locales. Las categorías y las marcas se derivan de los objetos que
 cada producto trae anidados, así que no hay que pedirlas aparte.
@@ -63,11 +73,11 @@ sufijo `_min` que traen las exportaciones.
 
 | Recurso | Horneado | Notas |
 |---|---|---|
-| Productos | 200 de 276 | Falta la página 2 de la API (`/api/products?page=2`) |
-| Categorías | 20 | Derivadas de los productos |
-| Marcas | 32 | Derivadas de los productos |
+| Productos | 276 de 276 | El catálogo completo |
+| Categorías | 29 | Derivadas de los productos |
+| Marcas | 43 | Derivadas de los productos |
 | Blog | 1 | «5 tips de cuidado para las guadañas» |
-| Imágenes de producto | 478 | Las 351 que referencian los 200 productos resuelven en local |
+| Imágenes de producto | 478 | Las 468 que referencian los productos resuelven en local |
 | Portada, logo, mascota, feed | 26 | Ver `storage/INVENTARIO.md` |
 
 `data/settings.json` está escrito a mano, no viene de la API: contiene el nombre, el
