@@ -161,7 +161,7 @@ TIENDA» o «CATÁLOGO SELECTO», y justo debajo están las fotos y el botón, q
 
 Una página estática no puede enviar correo: no hay servidor que lo haga. Antes esos dos
 formularios los recibía el backend, que era quien mandaba el correo. Ahora los recoge un
-servicio de reenvío y los entrega en `agroforestalventa@yahoo.com`.
+servicio de reenvío y los entrega en `agroforestalventas@yahoo.com`.
 
 `offline-api.js` ya interceptaba las llamadas a la API, pero sólo las de lectura. Ahora
 también atiende los `POST` de `/quotes` y `/service-requests` y se los pasa a
@@ -171,7 +171,7 @@ como siempre: no se envían por correo, porque llevan contraseñas.
 ### Activación, y qué pasa hasta entonces
 
 La primera vez que alguien envíe algo, el servicio manda un correo de confirmación a
-`agroforestalventa@yahoo.com`. **Hasta que se pulse ese enlace, ningún envío llega.**
+`agroforestalventas@yahoo.com`. **Hasta que se pulse ese enlace, ningún envío llega.**
 
 Por eso hay plan B: si el servicio rechaza el envío o no responde, se le ofrece al
 cliente mandarlo por correo, por WhatsApp o copiarlo al portapapeles, con todo ya
