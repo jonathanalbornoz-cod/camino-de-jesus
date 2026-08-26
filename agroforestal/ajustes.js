@@ -12,6 +12,10 @@
  *      rellenarse solo —lo hace cuando el carrito tiene algo, y entonces muestra hasta
  *      la foto—, así que basta con dejar el producto en el carrito antes de navegar.
  *
+ *   3. El filtro de marca del catálogo era una lista de 43 radios de 1.251 px sin
+ *      buscador: encontrar una marca obligaba a recorrer media página. Se le añade un
+ *      buscador, el número de productos de cada marca y una altura máxima con scroll.
+ *
  * Se carga como script clásico desde index.html, después de offline-api.js.
  */
 (function () {
@@ -152,9 +156,139 @@
     });
   }, true);
 
+  // --- 3. Buscador dentro del filtro de marcas ------------------------------
+
+  var ID_BUSCADOR = 'filtro-marca-buscador';
+
+  function sinTildes(t) {
+    return (t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
+  }
+
+  // Cuántos productos tiene cada marca. La aplicación no lo trae en /brands, así que
+  // se cuenta sobre el catálogo ya horneado.
+  //
+  // La clave es el NOMBRE normalizado, no el slug: los radios del filtro llevan
+  // value="on" porque Angular ata el valor al modelo y no al atributo del DOM, así
+  // que desde fuera la única forma de saber a qué marca corresponde cada fila es su
+  // texto. «Todas» es la excepción: esa sí trae value="".
+  var conteos = null;
+  function contarPorMarca(lista) {
+    if (conteos) return conteos;
+    conteos = {};
+    lista.forEach(function (p) {
+      var nombre = p.brand && p.brand.name;
+      if (!nombre) return;
+      var k = sinTildes(nombre);
+      conteos[k] = (conteos[k] || 0) + 1;
+    });
+    return conteos;
+  }
+
+  function esTodas(label) {
+    var input = label.querySelector('input');
+    return sinTildes(label.textContent) === 'todas' || (input && input.value === '');
+  }
+
+  // El panel de filtros son bloques con un título y una lista .space-y-2 debajo.
+  function bloqueDe(titulo) {
+    var titulos = document.querySelectorAll('aside p, main p, div > p');
+    for (var i = 0; i < titulos.length; i++) {
+      var p = titulos[i];
+      if (p.children.length === 0 && sinTildes(p.textContent) === sinTildes(titulo)) {
+        var lista = p.parentElement && p.parentElement.querySelector('.space-y-2');
+        if (lista) return { titulo: p, lista: lista, bloque: p.parentElement };
+      }
+    }
+    return null;
+  }
+
+  function aplicarBusqueda(lista, texto) {
+    var q = sinTildes(texto);
+    var visibles = 0;
+    [].forEach.call(lista.querySelectorAll('label'), function (l) {
+      var todas = esTodas(l);                       // «Todas» no se filtra nunca
+      var coincide = todas || !q || sinTildes(l.textContent).indexOf(q) !== -1;
+      l.style.display = coincide ? '' : 'none';
+      if (coincide && !todas) visibles++;
+    });
+    return visibles;
+  }
+
+  function montarBuscadorDeMarcas() {
+    var b = bloqueDe('MARCA');
+    if (!b) return;
+
+    // Números de producto junto a cada marca.
+    if (conteos) {
+      [].forEach.call(b.lista.querySelectorAll('label'), function (l) {
+        if (esTodas(l) || l.querySelector('.marca-conteo')) return;
+        var n = conteos[sinTildes(l.textContent)];
+        if (!n) return;
+        var s = document.createElement('span');
+        s.className = 'marca-conteo';
+        s.textContent = n;
+        s.style.cssText = 'margin-left:auto;font-size:11px;font-weight:700;color:#A08060';
+        l.appendChild(s);
+      });
+    }
+
+    if (document.getElementById(ID_BUSCADOR)) return;   // ya montado
+
+    var caja = document.createElement('div');
+    caja.style.cssText = 'margin-bottom:.6rem';
+
+    var input = document.createElement('input');
+    input.id = ID_BUSCADOR;
+    input.type = 'search';
+    input.placeholder = 'Buscar marca…';
+    input.setAttribute('aria-label', 'Buscar marca');
+    input.style.cssText =
+      'width:100%;padding:.45rem .7rem;font-size:13px;color:#3B2A1A;' +
+      'border:1px solid #E8DDD0;border-radius:.6rem;background:#fff;outline:none';
+    input.addEventListener('focus', function () { input.style.borderColor = '#F36821'; });
+    input.addEventListener('blur', function () { input.style.borderColor = '#E8DDD0'; });
+
+    var vacio = document.createElement('p');
+    vacio.textContent = 'Ninguna marca coincide.';
+    vacio.style.cssText = 'display:none;font-size:12px;color:#A08060;margin:.5rem 0 0';
+
+    input.addEventListener('input', function () {
+      var n = aplicarBusqueda(b.lista, input.value);
+      vacio.style.display = (input.value && n === 0) ? 'block' : 'none';
+    });
+
+    caja.appendChild(input);
+    b.bloque.insertBefore(caja, b.lista);
+    b.bloque.appendChild(vacio);
+
+    compactar(b.lista, '17rem');
+  }
+
+  // Con 43 marcas la lista medía 1.251 px. Y por encima hay otras 29 categorías: sin
+  // recortar las dos, el bloque de marcas queda a media página de scroll y el buscador
+  // no sirve de nada. Recortarlas devuelve además el sentido al panel sticky, que
+  // siendo más alto que la ventana no se quedaba fijo.
+  function compactar(lista, alto) {
+    if (!lista || lista.dataset.compacta) return;
+    lista.dataset.compacta = '1';
+    lista.style.maxHeight = alto;
+    lista.style.overflowY = 'auto';
+    lista.style.paddingRight = '.35rem';
+  }
+
+  function compactarCategorias() {
+    var c = bloqueDe('CATEGORÍA');
+    if (c) compactar(c.lista, '15rem');
+  }
+
   // --- arranque -------------------------------------------------------------
 
   function iniciar() {
+    cargarProductos().then(function (lista) {
+      contarPorMarca(lista);
+      montarBuscadorDeMarcas();
+      compactarCategorias();
+    });
     cargarNumero().then(function () {
       revisarBoton();
       // El botón de la aplicación aparece y desaparece al cambiar de ruta. El
@@ -163,7 +297,12 @@
       function revisarPronto() {
         if (pendiente) return;
         pendiente = true;
-        requestAnimationFrame(function () { pendiente = false; revisarBoton(); });
+        requestAnimationFrame(function () {
+          pendiente = false;
+          revisarBoton();
+          montarBuscadorDeMarcas();   // el catálogo se monta y desmonta al navegar
+          compactarCategorias();
+        });
       }
       new MutationObserver(revisarPronto).observe(document.body, { childList: true, subtree: true });
       window.addEventListener('popstate', revisarPronto);

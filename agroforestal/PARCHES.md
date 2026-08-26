@@ -95,3 +95,30 @@ cualquier CDN, con las imágenes y el catálogo dentro del propio repositorio.
 técnico ni registrar usuarios. Esos formularios siguen apuntando al backend real y, sin
 él, fallan a la vista. Está sin resolver a propósito: fingir un envío que nadie va a
 recibir sería peor, sobre todo con la campaña de Google Ads en marcha.
+
+---
+
+## 6. Buscador en el filtro de marcas
+
+**Archivo:** `ajustes.js` (no toca el bundle)
+
+El catálogo ya filtraba por marca y funcionaba. El problema era encontrarla: 43 marcas
+en una lista de radios de **1.251 px**, sin buscador y sin scroll propio. Y por encima,
+otras 29 categorías, así que el bloque de marcas quedaba a media página de scroll.
+
+Tres añadidos sobre el filtro que ya existía:
+
+- **Buscador** que va escondiendo las marcas que no coinciden según se escribe. Ignora
+  mayúsculas y tildes, y «Todas» nunca se oculta. Si nada coincide, lo dice.
+- **Número de productos** junto a cada marca, como ya hacen las pestañas de la portada.
+  Se cuentan sobre `data/products.json`: la API no los trae en `/brands`.
+- **Altura máxima con scroll** en las dos listas, marcas y categorías. Recortar sólo la
+  de marcas no habría servido de nada, porque el bloque seguiría llegando después de
+  las 29 categorías. El panel pasa de más de 1.600 px a 673, cabe en pantalla y el
+  `sticky top-40` que ya tenía vuelve a tener sentido: antes, siendo más alto que la
+  ventana, no se quedaba fijo.
+
+Un detalle del que depende todo: los radios del filtro llevan `value="on"`, porque
+Angular ata el valor al modelo y no al atributo del DOM. Desde fuera, la única forma de
+saber a qué marca corresponde cada fila es su **texto**, así que los conteos se indexan
+por nombre normalizado. `«Todas»` es la excepción: esa sí trae `value=""`.
