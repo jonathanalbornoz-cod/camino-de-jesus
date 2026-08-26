@@ -14,17 +14,21 @@ responde con los JSON de `data/`. Se carga como script clásico desde `index.htm
 que se ejecuta antes que los módulos de la app, que van diferidos.
 
 ```
-index.html          calcula <base> en tiempo de ejecución y carga el interceptor
+index.html          calcula <base> en tiempo de ejecución y carga los dos scripts
 offline-api.js      responde /settings /categories /brands /products /posts
+ajustes.js          correcciones de comportamiento (ver PARCHES.md)
 data/*.json         el contenido, tal como lo devuelve la API
 storage/            las imágenes que antes servía el backend
-main-*.js, chunk-*  la aplicación compilada, sin modificar
+main-*.js, chunk-*  la aplicación compilada
 .htaccess           reglas de Apache/Hostinger (rewrite SPA + caché)
 ```
 
-La aplicación compilada **no está parcheada**. Si algún día la API acepta este origen,
-basta con borrar la línea del interceptor en `index.html` y el sitio vuelve a tirar del
-backend en vivo.
+Del bundle sólo se editó `chunk-G5XOI3AW.js`, para quitar los dos topes que dejaban la
+portada en seis categorías; todo lo demás está intacto. `PARCHES.md` lo detalla, porque
+si el proyecto Angular original se recompila, ese cambio se pierde.
+
+Si algún día la API acepta este origen, basta con borrar la línea de `offline-api.js`
+en `index.html` y el sitio vuelve a tirar del backend en vivo.
 
 ### Qué se responde en local y qué no
 
