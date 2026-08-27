@@ -3,22 +3,27 @@
 <head>
   <meta charset="utf-8">
   <title>Agroforestal de Colombia — Maquinaria y herramientas agrícolas</title>
-  <!-- Base dinamica: funciona en la raiz del dominio (agroforestaldecolombia.com)
-       y tambien servido desde una subcarpeta (GitHub Pages). -->
+  <!-- Base dinamica: el sitio funciona igual en la raiz de un dominio propio
+       (agroforestaldecolombia.com), en la raiz de un repositorio de GitHub Pages
+       (usuario.github.io/repositorio/) y dentro de una subcarpeta. -->
   <script>
     (function () {
       var path = location.pathname;
-      var marker = '/agroforestal/';
-      var i = path.indexOf(marker);
+      var marca = '/agroforestal/';
+      var i = path.indexOf(marca);
+      var esPages = /\.github\.io$/i.test(location.hostname);
+      var primero = path.split('/')[1] || '';
       var root;
       if (i >= 0) {
-        root = path.slice(0, i + marker.length);          // servido desde la subcarpeta
+        root = path.slice(0, i + marca.length);            // subcarpeta dentro de otro repositorio
+      } else if (esPages && primero) {
+        root = '/' + primero + '/';                        // Pages de proyecto: /<repositorio>/...
       } else if (path === '' || /\/$/.test(path)) {
         root = path || '/';                                // la propia carpeta
       } else if (/\.[a-z0-9]+$/i.test(path)) {
         root = path.replace(/[^/]*$/, '');                 // .../index.html
       } else {
-        root = '/';                                        // ruta profunda de la SPA en la raiz
+        root = '/';                                        // dominio propio, ruta profunda
       }
       var base = document.createElement('base');
       base.setAttribute('href', root);

@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>Página no encontrada</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+  // GitHub Pages no reescribe rutas como el .htaccess de Apache: cualquier ruta de la
+  // aplicación (/catalogo, /blog/1, /catalogo/6…) cae aquí. Se reenvía al index.html
+  // conservando la ruta en el parámetro ?spa=, que index.html vuelve a colocar.
+  (function () {
+    var path = location.pathname;
+
+    // Las peticiones a un archivo que no existe (una imagen, un .js) no son rutas de la
+    // aplicación: ahí conviene el 404 de verdad y no un reenvío que confunda.
+    if (/\.[a-z0-9]+$/i.test(path)) return;
+
+    var marca = '/agroforestal/';
+    var i = path.indexOf(marca);
+    var esPages = /\.github\.io$/i.test(location.hostname);
+    var primero = path.split('/')[1] || '';
+    var root = null;
+
+    if (i >= 0) {
+      root = path.slice(0, i + marca.length);        // subcarpeta dentro de otro repositorio
+    } else if (esPages && primero) {
+      root = '/' + primero + '/';                    // Pages de proyecto: /<repositorio>/...
+    } else if (!esPages) {
+      root = '/';                                    // dominio propio sin reescritura
+    }
+    if (root === null || path === root) return;
+
+    var resto = path.slice(root.length);
+    var extra = location.search.replace('?', '&');
+    location.replace(root + '?spa=' + encodeURIComponent(resto) + extra + location.hash);
+  })();
+</script>
+<style>
+  body { margin:0; min-height:100vh; display:flex; align-items:center; justify-content:center;
+         font-family: system-ui, -apple-system, "Segoe UI", sans-serif; background:#FAF7F0; color:#3B2A1A; }
+  main { text-align:center; padding:2rem; }
+  h1 { font-size:3rem; margin:0 0 .5rem; color:#F36821; }
+  p { color:#6B5644; }
+  a { color:#F36821; }
+</style>
+</head>
+<body>
+  <main>
+    <h1>404</h1>
+    <p>La página que buscas no existe.</p>
+    <p><a href="./">Volver al inicio</a></p>
+  </main>
+</body>
+</html>
