@@ -37,7 +37,7 @@ logotipo oficial de la clínica.
 
 | Pestaña | Contenido |
 |---|---|
-| Portada | Imagen a pantalla completa, logotipo, eslogan y accesos a agenda y WhatsApp |
+| Portada | Fotografía del equipo en el mirador de Cali a pantalla completa, logotipo, eslogan y accesos a agenda y WhatsApp |
 | Servicios | Las ocho especialidades, cada una con su ilustración propia |
 | Reseña clínica | Quiénes son, método de trabajo y carrusel de fotos de la clínica |
 | Casos de éxito | Carrusel de antes y después |
@@ -114,6 +114,19 @@ Las fotos que envió la clínica están reducidas para web (las originales pesab
 3,7 MB cada una; ahora ninguna pasa de 165 KB). Para agregar o reemplazar fotos, todo está
 explicado en `assets/img/fotos/LEEME.md`: basta con copiarlas en esa carpeta con el nombre
 que corresponde y la página las publica sola.
+
+La portada usa **dos recortes de la misma fotografía**: `hero.jpg` (horizontal, para
+computador y tablet) y `hero-movil.jpg` (vertical, para pantallas de hasta 700 px). El
+navegador elige una u otra con un `<picture>`; en el teléfono el encuadre ancho dejaría a
+las personas fuera del cuadro.
+
+El velo oscuro que va encima está calibrado midiendo el contraste real de cada bloque de
+texto sobre la fotografía: en el peor punto, el titular queda en 6,9 : 1 y los textos
+pequeños en 5,6 : 1 o más, por encima del 4,5 : 1 que pide la norma de accesibilidad AA.
+Si se cambia la fotografía por una más clara, hay que volver a comprobarlo.
+
+> La fotografía muestra a dos personas identificables. Antes de publicar el sitio conviene
+> tener su autorización por escrito para usar su imagen, igual que con las fotos del equipo.
 
 Las tres imágenes de turismo dental —Cristo Rey, la Torre de Cali y los cholados— son
 fotografías (`cali-1.jpg`, `cali-2.jpg`, `cali-3.jpg`), recortadas para quitarles el marco

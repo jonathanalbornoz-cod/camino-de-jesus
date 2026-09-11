@@ -231,18 +231,23 @@ a:hover { text-decoration-color: var(--blanco); }
 }
 .heroe__fondo {
   position: absolute; inset: 0; width: 100%; height: 100%;
-  object-fit: cover; object-position: 78% 26%; z-index: -2;
+  object-fit: cover; object-position: 50% 42%; z-index: -2;
 }
 .heroe__velo {
   position: absolute; inset: 0; z-index: -1;
+  /* La fotografía es luminosa (cielo abierto sobre Cali), así que el velo hace dos
+     cosas a la vez: una banda oscura arriba y abajo para que la cabecera y el paso a
+     la sección siguiente no corten en seco, y una mancha central algo más densa que
+     sostiene el texto blanco. Fuera de esa mancha la foto se ve casi limpia. */
   background:
-    linear-gradient(180deg, rgba(10,10,10,.92) 0%, rgba(10,10,10,.55) 38%, rgba(10,10,10,.75) 72%, var(--negro) 100%),
-    radial-gradient(75% 55% at 50% 45%, rgba(10,10,10,.35), rgba(10,10,10,.8));
+    radial-gradient(64% 54% at 50% 52%, rgba(10,10,10,.84), rgba(10,10,10,.4) 68%, rgba(10,10,10,.1) 100%),
+    linear-gradient(180deg, rgba(10,10,10,.8) 0%, rgba(10,10,10,.26) 26%, rgba(10,10,10,.32) 62%, rgba(10,10,10,.92) 92%, var(--negro) 100%);
 }
 .heroe__contenido { max-width: 900px; margin-inline: auto; }
 .heroe__logo { width: clamp(150px, 17vw, 215px); height: auto; margin: 0 auto 2.2rem; }
 .heroe h1 { font-size: clamp(2.1rem, 5.4vw, 4.1rem); margin-bottom: 1.5rem; text-wrap: balance; }
-.heroe .entradilla { font-size: clamp(1rem, 1.6vw, 1.15rem); }
+.heroe .entradilla { font-size: clamp(1rem, 1.6vw, 1.15rem); color: #e6e6e6; }
+.heroe .rotulo { color: var(--texto); }
 .heroe__acciones { display: flex; flex-wrap: wrap; gap: .9rem; justify-content: center; margin-top: 2.4rem; }
 
 .heroe__baja {
@@ -668,6 +673,11 @@ a:hover { text-decoration-color: var(--blanco); }
 
 @media (max-width: 700px) {
   .heroe { min-height: 86vh; padding: 7rem 0 5rem; }
+  .heroe__velo {
+    background:
+      radial-gradient(98% 44% at 50% 50%, rgba(10,10,10,.72), rgba(10,10,10,.4) 78%, rgba(10,10,10,.2) 100%),
+      linear-gradient(180deg, rgba(10,10,10,.78) 0%, rgba(10,10,10,.24) 22%, rgba(10,10,10,.3) 66%, rgba(10,10,10,.92) 92%, var(--negro) 100%);
+  }
   .carrusel__diapositiva, .carrusel--ancho .carrusel__diapositiva { flex-basis: 100%; }
   .servicio { padding: 1.8rem 1.2rem; }
   .mapa, .mapa iframe { min-height: 320px; }

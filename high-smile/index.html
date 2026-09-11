@@ -24,7 +24,8 @@
 
   <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml" />
   <link rel="canonical" href="./index.html" />
-  <link rel="preload" as="image" href="assets/img/fotos/hero.jpg" />
+  <link rel="preload" as="image" href="assets/img/fotos/hero.jpg?v=10" media="(min-width: 701px)" />
+  <link rel="preload" as="image" href="assets/img/fotos/hero-movil.jpg?v=10" media="(max-width: 700px)" />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/jost.woff2" crossorigin />
   <link rel="preload" as="font" type="font/woff2" href="assets/fonts/inter.woff2" crossorigin />
   <link rel="stylesheet" href="assets/css/estilos.css" />
@@ -273,7 +274,12 @@
 
     <!-- ================= Héroe horizontal ================= -->
     <section class="heroe" id="inicio">
-      <img class="heroe__fondo" src="assets/img/fotos/hero.jpg" alt="" width="1500" height="2250" />
+      <!-- La foto original es horizontal. En el teléfono se usa un recorte vertical
+           centrado en el equipo, porque el encuadre ancho dejaría fuera a las personas. -->
+      <picture>
+        <source media="(max-width: 700px)" srcset="assets/img/fotos/hero-movil.jpg?v=10" width="1100" height="1650" />
+        <img class="heroe__fondo" src="assets/img/fotos/hero.jpg?v=10" alt="" width="1920" height="1280" />
+      </picture>
       <div class="heroe__velo"></div>
 
       <div class="contenedor heroe__contenido">
