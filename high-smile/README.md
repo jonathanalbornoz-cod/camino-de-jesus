@@ -18,8 +18,7 @@ logotipo oficial de la clínica.
 |---|---|
 | Nombre | High Smile Clínica Odontológica |
 | Dirección | Calle 14 #84a-05, Edificio Benessere, consultorio 310 · Santiago de Cali |
-| WhatsApp (canal principal) | +57 315 825 3729 |
-| Teléfono | +57 300 523 9827 |
+| WhatsApp y teléfono | +57 300 523 9827 (un solo número para las dos cosas) |
 | Atención | Solo con cita previa (la clínica no publica horario fijo) |
 | Correo | highsmilecali@gmail.com |
 | Instagram | [@highsmile_co](https://www.instagram.com/highsmile_co/) |

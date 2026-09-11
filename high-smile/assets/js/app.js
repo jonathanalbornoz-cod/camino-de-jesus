@@ -392,7 +392,7 @@
       }
 
       if (enlaceWa) {
-        enlaceWa.href = 'https://wa.me/573158253729?text=' + encodeURIComponent(lineas.join(salto));
+        enlaceWa.href = 'https://wa.me/573005239827?text=' + encodeURIComponent(lineas.join(salto));
       }
       if (enlaceCorreo) {
         enlaceCorreo.href = 'mailto:highsmilecali@gmail.com?subject=' +

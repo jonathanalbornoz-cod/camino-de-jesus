@@ -15,7 +15,7 @@
   if (!formulario) { return; }
 
   const CLAVE_ALMACEN = 'hs_datos_paciente';
-  const WHATSAPP = '573158253729';
+  const WHATSAPP = '573005239827';
   const SALTO = String.fromCharCode(10);
 
   const pasos = Array.from(formulario.querySelectorAll('.paso-form'));
