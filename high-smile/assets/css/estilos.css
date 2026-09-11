@@ -640,7 +640,9 @@ a:hover { text-decoration-color: var(--blanco); }
   transition: border-color var(--transicion), transform var(--transicion);
 }
 .tarjeta-cali:hover { border-color: var(--borde-fuerte); transform: translateY(-3px); }
-.tarjeta-cali__foto { aspect-ratio: 4 / 3; border: 0; border-bottom: 1px solid var(--borde); }
+/* Las fotografías de la ciudad son verticales: en apaisado habría que cortar
+   o el monumento o a las personas. */
+.tarjeta-cali__foto { aspect-ratio: 3 / 4; border: 0; border-bottom: 1px solid var(--borde); }
 .tarjeta-cali figcaption { padding: 1.5rem 1.5rem 1.7rem; }
 .tarjeta-cali strong { display: block; font-weight: 400; font-size: 1.05rem; margin-bottom: .5rem; }
 .tarjeta-cali span { color: var(--texto-suave); font-size: .9rem; }

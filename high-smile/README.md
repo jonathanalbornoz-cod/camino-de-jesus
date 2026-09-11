@@ -128,14 +128,10 @@ Si se cambia la fotografía por una más clara, hay que volver a comprobarlo.
 > La fotografía muestra a dos personas identificables. Antes de publicar el sitio conviene
 > tener su autorización por escrito para usar su imagen, igual que con las fotos del equipo.
 
-Las tres imágenes de turismo dental —Cristo Rey, la Torre de Cali y los cholados— son
-fotografías (`cali-1.jpg`, `cali-2.jpg`, `cali-3.jpg`), recortadas para quitarles el marco
-que traían y ajustadas a 900 × 675 px.
-
-> Conviene confirmar los derechos de uso de esas tres fotos de la ciudad antes de publicar
-> el sitio: si no son propias, lo más seguro es reemplazarlas por fotografías de la clínica
-> o por imágenes con licencia comercial. Basta con sobrescribir los archivos y subir
-> `VERSION_FOTOS`.
+Las tres imágenes de turismo dental son fotografías propias del equipo en la ciudad —el
+mirador de Belalcázar, el Gato del Río y una de las Gatas del Río— en `cali-1.jpg`,
+`cali-2.jpg` y `cali-3.jpg`, a 900 × 1200 px. Son verticales, y por eso la tarjeta de la
+ciudad usa proporción 3 : 4: en apaisado habría que cortar o el monumento o a las personas.
 
 Las ilustraciones de los ocho servicios son dibujos vectoriales hechos para el sitio: pesan
 menos de 1 KB cada uno y se ven nítidos en cualquier pantalla.
