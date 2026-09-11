@@ -269,6 +269,7 @@ a:hover { text-decoration-color: var(--blanco); }
 .rejilla--2 { grid-template-columns: repeat(2, 1fr); }
 .rejilla--3 { grid-template-columns: repeat(3, 1fr); }
 .rejilla--4 { grid-template-columns: repeat(4, 1fr); }
+.rejilla--5 { grid-template-columns: repeat(5, 1fr); }
 
 .tarjeta {
   background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio);
@@ -522,6 +523,8 @@ a:hover { text-decoration-color: var(--blanco); }
 @media (max-width: 1250px) {
   .contacto__grid, .agenda__grid { grid-template-columns: 1fr; }
   .rejilla--4 { grid-template-columns: repeat(2, 1fr); }
+  /* Cinco perfiles en dos columnas dejan las fotos enormes: mejor tres. */
+  .rejilla--5 { grid-template-columns: repeat(3, 1fr); }
   .pie__grid { grid-template-columns: repeat(2, 1fr); }
   .panel-lateral { position: static; }
 
@@ -549,6 +552,9 @@ a:hover { text-decoration-color: var(--blanco); }
   .resumen li { flex-direction: column; gap: .2rem; }
   .resumen strong { text-align: left; }
 }
+
+@media (max-width: 700px) { .rejilla--5 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 460px) { .rejilla--5 { grid-template-columns: 1fr; } }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -630,7 +636,6 @@ a:hover { text-decoration-color: var(--blanco); }
   font-size: .72rem; letter-spacing: .2em; text-transform: uppercase;
   color: var(--texto-suave); margin-bottom: .3rem;
 }
-.perfil__anios { font-size: .82rem; color: var(--gris); margin-bottom: .9rem; }
 
 .perfil p { color: var(--texto-suave); font-size: .93rem; }
 

@@ -4,14 +4,11 @@ Sitio web en **español e inglés** para High Smile Clínica Odontológica, en S
 Portada horizontal a pantalla completa, paleta **negro dominante, blanco y gris**, y el
 logotipo oficial de la clínica.
 
-> **Versión de muestra para presentación interna.** Los cuatro perfiles del equipo usan
-> nombres inventados sobre fotografías del material de la clínica. Antes de publicar el sitio
-> al público hay que reemplazarlos por los nombres, cargos y fotografías reales de cada
-> integrante, con su autorización.
->
-> Por eso las tres páginas van con `noindex`, y `robots.txt` y `.htaccess` piden lo mismo:
-> así Google no muestra en sus resultados nombres inventados asociados a una clínica real.
-> Los pasos para quitar esos candados están al final de `DESPLIEGUE-HOSTINGER.md`.
+> **Versión de muestra, en un dominio de pruebas.** Mientras el sitio viva en
+> `injoepropuesta2.online` y no en el dominio definitivo de la clínica, las tres páginas van
+> con `noindex`, y `robots.txt` y `.htaccess` piden lo mismo: así Google no indexa una
+> dirección provisional ni la deja compitiendo con la definitiva. Los pasos para quitar esos
+> candados están al final de `DESPLIEGUE-HOSTINGER.md`.
 
 ---
 
@@ -42,7 +39,7 @@ logotipo oficial de la clínica.
 | Reseña clínica | Quiénes son, método de trabajo y carrusel de fotos de la clínica |
 | Casos de éxito | Carrusel de antes y después |
 | Antes y después | Carrusel con los pacientes que terminaron su tratamiento |
-| Nuestro equipo | Cuatro perfiles con fotografía, especialidad y años de experiencia |
+| Nuestro equipo | Cinco perfiles con fotografía, nombre y especialidad |
 | Preguntas frecuentes | Agendamiento, provisionales y definitivos, tiempos de entrega, cuidados y miedo al odontólogo |
 | Contacto | Canales, dirección y mapa de Google cargado directamente |
 
@@ -138,29 +135,34 @@ menos de 1 KB cada uno y se ven nítidos en cualquier pantalla.
 
 ---
 
-## 5. Datos de ejemplo y pendientes
+## 5. Equipo y pendientes
 
-**Equipo (datos de ejemplo).** Los cuatro integrantes que aparecen —nombres, especialidades
-y años de experiencia— **son inventados para esta versión de presentación interna**, sobre
-fotografías del material que entregó la clínica. La propia sección lo advierte al pie.
+Los cinco perfiles son los profesionales reales de la clínica, con su fotografía, su nombre y
+su especialidad. No se publican años de experiencia.
 
-| Perfil (ejemplo) | Foto | Archivo |
+| Perfil | Especialidad | Foto |
 |---|---|---|
-| Dra. Valeria Ospina Arboleda | odontóloga frente al manifiesto | `equipo-2.jpg` |
-| Dr. Mateo Restrepo Salazar | odontólogo en el consultorio | `equipo-3.jpg` |
-| Dra. Camila Herrera Lozano | retrato en el consultorio | `equipo-4.jpg` |
-| Laura Marcela Caicedo | retrato en la recepción | `equipo-5.jpg` |
+| Paola Andrea Cortés Montes | CEO y gerente | `equipo-2.jpg` |
+| Dr. Mateo Restrepo Salazar | Cirugía maxilofacial e implantología | `equipo-3.jpg` |
+| Dra. Claudia Ramírez | Ortodoncia | `equipo-4.jpg` |
+| Dra. Carolina Silva Puentes | Odontopediatría y ortopedia maxilar | `equipo-5.jpg` |
+| Dr. Andrés Felipe Limas Martínez | Endodoncia | `equipo-6.jpg` |
 
-Para reemplazarlos por los reales:
+> **Por confirmar:** la clínica envió las tres fotografías nuevas sin decir cuál correspondía
+> a cada persona. Se asignaron por lo que se ve en cada una —la bata infantil para
+> odontopediatría, el uniforme de la clínica para ortodoncia— y **hay que verificarlo antes
+> de publicar**. Si alguna está cambiada, basta con intercambiar los archivos `equipo-4.jpg`
+> y `equipo-5.jpg` en `assets/img/fotos/` y subir `VERSION_FOTOS`.
 
-1. Cambia el texto en `assets/js/i18n.js`, claves `equipo.1.*` … `equipo.4.*` (en español y
-   en inglés).
-2. Sobrescribe la fotografía en `assets/img/fotos/` (`equipo-2.jpg` … `equipo-5.jpg`).
-3. Sube `VERSION_FOTOS` en `assets/js/app.js`.
+Para cambiar un perfil: el texto está en `assets/js/i18n.js`, claves `equipo.1.*` …
+`equipo.5.*` (en español y en inglés); la fotografía, en `assets/img/fotos/equipo-N.jpg`.
+Después sube `VERSION_FOTOS` en `assets/js/app.js`. Añadir un sexto perfil es copiar una
+tarjeta en `index.html`, crear sus tres claves y ajustar `.rejilla--5` en el CSS.
 
-**Pendientes reales:**
+**Pendientes:**
 
-1. **Nombres y fotos reales del equipo** antes de cualquier publicación al público.
+1. **Autorización de imagen.** Todas las fotografías muestran a personas identificables:
+   conviene tener su permiso por escrito antes de publicar el sitio.
 2. **Envío automático de las fotos del paciente.** Hoy la página prepara el mensaje y el
    paciente adjunta las imágenes en WhatsApp o en el correo. Para que lleguen solas a
    highsmilecali@gmail.com hace falta un servicio de formularios o un backend propio.
