@@ -1,0 +1,53 @@
+# Quesera Chiminangos — configuración para Apache / Hostinger
+# Subir el contenido de esta carpeta a public_html (este archivo incluido).
+
+Options -MultiViews
+DirectoryIndex index.html
+
+# ---------------------------------------------------------------
+# Caché
+# ---------------------------------------------------------------
+# Aquí los JS y el CSS NO llevan hash en el nombre, y datos.js se edita
+# cada vez que cambia el catálogo. Cachearlos a un año dejaría a los
+# clientes viendo un catálogo viejo, así que se revalidan siempre:
+# «no-cache» no significa no guardar, significa preguntar antes de usar,
+# y el servidor responde 304 si no cambió. Sale casi gratis.
+<FilesMatch "\.(html|js|css)$">
+  Header set Cache-Control "no-cache"
+</FilesMatch>
+
+# Las imágenes sí se cachean: cuando entra una foto nueva entra con
+# nombre nuevo, así que no hay riesgo de servir una desactualizada.
+<FilesMatch "\.(png|jpe?g|gif|svg|ico|webp|avif)$">
+  Header set Cache-Control "public, max-age=2592000"
+</FilesMatch>
+
+# ---------------------------------------------------------------
+# Compresión
+# ---------------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/plain
+  AddOutputFilterByType DEFLATE application/javascript application/json
+  AddOutputFilterByType DEFLATE image/svg+xml
+</IfModule>
+
+# ---------------------------------------------------------------
+# Tipos y codificación
+# ---------------------------------------------------------------
+AddDefaultCharset UTF-8
+<IfModule mod_mime.c>
+  AddType image/webp .webp
+</IfModule>
+
+# No adivinar el tipo de archivo
+<IfModule mod_headers.c>
+  Header set X-Content-Type-Options "nosniff"
+</IfModule>
+
+# ---------------------------------------------------------------
+# HTTPS
+# ---------------------------------------------------------------
+# Descomentar cuando el certificado SSL esté activo en Hostinger:
+# RewriteEngine On
+# RewriteCond %{HTTPS} off
+# RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
