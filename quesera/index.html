@@ -3,88 +3,105 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Quesera Chiminangos — Salsamentaria artesanal</title>
-<meta name="description" content="Salsamentaria Quesera Chiminangos: quesos frescos, lácteos, embutidos, carnes frías y amasijos. Pida por WhatsApp, al detal y por mayor.">
-<meta name="theme-color" content="#2F4A36">
-<link rel="icon" href="imagenes/favicon.svg" type="image/svg+xml">
+<title>Quesera Chiminangos — Salsamentaria en Cali</title>
+<meta name="description" content="Catálogo de Quesera Chiminangos: quesos, carnes frías, congelados, desechables, salsas, panadería, aceites y lácteos. Pida por WhatsApp. Cali, Colombia.">
+<meta name="theme-color" content="#45181F">
+<link rel="icon" href="imagenes/logo.webp" type="image/webp">
+<link rel="apple-touch-icon" href="imagenes/logo.jpg">
 <meta property="og:type" content="website">
-<meta property="og:title" content="Quesera Chiminangos — Salsamentaria artesanal">
-<meta property="og:description" content="Quesos frescos, lácteos y carnes frías del Valle. Haga su pedido por WhatsApp.">
+<meta property="og:title" content="Quesera Chiminangos — Salsamentaria en Cali">
+<meta property="og:description" content="Quesos, carnes frías, congelados y desechables. Arme su pedido y envíelo por WhatsApp.">
+<meta property="og:image" content="imagenes/logo.jpg">
 <meta property="og:locale" content="es_CO">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
 
 <a class="saltar" href="#catalogo">Saltar al catálogo</a>
 
-<!-- Ilustraciones por categoría: se usan cuando un producto no tiene foto -->
+<!-- Iconos: los usan los filtros, los sellos y los productos sin foto -->
 <svg width="0" height="0" aria-hidden="true" style="position:absolute">
   <defs>
-    <symbol id="ic-queso" viewBox="0 0 64 64">
-      <path d="M8 44V28l24-12 24 12v16a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4Z" fill="currentColor" opacity=".18"/>
-      <path d="M8 28 32 16l24 12v16a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4V28Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
-      <circle cx="22" cy="36" r="3.5" fill="currentColor"/><circle cx="38" cy="32" r="2.5" fill="currentColor"/><circle cx="44" cy="41" r="3" fill="currentColor"/>
+    <symbol id="ic-queso" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
+      <path d="M8 30 32 16l24 14v14a4 4 0 0 1-4 4H12a4 4 0 0 1-4-4V30Z"/>
+      <path d="M8 30h48"/><circle cx="22" cy="38" r="3" fill="currentColor" stroke="none"/><circle cx="40" cy="36" r="2.4" fill="currentColor" stroke="none"/><circle cx="45" cy="43" r="2.8" fill="currentColor" stroke="none"/>
     </symbol>
-    <symbol id="ic-leche" viewBox="0 0 64 64">
-      <path d="M26 6h12v8l6 10v30a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V24l6-10V6Z" fill="currentColor" opacity=".18"/>
-      <path d="M26 6h12v8l6 10v30a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V24l6-10V6Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
-      <path d="M20 34h24" stroke="currentColor" stroke-width="2.5"/>
+    <symbol id="ic-carne" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+      <path d="M13 43c-7-7-5-20 4-26s22-5 28 2 4 20-4 26-21 5-28-2Z"/>
+      <path d="M24 25c4 4 4 13 0 18M35 23c4 4 4 17 0 21"/>
     </symbol>
-    <symbol id="ic-embutido" viewBox="0 0 64 64">
-      <path d="M14 42c-6-6-6-18 2-24s20-6 26 0 6 18 0 24-22 6-28 0Z" fill="currentColor" opacity=".18"/>
-      <path d="M13 43c-7-7-5-20 4-26s22-5 28 2 4 20-4 26-21 5-28-2Z" fill="none" stroke="currentColor" stroke-width="2.5"/>
-      <path d="M24 24c4 4 4 12 0 16M34 22c4 4 4 16 0 20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <symbol id="ic-frio" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round">
+      <path d="M32 8v48M11 20l42 24M53 20 11 44"/>
+      <path d="m25 14 7 7 7-7M25 50l7-7 7 7"/>
     </symbol>
-    <symbol id="ic-carne" viewBox="0 0 64 64">
-      <rect x="8" y="18" width="48" height="28" rx="6" fill="currentColor" opacity=".18"/>
-      <rect x="8" y="18" width="48" height="28" rx="6" fill="none" stroke="currentColor" stroke-width="2.5"/>
-      <path d="M18 26v12M28 24v16M38 26v12M48 28v8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <symbol id="ic-caja" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
+      <path d="M8 16h48v10H8zM12 26h40v24a4 4 0 0 1-4 4H16a4 4 0 0 1-4-4V26Z"/><path d="M26 36h12" stroke-linecap="round"/>
     </symbol>
-    <symbol id="ic-pan" viewBox="0 0 64 64">
-      <path d="M10 38c0-12 10-20 22-20s22 8 22 20c0 6-4 10-10 10H20c-6 0-10-4-10-10Z" fill="currentColor" opacity=".18"/>
-      <path d="M10 38c0-12 10-20 22-20s22 8 22 20c0 6-4 10-10 10H20c-6 0-10-4-10-10Z" fill="none" stroke="currentColor" stroke-width="2.5"/>
-      <path d="M24 30c2 4 2 8 0 12M40 30c2 4 2 8 0 12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <symbol id="ic-salsa" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
+      <path d="M26 8h12v7l7 9v28a4 4 0 0 1-4 4H23a4 4 0 0 1-4-4V24l7-9V8Z"/><path d="M19 32h26"/>
     </symbol>
-    <symbol id="ic-despensa" viewBox="0 0 64 64">
-      <rect x="12" y="20" width="40" height="34" rx="5" fill="currentColor" opacity=".18"/>
-      <rect x="12" y="20" width="40" height="34" rx="5" fill="none" stroke="currentColor" stroke-width="2.5"/>
-      <path d="M22 20v-4a10 10 0 0 1 20 0v4" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <symbol id="ic-reposteria" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
+      <path d="M14 30h36l-4 22a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4L14 30Z"/>
+      <path d="M20 30c0-8 5-12 12-12s12 4 12 12" stroke-linecap="round"/><path d="M32 18V8" stroke-linecap="round"/>
     </symbol>
-    <symbol id="ic-corte" viewBox="0 0 64 64">
-      <path d="M16 10l32 38M48 10 16 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
-      <circle cx="18" cy="52" r="6" fill="none" stroke="currentColor" stroke-width="2.5"/>
-      <circle cx="46" cy="52" r="6" fill="none" stroke="currentColor" stroke-width="2.5"/>
+    <symbol id="ic-pan" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
+      <path d="M10 38c0-12 10-20 22-20s22 8 22 20c0 6-4 10-10 10H20c-6 0-10-4-10-10Z"/>
+      <path d="M24 30c2 4 2 9 0 13M40 30c2 4 2 9 0 13" stroke-linecap="round"/>
     </symbol>
-    <symbol id="ic-moto" viewBox="0 0 64 64">
-      <circle cx="16" cy="44" r="8" fill="none" stroke="currentColor" stroke-width="2.5"/>
-      <circle cx="48" cy="44" r="8" fill="none" stroke="currentColor" stroke-width="2.5"/>
-      <path d="M16 44l10-16h12l6 16M30 28l-4-8h-6" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <symbol id="ic-aceite" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
+      <path d="M22 10h20v8l6 8v28a4 4 0 0 1-4 4H20a4 4 0 0 1-4-4V26l6-8V10Z"/><path d="M24 34h16v12H24z"/>
     </symbol>
-    <symbol id="ic-mayor" viewBox="0 0 64 64">
-      <path d="M10 24h44v26a4 4 0 0 1-4 4H14a4 4 0 0 1-4-4V24Z" fill="currentColor" opacity=".18"/>
-      <path d="M8 14h48v10H8zM12 24h40v26a4 4 0 0 1-4 4H16a4 4 0 0 1-4-4V24Z" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linejoin="round"/>
-      <path d="M26 34h12" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+    <symbol id="ic-condimento" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
+      <path d="M20 24h24v28a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V24Z"/>
+      <path d="M22 24a10 10 0 0 1 20 0"/><path d="M28 14h8" stroke-linecap="round"/>
+    </symbol>
+    <symbol id="ic-leche" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
+      <path d="M26 8h12v8l6 10v30a4 4 0 0 1-4 4H24a4 4 0 0 1-4-4V26l6-10V8Z"/><path d="M20 34h24"/>
+    </symbol>
+    <symbol id="ic-catalogo" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
+      <rect x="10" y="12" width="20" height="18" rx="3"/><rect x="34" y="12" width="20" height="18" rx="3"/>
+      <rect x="10" y="34" width="20" height="18" rx="3"/><rect x="34" y="34" width="20" height="18" rx="3"/>
+    </symbol>
+    <symbol id="ic-mayor" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
+      <path d="M6 44V28l10-10h22l10 10v16"/><rect x="6" y="44" width="52" height="10" rx="3"/><path d="M26 18v26M16 28h32" stroke-linecap="round"/>
     </symbol>
     <symbol id="ic-whatsapp" viewBox="0 0 32 32">
       <path fill="currentColor" d="M16.04 3C8.86 3 3.02 8.83 3.02 16c0 2.3.6 4.54 1.75 6.52L3 29l6.65-1.73A13 13 0 0 0 16.04 29C23.2 29 29 23.17 29 16S23.2 3 16.04 3Zm0 23.6c-2.03 0-4.02-.55-5.75-1.58l-.41-.24-3.95 1.03 1.05-3.84-.27-.4A10.5 10.5 0 0 1 5.4 16c0-5.86 4.78-10.62 10.64-10.62S26.66 10.14 26.66 16c0 5.86-4.77 10.6-10.62 10.6Zm5.83-7.94c-.32-.16-1.89-.93-2.18-1.03-.29-.11-.5-.16-.71.16-.21.32-.82 1.03-1 1.24-.19.21-.37.24-.69.08-.32-.16-1.35-.5-2.57-1.58-.95-.85-1.59-1.89-1.78-2.21-.18-.32-.02-.5.14-.66.15-.14.32-.37.48-.56.16-.19.21-.32.32-.53.11-.21.05-.4-.03-.56-.08-.16-.71-1.72-.98-2.35-.26-.62-.52-.54-.71-.55h-.61c-.21 0-.56.08-.85.4-.29.32-1.11 1.09-1.11 2.65s1.14 3.08 1.3 3.29c.16.21 2.24 3.42 5.43 4.79.76.33 1.35.52 1.81.67.76.24 1.45.21 2 .13.61-.09 1.89-.77 2.15-1.52.27-.74.27-1.38.19-1.51-.08-.13-.29-.21-.61-.37Z"/>
     </symbol>
+    <symbol id="ic-instagram" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1.2" fill="currentColor" stroke="none"/>
+    </symbol>
+    <symbol id="ic-facebook" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M14 9h3V6h-3c-2.2 0-4 1.8-4 4v2H8v3h2v7h3v-7h3l1-3h-4v-2c0-.6.4-1 1-1Z"/>
+    </symbol>
+    <symbol id="ic-tiktok" viewBox="0 0 24 24">
+      <path fill="currentColor" d="M16.5 3c.4 2.1 1.7 3.5 3.9 3.7v2.7c-1.4.1-2.7-.3-3.9-1.1v5.5c0 4.5-4.6 6.9-8 4.5-2.7-1.9-2.5-6 .4-7.5 1-.5 2.2-.7 3.3-.4v2.8c-.4-.1-.9-.2-1.4 0-1.3.4-1.7 2-.8 2.9 1 1 3 .4 3-1.3V3h3.5Z"/>
+    </symbol>
+    <symbol id="ic-reloj" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+      <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+    </symbol>
+    <symbol id="ic-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+      <path d="M12 21s7-6 7-11a7 7 0 1 0-14 0c0 5 7 11 7 11Z"/><circle cx="12" cy="10" r="2.6"/>
+    </symbol>
+    <symbol id="ic-tel" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+      <path d="M5 3h4l2 5-2.5 1.5a12 12 0 0 0 6 6L16 13l5 2v4a2 2 0 0 1-2.2 2A17 17 0 0 1 3 5.2 2 2 0 0 1 5 3Z"/>
+    </symbol>
+    <symbol id="ic-correo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round">
+      <rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>
+    </symbol>
   </defs>
 </svg>
 
-<!-- Aviso que sólo aparece mientras falte configurar el WhatsApp -->
 <div id="aviso-config" class="aviso-config" hidden role="status"></div>
 
 <header class="cabecera" id="inicio">
   <div class="contenedor cabecera__fila">
     <a class="logo" href="#inicio" aria-label="Quesera Chiminangos, inicio">
-      <span class="logo__marca" id="logo-marca"></span>
-      <span class="logo__texto">
-        <strong>Quesera</strong>
-        <em>Chiminangos</em>
-      </span>
+      <img class="logo__img" id="logo-img" src="imagenes/logo.webp" alt="Quesera Chiminangos" width="48" height="48">
+      <span class="logo__texto"><strong>Quesera</strong><em>Chiminangos</em></span>
     </a>
 
     <button class="menu-boton" id="menu-boton" aria-expanded="false" aria-controls="menu">
@@ -93,13 +110,13 @@
     </button>
 
     <nav class="menu" id="menu" aria-label="Principal">
-      <a href="#catalogo">Productos</a>
+      <a href="#catalogo">Catálogo</a>
       <a href="#nosotros">Nosotros</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#visitanos">Visítenos</a>
+      <a href="#mayoristas">Mayoristas</a>
+      <a href="#contacto">Contacto</a>
       <a class="boton boton--wa menu__cta" data-wa="general">
         <svg class="ic" aria-hidden="true"><use href="#ic-whatsapp"></use></svg>
-        Escríbanos
+        Pedir ahora
       </a>
     </nav>
   </div>
@@ -110,24 +127,29 @@
   <section class="portada">
     <div class="contenedor portada__grid">
       <div class="portada__texto">
-        <p class="antetitulo">Salsamentaria · <span data-campo="ciudad"></span></p>
-        <h1>Quesos frescos, lácteos y carnes frías <em>del Valle</em></h1>
+        <p class="antetitulo">Salsamentaria · Cali, Colombia</p>
+        <h1>Todo para su cocina, <em>en un solo lugar</em></h1>
         <p class="portada__promesa" data-campo="promesa"></p>
         <div class="portada__acciones">
           <a class="boton boton--wa boton--grande" data-wa="general">
             <svg class="ic" aria-hidden="true"><use href="#ic-whatsapp"></use></svg>
             Pedir por WhatsApp
           </a>
-          <a class="boton boton--linea boton--grande" href="#catalogo">Ver el catálogo</a>
+          <a class="boton boton--claro boton--grande" href="#catalogo">Ver el catálogo</a>
         </div>
         <p class="portada__nota">
-          Atención al detal y por mayor · <span data-campo="horario"></span>
+          <span id="portada-conteo"></span> productos en 10 categorías · Al detal y por mayor
         </p>
       </div>
-      <div class="portada__sello" aria-hidden="true">
-        <div class="sello-grande" id="sello-grande"></div>
+      <div class="portada__figura">
+        <img src="imagenes/productos/queso-campesino.webp" alt="Queso campesino de Quesera Chiminangos"
+             width="900" height="1200" fetchpriority="high">
       </div>
     </div>
+    <svg class="onda" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 44c180-38 340 26 520 26s300-58 470-58 270 44 450 30v48H0z" fill="var(--dorado)"/>
+      <path d="M0 62c180-38 340 26 520 26s300-52 470-52 270 40 450 26v28H0z" fill="var(--crema)"/>
+    </svg>
   </section>
 
   <section class="sellos">
@@ -137,12 +159,11 @@
   <section class="catalogo" id="catalogo">
     <div class="contenedor">
       <header class="seccion__encabezado">
-        <p class="antetitulo">Nuestro surtido</p>
-        <h2>El catálogo</h2>
+        <p class="antetitulo">Catálogo</p>
+        <h2>Busque lo que necesita</h2>
         <p class="seccion__bajada">
-          Filtre por categoría o busque lo que necesita. Marque los productos y
-          nos llega un solo mensaje con su pedido; le confirmamos precio y
-          disponibilidad por WhatsApp.
+          Filtre por categoría o escriba el nombre. Marque los productos y le llega
+          un solo mensaje con su pedido; le confirmamos precio y disponibilidad por WhatsApp.
         </p>
       </header>
 
@@ -153,29 +174,19 @@
             <circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/>
             <path d="m16.5 16.5 4 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
           </svg>
-          <input type="search" id="buscar" placeholder="Buscar: queso, chorizo, arequipe…" autocomplete="off">
+          <input type="search" id="buscar" placeholder="Buscar: queso, tocineta, vasos, aceite…" autocomplete="off">
         </div>
-
-        <fieldset class="filtros__grupo">
-          <legend class="filtros__titulo">Categoría</legend>
-          <div class="fichas" id="filtro-categorias"></div>
-        </fieldset>
-
-        <fieldset class="filtros__grupo">
-          <legend class="filtros__titulo">Características</legend>
-          <div class="fichas fichas--suaves" id="filtro-etiquetas"></div>
-        </fieldset>
-
+        <div class="fichas" id="filtro-categorias"></div>
         <div class="filtros__pie">
           <p class="filtros__conteo" id="conteo" role="status" aria-live="polite"></p>
-          <button type="button" class="boton boton--texto" id="limpiar" hidden>Limpiar filtros</button>
+          <button type="button" class="boton boton--texto" id="limpiar" hidden>Ver todo</button>
         </div>
       </form>
 
       <div class="rejilla" id="rejilla"></div>
 
       <p class="vacio" id="vacio" hidden>
-        No encontramos productos con esos filtros.
+        No encontramos productos con esos filtros.<br>
         <button type="button" class="boton boton--texto" data-limpiar>Ver todo el catálogo</button>
       </p>
     </div>
@@ -185,84 +196,115 @@
     <div class="contenedor nosotros__grid">
       <div class="nosotros__texto">
         <p class="antetitulo">Quiénes somos</p>
-        <h2>Una salsamentaria de barrio, con producto de verdad</h2>
+        <h2>Su proveedor de confianza en Cali</h2>
         <p data-campo="descripcion"></p>
         <p>
-          Trabajamos con productores del Valle y del eje cafetero, recibimos a
-          diario y mantenemos la cadena de frío desde que el producto entra hasta
-          que sale para su casa. Lo que no rota, no se queda: por eso el queso
-          sabe a queso.
+          Manejamos refrigerados, congelados y secos con la rotación que exige cada
+          línea, y despachamos en las presentaciones que pide el negocio: del paquete
+          para la casa al empaque institucional.
         </p>
         <ul class="lista-marcada">
-          <li>Corte y empaque al vacío al momento.</li>
-          <li>Pedidos programados para tiendas y restaurantes.</li>
-          <li>Asesoría en presentaciones y cantidades.</li>
+          <li>Diez líneas de producto con un solo proveedor.</li>
+          <li>Presentaciones para hogar y para negocio.</li>
+          <li>Pedidos y cotizaciones por WhatsApp, sin vueltas.</li>
         </ul>
       </div>
       <ul class="cifras">
-        <li><strong>Diario</strong><span>Recibimos producto fresco</span></li>
-        <li><strong>6</strong><span>Líneas de producto</span></li>
-        <li><strong>Detal y mayor</strong><span>Dos formas de atender</span></li>
-        <li><strong>Mismo día</strong><span>Domicilios en la ciudad</span></li>
+        <li><strong id="cifra-productos"></strong><span>Productos en catálogo</span></li>
+        <li><strong>10</strong><span>Categorías</span></li>
+        <li><strong>Detal<br>y mayor</strong><span>Dos formas de atender</span></li>
+        <li><strong>Cali</strong><span>Valle del Cauca</span></li>
       </ul>
     </div>
   </section>
 
-  <section class="servicios" id="servicios">
+  <section class="mayoristas" id="mayoristas">
     <div class="contenedor">
       <header class="seccion__encabezado seccion__encabezado--claro">
-        <p class="antetitulo">Cómo atendemos</p>
-        <h2>Servicios</h2>
+        <p class="antetitulo">Para negocios</p>
+        <h2>Si usted vende comida, le surtimos</h2>
       </header>
-      <div class="servicios__grid">
+      <div class="mayoristas__grid">
         <article class="servicio">
-          <h3>Venta al detal</h3>
-          <p>Pase por el punto o pida a domicilio: cortamos la cantidad exacta que necesite, sin mínimos.</p>
+          <h3>Restaurantes y comidas rápidas</h3>
+          <p>Carnes frías, congelados, salsas, aceites y el desechable para el domicilio.</p>
         </article>
         <article class="servicio">
-          <h3>Venta por mayor</h3>
-          <p>Surtimos tiendas, panaderías, restaurantes y casinos con pedidos programados y presentaciones institucionales.</p>
+          <h3>Panaderías y reposterías</h3>
+          <p>Harinas, margarinas, azúcar, huevos, esencias y domos para torta.</p>
         </article>
         <article class="servicio">
-          <h3>Pedidos para eventos</h3>
-          <p>Tablas de quesos y carnes frías, bandejas de pasabocas y picadas armadas a su medida.</p>
+          <h3>Tiendas y minimercados</h3>
+          <p>Quesos y lácteos con la rotación de su punto, en las presentaciones que se venden.</p>
         </article>
         <article class="servicio">
-          <h3>Domicilios</h3>
-          <p>Entregamos el mismo día dentro de la ciudad, en empaque térmico para que el frío no se rompa.</p>
+          <h3>Eventos y casinos</h3>
+          <p>Volumen institucional: aceite de 19 litros, salsas de 4.000 g y desechables por bulto.</p>
         </article>
+      </div>
+      <div class="mayoristas__pie">
+        <p>Cuéntenos qué maneja su negocio y le armamos la lista.</p>
+        <a class="boton boton--dorado boton--grande" data-wa="mayorista">
+          <svg class="ic" aria-hidden="true"><use href="#ic-whatsapp"></use></svg>
+          Cotizar por mayor
+        </a>
       </div>
     </div>
   </section>
 
-  <section class="visitanos" id="visitanos">
-    <div class="contenedor visitanos__grid">
-      <div>
-        <p class="antetitulo">Dónde estamos</p>
-        <h2>Visítenos o escríbanos</h2>
-        <dl class="datos">
-          <div><dt>Dirección</dt><dd data-campo="direccion"></dd></div>
-          <div><dt>Ciudad</dt><dd data-campo="ciudad"></dd></div>
-          <div><dt>Horario</dt><dd data-campo="horario"></dd></div>
-          <div><dt>WhatsApp</dt><dd data-campo="whatsappVisible"></dd></div>
-        </dl>
-        <a class="boton boton--wa boton--grande" data-wa="general">
-          <svg class="ic" aria-hidden="true"><use href="#ic-whatsapp"></use></svg>
-          Abrir conversación
-        </a>
+  <section class="contacto" id="contacto">
+    <div class="contenedor">
+      <header class="seccion__encabezado">
+        <p class="antetitulo">Contacto</p>
+        <h2>Escríbanos o visítenos</h2>
+      </header>
+
+      <div class="contacto__grid">
+        <div class="contacto__datos">
+          <ul class="datos">
+            <li id="dato-direccion">
+              <svg class="ic" aria-hidden="true"><use href="#ic-pin"></use></svg>
+              <div><span>Dirección</span><p data-campo="direccion"></p></div>
+            </li>
+            <li id="dato-horario">
+              <svg class="ic" aria-hidden="true"><use href="#ic-reloj"></use></svg>
+              <div><span>Horarios de atención</span><p data-campo="horario"></p></div>
+            </li>
+            <li>
+              <svg class="ic" aria-hidden="true"><use href="#ic-whatsapp"></use></svg>
+              <div><span>WhatsApp</span><p><a data-wa="general" data-campo="whatsappVisible"></a></p></div>
+            </li>
+            <li>
+              <svg class="ic" aria-hidden="true"><use href="#ic-tel"></use></svg>
+              <div><span>Teléfono</span><p id="dato-telefono"></p></div>
+            </li>
+            <li>
+              <svg class="ic" aria-hidden="true"><use href="#ic-correo"></use></svg>
+              <div><span>Correo</span><p id="dato-correo"></p></div>
+            </li>
+          </ul>
+          <div class="redes" id="redes" hidden></div>
+          <a class="boton boton--wa boton--grande" data-wa="general">
+            <svg class="ic" aria-hidden="true"><use href="#ic-whatsapp"></use></svg>
+            Abrir conversación
+          </a>
+        </div>
+
+        <div class="contacto__tarjeta">
+          <h3>Cómo se pide</h3>
+          <ol class="pasos">
+            <li>Marque en el catálogo lo que necesita.</li>
+            <li>Toque <strong>Enviar pedido</strong> y se abre WhatsApp con la lista escrita.</li>
+            <li>Le confirmamos precio, disponibilidad y entrega.</li>
+          </ol>
+          <p class="contacto__aparte">
+            No publicamos precios porque cambian según la presentación y la cantidad:
+            así le damos siempre el del día y el de su volumen.
+          </p>
+        </div>
       </div>
-      <div class="visitanos__tarjeta">
-        <h3>¿Cómo se pide?</h3>
-        <ol class="pasos">
-          <li>Marque en el catálogo los productos que quiere.</li>
-          <li>Toque <strong>Enviar pedido</strong>: se abre WhatsApp con la lista escrita.</li>
-          <li>Le confirmamos precio, disponibilidad y hora de entrega.</li>
-        </ol>
-        <p class="visitanos__aparte">
-          Los precios los damos por WhatsApp porque cambian con la cosecha y con
-          la cantidad: así le decimos siempre el del día.
-        </p>
-      </div>
+
+      <div class="mapa" id="mapa" hidden></div>
     </div>
   </section>
 
@@ -270,31 +312,31 @@
 
 <footer class="pie">
   <div class="contenedor pie__grid">
-    <div>
-      <p class="pie__marca"><strong>Quesera</strong> <em>Chiminangos</em></p>
-      <p class="pie__eslogan" data-campo="eslogan"></p>
+    <div class="pie__marca">
+      <img src="imagenes/logo.webp" alt="" width="64" height="64">
+      <p class="pie__eslogan">Salsamentaria · Cali, Colombia</p>
     </div>
     <nav class="pie__enlaces" aria-label="Pie de página">
-      <a href="#catalogo">Productos</a>
+      <a href="#catalogo">Catálogo</a>
       <a href="#nosotros">Nosotros</a>
-      <a href="#servicios">Servicios</a>
-      <a href="#visitanos">Visítenos</a>
+      <a href="#mayoristas">Mayoristas</a>
+      <a href="#contacto">Contacto</a>
     </nav>
     <div class="pie__contacto">
       <p data-campo="direccion"></p>
       <p data-campo="horario"></p>
-      <a class="pie__wa" data-wa="general"><span data-campo="whatsappVisible"></span></a>
+      <p><a data-wa="general">WhatsApp <span data-campo="whatsappVisible"></span></a></p>
+      <p id="pie-correo"></p>
     </div>
   </div>
-  <p class="pie__legal">© <span id="anio"></span> Quesera Chiminangos. Todos los derechos reservados.</p>
+  <p class="pie__legal">© <span id="anio"></span> Quesera Chiminangos · Todos los derechos reservados</p>
 </footer>
 
-<!-- Barra del pedido: aparece cuando hay productos marcados -->
 <div class="pedido" id="pedido" hidden>
   <div class="contenedor pedido__fila">
     <button type="button" class="pedido__resumen" id="pedido-abrir" aria-expanded="false" aria-controls="pedido-lista">
       <span class="pedido__contador" id="pedido-contador">0</span>
-      <span class="pedido__texto">productos en su pedido</span>
+      <span class="pedido__texto" id="pedido-texto">en su pedido</span>
       <svg class="pedido__flecha" viewBox="0 0 24 24" aria-hidden="true"><path d="m6 15 6-6 6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </button>
     <div class="pedido__acciones">

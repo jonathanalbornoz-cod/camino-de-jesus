@@ -1,96 +1,120 @@
 # Quesera Chiminangos — sitio web
 
-Página de la salsamentaria **Quesera Chiminangos**. Sin precios: los pedidos y las
-cotizaciones se hacen por WhatsApp, que es lo que pide el brief.
+Catálogo digital de la salsamentaria **Quesera Chiminangos** (Cali, Colombia).
+Sin precios: el pedido y la cotización se hacen por WhatsApp, como pide el brief.
 
-Es un sitio estático, sin build ni dependencias: se abre `index.html` y funciona.
+Sitio estático, sin build ni dependencias: se abre `index.html` y funciona.
 
 ```
-index.html     la estructura de la página (no hace falta tocarla para cambiar contenido)
-estilos.css    los estilos y la paleta
-app.js         filtros del catálogo, armado del pedido y enlaces de WhatsApp
-datos.js       TODO el contenido editable: marca, contacto, categorías y productos
-imagenes/      logotipo, fotos de producto y favicon
+index.html              la página (no hay que tocarla para cambiar contenido)
+estilos.css             paleta y estilos
+app.js                  filtros, pedido y enlaces de WhatsApp
+datos.js                TODO el contenido editable
+imagenes/logo.*         el logotipo
+imagenes/productos/     las fotos de producto
 ```
 
-## Lo que falta del brief
+## De dónde salen los datos
 
-El PDF de la marca no llegó a la sesión donde se armó el sitio, así que los datos
-propios de la empresa están marcados `PENDIENTE` en `datos.js`:
+- **Brief** de Injoe Agencia (`BRIEF WEB SITE INJOE AGENCIA 2.docx`): nombre, contacto,
+  WhatsApp, ciudad, estilo y funcionalidades pedidas.
+- **`Categorias productos Quesera Chiminangos.pdf`**: las 10 categorías y los 50 productos.
+- **Las fotos de producto**: las marcas y los gramajes están impresos en cada empaque,
+  de ahí salen (Zenú 500 g, Rica Chef 30 tajadas, Wau! 7 oz × 50, etc.).
 
-| Dato | Dónde | Estado |
+## Lo que falta confirmar con el cliente
+
+| Dato | Dónde se pone | Estado |
 |---|---|---|
-| Número de WhatsApp | `MARCA.whatsapp` y `MARCA.whatsappVisible` | **PENDIENTE** |
-| Dirección del punto | `MARCA.direccion` | **PENDIENTE** |
-| Logotipo | `MARCA.logo` + archivo en `imagenes/` | **PENDIENTE** |
-| Catálogo | `PRODUCTOS` | Provisional: surtido típico de salsamentaria |
-| Textos de marca | `MARCA.promesa`, `MARCA.descripcion` | Provisionales |
+| Dirección del punto | `MARCA.direccion` | **Falta** |
+| Horarios de atención | `MARCA.horario` | **Falta** |
+| Mapa de ubicación | `MARCA.mapaEmbed` | **Falta** |
+| Redes sociales | `MARCA.instagram`, `.facebook`, `.tiktok` | **Falta** |
+| Presentaciones | `presentacion` de 29 productos | **Falta** |
+| Fotos | 21 de 50 productos | Parcial |
 
-Mientras `MARCA.whatsapp` siga en `PENDIENTE`, la página muestra una franja amarilla
-de aviso y los botones de WhatsApp explican que falta configurarlo. El aviso
-desaparece solo al poner un número válido, así que el sitio no se puede publicar
-por descuido sin él.
+Mientras algo de eso falte, la página muestra una franja arriba diciendo qué es. El aviso
+**desaparece solo** cuando estén los cuatro datos de marca. Los bloques que dependen de un
+dato ausente (dirección, horarios, mapa, redes) no se dibujan vacíos: simplemente no salen.
 
-## Cómo poner el número de WhatsApp
+## Cómo completar cada cosa
 
-En `datos.js`, sólo dígitos, con el indicativo del país y sin espacios ni signos:
+**Dirección y horarios** — en `datos.js`, reemplazar el texto que empieza por `PENDIENTE`.
 
-```js
-whatsapp: '573001234567',          // 57 + los 10 del celular
-whatsappVisible: '+57 300 123 4567',
+**Mapa** — Google Maps → buscar el negocio → *Compartir* → *Insertar un mapa* → copiar sólo
+la URL del `src` y pegarla en `MARCA.mapaEmbed`. La sección aparece sola.
+
+**Redes** — pegar la URL completa del perfil. Los iconos aparecen solos; los vacíos no salen.
+
+**Presentaciones** — el campo `presentacion` de cada producto. Si está vacío la tarjeta no
+muestra esa línea, así que no se ve rota, pero conviene llenarlas: es lo que el cliente
+pregunta por WhatsApp. Faltan sobre todo los quesos (¿libra, kilo, bloque?), las salsas,
+la panadería, los panes, los condimentos y los lácteos.
+
+**Fotos nuevas** — van en `imagenes/productos/`, y la ruta se pone en el campo `imagen`.
+Conviene pasarlas a `.webp` recortadas en 3:4 y por debajo de unos 150 KB:
+
+```bash
+python3 - <<'PY'
+from PIL import Image
+im = Image.open("foto.png").convert("RGB")
+w, h = im.size
+alto = int(w / 0.75)
+if alto < h:
+    arriba = int((h - alto) * 0.62)
+    im = im.crop((0, arriba, w, arriba + alto))
+im.thumbnail((900, 1200), Image.LANCZOS)
+im.save("quesera/imagenes/productos/nombre.webp", "WEBP", quality=82, method=6)
+PY
 ```
+
+Los productos sin foto no quedan feos: muestran el icono de su categoría sobre la onda
+dorada de la marca, con el mismo formato de las fotos.
 
 ## Cómo agregar o cambiar productos
 
-Cada producto es un objeto dentro de `PRODUCTOS`, en `datos.js`:
+Cada producto es un objeto en `PRODUCTOS`, dentro de `datos.js`:
 
 ```js
 {
-  id: 'queso-campesino',        // único, sin espacios ni tildes
-  nombre: 'Queso campesino',    // así aparece en el mensaje de WhatsApp
-  categoria: 'quesos',          // un id de CATEGORIAS
-  descripcion: 'Fresco, de sal suave y textura húmeda.',
-  presentacion: 'Libra, kilo o bloque entero',
-  etiquetas: ['artesanal', 'frio'],   // ids de ETIQUETAS
-  destacado: true,              // lo sube al comienzo y le pone la insignia
-  imagen: 'imagenes/queso-campesino.jpg',   // vacío = ilustración de la categoría
+  id: 'tocineta',              // único, sin tildes ni espacios
+  nombre: 'Tocineta',          // así va en el mensaje de WhatsApp
+  categoria: 'carnes',         // un id de CATEGORIAS
+  marca: 'Titos',              // opcional: sale como sello sobre la foto
+  presentacion: '900 g',       // opcional
+  descripcion: 'De cerdo ahumada, en lonjas parejas.',
+  imagen: 'imagenes/productos/tocineta.webp',
+  destacado: false,            // true lo sube al comienzo con la insignia
 }
 ```
 
-Las categorías y las etiquetas también se editan ahí: los filtros se dibujan solos a
-partir de esas dos listas, no hay que tocar el HTML.
-
-**Las fotos** van en `imagenes/`. Conviene recortarlas cuadradas o en 4:3 y dejarlas
-por debajo de 300 KB; la tarjeta las recorta a 4:3.
+Las categorías se editan en `CATEGORIAS`: los filtros y sus contadores se dibujan solos.
 
 ## Los filtros
 
-Tres, y se combinan entre sí:
-
-- **Categoría** — varias a la vez; suma (queso *o* lácteo).
-- **Características** — varias a la vez; resta (tiene que cumplirlas todas).
-- **Búsqueda** — por nombre, descripción, presentación y categoría; ignora las tildes,
-  así que «jamon» encuentra «jamón».
+- **Categoría** — chips con el número de productos de cada una; se pueden marcar varias.
+- **Búsqueda** — por nombre, descripción, presentación, marca y categoría. Ignora las
+  tildes, así que «jamon» encuentra «jamón» y «zen» encuentra los productos Zenú.
 
 ## El pedido
 
 En vez de un carrito con precios, el cliente marca productos con **Agregar** y la barra
-inferior arma un solo mensaje de WhatsApp con la lista. El pedido se guarda en el
-navegador (`localStorage`), así que sobrevive si la persona recarga o vuelve más tarde.
-Cada tarjeta tiene además un botón **Pedir** que escribe sólo por ese producto.
+inferior arma un solo mensaje de WhatsApp con toda la lista y sus presentaciones. Se guarda
+en el navegador (`localStorage`), así que sobrevive si recarga o vuelve más tarde. Cada
+tarjeta tiene además **Pedir**, que escribe sólo por ese producto.
 
 ## Dónde se puede servir
 
 - **GitHub Pages**: tal cual, en `/quesera/`. Todas las rutas son relativas.
 - **Cualquier hosting**: subir el contenido de esta carpeta.
-- **Local**: `python3 -m http.server` desde la raíz del repositorio y abrir
-  `http://localhost:8000/quesera/`.
+- **Local**: `python3 -m http.server` desde la raíz y abrir `http://localhost:8000/quesera/`.
 
-## Referentes
+## Decisiones de diseño
 
-Los dos que pidió el cliente:
+La paleta sale del logotipo y de las fotos: vino `#45181F`, dorado `#F5B921` y crema. La
+onda dorada que traen las fotografías se repite en la portada y en las tarjetas sin foto,
+que es lo que amarra el conjunto.
 
-1. **La Quesera Cassini & Cerato** — de ahí sale el tono artesanal: fondo crema,
-   titulares en serif, foto grande de producto y fichas sobrias.
-2. **Bonanza Grupo Empresarial** — de ahí sale la estructura comercial: bloques de
-   servicios, franja de sellos y una sección de contacto clara.
+De los referentes del brief: de **Cassini** el minimalismo, la fotografía limpia y los
+textos cortos; de **Bonanza** la organización por categorías con contadores y el aire de
+mayorista (la sección de negocios y las presentaciones institucionales).

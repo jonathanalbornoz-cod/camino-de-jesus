@@ -1,370 +1,377 @@
 /*
  * Quesera Chiminangos — contenido del sitio
  * ------------------------------------------------------------------
- * Todo lo editable vive en este archivo. Para cambiar el catálogo, los
- * datos de contacto o los textos NO hace falta tocar el HTML ni el CSS.
+ * Todo lo editable vive aquí. Para cambiar el catálogo o los datos de
+ * contacto no hace falta tocar el HTML ni el CSS.
  *
- * Los valores marcados con PENDIENTE están a la espera del brief oficial
- * (el PDF de la marca). Mientras «whatsapp» siga en PENDIENTE, la página
- * muestra un aviso amarillo para que nadie publique el sitio sin número.
+ * Fuentes: brief de Injoe Agencia, «Categorías productos Quesera
+ * Chiminangos.pdf» y las fotos de producto (de ahí salen las marcas y
+ * los gramajes: están impresos en cada empaque).
+ *
+ * Lo que sigue en PENDIENTE lo tiene que confirmar el cliente.
  */
 
 const MARCA = {
   nombre: 'Quesera Chiminangos',
-  eslogan: 'Salsamentaria artesanal',
-  // Frase corta de la portada
-  promesa: 'Quesos frescos, lácteos y carnes frías del Valle, hechos como en casa.',
+  eslogan: 'Salsamentaria',
+  promesa: 'Todo para su cocina en un solo lugar: quesos, carnes frías, congelados y desechables.',
   descripcion:
-    'Somos una salsamentaria de barrio: seleccionamos producto fresco todos los días ' +
-    'y lo despachamos cortado, empacado y listo para su mesa. Atendemos al detal y ' +
-    'por mayor para tiendas, restaurantes y panaderías.',
+    'Somos una salsamentaria de Cali que surte a hogares, restaurantes, ' +
+    'panaderías y negocios de comida. Manejamos un portafolio amplio —de los ' +
+    'quesos frescos a los empaques desechables— para que no tenga que pedirle ' +
+    'a cinco proveedores lo que le podemos despachar nosotros.',
 
-  // Número en formato internacional, sólo dígitos: 57 + los 10 del celular.
-  // Ejemplo de la forma esperada: '573001234567'
-  whatsapp: 'PENDIENTE',
-  // Cómo se muestra escrito en pantalla, ej. '+57 300 123 4567'
-  whatsappVisible: 'PENDIENTE',
+  contacto: 'Alejandra Giraldo',
+  cargo: 'Administradora',
+
+  // Número de WhatsApp: 57 + los 10 dígitos del celular
+  whatsapp: '573146440355',
+  whatsappVisible: '314 644 0355',
+  // Fijo que aparece en el logotipo
+  telefono: '446 6561',
+  correo: 'queserasalsamentariachimi@gmail.com',
 
   direccion: 'PENDIENTE — dirección del punto de venta',
-  ciudad: 'Cali, Valle del Cauca',
-  horario: 'Lunes a sábado 7:00 a.m. – 7:00 p.m. · Domingos y festivos 8:00 a.m. – 2:00 p.m.',
-  correo: '',
+  ciudad: 'Cali, Colombia',
+  horario: 'PENDIENTE — horarios de atención',
+
+  // Iframe de Google Maps. Vacío = la sección del mapa no se dibuja.
+  // Se saca en Google Maps → Compartir → Insertar un mapa → copiar el src.
+  mapaEmbed: '',
+
+  // Perfiles de redes. Los vacíos no se dibujan.
   instagram: '',
   facebook: '',
-  // Ruta del logotipo cuando se extraiga del PDF, ej. 'imagenes/logo.png'.
-  // Vacío = se dibuja el sello tipográfico de respaldo.
-  logo: '',
+  tiktok: '',
+
+  logo: 'imagenes/logo.webp',
 };
 
-/* Los sellos de la franja bajo la portada */
+/* La franja de sellos bajo la portada */
 const SELLOS = [
-  { icono: 'queso', titulo: 'Producción fresca', texto: 'Quesos y lácteos que rotan a diario, nunca de bodega.' },
-  { icono: 'corte', titulo: 'Como lo necesite', texto: 'Cortamos, tajamos y empacamos al vacío a su medida.' },
-  { icono: 'moto', titulo: 'Domicilios', texto: 'Llevamos su pedido en la ciudad el mismo día.' },
-  { icono: 'mayor', titulo: 'Al detal y por mayor', texto: 'Precios y presentaciones para negocios.' },
+  { icono: 'catalogo',  titulo: 'Portafolio amplio',   texto: 'Diez líneas de producto en un solo proveedor.' },
+  { icono: 'mayor',     titulo: 'Detal y por mayor',   texto: 'Atendemos al hogar y al negocio de comida.' },
+  { icono: 'frio',      titulo: 'Cadena de frío',      texto: 'Refrigerados y congelados manejados como toca.' },
+  { icono: 'whatsapp',  titulo: 'Pedido por WhatsApp', texto: 'Arme su lista y se la cotizamos al momento.' },
 ];
 
 /*
- * Categorías del catálogo. El «id» es el que usan los productos.
- * El orden de esta lista es el orden de los filtros.
+ * Categorías del catálogo, en el orden en que salen los filtros.
+ * Vienen del PDF de categorías del cliente.
  */
 const CATEGORIAS = [
-  { id: 'quesos',    nombre: 'Quesos',              icono: 'queso' },
-  { id: 'lacteos',   nombre: 'Lácteos y derivados', icono: 'leche' },
-  { id: 'embutidos', nombre: 'Embutidos',           icono: 'embutido' },
-  { id: 'carnes',    nombre: 'Carnes frías',        icono: 'carne' },
-  { id: 'amasijos',  nombre: 'Amasijos',            icono: 'pan' },
-  { id: 'despensa',  nombre: 'Despensa',            icono: 'despensa' },
+  { id: 'quesos',      nombre: 'Quesos',                 icono: 'queso' },
+  { id: 'carnes',      nombre: 'Carnes y embutidos',     icono: 'carne' },
+  { id: 'congelados',  nombre: 'Congelados',             icono: 'frio' },
+  { id: 'desechables', nombre: 'Desechables y empaques', icono: 'caja' },
+  { id: 'salsas',      nombre: 'Salsas y aderezos',      icono: 'salsa' },
+  { id: 'reposteria',  nombre: 'Panadería y repostería', icono: 'reposteria' },
+  { id: 'panes',       nombre: 'Panes',                  icono: 'pan' },
+  { id: 'aceites',     nombre: 'Aceites',                icono: 'aceite' },
+  { id: 'condimentos', nombre: 'Condimentos',            icono: 'condimento' },
+  { id: 'lacteos',     nombre: 'Lácteos',                icono: 'leche' },
 ];
 
 /*
- * Etiquetas transversales: son el segundo filtro, el que cruza categorías.
- */
-const ETIQUETAS = [
-  { id: 'artesanal', nombre: 'Artesanal' },
-  { id: 'vacio',     nombre: 'Empacado al vacío' },
-  { id: 'mayor',     nombre: 'Disponible por mayor' },
-  { id: 'frio',      nombre: 'Cadena de frío' },
-  { id: 'horno',     nombre: 'Del horno' },
-];
-
-/*
- * Catálogo PROVISIONAL: surtido típico de salsamentaria, puesto para que la
- * página se pueda ver funcionando. Reemplazar por el listado del brief.
+ * El catálogo. Campos de cada producto:
  *
- * Campos de cada producto:
- *   id           único, se usa en el enlace compartible
- *   nombre       como se escribe en el pedido
- *   categoria    id de CATEGORIAS
- *   descripcion  una o dos líneas
- *   presentacion cómo se vende (libra, kilo, unidad, paquete…)
- *   etiquetas    ids de ETIQUETAS
- *   destacado    true lo sube al comienzo y lo marca en la tarjeta
- *   imagen       ruta a la foto, ej. 'imagenes/queso-campesino.jpg'.
- *                Vacío = se dibuja la ilustración de la categoría.
+ *   id            único, sin tildes ni espacios
+ *   nombre        como va escrito en el pedido de WhatsApp
+ *   categoria     un id de CATEGORIAS
+ *   marca         opcional; sale como sello sobre la foto
+ *   presentacion  opcional; si está vacío la tarjeta no muestra esa línea
+ *   descripcion   una línea, corta
+ *   imagen        ruta de la foto; vacío = ilustración de la categoría
+ *   destacado     true lo sube al comienzo del catálogo
  *
- * NO se incluyen precios: es una decisión del brief, el precio se da por
- * WhatsApp. Si algún día se agregan, va aquí y hay que tocar la tarjeta.
+ * SIN PRECIOS: es decisión del brief. El precio se da por WhatsApp.
+ *
+ * Las presentaciones que están puestas salen del empaque en la foto o del
+ * PDF de categorías. Las que faltan las tiene que confirmar el cliente.
  */
 const PRODUCTOS = [
+
+  /* ---------------- Quesos ---------------- */
   {
-    id: 'queso-campesino',
-    nombre: 'Queso campesino',
-    categoria: 'quesos',
-    descripcion: 'Fresco, de sal suave y textura húmeda. El de todos los días.',
-    presentacion: 'Libra, kilo o bloque entero',
-    etiquetas: ['artesanal', 'frio', 'mayor'],
-    destacado: true,
-    imagen: '',
+    id: 'queso-campesino', nombre: 'Queso campesino', categoria: 'quesos',
+    descripcion: 'Fresco y de sal suave, el de la arepa y el desayuno.',
+    presentacion: '', imagen: 'imagenes/productos/queso-campesino.webp', destacado: true,
   },
   {
-    id: 'queso-doble-crema',
-    nombre: 'Queso doble crema',
-    categoria: 'quesos',
-    descripcion: 'El que se estira en el pandebono y en la arepa asada.',
-    presentacion: 'Libra, kilo o bloque entero',
-    etiquetas: ['artesanal', 'vacio', 'mayor'],
-    destacado: true,
-    imagen: '',
+    id: 'queso-cuajada', nombre: 'Queso cuajada', categoria: 'quesos',
+    descripcion: 'Cuajada fresca, para acompañar con melao o bocadillo.',
+    presentacion: '', imagen: 'imagenes/productos/queso-cuajada.webp', destacado: true,
   },
   {
-    id: 'quesillo',
-    nombre: 'Quesillo',
-    categoria: 'quesos',
-    descripcion: 'Amasado a mano y envuelto en hoja de plátano.',
-    presentacion: 'Unidad',
-    etiquetas: ['artesanal', 'frio'],
-    destacado: false,
-    imagen: '',
+    id: 'queso-mozzarella', nombre: 'Queso mozzarella', categoria: 'quesos',
+    descripcion: 'El que estira en la pizza, la lasaña y el sánduche caliente.',
+    presentacion: '', imagen: 'imagenes/productos/queso-mozarella.webp', destacado: true,
   },
   {
-    id: 'queso-costeno',
-    nombre: 'Queso costeño',
-    categoria: 'quesos',
+    id: 'queso-costeno', nombre: 'Queso costeño', categoria: 'quesos',
     descripcion: 'Salado y firme, para rallar sobre el sancocho o el arroz.',
-    presentacion: 'Libra o kilo',
-    etiquetas: ['artesanal', 'mayor'],
-    destacado: false,
-    imagen: '',
+    presentacion: '', imagen: 'imagenes/productos/queso-costeno.webp', destacado: false,
   },
   {
-    id: 'mozzarella',
-    nombre: 'Mozzarella',
-    categoria: 'quesos',
-    descripcion: 'En bloque o rallada, para pizza y lasaña.',
-    presentacion: 'Bloque, o bolsa rallada de 500 g y 1 kg',
-    etiquetas: ['vacio', 'mayor', 'frio'],
-    destacado: false,
-    imagen: '',
+    id: 'queso-cheddar', nombre: 'Queso cheddar', categoria: 'quesos',
+    descripcion: 'En lonjas, para hamburguesas y sánduches.',
+    presentacion: '', imagen: 'imagenes/productos/queso-cheddar.webp', destacado: false,
+  },
+
+  /* ---------------- Carnes y embutidos ---------------- */
+  {
+    id: 'costilla', nombre: 'Costilla ahumada', categoria: 'carnes',
+    descripcion: 'Ahumada de verdad, lista para hornear o para el asado.',
+    presentacion: '', imagen: 'imagenes/productos/costilla-ahumada.webp', destacado: true,
   },
   {
-    id: 'cuajada',
-    nombre: 'Cuajada',
-    categoria: 'quesos',
-    descripcion: 'Del día, para el desayuno con melao o bocadillo.',
-    presentacion: 'Libra',
-    etiquetas: ['artesanal', 'frio'],
-    destacado: false,
-    imagen: '',
+    id: 'carne-hamburguesa', nombre: 'Carne para hamburguesa', categoria: 'carnes',
+    marca: 'Zenú',
+    descripcion: 'Congelada, va directo a la plancha sin descongelar.',
+    presentacion: '500 g · 10 porciones', imagen: 'imagenes/productos/carne-hamburguesa.webp', destacado: true,
   },
   {
-    id: 'queso-crema',
-    nombre: 'Queso crema',
-    categoria: 'quesos',
-    descripcion: 'Untable, para tortas frías y pasabocas.',
-    presentacion: 'Tarro de 500 g y 1 kg',
-    etiquetas: ['frio', 'mayor'],
-    destacado: false,
-    imagen: '',
+    id: 'salchicha-perro', nombre: 'Salchicha para perro', categoria: 'carnes',
+    marca: 'Zenú',
+    descripcion: 'Súper perro tipo americano, la de los negocios de comida rápida.',
+    presentacion: '1.600 g · 20 unidades', imagen: 'imagenes/productos/salchicha-perro.webp', destacado: false,
   },
   {
-    id: 'kumis',
-    nombre: 'Kumis',
-    categoria: 'lacteos',
-    descripcion: 'Espeso y ácido, en botella de vidrio o garrafa.',
-    presentacion: 'Botella de 1 L y garrafa de 2 L',
-    etiquetas: ['artesanal', 'frio'],
-    destacado: true,
-    imagen: '',
+    id: 'jamon', nombre: 'Jamón', categoria: 'carnes',
+    marca: 'Rica Chef',
+    descripcion: 'Tajado parejo, rinde para el sánduche y la picada.',
+    presentacion: '500 g · 30 tajadas', imagen: 'imagenes/productos/jamon.webp', destacado: false,
   },
   {
-    id: 'yogurt',
-    nombre: 'Yogurt natural y de frutas',
-    categoria: 'lacteos',
-    descripcion: 'Mora, fresa, melocotón y natural sin endulzar.',
-    presentacion: 'Botella de 1 L y garrafa de 2 L',
-    etiquetas: ['frio', 'mayor'],
-    destacado: false,
-    imagen: '',
+    id: 'tocineta', nombre: 'Tocineta', categoria: 'carnes',
+    marca: 'Titos',
+    descripcion: 'De cerdo ahumada, en lonjas parejas.',
+    presentacion: '900 g', imagen: 'imagenes/productos/tocineta.webp', destacado: false,
   },
   {
-    id: 'arequipe',
-    nombre: 'Arequipe',
-    categoria: 'lacteos',
-    descripcion: 'Cocido despacio, denso y sin sabor a quemado.',
-    presentacion: 'Tarro de 250 g, 500 g y 1 kg',
-    etiquetas: ['artesanal', 'mayor'],
-    destacado: false,
-    imagen: '',
+    id: 'chorizos', nombre: 'Chorizos', categoria: 'carnes',
+    marca: 'El Paisa',
+    descripcion: 'Chorizo santarrosano, para asar o freír.',
+    presentacion: 'Paquete', imagen: 'imagenes/productos/chorizo-santarosano.webp', destacado: true,
   },
   {
-    id: 'mantequilla',
-    nombre: 'Mantequilla campesina',
-    categoria: 'lacteos',
-    descripcion: 'De batido, con sal o sin sal.',
-    presentacion: 'Libra',
-    etiquetas: ['artesanal', 'frio'],
-    destacado: false,
-    imagen: '',
+    id: 'salchichones', nombre: 'Salchichones', categoria: 'carnes',
+    marca: 'Calinnas',
+    descripcion: 'Cervecero ahumado de res, en trozo para tajar.',
+    presentacion: '1.000 g', imagen: 'imagenes/productos/salchichon-calimas.webp', destacado: false,
   },
   {
-    id: 'suero-costeno',
-    nombre: 'Suero costeño',
-    categoria: 'lacteos',
-    descripcion: 'Para la arepa, el patacón y el bollo.',
-    presentacion: 'Tarro de 500 g',
-    etiquetas: ['artesanal', 'frio'],
-    destacado: false,
-    imagen: '',
+    id: 'manguera', nombre: 'Manguera', categoria: 'carnes',
+    descripcion: 'Para la bandeja, la picada y el asado.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+
+  /* ---------------- Congelados ---------------- */
+  {
+    id: 'papas-francesa', nombre: 'Papas a la francesa', categoria: 'congelados',
+    marca: "Bart's Tradition",
+    descripcion: 'Prefritas congeladas, van directo al aceite.',
+    presentacion: '2,5 kg · 31 porciones', imagen: 'imagenes/productos/papas-francesas-2-500g.webp', destacado: true,
   },
   {
-    id: 'leche',
-    nombre: 'Leche fresca',
-    categoria: 'lacteos',
-    descripcion: 'Recibida en la madrugada, se despacha el mismo día.',
-    presentacion: 'Bolsa de 1 L',
-    etiquetas: ['frio', 'mayor'],
-    destacado: false,
-    imagen: '',
+    id: 'empanadas', nombre: 'Empanadas', categoria: 'congelados',
+    marca: 'Jiménez',
+    descripcion: 'Congeladas, listas para freír.',
+    presentacion: '1.000 g · 20 porciones', imagen: 'imagenes/productos/empanadas.webp', destacado: true,
   },
   {
-    id: 'chorizo',
-    nombre: 'Chorizo santarrosano',
-    categoria: 'embutidos',
-    descripcion: 'Amarrado a mano, para asar o freír.',
-    presentacion: 'Paquete de 5 y 10 unidades',
-    etiquetas: ['artesanal', 'vacio', 'mayor'],
-    destacado: true,
-    imagen: '',
+    id: 'maiz', nombre: 'Maíz dulce', categoria: 'congelados',
+    descripcion: 'Desgranado, para ensaladas, cremas y guarniciones.',
+    presentacion: '1.000 g', imagen: 'imagenes/productos/maiz-dulce.webp', destacado: false,
   },
   {
-    id: 'morcilla',
-    nombre: 'Morcilla',
-    categoria: 'embutidos',
-    descripcion: 'Con arroz y hierbas, bien condimentada.',
-    presentacion: 'Paquete de 5 y 10 unidades',
-    etiquetas: ['artesanal', 'frio'],
-    destacado: false,
-    imagen: '',
+    id: 'mix-verduras', nombre: 'Mix de verduras', categoria: 'congelados',
+    marca: 'Ricongelisto',
+    descripcion: 'Arveja, zanahoria, maíz y habichuela, ya picados.',
+    presentacion: '500 g', imagen: 'imagenes/productos/mix-de-verduras.webp', destacado: false,
   },
   {
-    id: 'salchicha',
-    nombre: 'Salchicha',
-    categoria: 'embutidos',
-    descripcion: 'Tipo ranchera y tipo perro, en paquete sellado.',
-    presentacion: 'Paquete de 500 g y 1 kg',
-    etiquetas: ['vacio', 'mayor'],
-    destacado: false,
-    imagen: '',
+    id: 'croquetas-yuca', nombre: 'Croquetas de yuca', categoria: 'congelados',
+    descripcion: 'Congeladas, para freír al momento.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+
+  /* ---------------- Desechables y empaques ---------------- */
+  {
+    id: 'contenedores', nombre: 'Contenedores', categoria: 'desechables',
+    descripcion: 'De icopor con tapa, para sopas, guisos y domicilios.',
+    presentacion: '8 oz · 12 oz · 16 oz · 24 oz', imagen: 'imagenes/productos/contenedores-8-16-24oz.webp', destacado: true,
   },
   {
-    id: 'salchichon',
-    nombre: 'Salchichón cervecero',
-    categoria: 'embutidos',
-    descripcion: 'En trozo o tajado al momento.',
-    presentacion: 'Trozo o tajado por libra',
-    etiquetas: ['vacio', 'mayor'],
-    destacado: false,
-    imagen: '',
+    id: 'portacomidas', nombre: 'Portacomidas', categoria: 'desechables',
+    descripcion: 'Para almuerzos y domicilios, en los cuatro formatos.',
+    presentacion: 'C1 · J2 · P3 · K1', imagen: '', destacado: false,
   },
   {
-    id: 'jamon',
-    nombre: 'Jamón',
-    categoria: 'carnes',
-    descripcion: 'De cerdo y de pechuga, tajado del grosor que pida.',
-    presentacion: 'Tajado por libra',
-    etiquetas: ['vacio', 'frio', 'mayor'],
-    destacado: true,
-    imagen: '',
+    id: 'platos-desechables', nombre: 'Platos desechables', categoria: 'desechables',
+    marca: 'Wau!',
+    descripcion: 'Plato pando de icopor, para eventos y para llevar.',
+    presentacion: '23 cm · 20 unidades', imagen: 'imagenes/productos/plato-de-icopor.webp', destacado: false,
   },
   {
-    id: 'mortadela',
-    nombre: 'Mortadela',
-    categoria: 'carnes',
-    descripcion: 'Con y sin tocino, tajada fina para sánduche.',
-    presentacion: 'Tajada por libra',
-    etiquetas: ['vacio', 'mayor'],
-    destacado: false,
-    imagen: '',
+    id: 'vasos-desechables', nombre: 'Vasos desechables', categoria: 'desechables',
+    marca: 'Wau!',
+    descripcion: 'Vaso translúcido reciclable, para bebidas frías.',
+    presentacion: '7 oz (207 ml) · 50 unidades', imagen: 'imagenes/productos/vaso-plastico.webp', destacado: false,
   },
   {
-    id: 'tocineta',
-    nombre: 'Tocineta ahumada',
-    categoria: 'carnes',
-    descripcion: 'En lonjas parejas, ahumada de verdad.',
-    presentacion: 'Paquete de 250 g y 500 g',
-    etiquetas: ['vacio', 'frio'],
-    destacado: false,
-    imagen: '',
+    id: 'servilletas', nombre: 'Servilletas', categoria: 'desechables',
+    marca: 'Popular',
+    descripcion: 'Servilleta partida, la de mayor rotación en el negocio.',
+    presentacion: '300 unidades', imagen: 'imagenes/productos/servilleta-desechables.webp', destacado: false,
   },
   {
-    id: 'chicharron',
-    nombre: 'Chicharrón carnudo',
-    categoria: 'carnes',
-    descripcion: 'Listo para freír, con buena proporción de carne.',
-    presentacion: 'Libra',
-    etiquetas: ['frio'],
-    destacado: false,
-    imagen: '',
+    id: 'moldes-aluminio', nombre: 'Moldes de aluminio', categoria: 'desechables',
+    descripcion: 'Redondos y rectangulares, de la porción individual a la bandeja.',
+    presentacion: 'Varios tamaños', imagen: 'imagenes/productos/moldes-de-aluminio.webp', destacado: false,
   },
   {
-    id: 'pandebono',
-    nombre: 'Pandebono',
-    categoria: 'amasijos',
-    descripcion: 'Crudo congelado para hornear en casa, o recién horneado.',
-    presentacion: 'Bolsa de 10 y 20 unidades',
-    etiquetas: ['horno', 'artesanal', 'mayor'],
-    destacado: true,
-    imagen: '',
+    id: 'copas-salseras', nombre: 'Copas salseras', categoria: 'desechables',
+    descripcion: 'Para salsas y aderezos al empacar el domicilio.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+
+  /* ---------------- Salsas y aderezos ---------------- */
+  {
+    id: 'salsas-difier', nombre: 'Salsas Difier', categoria: 'salsas',
+    marca: 'Difier',
+    descripcion: 'Presentación institucional para negocios de comida.',
+    presentacion: '4.000 g', imagen: '', destacado: false,
   },
   {
-    id: 'pan-de-yuca',
-    nombre: 'Pan de yuca',
-    categoria: 'amasijos',
-    descripcion: 'Crocante por fuera, con buen queso adentro.',
-    presentacion: 'Bolsa de 10 y 20 unidades',
-    etiquetas: ['horno', 'artesanal'],
-    destacado: false,
-    imagen: '',
+    id: 'pompeya-pina', nombre: 'Pompeya de piña', categoria: 'salsas',
+    descripcion: 'Para repostería y para acompañar carnes.',
+    presentacion: '', imagen: '', destacado: false,
   },
   {
-    id: 'almojabana',
-    nombre: 'Almojábana',
-    categoria: 'amasijos',
-    descripcion: 'Suave y esponjada, para el café de la tarde.',
-    presentacion: 'Bolsa de 6 y 12 unidades',
-    etiquetas: ['horno', 'artesanal'],
-    destacado: false,
-    imagen: '',
+    id: 'mayonesa-san-jorge', nombre: 'Aderezo de mayonesa', categoria: 'salsas',
+    marca: 'San Jorge',
+    descripcion: 'La base de la salsa de la casa.',
+    presentacion: '', imagen: '', destacado: false,
   },
   {
-    id: 'bunuelo',
-    nombre: 'Mezcla de buñuelo',
-    categoria: 'amasijos',
-    descripcion: 'Con el queso ya incorporado: sólo amasar y freír.',
-    presentacion: 'Bolsa de 500 g y 1 kg',
-    etiquetas: ['artesanal', 'mayor'],
-    destacado: false,
-    imagen: '',
+    id: 'salsa-italiana', nombre: 'Salsa italiana', categoria: 'salsas',
+    descripcion: 'Para pastas, lasañas y pizzas.',
+    presentacion: '', imagen: '', destacado: false,
   },
   {
-    id: 'huevos',
-    nombre: 'Huevos',
-    categoria: 'despensa',
-    descripcion: 'AA y extra, por unidad, media panal o panal.',
-    presentacion: 'Panal de 30 unidades',
-    etiquetas: ['mayor'],
-    destacado: false,
-    imagen: '',
+    id: 'salsa-bbq', nombre: 'Salsa BBQ', categoria: 'salsas',
+    descripcion: 'Presentación para restaurante.',
+    presentacion: '', imagen: '', destacado: false,
   },
   {
-    id: 'bocadillo',
-    nombre: 'Bocadillo veleño',
-    categoria: 'despensa',
-    descripcion: 'El compañero obligado de la cuajada y el queso.',
-    presentacion: 'Caja y unidad',
-    etiquetas: ['mayor'],
-    destacado: false,
-    imagen: '',
+    id: 'vinagre', nombre: 'Vinagre', categoria: 'salsas',
+    descripcion: 'Para aderezos, encurtidos y limpieza de cocina.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+
+  /* ---------------- Panadería y repostería ---------------- */
+  {
+    id: 'huevos', nombre: 'Huevos', categoria: 'reposteria',
+    descripcion: 'Por panal, para el negocio o para la casa.',
+    presentacion: '', imagen: '', destacado: false,
   },
   {
-    id: 'panela',
-    nombre: 'Panela',
-    categoria: 'despensa',
-    descripcion: 'Redonda y pulverizada.',
-    presentacion: 'Unidad y bolsa de 1 kg',
-    etiquetas: ['mayor'],
-    destacado: false,
-    imagen: '',
+    id: 'harinas', nombre: 'Harinas', categoria: 'reposteria',
+    descripcion: 'De trigo y de maíz, para panadería y amasijos.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+  {
+    id: 'margarinas', nombre: 'Margarinas', categoria: 'reposteria',
+    descripcion: 'Para hojaldre, ponqué y panadería en general.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+  {
+    id: 'azucar', nombre: 'Azúcar', categoria: 'reposteria',
+    descripcion: 'Blanca y pulverizada.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+  {
+    id: 'domos-torta', nombre: 'Domos para torta', categoria: 'reposteria',
+    descripcion: 'Para transportar y exhibir la torta sin dañarla.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+  {
+    id: 'esencias', nombre: 'Esencias', categoria: 'reposteria',
+    descripcion: 'Vainilla y sabores para repostería.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+
+  /* ---------------- Panes ---------------- */
+  {
+    id: 'pan-hamburguesa', nombre: 'Pan para hamburguesa', categoria: 'panes',
+    descripcion: 'Del tamaño que maneja el negocio de comida rápida.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+  {
+    id: 'pan-perro', nombre: 'Pan para perro', categoria: 'panes',
+    descripcion: 'Suave y parejo, aguanta la salsa.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+  {
+    id: 'pan-tajado', nombre: 'Pan tajado', categoria: 'panes',
+    descripcion: 'Para sánduches y desayunos.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+  {
+    id: 'pan-colita', nombre: 'Pan colita', categoria: 'panes',
+    descripcion: 'El clásico para el sánduche cubano y la picada.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+
+  /* ---------------- Aceites ---------------- */
+  {
+    id: 'aceite-industrial', nombre: 'Aceite industrial', categoria: 'aceites',
+    descripcion: 'Para freidora de negocio, rinde toda la jornada.',
+    presentacion: '19 litros', imagen: '', destacado: false,
+  },
+  {
+    id: 'aceite-galon', nombre: 'Aceite de galón', categoria: 'aceites',
+    descripcion: 'El intermedio: casa grande o negocio pequeño.',
+    presentacion: '3.000 ml', imagen: '', destacado: false,
+  },
+  {
+    id: 'aceite-cocina', nombre: 'Aceite de cocina', categoria: 'aceites',
+    descripcion: 'La presentación de siempre para la casa.',
+    presentacion: '1.000 ml', imagen: '', destacado: false,
+  },
+
+  /* ---------------- Condimentos ---------------- */
+  {
+    id: 'color', nombre: 'Color', categoria: 'condimentos',
+    descripcion: 'Para el arroz, el guiso y la sopa.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+  {
+    id: 'acento', nombre: 'Acento', categoria: 'condimentos',
+    descripcion: 'Sazonador de uso diario en cocina.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+  {
+    id: 'comino', nombre: 'Comino', categoria: 'condimentos',
+    descripcion: 'Molido, para carnes y sopas.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+
+  /* ---------------- Lácteos ---------------- */
+  {
+    id: 'leche', nombre: 'Leche', categoria: 'lacteos',
+    descripcion: 'Para la casa y para el negocio.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+  {
+    id: 'crema-leche', nombre: 'Crema de leche', categoria: 'lacteos',
+    descripcion: 'Para salsas, postres y repostería.',
+    presentacion: '', imagen: '', destacado: false,
+  },
+  {
+    id: 'yogur', nombre: 'Yogur', categoria: 'lacteos',
+    descripcion: 'Para el desayuno y las onces.',
+    presentacion: '', imagen: '', destacado: false,
   },
 ];
