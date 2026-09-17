@@ -108,8 +108,8 @@
  "turismo.cali.1.texto": "El conquistador señala el valle desde lo alto y la ciudad entera se abre a sus pies. Es la primera parada de rigor: subes, respiras aire de montaña y de un vistazo entiendes dónde estás.",
  "turismo.cali.2.titulo": "El Gato del Río",
  "turismo.cali.2.texto": "La mole de bronce de Hernando Tejada vigila la orilla del río Cali con bigotes de alambre y cara de pocos amigos. Nadie pasa de largo: es el punto de encuentro más fotografiado de la ciudad.",
- "turismo.cali.3.titulo": "Las Gatas del Río",
- "turismo.cali.3.texto": "Al gato le pusieron compañía: una comitiva de gatas repartidas por la ribera, cada una pintada por un artista distinto. Recorrer el paseo buscándolas, entre guaduas y sombra, es plan de media tarde.",
+ "turismo.cali.3.titulo": "Por qué venir a Cali",
+ "turismo.cali.3.texto": "Aeropuerto internacional a media hora en carro y vuelos directos desde varias capitales. Una ciudad que se recorre sin prisa —el paseo del río, San Antonio, el Bulevar— y con el Pacífico y el Eje Cafetero a un viaje corto, por si el tratamiento deja días libres.",
  "turismo.cta": "Planear mi viaje odontológico",
  "faq.rotulo": "Preguntas frecuentes",
  "faq.titulo": "Antes de tu primera cita",
@@ -292,7 +292,7 @@
  "priv.5.h": "Las fotos que eliges para una valoración a distancia no se suben a ningún servidor: se previsualizan en tu dispositivo y las adjuntas tú mismo al mensaje de WhatsApp o de correo.",
  "foto.cali.1": "El equipo de High Smile en el mirador de Belalcázar, Cali",
  "foto.cali.2": "El equipo de High Smile junto al Gato del Río, Cali",
- "foto.cali.3": "El equipo de High Smile junto a una de las Gatas del Río, Cali",
+ "foto.cali.3": "El equipo de High Smile en una calle de Cali",
  "foto.paciente.3": "Paciente de High Smile en la sala de espera"
 },
     en: {
@@ -391,8 +391,8 @@
  "turismo.cali.1.texto": "The conquistador points out across the valley from the hilltop, and the whole city opens up below. It is the first stop everyone makes: you climb, you breathe mountain air, and in one look you know where you are.",
  "turismo.cali.2.titulo": "The River Cat",
  "turismo.cali.2.texto": "Hernando Tejada's great bronze cat watches over the bank of the Cali river with wire whiskers and a look of mild disdain. Nobody walks past it: it is the most photographed meeting point in the city.",
- "turismo.cali.3.titulo": "The River Cats",
- "turismo.cali.3.texto": "The cat was given company: a parade of she-cats along the riverbank, each one painted by a different artist. Walking the promenade to find them, among bamboo and shade, is an afternoon well spent.",
+ "turismo.cali.3.titulo": "Why come to Cali",
+ "turismo.cali.3.texto": "An international airport half an hour away by car, with direct flights from several capitals. A city you can take slowly — the river walk, San Antonio, the Bulevar — and with the Pacific coast and the coffee region a short trip away, for the days your treatment leaves free.",
  "turismo.cta": "Plan my dental trip",
  "faq.rotulo": "Frequently asked questions",
  "faq.titulo": "Before your first visit",
@@ -575,7 +575,7 @@
  "priv.5.h": "The photos you choose for a remote consultation are not uploaded to any server: they are previewed on your device and you attach them yourself to the WhatsApp or email message.",
  "foto.cali.1": "The High Smile team at the Belalcázar lookout in Cali",
  "foto.cali.2": "The High Smile team beside the River Cat in Cali",
- "foto.cali.3": "The High Smile team beside one of the River Cats in Cali",
+ "foto.cali.3": "The High Smile team on a street in Cali",
  "foto.paciente.3": "A High Smile patient in the waiting room"
 }
   };
