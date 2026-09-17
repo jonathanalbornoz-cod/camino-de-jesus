@@ -637,6 +637,11 @@ a:hover { text-decoration-color: var(--blanco); }
 .carrusel__diapositiva img { width: 100%; height: 100%; aspect-ratio: 4 / 5; object-fit: cover; display: block; }
 .carrusel--ancho .carrusel__diapositiva img { aspect-ratio: 4 / 5; }
 
+/* Con una sola fotografía no hay nada que desplazar: se centra y se esconden
+   los mandos, en vez de dejarla arrinconada con un hueco al lado. */
+.carrusel:has(.carrusel__diapositiva:only-child) .carrusel__pista { justify-content: center; }
+.carrusel:has(.carrusel__diapositiva:only-child) .carrusel__controles { display: none; }
+
 .carrusel__controles { display: flex; align-items: center; justify-content: center; gap: 1.2rem; margin-top: 1.6rem; }
 .carrusel__boton {
   width: 44px; height: 44px; border: 1px solid var(--borde); background: transparent;

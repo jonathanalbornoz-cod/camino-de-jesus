@@ -130,7 +130,7 @@
   /* Los navegadores guardan las imágenes en caché por su dirección. Si se
      reemplaza una foto conservando el nombre, hay que subir este número para
      que todo el mundo vea la nueva y no la que tenía guardada. */
-  const VERSION_FOTOS = '14';
+  const VERSION_FOTOS = '15';
 
   const cargarImagen = (nombre, alExistir, alFaltar) => {
     const probar = (indice) => {
