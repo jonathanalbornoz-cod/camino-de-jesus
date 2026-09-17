@@ -150,6 +150,22 @@ a:hover { text-decoration-color: var(--blanco); }
 .linea-fina { width: 46px; height: 1px; background: var(--borde-fuerte); border: 0; margin: 0 0 1.6rem; }
 .centrado .linea-fina { margin-inline: auto; }
 
+/* ---------- Texto justificado ----------
+   Los bloques de texto corrido van a bandera plena. Se activa la partición de
+   palabras para que la justificación no abra huecos: el navegador parte según
+   el idioma del documento, y el traductor mantiene <html lang> al día, así que
+   funciona igual en español y en inglés.
+   Los textos centrados y los de tarjeta se quedan fuera: en una columna
+   estrecha la justificación produce más ríos que orden. */
+.justificado,
+.faq__panel,
+.aviso,
+.columna-texto > p:not(.rotulo):not(.entradilla) {
+  text-align: justify;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
 /* ---------- Botones ---------- */
 .boton {
   display: inline-flex; align-items: center; justify-content: center; gap: .6rem;
@@ -555,6 +571,13 @@ a:hover { text-decoration-color: var(--blanco); }
 
 @media (max-width: 700px) { .rejilla--5 { grid-template-columns: repeat(2, 1fr); } }
 @media (max-width: 460px) { .rejilla--5 { grid-template-columns: 1fr; } }
+
+@media (max-width: 600px) {
+  .justificado,
+  .faq__panel,
+  .aviso,
+  .columna-texto > p:not(.rotulo):not(.entradilla) { text-align: left; hyphens: manual; }
+}
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }

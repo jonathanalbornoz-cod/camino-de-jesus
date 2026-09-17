@@ -233,5 +233,10 @@ una subcarpeta, sin tocar nada.
   (`pasoActual` en el formulario e `idiomaActual` en el traductor).
 - Modo estricto (`'use strict'`) e IIFE para no contaminar el ámbito global.
 - Sin atributos `style=` en el HTML: todo va en clases, para mantener `style-src 'self'`.
+- **Texto justificado** en los bloques de texto corrido —la reseña clínica, las respuestas
+  de preguntas frecuentes, los avisos y la política de privacidad—, con partición de palabras
+  según el idioma del documento. Los textos centrados y los de tarjeta se quedan a bandera
+  izquierda: en columna estrecha la justificación abre más huecos de los que arregla. Por
+  debajo de 600 px se desactiva por el mismo motivo. La clase es `.justificado`.
 - HTML semántico y accesible: `aria-*`, roles, foco visible, navegación por teclado,
   carruseles manejables con el teclado y respeto por `prefers-reduced-motion`.
