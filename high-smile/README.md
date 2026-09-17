@@ -142,7 +142,7 @@ su especialidad. No se publican años de experiencia.
 | Perfil | Especialidad | Foto |
 |---|---|---|
 | Paola Andrea Cortés Montes | CEO y gerente | `equipo-2.jpg` |
-| Dr. Mateo Restrepo Salazar | Cirugía maxilofacial e implantología | `equipo-3.jpg` |
+| Dr. Edward Sanchez | CEO · Implantología y rehabilitación oral | `equipo-3.jpg` |
 | Dra. Claudia Ramírez | Ortodoncia | `equipo-4.jpg` |
 | Dra. Carolina Silva Puentes | Odontopediatría y ortopedia maxilar | `equipo-5.jpg` |
 | Dr. Andrés Felipe Limas Martínez | Endodoncia | `equipo-6.jpg` |
