@@ -186,10 +186,19 @@
       if (diapositiva) { pista.scrollTo({ left: diapositiva.offsetLeft - pista.offsetLeft, behavior: 'smooth' }); }
     };
 
+    /* Cuánto avanza un paso del carrusel. Se mide entre dos diapositivas
+       reales en vez de sumar un hueco fijo, porque la banda va sin separación
+       y ese sumando la desalineaba un poco en cada salto. */
+    const paso = () => {
+      const hijos = pista.children;
+      if (hijos.length > 1) { return hijos[1].offsetLeft - hijos[0].offsetLeft; }
+      return hijos.length > 0 ? hijos[0].offsetWidth : 0;
+    };
+
     const marcarPunto = () => {
       if (!puntos) { return; }
 
-      const ancho = pista.children.length > 0 ? pista.children[0].offsetWidth + 16 : 1;
+      const ancho = paso() || 1;
       const actual = Math.round(pista.scrollLeft / ancho);
 
       $$('button', puntos).forEach((punto, i) => {
@@ -232,7 +241,7 @@
 
     $$('[data-ir]', carrusel).forEach((boton) => {
       boton.addEventListener('click', () => {
-        const ancho = pista.children.length > 0 ? pista.children[0].offsetWidth + 16 : 300;
+        const ancho = paso() || 300;
         pista.scrollBy({ left: ancho * Number(boton.dataset.ir), behavior: 'smooth' });
       });
     });

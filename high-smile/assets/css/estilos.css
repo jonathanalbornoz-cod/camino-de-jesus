@@ -629,6 +629,9 @@ a:hover { text-decoration-color: var(--blanco); }
 }
 .carrusel__pista::-webkit-scrollbar { display: none; }
 .carrusel:has(.carrusel__diapositiva + .carrusel__diapositiva) .carrusel__pista { cursor: grab; }
+/* La banda se arrastra aunque lleve una sola fotografía: allí el recorrido
+   lo da la propia imagen, que es más ancha que la franja. */
+.carrusel--banda .carrusel__pista { cursor: grab; }
 /* Mientras se arrastra, el imán de las diapositivas estorba: se suelta. */
 .carrusel__pista.arrastrando { cursor: grabbing; scroll-snap-type: none; scroll-behavior: auto; }
 .carrusel__pista:focus-visible { outline: 2px solid var(--blanco); outline-offset: 4px; }
@@ -644,17 +647,28 @@ a:hover { text-decoration-color: var(--blanco); }
    Ocupa todo el ancho de la ventana, sin contenedor, y cada imagen llena la
    franja. El cursor de mano avisa de que se puede arrastrar. */
 .banda { background: var(--negro); }
-.carrusel--banda .carrusel__pista { gap: 0; }
-.carrusel--banda .carrusel__diapositiva {
-  flex: 0 0 100%; border: 0; scroll-snap-align: center;
+/* La fotografía se muestra ampliada: es un 15 % más ancha que la franja, de
+   modo que siempre sobra recorrido y el ratón puede llevarla de un lado al
+   otro. Sin ese sobrante no habría nada que arrastrar. El tope de ancho de la
+   pista evita que en un monitor muy grande la franja se vuelva altísima. */
+.carrusel--banda .carrusel__pista {
+  gap: 0; max-width: 1600px; margin-inline: auto; scroll-snap-type: none;
 }
-/* La imagen se ve entera: la franja toma su misma proporción en vez de una
-   altura fija que la recortaba por arriba y por abajo. El tope en vh evita
-   que en un monitor muy ancho ocupe más de una pantalla. */
+.carrusel--banda .carrusel__diapositiva {
+  flex: 0 0 115%; border: 0; scroll-snap-align: none;
+}
+/* Nunca se recorta por arriba ni por abajo: la diapositiva conserva la
+   proporción de la foto y el arrastre descubre los lados. */
 .carrusel--banda .carrusel__diapositiva img {
-  width: 100%; height: auto; aspect-ratio: 16 / 9; max-height: 80vh; object-fit: cover;
+  width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain;
 }
 .carrusel--banda .carrusel__controles { margin-top: 1.2rem; padding-bottom: 1.2rem; }
+/* Aunque la banda lleve una sola fotografía, aquí sí hay recorrido, así que
+   las flechas deben verse (la regla general de más abajo las esconde). Los
+   puntos no: con una sola foto no indicarían nada. */
+.carrusel.carrusel--banda:has(.carrusel__diapositiva:only-child) .carrusel__pista { justify-content: flex-start; }
+.carrusel.carrusel--banda:has(.carrusel__diapositiva:only-child) .carrusel__controles { display: flex; }
+.carrusel--banda .carrusel__puntos:has(button:only-child) { display: none; }
 
 /* Con una sola fotografía no hay nada que desplazar: se centra y se esconden
    los mandos, en vez de dejarla arrinconada con un hueco al lado. */
