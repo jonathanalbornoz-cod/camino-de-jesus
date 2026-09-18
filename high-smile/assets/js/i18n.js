@@ -299,7 +299,10 @@
  "foto.cali.1": "El equipo de High Smile en el mirador de Belalcázar, Cali",
  "foto.cali.2": "El equipo de High Smile junto al Gato del Río, Cali",
  "foto.cali.3": "El equipo de High Smile en una calle de Cali",
- "foto.paciente.3": "Paciente de High Smile en la sala de espera"
+ "foto.paciente.3": "Paciente de High Smile en la sala de espera",
+ "foto.paciente.4": "Dos pacientes de High Smile al terminar su tratamiento",
+ "foto.paciente.5": "Una paciente de High Smile con el equipo de la clínica",
+ "foto.paciente.6": "Una paciente infantil de High Smile en el consultorio"
 },
     en: {
  "meta.inicio.titulo": "High Smile | Dental Clinic in Cali · High function and aesthetics",
@@ -588,7 +591,10 @@
  "foto.cali.1": "The High Smile team at the Belalcázar lookout in Cali",
  "foto.cali.2": "The High Smile team beside the River Cat in Cali",
  "foto.cali.3": "The High Smile team on a street in Cali",
- "foto.paciente.3": "A High Smile patient in the waiting room"
+ "foto.paciente.3": "A High Smile patient in the waiting room",
+ "foto.paciente.4": "Two High Smile patients after finishing their treatment",
+ "foto.paciente.5": "A High Smile patient with the clinic team",
+ "foto.paciente.6": "A young High Smile patient in the treatment room"
 }
   };
 

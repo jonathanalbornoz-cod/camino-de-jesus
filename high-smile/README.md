@@ -170,6 +170,8 @@ tarjeta en `index.html`, crear sus tres claves y ajustar `.rejilla--5` en el CSS
    profesionales concretos: conviene tener su permiso por escrito antes de publicar el sitio.
    Los casos de éxito son, además, **fotografía clínica de pacientes reconocibles**: ese
    consentimiento debe ser específico para uso publicitario y conviene conservarlo firmado.
+   `paciente-6.jpg` muestra a **una menor de edad**, así que su autorización la firman el
+   padre, la madre o quien tenga su representación legal.
 2. **Caso 6 (`caso-6.jpg`).** Sus dos fotografías son del resultado, no un antes y un
    después: la diapositiva muestra dos vistas del mismo resultado y su texto alternativo lo
    dice así. Si aparece la fotografía previa, basta recomponer la diapositiva.
