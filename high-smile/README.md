@@ -136,8 +136,8 @@ menos de 1 KB cada uno y se ven nítidos en cualquier pantalla.
 
 ## 5. Equipo y pendientes
 
-Los cinco perfiles son los profesionales reales de la clínica, con su fotografía, su nombre y
-su especialidad. No se publican años de experiencia.
+Los cinco perfiles son los profesionales reales de la clínica, con su nombre y su
+especialidad. No se publican años de experiencia.
 
 | Perfil | Especialidad | Foto |
 |---|---|---|
@@ -147,11 +147,15 @@ su especialidad. No se publican años de experiencia.
 | Dra. Carolina Silva Puentes | Odontopediatría y ortopedia maxilar | `equipo-5.jpg` |
 | Dr. Andrés Felipe Limas Martínez | Endodoncia | `equipo-6.jpg` |
 
-> **Por confirmar:** la clínica envió las tres fotografías nuevas sin decir cuál correspondía
-> a cada persona. Se asignaron por lo que se ve en cada una —la bata infantil para
-> odontopediatría, el uniforme de la clínica para ortodoncia— y **hay que verificarlo antes
-> de publicar**. Si alguna está cambiada, basta con intercambiar los archivos `equipo-4.jpg`
-> y `equipo-5.jpg` en `assets/img/fotos/` y subir `VERSION_FOTOS`.
+> **Los cinco retratos están generados con inteligencia artificial**, no son fotografías.
+> Se hicieron así para que la sección quedara uniforme: mismo consultorio, mismo uniforme y
+> misma luz en los cinco. Conviene que cada persona vea su retrato y dé el visto bueno antes
+> de publicar, porque representa su imagen aunque no sea una foto suya.
+>
+> **Por confirmar:** llegaron sin decir cuál correspondía a cada quien. Se asignaron por
+> parecido con las fotografías anteriores, y los dos retratos de mujer rubia —`equipo-2.jpg`
+> para la gerente y `equipo-5.jpg` para la odontopediatra— son los que más conviene revisar.
+> Si están cambiados, basta con intercambiar los dos archivos y subir `VERSION_FOTOS`.
 
 Para cambiar un perfil: el texto está en `assets/js/i18n.js`, claves `equipo.1.*` …
 `equipo.5.*` (en español y en inglés); la fotografía, en `assets/img/fotos/equipo-N.jpg`.
@@ -160,8 +164,9 @@ tarjeta en `index.html`, crear sus tres claves y ajustar `.rejilla--5` en el CSS
 
 **Pendientes:**
 
-1. **Autorización de imagen.** Todas las fotografías muestran a personas identificables:
-   conviene tener su permiso por escrito antes de publicar el sitio.
+1. **Autorización de imagen.** Las fotografías de la portada, de la clínica y de turismo
+   dental muestran a personas identificables, y los cinco retratos del equipo representan a
+   profesionales concretos: conviene tener su permiso por escrito antes de publicar el sitio.
 2. **Envío automático de las fotos del paciente.** Hoy la página prepara el mensaje y el
    paciente adjunta las imágenes en WhatsApp o en el correo. Para que lleguen solas a
    highsmilecali@gmail.com hace falta un servicio de formularios o un backend propio.
