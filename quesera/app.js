@@ -70,17 +70,16 @@
                  title="Ubicación de ${MARCA.nombre}" allowfullscreen></iframe>`;
     }
 
+    // Lo que falte de datos.js se avisa por consola, no en pantalla: el aviso
+    // es para quien mantiene el sitio, no para el cliente que entra a pedir.
     const faltan = [];
-    if (SIN_NUMERO) faltan.push('el número de WhatsApp (<code>whatsapp</code>)');
-    if (PENDIENTE(MARCA.direccion)) faltan.push('la dirección (<code>direccion</code>)');
-    if (PENDIENTE(MARCA.horario)) faltan.push('los horarios (<code>horario</code>)');
-    if (!MARCA.mapaEmbed) faltan.push('el mapa (<code>mapaEmbed</code>)');
-    if (!MARCA.instagram && !MARCA.facebook && !MARCA.tiktok) faltan.push('las redes sociales');
+    if (SIN_NUMERO) faltan.push('whatsapp');
+    if (PENDIENTE(MARCA.direccion)) faltan.push('direccion');
+    if (PENDIENTE(MARCA.horario)) faltan.push('horario');
+    if (!MARCA.mapaEmbed) faltan.push('mapaEmbed');
+    if (!MARCA.instagram && !MARCA.facebook && !MARCA.tiktok) faltan.push('instagram / facebook / tiktok');
     if (faltan.length) {
-      const aviso = $('#aviso-config');
-      aviso.hidden = false;
-      aviso.innerHTML = `Falta por configurar en <code>datos.js</code>: ${faltan.join(', ')}. ` +
-        'Este aviso desaparece solo cuando estén completos.';
+      console.warn('[Quesera Chiminangos] Falta por configurar en datos.js: ' + faltan.join(', '));
     }
   }
 

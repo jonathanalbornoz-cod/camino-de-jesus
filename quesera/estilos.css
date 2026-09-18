@@ -102,10 +102,6 @@ h1 em { font-style: italic; color: var(--dorado); }
 .boton--texto { background: none; border: none; color: var(--vino-3); text-decoration: underline; text-underline-offset: 3px; padding: .4rem .2rem; font-weight: 600; cursor: pointer; }
 .boton--texto:hover { color: var(--vino); }
 
-/* ---------- Aviso de datos pendientes ---------- */
-.aviso-config { background: var(--dorado-suave); color: #6B4E00; border-bottom: 1px solid var(--dorado); padding: .7rem 20px; font-size: .88rem; text-align: center; }
-.aviso-config code { font-family: ui-monospace, Menlo, monospace; background: rgba(0,0,0,.07); padding: .1em .4em; border-radius: 4px; }
-
 /* ---------- Cabecera ---------- */
 .cabecera {
   position: sticky; top: 0; z-index: 100;
@@ -217,17 +213,11 @@ h1 em { font-style: italic; color: var(--dorado); }
 
 /*
  * Los productos sin foto no van en vino: 29 bloques oscuros en la rejilla la
- * vuelven pesada, y el brief pide justo lo contrario. Van en crema, con la
- * onda dorada de las fotos para que el conjunto se lea igual.
+ * vuelven pesada, y el brief pide justo lo contrario. Van en crema liso con
+ * el icono de su categoría, en el mismo formato 3:4 de las fotos.
  */
 .tarjeta__figura--vacia { background: var(--crema); }
-.tarjeta__figura--vacia > svg { position: relative; z-index: 1; width: 34%; height: 34%; color: var(--vino); opacity: .42; }
-.tarjeta__figura--vacia::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 32%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40' preserveAspectRatio='none'%3E%3Cpath d='M0 10 Q30 0 60 11 T120 9 V40 H0 Z' fill='%23F5B921'/%3E%3Cpath d='M0 20 Q30 10 60 21 T120 19 V40 H0 Z' fill='%23EFE2CE'/%3E%3C/svg%3E");
-  background-size: 100% 100%;
-  background-repeat: no-repeat;
-}
+.tarjeta__figura--vacia > svg { width: 34%; height: 34%; color: var(--vino); opacity: .34; }
 .tarjeta__marca { position: absolute; top: 10px; left: 10px; z-index: 1; background: rgba(247, 238, 224, .94); color: var(--vino); font-size: .7rem; font-weight: 700; letter-spacing: .04em; padding: .26rem .6rem; border-radius: 999px; }
 .tarjeta__insignia { position: absolute; top: 10px; right: 10px; z-index: 1; background: var(--dorado); color: var(--vino); font-size: .66rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: .26rem .6rem; border-radius: 999px; }
 
@@ -336,6 +326,6 @@ body.con-pedido .flotante { bottom: 104px; }
 .flotante .ic { width: 30px; height: 30px; }
 
 @media print {
-  .cabecera, .pedido, .flotante, .filtros, .saltar, .aviso-config { display: none !important; }
+  .cabecera, .pedido, .flotante, .filtros, .saltar { display: none !important; }
   body { background: #fff; }
 }
