@@ -31,13 +31,14 @@ const MARCA = {
   telefono: '446 6561',
   correo: 'queserasalsamentariachimi@gmail.com',
 
-  direccion: 'PENDIENTE — dirección del punto de venta',
+  direccion: 'Calle 44 #1C-25, barrio Chiminangos',
   ciudad: 'Cali, Colombia',
   horario: 'PENDIENTE — horarios de atención',
 
-  // Iframe de Google Maps. Vacío = la sección del mapa no se dibuja.
-  // Se saca en Google Maps → Compartir → Insertar un mapa → copiar el src.
-  mapaEmbed: '',
+  // Mapa. Esta URL busca la dirección en Google Maps; sirve sin necesidad de
+  // una clave de API. Si el pin no cae exacto, se reemplaza por el iframe de
+  // Google Maps → Compartir → Insertar un mapa → copiar sólo el src.
+  mapaEmbed: 'https://www.google.com/maps?q=Calle%2044%20%231C-25%2C%20Chiminangos%2C%20Cali%2C%20Valle%20del%20Cauca%2C%20Colombia&output=embed',
 
   // Perfiles de redes. Los vacíos no se dibujan.
   instagram: '',

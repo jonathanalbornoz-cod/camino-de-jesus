@@ -34,6 +34,11 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
+/* Sin esto, un display: flex o grid propio le gana al hidden del navegador y
+   los bloques que dependen de un dato que falta salen vacíos en vez de no
+   salir (pasaba con la fila de horarios en contacto). */
+[hidden] { display: none !important; }
+
 html { scroll-behavior: smooth; scroll-padding-top: 90px; -webkit-text-size-adjust: 100%; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
