@@ -11,7 +11,7 @@ estilos.css             paleta y estilos
 app.js                  filtros, pedido y enlaces de WhatsApp
 datos.js                TODO el contenido editable
 imagenes/logo.*         el logotipo
-imagenes/productos/     las fotos de producto
+imagenes/productos/     las fotos de producto, ya sin la onda del set
 ```
 
 ## De dónde salen los datos
@@ -52,12 +52,25 @@ pregunta por WhatsApp. Faltan sobre todo los quesos (¿libra, kilo, bloque?), la
 la panadería, los panes, los condimentos y los lácteos.
 
 **Fotos nuevas** — van en `imagenes/productos/`, y la ruta se pone en el campo `imagen`.
-Conviene pasarlas a `.webp` recortadas en 3:4 y por debajo de unos 150 KB:
+
+Las fotos del set vienen con una onda dorada de fondo. En la web no se usa, así que antes
+de montarlas hay que quitarla:
 
 ```bash
-python3 - <<'PY'
+python3 tools/quitar-onda.py carpeta-con-las-fotos carpeta-limpia
+```
+
+Deja el fondo con un horizonte recto y no toca el producto ni su sombra. Si llega una foto
+donde el producto es del color de la onda —le pasa al cheddar—, se le añade una entrada al
+diccionario `AJUSTES` del propio script, que documenta los casos ya resueltos.
+
+Después se recortan a 3:4 y se pasan a `.webp`, que las deja por debajo de 150 KB. El
+recorte va desplazado hacia arriba (0.62) porque el producto vive en la mitad baja del
+encuadre:
+
+```python
 from PIL import Image
-im = Image.open("foto.png").convert("RGB")
+im = Image.open("foto-limpia.png").convert("RGB")
 w, h = im.size
 alto = int(w / 0.75)
 if alto < h:
@@ -65,11 +78,10 @@ if alto < h:
     im = im.crop((0, arriba, w, arriba + alto))
 im.thumbnail((900, 1200), Image.LANCZOS)
 im.save("quesera/imagenes/productos/nombre.webp", "WEBP", quality=82, method=6)
-PY
 ```
 
-Los productos sin foto no quedan feos: muestran el icono de su categoría sobre la onda
-dorada de la marca, con el mismo formato de las fotos.
+Los productos sin foto no quedan feos: muestran el icono de su categoría sobre un fondo
+crema, en el mismo formato 3:4 de las fotos.
 
 ## Cómo agregar o cambiar productos
 
@@ -111,9 +123,10 @@ tarjeta tiene además **Pedir**, que escribe sólo por ese producto.
 
 ## Decisiones de diseño
 
-La paleta sale del logotipo y de las fotos: vino `#45181F`, dorado `#F5B921` y crema. La
-onda dorada que traen las fotografías se repite en la portada y en las tarjetas sin foto,
-que es lo que amarra el conjunto.
+La paleta sale del logotipo y de las fotos: vino `#45181F`, dorado `#F5B921` y crema. El
+dorado quedó para acentos —el botón de mayoristas, los antetítulos—; la onda dorada que
+traían las fotografías se quitó a petición del cliente, y los cortes entre secciones son
+rectos.
 
 De los referentes del brief: de **Cassini** el minimalismo, la fotografía limpia y los
 textos cortos; de **Bonanza** la organización por categorías con contadores y el aire de
