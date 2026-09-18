@@ -648,8 +648,11 @@ a:hover { text-decoration-color: var(--blanco); }
 .carrusel--banda .carrusel__diapositiva {
   flex: 0 0 100%; border: 0; scroll-snap-align: center;
 }
+/* La imagen se ve entera: la franja toma su misma proporción en vez de una
+   altura fija que la recortaba por arriba y por abajo. El tope en vh evita
+   que en un monitor muy ancho ocupe más de una pantalla. */
 .carrusel--banda .carrusel__diapositiva img {
-  aspect-ratio: auto; height: clamp(260px, 40vw, 560px); object-fit: cover;
+  width: 100%; height: auto; aspect-ratio: 16 / 9; max-height: 80vh; object-fit: cover;
 }
 .carrusel--banda .carrusel__controles { margin-top: 1.2rem; padding-bottom: 1.2rem; }
 
