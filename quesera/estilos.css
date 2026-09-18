@@ -1,8 +1,8 @@
 /*
  * Quesera Chiminangos — estilos
  * ------------------------------------------------------------------
- * La paleta sale del logotipo y de las fotos de producto: vino de fondo,
- * onda dorada y crema abajo. Las tarjetas repiten ese mismo gesto.
+ * La paleta sale del logotipo y de las fotos de producto: vino, dorado y
+ * crema. La portada corta recto contra el crema, sin ornamento.
  *
  * Referentes del brief: Cassini (minimalismo, foto limpia, información
  * corta) y Bonanza (categorías ordenadas, aire de mayorista).
@@ -144,7 +144,7 @@ h1 em { font-style: italic; color: var(--dorado); }
 }
 
 /* ---------- Portada ---------- */
-.portada { position: relative; background: var(--vino); color: var(--crema); padding: clamp(2.6rem, 6vw, 4.6rem) 0 clamp(4rem, 8vw, 6rem); overflow: hidden; }
+.portada { position: relative; background: var(--vino); color: var(--crema); padding: clamp(2.6rem, 6vw, 4.6rem) 0 clamp(3rem, 6vw, 4.6rem); overflow: hidden; }
 .portada::before {
   content: ""; position: absolute; inset: 0;
   background: radial-gradient(760px 420px at 78% 12%, rgba(245, 185, 33, .16), transparent 68%);
@@ -158,8 +158,6 @@ h1 em { font-style: italic; color: var(--dorado); }
 
 .portada__figura { justify-self: center; width: min(360px, 82%); }
 .portada__figura img { width: 100%; border-radius: var(--radio-g); box-shadow: var(--sombra-alta); }
-
-.onda { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: clamp(46px, 6vw, 86px); display: block; }
 
 @media (max-width: 960px) {
   .portada__grid { grid-template-columns: 1fr; gap: 2rem; }
