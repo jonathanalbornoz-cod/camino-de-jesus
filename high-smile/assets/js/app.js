@@ -130,7 +130,7 @@
   /* Los navegadores guardan las imágenes en caché por su dirección. Si se
      reemplaza una foto conservando el nombre, hay que subir este número para
      que todo el mundo vea la nueva y no la que tenía guardada. */
-  const VERSION_FOTOS = '18';
+  const VERSION_FOTOS = '19';
 
   const cargarImagen = (nombre, alExistir, alFaltar) => {
     const probar = (indice) => {
@@ -236,6 +236,49 @@
         pista.scrollBy({ left: ancho * Number(boton.dataset.ir), behavior: 'smooth' });
       });
     });
+
+    /* Arrastre con el ratón. En pantalla táctil el propio navegador ya desplaza
+       la pista; con ratón no hay nada equivalente, así que se traduce el gesto
+       a scroll. `arrastrando` solo se marca al mover de verdad, para no robarle
+       el clic a los enlaces ni cambiar el cursor en un clic suelto. */
+    const arrastre = { activo: false, movido: false, x: 0, desde: 0 };
+
+    pista.addEventListener('pointerdown', (evento) => {
+      if (evento.pointerType !== 'mouse' || evento.button !== 0) { return; }
+      arrastre.activo = true;
+      arrastre.movido = false;
+      arrastre.x = evento.clientX;
+      arrastre.desde = pista.scrollLeft;
+    });
+
+    pista.addEventListener('pointermove', (evento) => {
+      if (!arrastre.activo) { return; }
+
+      const recorrido = evento.clientX - arrastre.x;
+      if (!arrastre.movido && Math.abs(recorrido) < 4) { return; }
+
+      arrastre.movido = true;
+      pista.classList.add('arrastrando');
+      pista.scrollLeft = arrastre.desde - recorrido;
+      evento.preventDefault();
+    });
+
+    const soltar = () => {
+      if (!arrastre.activo) { return; }
+      arrastre.activo = false;
+      pista.classList.remove('arrastrando');
+    };
+
+    pista.addEventListener('pointerup', soltar);
+    pista.addEventListener('pointerleave', soltar);
+    pista.addEventListener('pointercancel', soltar);
+
+    /* Tras arrastrar, el clic que cierra el gesto no debe activar nada. */
+    pista.addEventListener('click', (evento) => {
+      if (arrastre.movido) { evento.preventDefault(); evento.stopPropagation(); }
+    }, true);
+
+    pista.addEventListener('dragstart', (evento) => { evento.preventDefault(); });
 
     pista.addEventListener('scroll', marcarPunto, { passive: true });
     escanear(1, 0);

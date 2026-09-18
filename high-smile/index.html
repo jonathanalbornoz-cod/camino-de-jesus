@@ -305,6 +305,27 @@
       </a>
     </section>
 
+    <!-- ================= Banda deslizable =================
+         Franja a ancho completo bajo la portada. Se arrastra con el ratón, con el
+         dedo o con las flechas, y usa el mismo buscador de fotos que los demás
+         carruseles: para sumar imágenes basta copiar banda-2.jpg, banda-3.jpg… -->
+    <section class="banda" aria-label="Imágenes de la clínica">
+      <div class="carrusel carrusel--banda" data-carrusel="banda" data-total="8">
+        <div class="carrusel__pista" tabindex="0" role="region" aria-label="Imágenes de la clínica"></div>
+        <div class="carrusel__controles">
+          <button class="carrusel__boton" type="button" data-ir="-1">
+            <svg aria-hidden="true"><use href="#i-izquierda"></use></svg>
+            <span class="solo-lectores" data-i18n="carrusel.anterior">Foto anterior</span>
+          </button>
+          <div class="carrusel__puntos" role="tablist" aria-label="Fotos"></div>
+          <button class="carrusel__boton" type="button" data-ir="1">
+            <svg aria-hidden="true"><use href="#i-flecha"></use></svg>
+            <span class="solo-lectores" data-i18n="carrusel.siguiente">Foto siguiente</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
     <!-- ================= Cifras ================= -->
     <section class="contenedor" id="cifras">
       <div class="cifras revelar">
