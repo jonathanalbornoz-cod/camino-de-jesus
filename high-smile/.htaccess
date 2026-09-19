@@ -58,7 +58,7 @@ ErrorDocument 404 /index.html
 Options -Indexes
 
 # No se sirven archivos internos del proyecto. robots.txt sí, claro.
-<FilesMatch "^(README\.md|_headers|\.nojekyll|OFL-.*\.txt)$">
+<FilesMatch "^(README\.md|DESPLIEGUE-HOSTINGER\.md|_headers|\.nojekyll|OFL-.*\.txt)$">
   <IfModule mod_authz_core.c>
     Require all denied
   </IfModule>
