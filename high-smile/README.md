@@ -107,6 +107,23 @@ texto cae en la tipografía del sistema y la página sigue viéndose bien.
 
 ## 4. Fotografías
 
+> **Caché: sube el número de versión al desplegar.** El servidor guarda las imágenes un año
+> y la hoja de estilos y el JavaScript siete días, así que un visitante que ya estuvo en el
+> sitio seguiría usando los archivos viejos. Para evitarlo cada recurso se pide con un
+> `?v=` en la dirección, y basta con cambiar ese número para que todos los navegadores
+> descarguen la versión nueva. Hay **tres sitios** que tocar, y conviene dejarlos siempre
+> con el mismo número:
+>
+> | Qué cambiaste | Dónde subir el número |
+> |---|---|
+> | Una fotografía de las carpetas de `fotos/` | `VERSION_FOTOS` en `assets/js/app.js` |
+> | `estilos.css` o cualquier `.js` | El `?v=` de los `<link>` y `<script>` en `index.html`, `agenda.html` y `privacidad.html` |
+> | `hero.jpg` o `hero-movil.jpg` | El `?v=` de los `<link rel="preload">` y del `<picture>` en `index.html` (llevan su propio número porque van escritos en el HTML) |
+>
+> Olvidar esto no rompe nada en local ni en la vista previa, porque ahí no hay caché: el
+> fallo solo aparece en el servidor de verdad, y se manifiesta como una página que se ve
+> con el diseño antiguo.
+
 Las fotos que envió la clínica están reducidas para web (las originales pesaban entre 1,4 y
 3,7 MB cada una; ahora ninguna pasa de 165 KB). Para agregar o reemplazar fotos, todo está
 explicado en `assets/img/fotos/LEEME.md`: basta con copiarlas en esa carpeta con el nombre
