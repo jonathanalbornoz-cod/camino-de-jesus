@@ -35,8 +35,8 @@ logotipo oficial de la clínica.
 |---|---|
 | Portada | Fotografía del equipo en el mirador de Cali a pantalla completa, logotipo, eslogan y accesos a agenda y WhatsApp |
 | Servicios | Las ocho especialidades, cada una con su ilustración propia |
-| Reseña clínica | Quiénes son, método de trabajo y carrusel de fotos de la clínica |
-| Casos de éxito | Carrusel de antes y después (`caso-1` … `caso-6`, cada diapositiva monta las dos fotos del caso) |
+| Reseña clínica | Quiénes son, método de trabajo y carrusel con las instalaciones (`clinica-1` … `clinica-4`) |
+| Casos de éxito | Carrusel de antes y después (`caso-1` … `caso-5`, cada diapositiva monta el antes y el después del caso) |
 | Antes y después | Carrusel con los pacientes que terminaron su tratamiento |
 | Nuestro equipo | Cinco perfiles con fotografía, nombre y especialidad |
 | Preguntas frecuentes | Agendamiento, provisionales y definitivos, tiempos de entrega, cuidados y miedo al odontólogo |
@@ -188,13 +188,10 @@ tarjeta en `index.html`, crear sus tres claves y ajustar `.rejilla--5` en el CSS
    consentimiento debe ser específico para uso publicitario y conviene conservarlo firmado.
    `paciente-6.jpg` muestra a **una menor de edad**, así que su autorización la firman el
    padre, la madre o quien tenga su representación legal.
-2. **Caso 6 (`caso-6.jpg`).** Sus dos fotografías son del resultado, no un antes y un
-   después: la diapositiva muestra dos vistas del mismo resultado y su texto alternativo lo
-   dice así. Si aparece la fotografía previa, basta recomponer la diapositiva.
-3. **Envío automático de las fotos del paciente.** Hoy la página prepara el mensaje y el
+2. **Envío automático de las fotos del paciente.** Hoy la página prepara el mensaje y el
    paciente adjunta las imágenes en WhatsApp o en el correo. Para que lleguen solas a
    highsmilecali@gmail.com hace falta un servicio de formularios o un backend propio.
-4. **Textos.** La redacción es una propuesta; conviene que la clínica la revise, sobre todo
+3. **Textos.** La redacción es una propuesta; conviene que la clínica la revise, sobre todo
    la política de privacidad.
 
 ---
