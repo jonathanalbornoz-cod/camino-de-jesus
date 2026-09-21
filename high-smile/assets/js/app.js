@@ -130,7 +130,7 @@
   /* Los navegadores guardan las imágenes en caché por su dirección. Si se
      reemplaza una foto conservando el nombre, hay que subir este número para
      que todo el mundo vea la nueva y no la que tenía guardada. */
-  const VERSION_FOTOS = '23';
+  const VERSION_FOTOS = '24';
 
   const cargarImagen = (nombre, alExistir, alFaltar) => {
     const probar = (indice) => {
@@ -187,8 +187,8 @@
     };
 
     /* Cuánto avanza un paso del carrusel. Se mide entre dos diapositivas
-       reales en vez de sumar un hueco fijo, porque la banda va sin separación
-       y ese sumando la desalineaba un poco en cada salto. */
+       reales en vez de sumar un hueco fijo, que desalineaba el salto cuando la
+       separación entre diapositivas no era la prevista. */
     const paso = () => {
       const hijos = pista.children;
       if (hijos.length > 1) { return hijos[1].offsetLeft - hijos[0].offsetLeft; }

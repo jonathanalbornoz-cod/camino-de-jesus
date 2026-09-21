@@ -34,7 +34,6 @@ logotipo oficial de la clínica.
 | Pestaña | Contenido |
 |---|---|
 | Portada | Fotografía del equipo en el mirador de Cali a pantalla completa, logotipo, eslogan y accesos a agenda y WhatsApp |
-| Banda | Franja de imagen a ancho completo bajo la portada, deslizable con el ratón, el dedo o las flechas |
 | Servicios | Las ocho especialidades, cada una con su ilustración propia |
 | Reseña clínica | Quiénes son, método de trabajo y carrusel de fotos de la clínica |
 | Casos de éxito | Carrusel de antes y después (`caso-1` … `caso-6`, cada diapositiva monta las dos fotos del caso) |

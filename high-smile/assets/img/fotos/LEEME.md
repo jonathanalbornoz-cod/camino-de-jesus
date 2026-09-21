@@ -7,7 +7,6 @@ Copia aquí las fotos y la página las publica sola: **no hay que tocar el códi
 | Archivo | Dónde aparece |
 |---|---|
 | `hero.jpg` | Fondo de la portada en computador y tablet (horizontal) |
-| `banda-1.jpg` … | Banda deslizable bajo la portada, a ancho completo |
 | `hero-movil.jpg` | El mismo fondo recortado en vertical, para el teléfono |
 | `clinica-1.jpg` … `clinica-12.jpg` | Carrusel de «Reseña clínica» |
 | `caso-1.jpg` … `caso-12.jpg` | Carrusel de «Casos de éxito» (antes y después) |
