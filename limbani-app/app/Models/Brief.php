@@ -70,6 +70,66 @@ class Brief extends Model
     }
 
     /**
+     * The question sections used to render the brief (edit, show and PDF views).
+     */
+    public static function sections(): array
+    {
+        return [
+            ['title' => 'Prioridades del Mes', 'icon' => 'fas fa-bullseye', 'color' => 'orange', 'qs' => [
+                'q1' => 'Lanzamientos, promociones o novedades',
+                'q2' => 'Producto/Servicio con mayor visibilidad',
+                'q3' => 'Objetivo comercial principal',
+            ]],
+            ['title' => 'Mensaje Estratégico', 'icon' => 'fas fa-comment-dots', 'color' => 'blue', 'qs' => [
+                'q4' => 'Mensaje principal a comunicar',
+                'q5' => 'Campañas internas o anuncios',
+            ]],
+            ['title' => 'Productos a Destacar', 'icon' => 'fas fa-gem', 'color' => 'purple', 'qs' => [
+                'q6' => 'Productos/servicios a promocionar',
+                'q7' => 'Prioridad máxima de venta',
+                'q8' => 'Promociones o descuentos',
+            ]],
+            ['title' => 'Fechas y Oportunidades', 'icon' => 'fas fa-calendar-star', 'color' => 'yellow', 'qs' => [
+                'q9' => 'Fechas especiales o eventos',
+                'q10' => 'Casos de éxito o experiencias',
+            ]],
+            ['title' => 'Contenido Estratégico', 'icon' => 'fas fa-paint-brush', 'color' => 'indigo', 'qs' => [
+                'q11' => 'Tipo de contenido priorizado',
+                'q12' => 'Preguntas frecuentes a responder',
+                'q13' => 'Temas a EVITAR',
+            ]],
+            ['title' => 'Recursos Disponibles', 'icon' => 'fas fa-camera', 'color' => 'green', 'qs' => [
+                'q14' => 'Material gráfico/video disponible',
+                'q15' => 'Personas que pueden participar',
+            ]],
+            ['title' => 'Publicidad (Meta Ads)', 'icon' => 'fas fa-rocket', 'color' => 'red', 'qs' => [
+                'q16' => '¿Realizar pauta publicitaria?',
+                'q17' => 'Presupuesto total de pauta',
+                'q18' => 'Distribución del presupuesto',
+            ]],
+            ['title' => 'Resultados Esperados', 'icon' => 'fas fa-trophy', 'color' => 'amber', 'qs' => [
+                'q19' => 'Resultado ideal tras la estrategia',
+            ]],
+            ['title' => 'Información Adicional', 'icon' => 'fas fa-info-circle', 'color' => 'gray', 'qs' => [
+                'q20' => 'Observaciones finales',
+            ]],
+        ];
+    }
+
+    /**
+     * Human-readable labels for each brief status.
+     */
+    public static function statusLabels(): array
+    {
+        return [
+            'draft' => 'Borrador',
+            'submitted' => 'Enviado',
+            'reviewed' => 'Revisado',
+            'approved' => 'Aprobado',
+        ];
+    }
+
+    /**
      * Check if brief is in draft status.
      */
     public function isDraft(): bool
