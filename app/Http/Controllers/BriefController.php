@@ -6,6 +6,7 @@ use App\Models\Project;
 use App\Models\Brief;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class BriefController extends Controller
 {
@@ -97,16 +98,21 @@ class BriefController extends Controller
     public function download(Project $project)
     {
         $brief = $project->brief;
-        
+
         if (!$brief) {
             abort(404, 'No se encontró un brief para este proyecto');
         }
 
-        // TODO: Implement PDF generation
-        return response()->json([
-            'message' => 'PDF generation not implemented yet',
+        $pdf = Pdf::loadView('briefs.pdf', [
+            'project' => $project,
             'brief' => $brief,
-        ]);
+            'sections' => Brief::sections(),
+            'statusLabels' => Brief::statusLabels(),
+        ])->setPaper('a4');
+
+        $filename = 'brief-'.\Illuminate\Support\Str::slug($project->name).'.pdf';
+
+        return $pdf->download($filename);
     }
 
     /**
@@ -129,13 +135,6 @@ class BriefController extends Controller
      */
     private function getStatusLabel($status): string
     {
-        $labels = [
-            'draft' => 'Borrador',
-            'submitted' => 'Enviado',
-            'reviewed' => 'Revisado',
-            'approved' => 'Aprobado',
-        ];
-
-        return $labels[$status] ?? $status;
+        return Brief::statusLabels()[$status] ?? $status;
     }
 }
