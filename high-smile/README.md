@@ -110,8 +110,10 @@ texto cae en la tipografía del sistema y la página sigue viéndose bien.
 > y la hoja de estilos y el JavaScript siete días, así que un visitante que ya estuvo en el
 > sitio seguiría usando los archivos viejos. Para evitarlo cada recurso se pide con un
 > `?v=` en la dirección, y basta con cambiar ese número para que todos los navegadores
-> descarguen la versión nueva. Hay **tres sitios** que tocar, y conviene dejarlos siempre
-> con el mismo número:
+> descarguen la versión nueva. Hay **tres sitios** que tocar, cada uno para lo suyo; no
+> hace falta que coincidan entre sí, y de hecho conviene que no: subir el de las fotos
+> cuando solo cambió un texto obliga a todo el mundo a descargar de nuevo los 3 MB de
+> imágenes sin necesidad.
 >
 > | Qué cambiaste | Dónde subir el número |
 > |---|---|
@@ -159,7 +161,7 @@ especialidad. No se publican años de experiencia.
 | Perfil | Especialidad | Foto |
 |---|---|---|
 | Paola Andrea Cortés Montes | CEO y gerente | `equipo-2.jpg` |
-| Dr. Edward Sanchez | CEO · Implantología y rehabilitación oral | `equipo-3.jpg` |
+| Dr. Edward Sánchez | CEO · Periodoncia e Implantología oral | `equipo-3.jpg` |
 | Dra. Claudia Ramírez | Ortodoncia | `equipo-4.jpg` |
 | Dra. Carolina Silva Puentes | Odontopediatría y ortopedia maxilar | `equipo-5.jpg` |
 | Dr. Andrés Felipe Limas Martínez | Endodoncia | `equipo-6.jpg` |
