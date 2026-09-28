@@ -66,6 +66,7 @@
                             <option value="direccion_admin" {{ request('category') === 'direccion_admin' ? 'selected' : '' }}>Dirección Administrativa</option>
                         </optgroup>
                     </select>
+                    <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">Define en qué sección del menú lateral aparecerá el proyecto (Dirección General, Operación & Producción, o Talento Humano/Admon) y quién puede verlo.</p>
                 </div>
 
                 <!-- Plantilla a usar (Solo creación) -->
@@ -78,6 +79,7 @@
                             <option value="{{ $template->id }}">{{ $template->name }}</option>
                         @endforeach
                     </select>
+                    <p class="text-xs text-gray-500 dark:text-gray-500 mt-1">Si eliges un proyecto guardado como plantilla, se copiarán automáticamente todas sus tareas y subtareas al nuevo proyecto.</p>
                 </div>
                 @endif
                 

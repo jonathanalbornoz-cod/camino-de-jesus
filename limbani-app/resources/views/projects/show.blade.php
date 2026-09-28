@@ -71,6 +71,30 @@
         </div>
 
         <div class="flex-1 overflow-y-auto custom-scroll p-4 md:p-8 space-y-4">
+            @if($project->tasks->isEmpty())
+                <div class="flex flex-col items-center justify-center text-center py-16 px-4">
+                    <div class="w-16 h-16 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-500 mb-4">
+                        <i class="fas fa-layer-group text-xl"></i>
+                    </div>
+                    <h4 class="text-lg font-medium text-gray-900 dark:text-white mb-2">Este proyecto todavía no tiene secciones</h4>
+                    <p class="text-gray-500 dark:text-gray-400 mb-6 max-w-md text-sm">
+                        Antes de agregar tareas, crea una sección (por ejemplo "Por hacer", "En proceso", "Terminado") con el botón
+                        <span class="font-bold text-orange-500">"+ Nueva Sección"</span> ubicado arriba a la derecha.
+                    </p>
+                    @if(in_array(Auth::user()->role, ['admin', 'ceo', 'rrhh', 'contabilidad']))
+                    <div x-data="{ addingSection: false }">
+                        <button type="button" @click="addingSection = true; $nextTick(() => $refs.emptySectionInput.focus())" x-show="!addingSection" class="bg-orange-500 hover:bg-orange-600 text-black px-6 py-3 rounded-2xl text-xs font-black uppercase tracking-widest transition-all shadow-xl shadow-orange-500/20">
+                            <i class="fas fa-plus mr-2"></i> Crear primera sección
+                        </button>
+                        <form action="{{ route('tasks.store', $project) }}" method="POST" x-show="addingSection" class="flex items-center gap-2" style="display: none;">
+                            @csrf
+                            <input type="text" name="title" x-ref="emptySectionInput" placeholder="Nombre de la sección..." required class="bg-gray-100 dark:bg-[#1a1a1a] border border-gray-300 dark:border-white/10 rounded-lg px-3 py-2 text-xs text-gray-900 dark:text-white focus:ring-1 focus:ring-orange-500 outline-none">
+                            <button type="submit" class="text-green-500 hover:text-green-400 p-1.5 transition-colors" title="Guardar"><i class="fas fa-check"></i></button>
+                        </form>
+                    </div>
+                    @endif
+                </div>
+            @endif
             @foreach($project->tasks as $section)
                 <div x-data="{
                     expanded: localStorage.getItem('section_{{ $section->id }}') === 'false' ? false : true,
