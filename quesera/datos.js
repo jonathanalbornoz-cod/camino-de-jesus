@@ -71,6 +71,7 @@ const CATEGORIAS = [
   { id: 'aceites',     nombre: 'Aceites',                icono: 'aceite' },
   { id: 'condimentos', nombre: 'Condimentos',            icono: 'condimento' },
   { id: 'lacteos',     nombre: 'Lácteos',                icono: 'leche' },
+  { id: 'enlatados',   nombre: 'Enlatados',              icono: 'lata' },
 ];
 
 /*
@@ -163,14 +164,14 @@ const PRODUCTOS = [
   },
   {
     id: 'manguera', nombre: 'Manguera', categoria: 'carnes',
-    descripcion: 'Para la bandeja, la picada y el asado.',
-    presentacion: '', imagen: '', destacado: false,
+    descripcion: 'Salchicha en rollo, para la bandeja, la picada y el asado.',
+    presentacion: '', imagen: 'imagenes/productos/salchicha-manguera.webp', destacado: false,
   },
 
   /* ---------------- Congelados ---------------- */
   {
     id: 'papas-francesa', nombre: 'Papas a la francesa', categoria: 'congelados',
-    marca: "Bart's Tradition",
+    marca: 'Bart\'s Tradition',
     descripcion: 'Prefritas congeladas, van directo al aceite.',
     presentacion: '2,5 kg · 31 porciones', imagen: 'imagenes/productos/papas-francesas-2-500g.webp', destacado: true,
   },
@@ -205,8 +206,8 @@ const PRODUCTOS = [
   },
   {
     id: 'portacomidas', nombre: 'Portacomidas', categoria: 'desechables',
-    descripcion: 'Para almuerzos y domicilios, en los cuatro formatos.',
-    presentacion: 'C1 · J2 · P3 · K1', imagen: '', destacado: false,
+    descripcion: 'De icopor con tapa y divisiones, para almuerzos y domicilios.',
+    presentacion: 'C1 · J2 · P1 · K1', imagen: 'imagenes/productos/porta-comida-c1-k1-j2-p1.webp', destacado: false,
   },
   {
     id: 'platos-desechables', nombre: 'Platos desechables', categoria: 'desechables',
@@ -234,10 +235,28 @@ const PRODUCTOS = [
   {
     id: 'copas-salseras', nombre: 'Copas salseras', categoria: 'desechables',
     descripcion: 'Para salsas y aderezos al empacar el domicilio.',
-    presentacion: '', imagen: '', destacado: false,
+    presentacion: '', imagen: 'imagenes/productos/copa-salsera.webp', destacado: false,
+  },
+  {
+    id: 'papel-aluminio', nombre: 'Papel aluminio', categoria: 'desechables',
+    marca: 'House',
+    descripcion: 'Rollo para horno, asado y para conservar.',
+    presentacion: '100 m × 30 cm', imagen: 'imagenes/productos/papel-aluminio.webp', destacado: false,
   },
 
   /* ---------------- Salsas y aderezos ---------------- */
+  {
+    id: 'mayonesa-san-jorge', nombre: 'Aderezo de mayonesa', categoria: 'salsas',
+    marca: 'San Jorge',
+    descripcion: 'La base de la salsa de la casa, en presentación para negocio.',
+    presentacion: '', imagen: 'imagenes/productos/aderezo-mayonesa.webp', destacado: true,
+  },
+  {
+    id: 'vinagre', nombre: 'Vinagre blanco', categoria: 'salsas',
+    marca: 'Distrivalle',
+    descripcion: 'Para aderezos, encurtidos y limpieza de cocina.',
+    presentacion: '3.000 ml', imagen: 'imagenes/productos/vinagre.webp', destacado: false,
+  },
   {
     id: 'salsas-difier', nombre: 'Salsas Difier', categoria: 'salsas',
     marca: 'Difier',
@@ -250,12 +269,6 @@ const PRODUCTOS = [
     presentacion: '', imagen: '', destacado: false,
   },
   {
-    id: 'mayonesa-san-jorge', nombre: 'Aderezo de mayonesa', categoria: 'salsas',
-    marca: 'San Jorge',
-    descripcion: 'La base de la salsa de la casa.',
-    presentacion: '', imagen: '', destacado: false,
-  },
-  {
     id: 'salsa-italiana', nombre: 'Salsa italiana', categoria: 'salsas',
     descripcion: 'Para pastas, lasañas y pizzas.',
     presentacion: '', imagen: '', destacado: false,
@@ -265,59 +278,60 @@ const PRODUCTOS = [
     descripcion: 'Presentación para restaurante.',
     presentacion: '', imagen: '', destacado: false,
   },
-  {
-    id: 'vinagre', nombre: 'Vinagre', categoria: 'salsas',
-    descripcion: 'Para aderezos, encurtidos y limpieza de cocina.',
-    presentacion: '', imagen: '', destacado: false,
-  },
 
   /* ---------------- Panadería y repostería ---------------- */
   {
     id: 'huevos', nombre: 'Huevos', categoria: 'reposteria',
-    descripcion: 'Por panal, para el negocio o para la casa.',
-    presentacion: '', imagen: '', destacado: false,
+    descripcion: 'AA y AAA, por panal o por cubeta.',
+    presentacion: 'Panal de 30 unidades', imagen: 'imagenes/productos/huevos-aa-aaa.webp', destacado: true,
   },
   {
-    id: 'harinas', nombre: 'Harinas', categoria: 'reposteria',
-    descripcion: 'De trigo y de maíz, para panadería y amasijos.',
-    presentacion: '', imagen: '', destacado: false,
+    id: 'harinas', nombre: 'Harina de trigo', categoria: 'reposteria',
+    marca: 'Haz de Oros',
+    descripcion: 'Fortificada tradicional, para panadería y amasijos.',
+    presentacion: '2,5 kg', imagen: 'imagenes/productos/harina-de-trigo.webp', destacado: false,
   },
   {
-    id: 'margarinas', nombre: 'Margarinas', categoria: 'reposteria',
-    descripcion: 'Para hojaldre, ponqué y panadería en general.',
-    presentacion: '', imagen: '', destacado: false,
+    id: 'margarinas', nombre: 'Margarina', categoria: 'reposteria',
+    marca: 'Astra',
+    descripcion: 'Industrial para pastelería fina: hojaldre, ponqué y panadería.',
+    presentacion: '', imagen: 'imagenes/productos/margarina-astra.webp', destacado: false,
   },
   {
-    id: 'azucar', nombre: 'Azúcar', categoria: 'reposteria',
-    descripcion: 'Blanca y pulverizada.',
-    presentacion: '', imagen: '', destacado: false,
+    id: 'azucar', nombre: 'Azúcar blanco', categoria: 'reposteria',
+    marca: 'La Cabaña',
+    descripcion: 'Bulto para negocio; también se despacha por menor.',
+    presentacion: '50 kg', imagen: 'imagenes/productos/azucar.webp', destacado: false,
   },
   {
     id: 'domos-torta', nombre: 'Domos para torta', categoria: 'reposteria',
     descripcion: 'Para transportar y exhibir la torta sin dañarla.',
-    presentacion: '', imagen: '', destacado: false,
+    presentacion: '', imagen: 'imagenes/productos/domos-para-tortas.webp', destacado: false,
   },
   {
     id: 'esencias', nombre: 'Esencias', categoria: 'reposteria',
-    descripcion: 'Vainilla y sabores para repostería.',
-    presentacion: '', imagen: '', destacado: false,
+    descripcion: 'Vainilla, mantequilla, coco y más sabores para repostería.',
+    presentacion: '', imagen: 'imagenes/productos/esencias-para-alimentos.webp', destacado: false,
   },
 
   /* ---------------- Panes ---------------- */
   {
     id: 'pan-hamburguesa', nombre: 'Pan para hamburguesa', categoria: 'panes',
-    descripcion: 'Del tamaño que maneja el negocio de comida rápida.',
-    presentacion: '', imagen: '', destacado: false,
+    marca: 'Pan del Valle',
+    descripcion: 'Tipo brioche, del tamaño que maneja la comida rápida.',
+    presentacion: '', imagen: 'imagenes/productos/pan-hamburguesa.webp', destacado: false,
   },
   {
     id: 'pan-perro', nombre: 'Pan para perro', categoria: 'panes',
+    marca: 'Bimbo',
     descripcion: 'Suave y parejo, aguanta la salsa.',
-    presentacion: '', imagen: '', destacado: false,
+    presentacion: '10 unidades', imagen: 'imagenes/productos/pan-perro.webp', destacado: false,
   },
   {
     id: 'pan-tajado', nombre: 'Pan tajado', categoria: 'panes',
+    marca: 'Pan Pullman',
     descripcion: 'Para sánduches y desayunos.',
-    presentacion: '', imagen: '', destacado: false,
+    presentacion: '680 g', imagen: 'imagenes/productos/pan-tajado.webp', destacado: false,
   },
   {
     id: 'pan-colita', nombre: 'Pan colita', categoria: 'panes',
@@ -328,18 +342,21 @@ const PRODUCTOS = [
   /* ---------------- Aceites ---------------- */
   {
     id: 'aceite-industrial', nombre: 'Aceite industrial', categoria: 'aceites',
-    descripcion: 'Para freidora de negocio, rinde toda la jornada.',
-    presentacion: '19 litros', imagen: '', destacado: false,
+    marca: 'Celestial',
+    descripcion: 'Oleína de palma alto oleico, para freidora de negocio.',
+    presentacion: '19 litros', imagen: 'imagenes/productos/aceite-industrial-19lts.webp', destacado: true,
   },
   {
-    id: 'aceite-galon', nombre: 'Aceite de galón', categoria: 'aceites',
+    id: 'aceite-galon', nombre: 'Aceite de palma en garrafa', categoria: 'aceites',
+    marca: 'Palma de Oro',
     descripcion: 'El intermedio: casa grande o negocio pequeño.',
-    presentacion: '3.000 ml', imagen: '', destacado: false,
+    presentacion: '5.000 ml', imagen: 'imagenes/productos/aceite-de-palma-5000ml.webp', destacado: false,
   },
   {
     id: 'aceite-cocina', nombre: 'Aceite de cocina', categoria: 'aceites',
+    marca: 'Kindom',
     descripcion: 'La presentación de siempre para la casa.',
-    presentacion: '1.000 ml', imagen: '', destacado: false,
+    presentacion: '1.000 ml', imagen: 'imagenes/productos/aceite-kindom-1000ml.webp', destacado: false,
   },
 
   /* ---------------- Condimentos ---------------- */
@@ -361,18 +378,41 @@ const PRODUCTOS = [
 
   /* ---------------- Lácteos ---------------- */
   {
-    id: 'leche', nombre: 'Leche', categoria: 'lacteos',
-    descripcion: 'Para la casa y para el negocio.',
-    presentacion: '', imagen: '', destacado: false,
+    id: 'leche', nombre: 'Leche entera', categoria: 'lacteos',
+    marca: 'Alquería',
+    descripcion: 'En bolsa, para la casa y para el negocio.',
+    presentacion: 'Megalitro', imagen: 'imagenes/productos/leche-entera.webp', destacado: false,
   },
   {
     id: 'crema-leche', nombre: 'Crema de leche', categoria: 'lacteos',
+    marca: 'Mr Quick',
     descripcion: 'Para salsas, postres y repostería.',
-    presentacion: '', imagen: '', destacado: false,
+    presentacion: '900 ml', imagen: 'imagenes/productos/crema-de-leche.webp', destacado: false,
   },
   {
     id: 'yogur', nombre: 'Yogur', categoria: 'lacteos',
-    descripcion: 'Para el desayuno y las onces.',
-    presentacion: '', imagen: '', destacado: false,
+    marca: 'Lactodelicias',
+    descripcion: 'Sabor melocotón, con probióticos.',
+    presentacion: '1.750 g · 8 porciones', imagen: 'imagenes/productos/yogurt.webp', destacado: false,
+  },
+
+  /* ---------------- Enlatados ---------------- */
+  {
+    id: 'atun', nombre: 'Atún', categoria: 'enlatados',
+    marca: 'Isabel',
+    descripcion: 'Atún claro en lomitos, en aceite de girasol o en agua.',
+    presentacion: '', imagen: 'imagenes/productos/atun-isabel.webp', destacado: true,
+  },
+  {
+    id: 'frijoles-enlatados', nombre: 'Frijoles antioqueños', categoria: 'enlatados',
+    marca: 'Zenú',
+    descripcion: 'Listos para calentar y servir.',
+    presentacion: '310 g · 2 porciones', imagen: 'imagenes/productos/frijoles-enlatados.webp', destacado: false,
+  },
+  {
+    id: 'arveja-zanahoria', nombre: 'Arveja con zanahoria', categoria: 'enlatados',
+    marca: 'San Jorge',
+    descripcion: 'Enlatada, lista para la ensalada o el arroz.',
+    presentacion: '', imagen: 'imagenes/productos/arveja-y-zanahoria-enlatada.webp', destacado: false,
   },
 ];

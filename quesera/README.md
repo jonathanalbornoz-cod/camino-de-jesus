@@ -30,8 +30,8 @@ imagenes/productos/     las fotos de producto, ya sin la onda del set
 | Horarios de atención | `MARCA.horario` | **Falta** |
 | Mapa de ubicación | `MARCA.mapaEmbed` | **Falta** |
 | Redes sociales | `MARCA.instagram`, `.facebook`, `.tiktok` | **Falta** |
-| Presentaciones | `presentacion` de 29 productos | **Falta** |
-| Fotos | 21 de 50 productos | Parcial |
+| Presentaciones | `presentacion` de 15 productos | **Falta** |
+| Fotos | 45 de 54 productos | Parcial |
 
 Mientras algo de eso falte, la página muestra una franja arriba diciendo qué es. El aviso
 **desaparece solo** cuando estén los cuatro datos de marca. Los bloques que dependen de un
@@ -48,8 +48,8 @@ la URL del `src` y pegarla en `MARCA.mapaEmbed`. La sección aparece sola.
 
 **Presentaciones** — el campo `presentacion` de cada producto. Si está vacío la tarjeta no
 muestra esa línea, así que no se ve rota, pero conviene llenarlas: es lo que el cliente
-pregunta por WhatsApp. Faltan sobre todo los quesos (¿libra, kilo, bloque?), las salsas,
-la panadería, los panes, los condimentos y los lácteos.
+pregunta por WhatsApp. Faltan sobre todo los quesos (¿libra, kilo, bloque?), las salsas sin
+foto, los condimentos, el chorizo, la manguera y las copas salseras.
 
 **Fotos nuevas** — van en `imagenes/productos/`, y la ruta se pone en el campo `imagen`.
 
@@ -107,6 +107,11 @@ Las categorías se editan en `CATEGORIAS`: los filtros y sus contadores se dibuj
 - **Categoría** — chips con el número de productos de cada una; se pueden marcar varias.
 - **Búsqueda** — por nombre, descripción, presentación, marca y categoría. Ignora las
   tildes, así que «jamon» encuentra «jamón» y «zen» encuentra los productos Zenú.
+
+Los resultados van ordenados por relevancia: primero los que empiezan por lo buscado,
+luego los que lo contienen en el nombre, después por marca y por categoría. Sin eso
+mandaba el orden del catálogo y buscar «pan» devolvía primero un queso, porque su
+descripción dice «acompañar».
 
 ## El pedido
 

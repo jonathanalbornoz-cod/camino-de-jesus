@@ -34,7 +34,7 @@ def _oro(p):
 
 
 def quitar_onda(entrada, salida, ventana=None, flecos=True,
-                banda_completa=False, margen_abajo=0, forzar=()):
+                banda_completa=False, margen_abajo=0, forzar=(), alcance=30):
     im = Image.open(entrada).convert("RGB")
     a = np.array(im).astype(np.int16)
     h, w, _ = a.shape
@@ -44,12 +44,17 @@ def quitar_onda(entrada, salida, ventana=None, flecos=True,
     # El vino no se mide por distancia a una referencia: el fondo lleva un
     # degradado y abajo es bastante más oscuro que arriba (en la foto de la
     # costilla, un 40% de las filas bajas se salía de tolerancia). Se mide por
-    # tono, que es lo que de verdad lo distingue: oscuro, rojizo y sin azul.
-    # Un empaque negro (20,20,20) no pasa, y uno rojo (200,30,40) tampoco.
+    # tono, y el tono hay que afinarlo, porque medio catálogo lleva empaques
+    # rojos. Medido sobre las esquinas superiores de las 46 fotos, el vino del
+    # set va R 41-98, G 0-16, B 7-31, y siempre con MÁS AZUL QUE VERDE: es un
+    # rojo azulado. El rojo de un empaque no cumple eso —el de la bolsa de
+    # empanadas es (90,30,30)—, y por no distinguirlo el barrido se metía
+    # dentro de la bolsa y le pintaba una banda de fondo encima.
     R, G, B = a[:, :, 0], a[:, :, 1], a[:, :, 2]
     es_vino = ((np.abs(a - vino.reshape(1, 1, 3)).max(axis=2) <= TOL_VINO) |
-               ((R > 28) & (R < 120) & (G < 62) & (B < 72) & (R > G + 14)))
-    es_oro = (a[:, :, 0] > 180) & (a[:, :, 1] > 100) & (a[:, :, 1] < 225) & (a[:, :, 2] < 45)
+               ((R > 24) & (R < 118) & (G < 26) & (B > 3) & (B < 48) &
+                (B >= G - 2) & (R > G + 20)))
+    es_oro = (R > 180) & (G > 100) & (G < 225) & (B < 45)
 
     # El barrido arranca por debajo de cualquier estorbo pegado al borde
     # superior — en la foto de la costilla, la barra de la que cuelga.
@@ -85,13 +90,37 @@ def quitar_onda(entrada, salida, ventana=None, flecos=True,
     if len(columnas) < w * .05:
         return None                                   # esta foto no trae onda
 
-    # La onda es un trazo continuo: las columnas cuyo tope se sale del grupo
-    # no son la onda sino un producto del mismo color (el cheddar, por caso).
+    # Las columnas que de verdad enseñan la onda tienen que cumplir dos cosas.
+    #
+    # Primero, agruparse: la onda va a una altura parecida en toda la foto, así
+    # que lo que se aleja mucho de la mediana no es onda sino un producto del
+    # mismo color.
     ts = np.array([v[0] for v in columnas.values()])
     med = np.median(ts)
     mad = np.median(np.abs(ts - med)) or 1
     limite = max(30, 5 * mad)
     columnas = {x: v for x, v in columnas.items() if abs(v[0] - med) <= limite}
+    if len(columnas) < w * .05:
+        return None
+
+    # Y segundo, continuar el trazo: la onda no da saltos. Se entra por cada
+    # borde —que en estas tomas es siempre fondo limpio, el producto va
+    # centrado— y se la sigue aceptando sólo lo que sigue la línea. Donde el
+    # producto la tapa se salta y se retoma al otro lado, con un margen que
+    # crece con el hueco pero tiene tope: sin ese tope, un hueco ancho deja
+    # pasar cualquier cosa y el envase acaba con una banda pintada encima.
+    def seguir(orden):
+        aceptadas, t_ref, x_ref = {}, None, None
+        for x in orden:
+            if x not in columnas:
+                continue
+            t = columnas[x][0]
+            if t_ref is None or abs(t - t_ref) <= min(45, 12 + 0.45 * abs(x - x_ref)):
+                aceptadas[x] = columnas[x]
+                t_ref, x_ref = t, x
+        return aceptadas
+
+    columnas = {**seguir(range(w)), **seguir(range(w - 1, -1, -1))}
     if len(columnas) < w * .05:
         return None
 
@@ -175,6 +204,24 @@ def quitar_onda(entrada, salida, ventana=None, flecos=True,
         pendientes = np.zeros((h, w), bool)
         pendientes[:, [x for x in todas if x not in columnas]] = True
 
+        # Y sólo cerca de donde la onda sí se lee. El fleco que queda por
+        # limpiar está pegado al producto, a pocos píxeles de la última
+        # columna buena; sin este tope la limpieza se adentraba en envases
+        # amarillos —la bolsa de empanadas, el panal de huevos— y les dejaba
+        # una banda de fondo pintada por encima.
+        leidas = np.zeros(w, bool)
+        leidas[list(columnas)] = True
+        dist = np.full(w, w, int)
+        d = w
+        for x in range(w):
+            d = 0 if leidas[x] else d + 1
+            dist[x] = d
+        d = w
+        for x in range(w - 1, -1, -1):
+            d = 0 if leidas[x] else d + 1
+            dist[x] = min(dist[x], d)
+        pendientes &= (dist <= alcance)
+
         # Se repasa en dos vueltas: primero el dorado limpio, luego los bordes
         # difuminados, que sólo se tocan si están pegados a lo ya repintado.
         pintado = np.zeros((h, w), bool)
@@ -193,7 +240,7 @@ def quitar_onda(entrada, salida, ventana=None, flecos=True,
         # El borde difuminado de la onda: mezcla de oro con crema, así que el
         # azul sube. Se acepta hasta 95 —la madera de las tablas anda por 70,
         # pero no es contigua a la onda, y aquí sólo se crece desde ella.
-        for _ in range(70):
+        for _ in range(24):
             b = np.clip(arr, 0, 255).astype(np.int16)
             difuso = ((b[:, :, 0] > 175) & (b[:, :, 1] > 95) &
                       (b[:, :, 1] < 235) & (b[:, :, 2] < 95))
@@ -202,7 +249,7 @@ def quitar_onda(entrada, salida, ventana=None, flecos=True,
             vecino[:, :-1] |= pintado[:, 1:]
             vecino[1:] |= pintado[:-1]
             vecino[:-1] |= pintado[1:]
-            objetivo = difuso & dentro & vecino & ~pintado
+            objetivo = difuso & dentro & vecino & ~pintado & (dist <= alcance)
             if not objetivo.any():
                 break
             yy, xx = np.nonzero(objetivo)
@@ -229,7 +276,14 @@ AJUSTES = {
     # La costilla cuelga desde arriba: si una columna enseña la onda, esa
     # columna no tiene producto ni arriba ni abajo, así que se puede repintar
     # la banda entera y llevarse también el borde difuso de la onda.
-    "Costilla ahumada .png": dict(banda_completa=True, margen_abajo=70),
+    "Costilla ahumada .png": dict(banda_completa=True, margen_abajo=70,
+                                 forzar=[(0, 120), (800, 1023)], alcance=260),
+    # Envases amarillos y altos: el bidón de aceite y la bolsa de leche cortan
+    # el barrido del vino antes de llegar a la onda, y su propio amarillo se
+    # confunde con ella. Se acota dónde puede estar la onda de verdad, que se
+    # lee en las columnas del borde (ahí siempre hay fondo limpio).
+    "Aceite industrial 19Lts.png": dict(ventana=(540, 650)),
+    "Leche entera .png":           dict(ventana=(720, 830)),
 }
 
 

@@ -206,10 +206,28 @@
       </article>`;
   }
 
+  /*
+   * Relevancia de un resultado de búsqueda. Sin esto manda el orden del
+   * catálogo y buscar «pan» devolvía primero un queso, porque su descripción
+   * dice «acompañar». Cuanto más bajo, más arriba sale.
+   */
+  function relevancia(p) {
+    const q = estado.busqueda;
+    if (!q) return 0;
+    const nombre = normalizar(p.nombre);
+    if (nombre.startsWith(q)) return 0;
+    if (nombre.includes(q)) return 1;
+    if (normalizar(p.marca || '').includes(q)) return 2;
+    if (normalizar(cat(p.categoria).nombre).includes(q)) return 3;
+    return 4;
+  }
+
   function pintarCatalogo() {
     const lista = filtrar();
-    // Los destacados arriba; dentro de cada grupo se respeta el orden de datos.js
-    lista.sort((a, b) => Number(b.destacado) - Number(a.destacado));
+    // Primero lo que mejor responde a la búsqueda; después los destacados.
+    // Dentro de cada grupo se respeta el orden de datos.js.
+    lista.sort((a, b) =>
+      relevancia(a) - relevancia(b) || Number(b.destacado) - Number(a.destacado));
 
     $('#rejilla').innerHTML = lista.map(tarjeta).join('');
     $('#vacio').hidden = lista.length > 0;
