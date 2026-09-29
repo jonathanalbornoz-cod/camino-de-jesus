@@ -74,7 +74,35 @@
                     @forelse($projects as $project)
                         <div x-show="search === '' || '{{ strtolower($project->name) }}'.includes(search.toLowerCase())"
                              class="group relative bg-white/80 dark:bg-[#1a1a1a]/70 backdrop-blur-2xl border border-gray-200 dark:border-white/20 hover:border-orange-500/50 transition-all duration-500 rounded-2xl p-8 flex flex-col h-full shadow-sm hover:shadow-xl transform hover:-translate-y-1">
-                            
+
+                            @if(in_array(Auth::user()->role, ['admin', 'ceo']))
+                            <div class="absolute top-5 right-5 z-30" x-data="{ open: false }">
+                                <button @click="open = !open" @click.away="open = false" class="text-gray-500 hover:text-orange-500 transition-colors p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/5">
+                                    <i class="fas fa-ellipsis-v text-sm"></i>
+                                </button>
+
+                                <div x-show="open"
+                                     x-transition:enter="transition ease-out duration-200"
+                                     x-transition:enter-start="opacity-0 translate-y-2"
+                                     x-transition:enter-end="opacity-100 translate-y-0"
+                                     class="absolute right-0 mt-2 w-40 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 rounded-xl shadow-xl overflow-hidden z-40"
+                                     style="display: none;">
+
+                                    <a href="{{ route('projects.edit', $project) }}" class="block px-4 py-3 text-xs font-medium text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white transition-colors">
+                                        Editar Proyecto
+                                    </a>
+
+                                    <form action="{{ route('projects.destroy', $project) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este proyecto? Esta acción no se puede deshacer.');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="block w-full text-left px-4 py-3 text-xs font-medium text-red-500 hover:bg-red-500/10 hover:text-red-400 transition-colors">
+                                            Eliminar
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                            @endif
+
                             <a href="{{ route('projects.show', $project) }}" class="absolute inset-0 z-10"></a>
 
                             <div class="flex justify-between items-start mb-6">
