@@ -55,7 +55,17 @@ class SubtaskController extends Controller
         }
 
         if ($request->has('team_member_id')) {
-            $data['team_member_id'] = empty($request->team_member_id) ? null : $request->team_member_id;
+            $newTeamMemberId = empty($request->team_member_id) ? null : $request->team_member_id;
+
+            // Un colaborador solo puede asignar tareas a colaboradores de menor cargo jerárquico.
+            if ($newTeamMemberId && auth()->user()->role === 'colaborador') {
+                $targetMember = \App\Models\TeamMember::with('user')->find($newTeamMemberId);
+                if (!auth()->user()->canAssignTo($targetMember?->user)) {
+                    abort(403, 'No tienes permiso para asignar tareas a este colaborador.');
+                }
+            }
+
+            $data['team_member_id'] = $newTeamMemberId;
         }
 
         $oldMemberId = $subtask->team_member_id;

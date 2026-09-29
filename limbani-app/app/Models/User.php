@@ -22,6 +22,7 @@ class User extends Authenticatable
         'email',
         'password',
         'role',
+        'hierarchy_level',
     ];
 
     // Constantes para Roles
@@ -73,5 +74,29 @@ class User extends Authenticatable
     public function teamMember()
     {
         return $this->hasOne(TeamMember::class);
+    }
+
+    public function invitedProjects()
+    {
+        return $this->belongsToMany(Project::class);
+    }
+
+    /**
+     * ¿Puede este usuario asignar tareas al usuario dado, según su cargo jerárquico?
+     * Un nivel más alto (número mayor) significa menor rango.
+     */
+    public function canAssignTo(?User $other): bool
+    {
+        if (!$other) {
+            return false;
+        }
+
+        if (in_array($this->role, ['admin', 'ceo', 'rrhh', 'contabilidad'])) {
+            return true;
+        }
+
+        return $this->hierarchy_level !== null
+            && $other->hierarchy_level !== null
+            && $other->hierarchy_level > $this->hierarchy_level;
     }
 }

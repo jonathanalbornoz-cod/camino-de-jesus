@@ -1,3 +1,18 @@
+@php
+    // Colaboradores que el usuario actual puede asignar como responsables.
+    // Admin/ceo/rrhh/contabilidad ven a todo el equipo; un colaborador solo
+    // ve a quienes están por debajo de él en el cargo jerárquico (si tiene uno asignado).
+    $currentAuthUser = Auth::user();
+    if (in_array($currentAuthUser->role, ['admin', 'ceo', 'rrhh', 'contabilidad'])) {
+        $assignableTeamMembers = \App\Models\TeamMember::orderBy('name')->get();
+    } elseif ($currentAuthUser->hierarchy_level !== null) {
+        $assignableTeamMembers = \App\Models\TeamMember::whereHas('user', function($q) use ($currentAuthUser) {
+            $q->where('hierarchy_level', '>', $currentAuthUser->hierarchy_level);
+        })->orderBy('name')->get();
+    } else {
+        $assignableTeamMembers = collect();
+    }
+@endphp
 <!-- PANEL LATERAL DE TAREA (Único y Global) -->
 <div x-show="openPanel" 
      x-transition:enter="transition ease-out duration-300"
@@ -53,7 +68,7 @@
             <div class="flex items-center gap-12">
                 <label class="w-32 text-xs font-medium text-gray-500 uppercase tracking-wider">Responsable</label>
                 <div class="flex-1">
-                    <template x-if="'{{ Auth::user()->role }}' === 'colaborador'">
+                    <template x-if="{{ $assignableTeamMembers->isEmpty() ? 'true' : 'false' }}">
                         <div class="flex items-center gap-2 px-2 py-1.5 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg">
                             <template x-if="currentTask.team_member_photo">
                                 <img :src="'{{ asset('storage') }}/' + currentTask.team_member_photo" class="w-5 h-5 rounded-full object-cover border border-white/10">
@@ -66,7 +81,7 @@
                             <span class="text-sm text-gray-700 dark:text-gray-300" x-text="currentTask.team_member_name || 'Sin asignar'"></span>
                         </div>
                     </template>
-                    <template x-if="'{{ Auth::user()->role }}' !== 'colaborador'">
+                    <template x-if="{{ $assignableTeamMembers->isNotEmpty() ? 'true' : 'false' }}">
                         <select
                             name="team_member_id"
                             x-model="currentTask.team_member_id"
@@ -74,7 +89,7 @@
                             class="w-full bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 focus:ring-1 focus:ring-orange-500 outline-none p-2"
                         >
                             <option value="">Sin asignar</option>
-                            @foreach(\App\Models\TeamMember::orderBy('name')->get() as $m)
+                            @foreach($assignableTeamMembers as $m)
                                 <option value="{{ $m->id }}">{{ $m->name }}</option>
                             @endforeach
                         </select>
@@ -139,7 +154,7 @@
                                    class="bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 rounded-lg pl-8 pr-2 py-1 text-sm text-gray-700 dark:text-gray-300 focus:ring-1 focus:ring-orange-500 outline-none cursor-pointer hover:text-black dark:hover:text-white transition-colors">
                         </div>
                     </template>
-                    <template x-if="currentTask.due_date">
+                    <template x-if="currentTask.due_date && currentTask.team_member_id">
                         <p class="text-[10px] font-bold uppercase tracking-wider" :class="new Date(currentTask.due_date) < new Date() ? 'text-red-500' : 'text-green-500'"><i class="fas fa-clock mr-1"></i> <span x-text="getRemainingTime(currentTask.due_date)"></span></p>
                     </template>
                 </div>
@@ -190,7 +205,7 @@
                             <input type="text" :value="child.title" @change="fetch('{{ url('/subtasks') }}/'+child.id, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' }, body: JSON.stringify({ title: $event.target.value }) })" class="bg-transparent border-none text-sm font-medium text-gray-700 dark:text-gray-300 focus:ring-0 p-0 w-full" :class="child.is_completed ? 'line-through opacity-40' : ''">
                             
                             <div class="flex flex-wrap items-center gap-4 mt-2">
-                                <template x-if="'{{ Auth::user()->role }}' === 'colaborador'">
+                                <template x-if="{{ $assignableTeamMembers->isEmpty() ? 'true' : 'false' }}">
                                     <div class="flex gap-4">
                                         <div class="flex items-center gap-1.5">
                                             <i class="fas fa-user text-[8px] text-gray-600"></i>
@@ -202,7 +217,7 @@
                                         </div>
                                     </div>
                                 </template>
-                                <template x-if="'{{ Auth::user()->role }}' !== 'colaborador'">
+                                <template x-if="{{ $assignableTeamMembers->isNotEmpty() ? 'true' : 'false' }}">
                                     <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
                                         <!-- Responsable -->
                                         <div class="flex items-center gap-1.5 group/select">
@@ -212,7 +227,7 @@
                                                 class="bg-transparent border-none text-[10px] font-bold text-gray-500 focus:ring-0 p-0 cursor-pointer hover:text-orange-500 transition-colors outline-none uppercase tracking-tighter"
                                             >
                                                 <option value="">Sin asignar</option>
-                                                @foreach(\App\Models\TeamMember::orderBy('name')->get() as $m)
+                                                @foreach($assignableTeamMembers as $m)
                                                     <option value="{{ $m->id }}" :selected="child.team_member_id == {{ $m->id }}">{{ $m->name }}</option>
                                                 @endforeach
                                             </select>

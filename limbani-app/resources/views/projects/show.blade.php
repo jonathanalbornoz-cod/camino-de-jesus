@@ -35,7 +35,51 @@
             
             <div class="flex items-center gap-4 w-full md:w-auto justify-between md:justify-end">
                 <x-notification-center />
-                
+
+                @if(in_array(Auth::user()->role, ['admin', 'ceo', 'rrhh', 'contabilidad']))
+                @php
+                    $invitedUserIds = $project->members->pluck('id')->toArray();
+                    $invitableTeamMembers = \App\Models\TeamMember::whereNotNull('user_id')->whereNotIn('user_id', $invitedUserIds)->orderBy('name')->get();
+                @endphp
+                <div class="relative" x-data="{ showInvite: false }">
+                    <button type="button" @click="showInvite = !showInvite" class="flex items-center gap-2 bg-gray-100 dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 hover:border-orange-500/50 px-4 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-colors text-gray-600 dark:text-gray-300">
+                        <i class="fas fa-user-plus"></i>
+                        <span>Colaboradores</span>
+                        @if($project->members->count() > 0)
+                            <span class="bg-orange-500 text-black rounded-full w-5 h-5 flex items-center justify-center text-[10px]">{{ $project->members->count() }}</span>
+                        @endif
+                    </button>
+                    <div x-show="showInvite" @click.away="showInvite = false" x-transition class="absolute right-0 mt-2 w-72 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 rounded-xl shadow-xl z-50 p-4" style="display: none;">
+                        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Participantes del proyecto</p>
+                        <div class="space-y-1 mb-4 max-h-40 overflow-y-auto">
+                            @forelse($project->members as $member)
+                                <div class="flex items-center justify-between text-xs text-gray-700 dark:text-gray-300 py-1">
+                                    <span class="truncate">{{ $member->name }}</span>
+                                    <form action="{{ route('projects.members.remove', [$project, $member]) }}" method="POST" onsubmit="return confirm('¿Quitar a {{ $member->name }} del proyecto?');">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="text-gray-400 hover:text-red-500"><i class="fas fa-times text-[10px]"></i></button>
+                                    </form>
+                                </div>
+                            @empty
+                                <p class="text-[10px] text-gray-600 italic">Nadie invitado todavía.</p>
+                            @endforelse
+                        </div>
+                        <p class="text-[10px] font-bold text-gray-500 uppercase tracking-widest mb-2">Invitar colaborador</p>
+                        <form action="{{ route('projects.invite', $project) }}" method="POST" class="flex items-center gap-2">
+                            @csrf
+                            <select name="team_member_id" required class="flex-1 bg-gray-50 dark:bg-[#111] border border-gray-200 dark:border-white/10 rounded-lg text-xs p-2 text-gray-700 dark:text-gray-300">
+                                <option value="">-- Elegir --</option>
+                                @foreach($invitableTeamMembers as $tm)
+                                    <option value="{{ $tm->id }}">{{ $tm->name }}</option>
+                                @endforeach
+                            </select>
+                            <button type="submit" class="bg-orange-500 text-black px-3 py-2 rounded-lg text-xs font-bold"><i class="fas fa-plus"></i></button>
+                        </form>
+                    </div>
+                </div>
+                @endif
+
                 @if(in_array(Auth::user()->role, ['admin', 'ceo', 'rrhh', 'contabilidad']))
                 <div x-data="{ addingSection: false }">
                     <button type="button" @click="addingSection = true; $nextTick(() => $refs.sectionInput.focus())" x-show="!addingSection" class="bg-gray-900 dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-colors shadow-lg">
