@@ -32,7 +32,16 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // 2. Rutas de la Agencia (Proyectos)
-    Route::resource('projects', ProjectController::class);
+    // Crear, editar y borrar proyectos: solo administradores.
+    Route::middleware([\App\Http\Middleware\CheckRole::class.':admin'])->group(function () {
+        Route::get('/projects/create', [ProjectController::class, 'create'])->name('projects.create');
+        Route::post('/projects', [ProjectController::class, 'store'])->name('projects.store');
+        Route::get('/projects/{project}/edit', [ProjectController::class, 'edit'])->name('projects.edit');
+        Route::put('/projects/{project}', [ProjectController::class, 'update'])->name('projects.update');
+        Route::delete('/projects/{project}', [ProjectController::class, 'destroy'])->name('projects.destroy');
+    });
+    Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
+    Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
     Route::post('/projects/reorder', [ProjectController::class, 'reorder'])->name('projects.reorder');
     Route::post('/projects/{project}/generate-meta-strategy', [ProjectController::class, 'generateMetaStrategy'])->name('projects.generate-meta-strategy');
 
@@ -88,7 +97,7 @@ Route::middleware('auth')->group(function () {
 
     // 7. Gestión Administrativa & Contratos
     Route::get('/admin-projects', [\App\Http\Controllers\AdministrativeProjectController::class, 'index'])->name('admin-projects.index');
-    Route::post('/admin-projects', [\App\Http\Controllers\AdministrativeProjectController::class, 'store'])->name('admin-projects.store');
+    Route::post('/admin-projects', [\App\Http\Controllers\AdministrativeProjectController::class, 'store'])->middleware([\App\Http\Middleware\CheckRole::class.':admin'])->name('admin-projects.store');
     Route::post('/contracts', [\App\Http\Controllers\ContractController::class, 'store'])->name('contracts.store');
     Route::get('/contracts/{contract}/print', [\App\Http\Controllers\ContractController::class, 'print'])->name('contracts.print');
 
