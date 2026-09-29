@@ -72,37 +72,39 @@
             </div>
 
             <div class="col-span-3 text-right flex items-center justify-end gap-2 shrink-0">
-                @php
-                    $now = now();
-                    $start = $subtask->start_date;
-                    $due = $subtask->due_date;
-                    $isOverdue = $due && $now > $due && !$subtask->is_completed;
-                @endphp
+                @if($subtask->team_member_id)
+                    @php
+                        $now = now();
+                        $start = $subtask->start_date;
+                        $due = $subtask->due_date;
+                        $isOverdue = $due && $now > $due && !$subtask->is_completed;
+                    @endphp
 
-                @if($isOverdue)
-                    <div class="flex items-center px-1.5 py-0.5 rounded-full border border-red-500/30 bg-red-500/20 text-red-500 text-[7px] font-black uppercase tracking-tighter shrink-0 animate-pulse">
-                        Vencida
+                    @if($isOverdue)
+                        <div class="flex items-center px-1.5 py-0.5 rounded-full border border-red-500/30 bg-red-500/20 text-red-500 text-[7px] font-black uppercase tracking-tighter shrink-0 animate-pulse">
+                            Vencida
+                        </div>
+                    @endif
+
+                    <div class="flex flex-col items-end leading-none">
+                        @if($start)
+                            <div class="flex items-center gap-1">
+                                <span class="text-[7px] font-bold text-gray-500 uppercase opacity-60">Ini:</span>
+                                <span class="text-[9px] font-bold text-orange-500/80 whitespace-nowrap">{{ $start->format('d M, h:i A') }}</span>
+                            </div>
+                        @else
+                            <!-- Espacio reservado para mantener alineación -->
+                            <div class="h-[9px]"></div>
+                        @endif
+                        <div class="flex items-center gap-1">
+                            <span class="text-[7px] font-bold text-gray-500 uppercase opacity-60">Fin:</span>
+                            <span class="{{ $level == 0 ? 'text-[11px]' : 'text-[9px]' }} font-black text-gray-400 dark:text-gray-200 whitespace-nowrap">
+                                {{ $due ? $due->format('d M, h:i A') : '--:--' }}
+                            </span>
+                        </div>
                     </div>
                 @endif
 
-                <div class="flex flex-col items-end leading-none">
-                    @if($start)
-                        <div class="flex items-center gap-1">
-                            <span class="text-[7px] font-bold text-gray-500 uppercase opacity-60">Ini:</span>
-                            <span class="text-[9px] font-bold text-orange-500/80 whitespace-nowrap">{{ $start->format('d M, h:i A') }}</span>
-                        </div>
-                    @else
-                        <!-- Espacio reservado para mantener alineación -->
-                        <div class="h-[9px]"></div>
-                    @endif
-                    <div class="flex items-center gap-1">
-                        <span class="text-[7px] font-bold text-gray-500 uppercase opacity-60">Fin:</span>
-                        <span class="{{ $level == 0 ? 'text-[11px]' : 'text-[9px]' }} font-black text-gray-400 dark:text-gray-200 whitespace-nowrap">
-                            {{ $due ? $due->format('d M, h:i A') : '--:--' }}
-                        </span>
-                    </div>
-                </div>
-                
                 @if($level > 0 && Auth::user()->role !== 'colaborador')
                     <button type="button" 
                             @click.stop="if(confirm('¿Borrar?')) fetch('{{ url('/subtasks') }}/{{ $subtask->id }}', { method: 'DELETE', headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json' } }).then(() => window.location.reload())" 

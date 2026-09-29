@@ -19,11 +19,16 @@ class ProjectController extends Controller
             $teamMember = $user->teamMember;
             $teamMemberId = $teamMember ? $teamMember->id : null;
 
-            // Un colaborador solo ve los proyectos donde tiene subtareas asignadas
+            // Un colaborador ve los proyectos donde tiene subtareas asignadas,
+            // o a los que fue invitado explícitamente aunque aún no tenga tareas.
             $categories = ['agencia', 'produccion_av', 'postproduccion', 'diseno_grafico', 'desarrollo_web'];
             $projects = Project::whereIn('category', $categories)
-                ->whereHas('tasks.subtasks', function($query) use ($teamMemberId) {
-                    $query->where('team_member_id', $teamMemberId);
+                ->where(function($q) use ($teamMemberId, $user) {
+                    $q->whereHas('tasks.subtasks', function($sq) use ($teamMemberId) {
+                        $sq->where('team_member_id', $teamMemberId);
+                    })->orWhereHas('members', function($mq) use ($user) {
+                        $mq->where('users.id', $user->id);
+                    });
                 })->with(['tasks' => function($query) use ($teamMemberId) {
                     $query->whereHas('subtasks', function($q) use ($teamMemberId) {
                         $q->where('team_member_id', $teamMemberId);
@@ -143,11 +148,13 @@ class ProjectController extends Controller
     public function show(Project $project)
     {
         $user = Auth::user();
-        
-        if ($user->role === 'colaborador') {
+
+        $isInvitedMember = $project->members()->where('users.id', $user->id)->exists();
+
+        if ($user->role === 'colaborador' && !$isInvitedMember) {
             $teamMemberId = $user->teamMember ? $user->teamMember->id : null;
-            
-            // Cargar solo las secciones que tienen tareas asignadas al colaborador, 
+
+            // Cargar solo las secciones que tienen tareas asignadas al colaborador,
             // y dentro de esas secciones solo sus tareas.
             $project->load(['tasks' => function($query) use ($teamMemberId) {
                 $query->whereHas('subtasks', function($q) use ($teamMemberId) {
@@ -164,7 +171,35 @@ class ProjectController extends Controller
             }]);
         }
 
+        $project->load('members');
+
         return view('projects.show', compact('project'));
+    }
+
+    // Invitar a un colaborador registrado a participar del proyecto completo
+    public function invite(Request $request, Project $project)
+    {
+        $request->validate([
+            'team_member_id' => 'required|exists:team_members,id',
+        ]);
+
+        $teamMember = \App\Models\TeamMember::findOrFail($request->team_member_id);
+
+        if (!$teamMember->user_id) {
+            return back()->with('error', 'Este colaborador no tiene una cuenta de usuario vinculada todavía.');
+        }
+
+        $project->members()->syncWithoutDetaching([$teamMember->user_id]);
+
+        return back()->with('success', 'Colaborador invitado al proyecto correctamente.');
+    }
+
+    // Quitar a un colaborador del proyecto
+    public function removeMember(Project $project, User $user)
+    {
+        $project->members()->detach($user->id);
+
+        return back()->with('success', 'Colaborador removido del proyecto.');
     }
 
     // 4. Mostrar formulario de edición (reutilizando create)

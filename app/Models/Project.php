@@ -47,6 +47,11 @@ class Project extends Model
         return $this->hasManyThrough(Subtask::class, Task::class);
     }
 
+    public function members()
+    {
+        return $this->belongsToMany(User::class);
+    }
+
     /**
      * Get or create brief for this project
      */

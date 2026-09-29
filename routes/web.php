@@ -44,6 +44,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/projects', [ProjectController::class, 'index'])->name('projects.index');
     Route::get('/projects/{project}', [ProjectController::class, 'show'])->name('projects.show');
     Route::post('/projects/reorder', [ProjectController::class, 'reorder'])->name('projects.reorder');
+    // Invitar colaboradores al proyecto: administración y mandos de gestión.
+    Route::middleware([\App\Http\Middleware\CheckRole::class.':admin,ceo,rrhh,contabilidad'])->group(function () {
+        Route::post('/projects/{project}/invite', [ProjectController::class, 'invite'])->name('projects.invite');
+        Route::delete('/projects/{project}/members/{user}', [ProjectController::class, 'removeMember'])->name('projects.members.remove');
+    });
     Route::post('/projects/{project}/generate-meta-strategy', [ProjectController::class, 'generateMetaStrategy'])->name('projects.generate-meta-strategy');
 
     // 3. Rutas de Tareas
