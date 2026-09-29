@@ -105,7 +105,14 @@
                                     <a href="{{ route('projects.edit', $project) }}" class="block px-4 py-3 text-xs font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
                                         Editar Proyecto
                                     </a>
-                                    
+
+                                    <form action="{{ route('projects.duplicate', $project) }}" method="POST">
+                                        @csrf
+                                        <button type="submit" class="block w-full text-left px-4 py-3 text-xs font-medium text-gray-300 hover:bg-white/5 hover:text-white transition-colors">
+                                            Duplicar Proyecto
+                                        </button>
+                                    </form>
+
                                     <form action="{{ route('projects.destroy', $project) }}" method="POST" onsubmit="return confirm('¿Estás seguro de eliminar este proyecto? Esta acción no se puede deshacer.');">
                                         @csrf
                                         @method('DELETE')
