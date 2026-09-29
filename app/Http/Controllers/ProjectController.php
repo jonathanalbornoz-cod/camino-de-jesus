@@ -206,6 +206,32 @@ class ProjectController extends Controller
         return redirect()->route('dashboard')->with('success', 'Proyecto eliminado correctamente.');
     }
 
+    // 6b. Duplicar el proyecto con todas sus secciones y tareas
+    public function duplicate(Project $project)
+    {
+        $project->load('tasks.subtasks');
+
+        DB::transaction(function () use ($project) {
+            $newProject = $project->replicate();
+            $newProject->name = $project->name . ' (Copia)';
+            $newProject->is_template = false;
+            $newProject->save();
+
+            foreach ($project->tasks as $section) {
+                $newSection = $newProject->tasks()->create([
+                    'title' => $section->title,
+                    'position' => $section->position,
+                ]);
+
+                foreach ($section->subtasks->where('parent_id', null) as $subtask) {
+                    $this->cloneSubtask($subtask, $newSection->id);
+                }
+            }
+        });
+
+        return redirect()->route('dashboard')->with('success', 'Proyecto duplicado correctamente.');
+    }
+
     public function generateMetaStrategy(Project $project)
     {
         $metaSection = $project->tasks()->firstOrCreate(['title' => 'PROGRAMACIÓN META ADS'], ['position' => 0]);
