@@ -111,7 +111,7 @@
                     <h3 class="px-4 text-[10px] font-bold text-gray-500 dark:text-gray-600 uppercase tracking-widest mb-3">Operación & Producción</h3>
                     
                     <div class="space-y-1">
-                        @if(in_array(Auth::user()->role, ['admin', 'ceo']))
+                        @if(Auth::user()->role === 'admin')
                         <a href="{{ route('projects.create') }}" class="group flex items-center px-4 py-2 text-sm font-medium text-orange-500 hover:bg-orange-500/5 rounded-xl transition-all">
                             <i class="fas fa-plus-circle w-6 text-center mr-2"></i>
                             Nuevo Proyecto
@@ -212,7 +212,7 @@
                                     <p class="px-4 py-2 text-[10px] text-gray-600 italic uppercase">Sin proyectos</p>
                                 @endforelse
                                 
-                                @if(in_array(Auth::user()->role, ['admin', 'ceo', 'rrhh']))
+                                @if(Auth::user()->role === 'admin')
                                 <a href="{{ route('projects.create', ['category' => 'rrhh']) }}" class="flex items-center px-4 py-2 text-[9px] font-black text-orange-500 hover:bg-orange-500/5 rounded-lg transition-all uppercase tracking-widest mt-2 border border-orange-500/20 border-dashed">
                                     <i class="fas fa-plus-circle mr-2"></i> Nuevo Técnico
                                 </a>
