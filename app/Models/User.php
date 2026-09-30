@@ -23,6 +23,7 @@ class User extends Authenticatable
         'password',
         'role',
         'hierarchy_level',
+        'photo',
     ];
 
     // Constantes para Roles

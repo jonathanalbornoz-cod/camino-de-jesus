@@ -232,9 +232,14 @@
 
             <div class="border-t border-black/5 dark:border-white/5 bg-gray-100 dark:bg-white/[0.02]">
                 <!-- Perfil -->
-                <div class="p-4 flex items-center gap-3">
-                    @if(Auth::user()->teamMember && Auth::user()->teamMember->photo)
-                        <img src="{{ asset('storage/' . Auth::user()->teamMember->photo) }}" class="h-10 w-10 rounded-full object-cover border-2 border-orange-500 shadow-lg shadow-orange-900/50">
+                @php
+                    $sidebarPhoto = (Auth::user()->teamMember && Auth::user()->teamMember->photo)
+                        ? Auth::user()->teamMember->photo
+                        : Auth::user()->photo;
+                @endphp
+                <a href="{{ route('profile.edit') }}" class="p-4 flex items-center gap-3 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                    @if($sidebarPhoto)
+                        <img src="{{ asset('storage/' . $sidebarPhoto) }}" class="h-10 w-10 rounded-full object-cover border-2 border-orange-500 shadow-lg shadow-orange-900/50">
                     @else
                         <div class="h-10 w-10 rounded-full bg-gradient-to-br from-orange-500 to-orange-700 flex items-center justify-center text-white font-bold shadow-lg shadow-orange-900/50">
                             {{ substr(Auth::user()->name ?? 'U', 0, 1) }}
@@ -244,7 +249,7 @@
                         <p class="text-sm font-bold text-gray-900 dark:text-white tracking-tight leading-none">{{ Auth::user()->name ?? 'Usuario' }}</p>
                         <p class="text-[10px] text-gray-500 mt-1 uppercase tracking-wider">{{ strtoupper(Auth::user()->role ?? 'Invitado') }}</p>
                     </div>
-                </div>
+                </a>
 
                 <!-- Opciones de pie -->
                 <div class="px-4 pb-4 space-y-2">
