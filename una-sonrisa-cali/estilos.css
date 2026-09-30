@@ -111,6 +111,8 @@ p { margin: 0; }
 .titulo mark {
   background: var(--azul); color: #fff;
   font-weight: 800;
+  display: inline-block; line-height: 1;
+  margin: .08em 0 .04em;
   padding: .02em .14em .06em;
   border-radius: .16em;
   -webkit-box-decoration-break: clone; box-decoration-break: clone;
