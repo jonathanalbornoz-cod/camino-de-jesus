@@ -282,10 +282,12 @@ section { position: relative; }
 .copiar:hover { background: var(--azul); color: #fff; }
 .pago__qr { margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
 .pago__qr img {
-  width: 100%; max-width: 280px; aspect-ratio: 1; object-fit: contain;
-  border-radius: 16px; border: 3px solid var(--azul); padding: 10px; background: #fff;
+  width: 100%; max-width: 330px; aspect-ratio: 1; object-fit: contain;
+  border-radius: 16px; border: 3px solid var(--azul); padding: 8px; background: #fff;
 }
+.pago__qr-titulo { font-size: 22px; font-weight: 800; letter-spacing: -.03em; color: var(--marino); margin-bottom: 14px; }
 .pago__qr figcaption { margin-top: 14px; font-weight: 600; color: var(--texto-suave); }
+.pago__qr-nota { margin: 10px 0 14px; font-size: 14px; color: var(--texto-suave); max-width: 34ch; }
 
 /* ---------- Lugar ---------- */
 .lugar { padding: 96px 0; }

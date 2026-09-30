@@ -240,27 +240,31 @@
   </section>
 
   <!-- ============ DATOS BANCARIOS ============
-       EDITAR: cambie SOLO el texto entre las etiquetas (no borre las etiquetas).
-       El QR se cambia subiendo su imagen como img/qr-pago.png (mismo nombre). -->
+       Bancolombia · Ahorros 821-000117-55 · Llave Bre-B @imagen3d.
+       Para cambiar el QR: reemplace img/qr-pago.png (recorte) y img/qr-pago-bancolombia.jpg (completo). -->
   <section class="pago" id="pago">
     <div class="contenedor">
       <header class="seccion__cab">
         <p class="etiqueta">Bono de donación</p>
         <h2 class="seccion__titulo">Datos para <span>tu pago</span></h2>
-        <p class="seccion__intro">Haz tu transferencia o escanea el código QR y envíanos el comprobante por WhatsApp para confirmar tu cupo.</p>
+        <p class="seccion__intro">Paga con el código QR, la llave Bre-B o por transferencia a la cuenta de ahorros, y envíanos el comprobante por WhatsApp para confirmar tu cupo.</p>
       </header>
       <div class="pago__grid">
         <div class="pago__banco">
           <dl class="cuenta">
-            <div><dt>Banco</dt><dd>[NOMBRE DEL BANCO]</dd></div>
-            <div><dt>Tipo de cuenta</dt><dd>[AHORROS / CORRIENTE]</dd></div>
+            <div><dt>Banco</dt><dd>Bancolombia</dd></div>
+            <div><dt>Tipo de cuenta</dt><dd>Ahorros</dd></div>
             <div class="cuenta__num">
               <dt>Número de cuenta</dt>
-              <dd><span id="numero-cuenta">[000-000000-00]</span>
-                <button type="button" class="copiar" data-copiar="numero-cuenta">Copiar</button></dd>
+              <dd><span id="numero-cuenta">821-000117-55</span>
+                <button type="button" class="copiar" data-copiar="numero-cuenta" data-digitos>Copiar</button></dd>
             </div>
-            <div><dt>Titular</dt><dd>[NOMBRE DEL TITULAR]</dd></div>
-            <div><dt>NIT / C.C.</dt><dd>[000.000.000-0]</dd></div>
+            <div class="cuenta__num">
+              <dt>Llave Bre-B</dt>
+              <dd><span id="llave-breb">@imagen3d</span>
+                <button type="button" class="copiar" data-copiar="llave-breb">Copiar</button></dd>
+            </div>
+            <div><dt>Titular</dt><dd>Imagen 3D Colombia S.A.S.</dd></div>
             <div><dt>Valor</dt><dd class="cuenta__valor">$240.000 COP</dd></div>
             <div><dt>Referencia</dt><dd>Tu nombre completo</dd></div>
           </dl>
@@ -269,8 +273,11 @@
           </a>
         </div>
         <figure class="pago__qr">
-          <img src="img/qr-pago.png" alt="Código QR para pagar el bono de donación" width="600" height="600" loading="lazy">
-          <figcaption>Escanea con la app de tu banco</figcaption>
+          <p class="pago__qr-titulo">Paga aquí con QR</p>
+          <img src="img/qr-pago.png" alt="Código QR Bre-B de Bancolombia para pagar el bono de donación a Imagen 3D Colombia S.A.S., llave @imagen3d" width="760" height="760" loading="lazy">
+          <figcaption>Escanea desde la app de tu banco (Bre-B)</figcaption>
+          <p class="pago__qr-nota">¿Estás en el celular? Descarga el QR y cárgalo desde la app de tu banco, o usa la llave <strong>@imagen3d</strong>.</p>
+          <a class="btn btn--linea btn--sm" href="img/qr-pago-bancolombia.jpg" download="QR-pago-Una-Sonrisa-por-Cali.jpg">Descargar QR</a>
         </figure>
       </div>
     </div>
@@ -326,7 +333,8 @@
     // Botón "Copiar" del número de cuenta
     document.querySelectorAll('.copiar').forEach(function (b) {
       b.addEventListener('click', function () {
-        var texto = document.getElementById(b.dataset.copiar).textContent.replace(/[^\d]/g, '');
+        var texto = document.getElementById(b.dataset.copiar).textContent.trim();
+        if (b.hasAttribute('data-digitos')) texto = texto.replace(/[^\d]/g, '');
         var listo = function () { b.textContent = '¡Copiado!'; setTimeout(function () { b.textContent = 'Copiar'; }, 1800); };
         if (navigator.clipboard) navigator.clipboard.writeText(texto).then(listo, function () {});
       });
