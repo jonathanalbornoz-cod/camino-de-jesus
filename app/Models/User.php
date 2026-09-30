@@ -82,6 +82,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Project::class);
     }
 
+    public function photos()
+    {
+        return $this->hasMany(UserPhoto::class)->orderBy('position');
+    }
+
     /**
      * ¿Puede este usuario asignar tareas al usuario dado, según su cargo jerárquico?
      * Un nivel más alto (número mayor) significa menor rango.

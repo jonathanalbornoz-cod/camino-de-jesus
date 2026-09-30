@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::post('/profile/photo', [ProfileController::class, 'updatePhoto'])->name('profile.photo.update');
+    Route::post('/profile/gallery', [ProfileController::class, 'storeGalleryPhoto'])->name('profile.gallery.store');
+    Route::delete('/profile/gallery/{photo}', [ProfileController::class, 'destroyGalleryPhoto'])->name('profile.gallery.destroy');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
     // 2. Rutas de la Agencia (Proyectos)
