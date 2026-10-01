@@ -113,9 +113,7 @@
                             <a href="{{ route('projects.show', $project) }}" class="absolute inset-0 z-10"></a>
 
                             <div class="flex justify-between items-start mb-6">
-                                <div class="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500 text-lg">
-                                    <i class="fas fa-folder-open"></i>
-                                </div>
+                                <x-project-icon :project="$project" size="w-12 h-12" rounded="rounded-xl" text="text-lg" />
                                 <span class="text-[9px] font-bold uppercase tracking-widest text-gray-500 bg-gray-100 dark:bg-white/5 px-2 py-1 rounded-md">
                                     {{ $project->status }}
                                 </span>

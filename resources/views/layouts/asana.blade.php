@@ -133,8 +133,8 @@
                                 @endphp
 
                                 @foreach($opProjects as $proj)
-                                    <a href="{{ route('projects.show', $proj) }}" class="group flex items-center px-6 py-2 text-sm font-medium rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 transition-all text-gray-600 dark:text-gray-400 hover:text-orange-500">
-                                        <span class="w-1.5 h-1.5 rounded-full bg-gray-400 group-hover:bg-orange-500 mr-3 transition-colors"></span>
+                                    <a href="{{ route('projects.show', $proj) }}" class="group flex items-center gap-2 px-6 py-2 text-sm font-medium rounded-xl hover:bg-gray-100 dark:hover:bg-white/5 transition-all text-gray-600 dark:text-gray-400 hover:text-orange-500">
+                                        <x-project-icon :project="$proj" size="w-5 h-5" rounded="rounded-md" text="text-[8px]" />
                                         <span class="truncate">{{ $proj->name }}</span>
                                     </a>
                                 @endforeach

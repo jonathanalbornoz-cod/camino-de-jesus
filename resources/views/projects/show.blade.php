@@ -18,15 +18,7 @@
                     <i class="fas fa-arrow-left"></i>
                 </a>
                 <div class="flex items-center gap-3 md:gap-4">
-                    @if($project->logo)
-                        <div class="h-10 md:h-12 min-w-[2.5rem] md:min-w-[3rem] max-w-[10rem] px-2 rounded-xl bg-white dark:bg-orange-500/10 border border-gray-200 dark:border-white/10 flex items-center justify-center overflow-hidden shadow-sm">
-                            <img src="{{ asset('storage/' . $project->logo) }}" alt="{{ $project->name }}" class="h-full w-auto object-contain py-1">
-                        </div>
-                    @else
-                        <div class="h-10 md:h-12 min-w-[2.5rem] md:min-w-[3rem] px-2 rounded-xl bg-white dark:bg-orange-500/10 border border-gray-200 dark:border-white/10 flex items-center justify-center text-orange-500 shadow-sm">
-                            <i class="fas fa-layer-group text-lg md:text-xl"></i>
-                        </div>
-                    @endif
+                    <x-project-icon :project="$project" size="h-10 md:h-12 w-10 md:w-12" rounded="rounded-xl" text="text-lg md:text-xl" class="shadow-sm" />
                     <div>
                         <h1 class="text-xl md:text-3xl font-medium tracking-tight text-gray-900 dark:text-white truncate max-w-[200px] md:max-w-none">{{ $project->name }}</h1>
                     </div>

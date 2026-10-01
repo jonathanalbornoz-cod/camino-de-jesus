@@ -36,8 +36,38 @@
         <div class="lg:col-span-8 space-y-8">
             
             @if(Auth::user()->role !== 'colaborador')
-            <div x-data="{ 
-                search: '', 
+            <!-- RESUMEN COMPACTO DE PROYECTOS -->
+            <div x-data="{ showAllProjects: false }" class="bg-white dark:bg-white/[0.03] backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-3xl p-6 mb-2">
+                <div class="flex items-center justify-between mb-5">
+                    <h2 class="text-sm font-bold text-gray-500 uppercase tracking-widest">Proyectos</h2>
+                    @if($projects->count() > 7)
+                        <button @click="showAllProjects = !showAllProjects" class="text-[10px] font-bold text-orange-500 uppercase tracking-widest hover:text-orange-600">
+                            <span x-text="showAllProjects ? 'Mostrar menos' : 'Mostrar más'"></span>
+                        </button>
+                    @endif
+                </div>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                    @if(in_array(Auth::user()->role, ['admin', 'ceo']))
+                    <a href="{{ route('projects.create') }}" class="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-dashed border-gray-300 dark:border-white/10 text-gray-500 hover:text-orange-500 hover:border-orange-500/50 transition-all">
+                        <div class="w-8 h-8 rounded-lg bg-gray-100 dark:bg-white/5 flex items-center justify-center shrink-0">
+                            <i class="fas fa-plus text-xs"></i>
+                        </div>
+                        <span class="text-xs font-medium truncate">Crear proyecto</span>
+                    </a>
+                    @endif
+                    @foreach($projects as $index => $project)
+                        <a href="{{ route('projects.show', $project) }}"
+                           @if($index >= 7) x-show="showAllProjects" style="display: none;" @endif
+                           class="flex items-center gap-2 px-3 py-2.5 rounded-xl border border-gray-200 dark:border-white/5 hover:border-orange-500/50 hover:bg-gray-50 dark:hover:bg-white/5 transition-all">
+                            <x-project-icon :project="$project" size="w-8 h-8" rounded="rounded-lg" text="text-xs" />
+                            <span class="text-xs font-medium text-gray-700 dark:text-gray-300 truncate">{{ $project->name }}</span>
+                        </a>
+                    @endforeach
+                </div>
+            </div>
+
+            <div x-data="{
+                search: '',
                 projects: @js($projects),
                 init() {
                     @if(in_array(Auth::user()->role, ['admin', 'ceo']))
@@ -127,13 +157,7 @@
                             <a href="{{ route('projects.show', $project) }}" class="absolute inset-0 z-10"></a>
 
                             <div class="flex justify-between items-start mb-8 relative z-0">
-                                <div class="h-14 min-w-[3.5rem] px-2 rounded-xl bg-white dark:bg-black/20 border border-gray-200 dark:border-white/5 flex items-center justify-center text-gray-400 dark:text-white/80 text-xl group-hover:border-orange-500/50 group-hover:text-orange-500 transition-all duration-500 overflow-hidden shadow-sm">
-                                    @if($project->logo)
-                                        <img src="{{ asset('storage/' . $project->logo) }}" alt="{{ $project->name }}" class="h-full w-auto object-contain py-1.5">
-                                    @else
-                                        <i class="fas fa-cube"></i>
-                                    @endif
-                                </div>
+                                <x-project-icon :project="$project" size="h-14 w-14" rounded="rounded-xl" text="text-xl" class="group-hover:border-orange-500/50 group-hover:text-orange-500 transition-all duration-500 shadow-sm" />
                                 <div class="flex items-center gap-2 mt-2">
                                     <div class="w-1.5 h-1.5 rounded-full {{ $progress == 100 ? 'bg-green-500' : 'bg-orange-600' }}"></div>
                                     <span class="text-[10px] font-medium uppercase tracking-widest text-gray-500">
