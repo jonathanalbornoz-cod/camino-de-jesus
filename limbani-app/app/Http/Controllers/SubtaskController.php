@@ -102,14 +102,30 @@ class SubtaskController extends Controller
         return back()->with('success', 'Acción eliminada.');
     }
 
-    // Duplicar subtarea
+    // Duplicar subtarea (y todo lo que tenga anidado adentro)
     public function duplicate(Subtask $subtask)
     {
-        $newSubtask = $subtask->replicate();
-        $newSubtask->title = $subtask->title . ' (Copia)';
-        $newSubtask->save();
+        $this->cloneSubtaskRecursive($subtask, $subtask->task_id, $subtask->parent_id, true);
 
         return back()->with('success', 'Acción duplicada.');
+    }
+
+    private function cloneSubtaskRecursive(Subtask $subtask, $taskId, $parentId, $isRoot = false)
+    {
+        $newSubtask = $subtask->replicate();
+        $newSubtask->task_id = $taskId;
+        $newSubtask->parent_id = $parentId;
+        if ($isRoot) {
+            $newSubtask->title = $subtask->title . ' (Copia)';
+        }
+        $newSubtask->position = $subtask->position + 1;
+        $newSubtask->save();
+
+        foreach ($subtask->children as $child) {
+            $this->cloneSubtaskRecursive($child, $taskId, $newSubtask->id);
+        }
+
+        return $newSubtask;
     }
 
     // Guardar subtarea HIJA (dentro de otra subtarea)
