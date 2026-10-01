@@ -105,9 +105,19 @@
                     </div>
                 @endif
 
+                @if(Auth::user()->role !== 'colaborador')
+                    <button type="button"
+                            @click.stop="fetch('{{ route('subtasks.duplicate', $subtask) }}', { method: 'POST', headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json' } }).then(() => window.location.reload())"
+                            title="Duplicar"
+                            class="opacity-0 group-hover:opacity-100 text-gray-600 hover:text-orange-500 p-1 transition-opacity">
+                        <i class="fas fa-copy text-xs"></i>
+                    </button>
+                @endif
+
                 @if($level > 0 && Auth::user()->role !== 'colaborador')
-                    <button type="button" 
-                            @click.stop="if(confirm('¿Borrar?')) fetch('{{ url('/subtasks') }}/{{ $subtask->id }}', { method: 'DELETE', headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json' } }).then(() => window.location.reload())" 
+                    <button type="button"
+                            @click.stop="if(confirm('¿Borrar?')) fetch('{{ url('/subtasks') }}/{{ $subtask->id }}', { method: 'DELETE', headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json' } }).then(() => window.location.reload())"
+                            title="Borrar"
                             class="opacity-0 group-hover:opacity-100 text-gray-600 hover:text-red-500 p-1 transition-opacity">
                         <i class="fas fa-trash-alt text-xs"></i>
                     </button>
