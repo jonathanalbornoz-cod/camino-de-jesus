@@ -19,25 +19,38 @@ class ProjectController extends Controller
             $teamMember = $user->teamMember;
             $teamMemberId = $teamMember ? $teamMember->id : null;
 
-            // Un colaborador ve los proyectos donde tiene subtareas asignadas,
-            // o a los que fue invitado explícitamente aunque aún no tenga tareas.
             $categories = ['agencia', 'produccion_av', 'postproduccion', 'diseno_grafico', 'desarrollo_web'];
-            $projects = Project::whereIn('category', $categories)
-                ->where(function($q) use ($teamMemberId, $user) {
-                    $q->whereHas('tasks.subtasks', function($sq) use ($teamMemberId) {
-                        $sq->where('team_member_id', $teamMemberId);
-                    })->orWhereHas('members', function($mq) use ($user) {
-                        $mq->where('users.id', $user->id);
-                    });
-                })->with(['tasks' => function($query) use ($teamMemberId) {
+
+            // Proyectos a los que fue invitado explícitamente: ve TODAS las secciones y tareas.
+            $invitedProjects = Project::whereIn('category', $categories)
+                ->whereHas('members', function($mq) use ($user) {
+                    $mq->where('users.id', $user->id);
+                })
+                ->with(['tasks' => function($q) {
+                    $q->with(['subtasks' => function($sq) {
+                        $sq->with(['children', 'teamMember', 'attachments', 'comments.user', 'task.project', 'parent']);
+                    }]);
+                }])->get();
+
+            // Proyectos donde NO fue invitado pero tiene subtareas asignadas: ve solo lo suyo.
+            $assignedProjects = Project::whereIn('category', $categories)
+                ->whereDoesntHave('members', function($mq) use ($user) {
+                    $mq->where('users.id', $user->id);
+                })
+                ->whereHas('tasks.subtasks', function($sq) use ($teamMemberId) {
+                    $sq->where('team_member_id', $teamMemberId);
+                })
+                ->with(['tasks' => function($query) use ($teamMemberId) {
                     $query->whereHas('subtasks', function($q) use ($teamMemberId) {
                         $q->where('team_member_id', $teamMemberId);
                     })->with(['subtasks' => function($q) use ($teamMemberId) {
                         $q->where('team_member_id', $teamMemberId)
                           ->with(['children', 'teamMember', 'attachments', 'comments.user', 'task.project', 'parent']);
                     }]);
-                }])->latest()->get();
-            
+                }])->get();
+
+            $projects = $invitedProjects->concat($assignedProjects)->sortByDesc('created_at')->values();
+
             // Solo ve a sus compañeros de equipo de los proyectos en los que participa
             $team = \App\Models\TeamMember::whereIn('id', function($query) use ($projects) {
                 $query->select('team_member_id')
@@ -173,7 +186,7 @@ class ProjectController extends Controller
 
         $project->load('members');
 
-        return view('projects.show', compact('project'));
+        return view('projects.show', compact('project', 'isInvitedMember'));
     }
 
     // Invitar a un colaborador registrado a participar del proyecto completo
