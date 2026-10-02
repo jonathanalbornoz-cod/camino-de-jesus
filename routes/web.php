@@ -10,6 +10,7 @@ use App\Http\Controllers\CommentController;
 use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\MyTasksController;
 
 
 Route::get('/', function () {
@@ -25,6 +26,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/attendance/scanner', [AttendanceController::class, 'scanner'])->name('attendance.scanner');
     Route::post('/attendance/scan', [AttendanceController::class, 'scan'])->name('attendance.scan');
     Route::get('/attendance', [AttendanceController::class, 'index'])->name('attendance.index');
+
+    // 0b. Mis Tareas (Lista, Tablero y Calendario, estilo Asana)
+    Route::get('/mis-tareas', [MyTasksController::class, 'index'])->name('my-tasks.index');
 
     // 1. Perfil de Usuario
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
