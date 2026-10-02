@@ -1,16 +1,20 @@
 @php
-    // Colaboradores que el usuario actual puede asignar como responsables.
-    // Admin/ceo/rrhh/contabilidad ven a todo el equipo; un colaborador solo
-    // ve a quienes están por debajo de él en el cargo jerárquico (si tiene uno asignado).
+    // El selector de Responsable siempre muestra a TODO el equipo, para que la persona
+    // asignada se vea correctamente sin importar la jerarquía de quien esté mirando.
+    // Lo que sí depende de la jerarquía es a quién puede REASIGNAR la tarea: admin/ceo/
+    // rrhh/contabilidad pueden a cualquiera; un colaborador solo a quienes están por
+    // debajo de él en el cargo (si tiene uno asignado); si no tiene, no puede reasignar
+    // a nadie y el selector queda deshabilitado (solo lectura).
     $currentAuthUser = Auth::user();
+    $assignableTeamMembers = \App\Models\TeamMember::orderBy('name')->get();
     if (in_array($currentAuthUser->role, ['admin', 'ceo', 'rrhh', 'contabilidad'])) {
-        $assignableTeamMembers = \App\Models\TeamMember::orderBy('name')->get();
+        $allowedTeamMemberIds = $assignableTeamMembers->pluck('id')->all();
     } elseif ($currentAuthUser->hierarchy_level !== null) {
-        $assignableTeamMembers = \App\Models\TeamMember::whereHas('user', function($q) use ($currentAuthUser) {
+        $allowedTeamMemberIds = \App\Models\TeamMember::whereHas('user', function($q) use ($currentAuthUser) {
             $q->where('hierarchy_level', '>', $currentAuthUser->hierarchy_level);
-        })->orderBy('name')->get();
+        })->pluck('id')->all();
     } else {
-        $assignableTeamMembers = collect();
+        $allowedTeamMemberIds = [];
     }
 @endphp
 <!-- PANEL LATERAL DE TAREA (Único y Global) -->
@@ -30,7 +34,7 @@
                 <i class="fas fa-check-circle"></i><span x-text="currentTask.is_completed ? 'Finalizada' : 'Marcar Finalizada'"></span>
             </button>
             
-            <template x-if="'{{ Auth::user()->role }}' === 'admin' || '{{ Auth::user()->role }}' === 'ceo' || '{{ Auth::user()->role }}' === 'rrhh' || '{{ Auth::user()->role }}' === 'contabilidad'">
+            <template x-if="{{ in_array($currentAuthUser->role, ['admin', 'ceo', 'rrhh', 'contabilidad']) ? 'true' : 'false' }} || currentTask.assigned_by == {{ Auth::id() }}">
                 <button @click="currentTask.is_approved = !currentTask.is_approved; updateTask().then(() => window.location.reload())"
                         class="flex items-center gap-2 px-3 py-1.5 rounded-lg border transition-all text-[10px] font-bold uppercase tracking-widest"
                         :class="currentTask.is_approved ? 'bg-orange-500 text-black border-orange-600' : 'bg-white/5 border-white/10 text-gray-400 hover:text-white'">
@@ -68,32 +72,18 @@
             <div class="flex items-center gap-12">
                 <label class="w-32 text-xs font-medium text-gray-500 uppercase tracking-wider">Responsable</label>
                 <div class="flex-1">
-                    <template x-if="{{ $assignableTeamMembers->isEmpty() ? 'true' : 'false' }}">
-                        <div class="flex items-center gap-2 px-2 py-1.5 bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-lg">
-                            <template x-if="currentTask.team_member_photo">
-                                <img :src="'{{ asset('storage') }}/' + currentTask.team_member_photo" class="w-5 h-5 rounded-full object-cover border border-white/10">
-                            </template>
-                            <template x-if="!currentTask.team_member_photo">
-                                <div class="w-5 h-5 rounded-full bg-orange-500 text-black flex items-center justify-center text-[8px] font-bold">
-                                    <span x-text="currentTask.team_member_name ? currentTask.team_member_name.substring(0, 1) : '?'"></span>
-                                </div>
-                            </template>
-                            <span class="text-sm text-gray-700 dark:text-gray-300" x-text="currentTask.team_member_name || 'Sin asignar'"></span>
-                        </div>
-                    </template>
-                    <template x-if="{{ $assignableTeamMembers->isNotEmpty() ? 'true' : 'false' }}">
-                        <select
-                            name="team_member_id"
-                            x-model="currentTask.team_member_id"
-                            @change="updateTask()"
-                            class="w-full bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 focus:ring-1 focus:ring-orange-500 outline-none p-2"
-                        >
-                            <option value="">Sin asignar</option>
-                            @foreach($assignableTeamMembers as $m)
-                                <option value="{{ $m->id }}">{{ $m->name }}</option>
-                            @endforeach
-                        </select>
-                    </template>
+                    <select
+                        name="team_member_id"
+                        x-model="currentTask.team_member_id"
+                        @change="updateTask()"
+                        {{ empty($allowedTeamMemberIds) ? 'disabled' : '' }}
+                        class="w-full bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 rounded-lg text-sm text-gray-700 dark:text-gray-300 focus:ring-1 focus:ring-orange-500 outline-none p-2 disabled:opacity-80 disabled:cursor-not-allowed"
+                    >
+                        <option value="">Sin asignar</option>
+                        @foreach($assignableTeamMembers as $m)
+                            <option value="{{ $m->id }}" @unless(in_array($m->id, $allowedTeamMemberIds)) disabled @endunless>{{ $m->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
             </div>
 
@@ -213,30 +203,18 @@
                             <input type="text" :value="child.title" @change="fetch('{{ url('/subtasks') }}/'+child.id, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' }, body: JSON.stringify({ title: $event.target.value }) })" class="bg-transparent border-none text-sm font-medium text-gray-700 dark:text-gray-300 focus:ring-0 p-0 w-full" :class="child.is_completed ? 'line-through opacity-40' : ''">
                             
                             <div class="flex flex-wrap items-center gap-4 mt-2">
-                                <template x-if="{{ $assignableTeamMembers->isEmpty() ? 'true' : 'false' }}">
-                                    <div class="flex gap-4">
-                                        <div class="flex items-center gap-1.5">
-                                            <i class="fas fa-user text-[8px] text-gray-600"></i>
-                                            <span class="text-[10px] text-gray-500" x-text="child.team_member ? child.team_member.name : 'Sin asignar'"></span>
-                                        </div>
-                                        <div class="flex items-center gap-1.5">
-                                            <i class="far fa-calendar text-[8px] text-gray-600"></i>
-                                            <span class="text-[10px] text-gray-500" x-text="child.due_date ? new Date(child.due_date).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' }) : '--'"></span>
-                                        </div>
-                                    </div>
-                                </template>
-                                <template x-if="{{ $assignableTeamMembers->isNotEmpty() ? 'true' : 'false' }}">
                                     <div class="flex flex-wrap items-center gap-x-4 gap-y-2">
                                         <!-- Responsable -->
                                         <div class="flex items-center gap-1.5 group/select">
                                             <i class="fas fa-user-circle text-[10px] text-gray-600 group-hover/select:text-orange-500"></i>
                                             <select
                                                 @change="fetch('{{ url('/subtasks') }}/'+child.id, { method: 'PUT', headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' }, body: JSON.stringify({ team_member_id: $event.target.value }) })"
-                                                class="bg-transparent border-none text-[10px] font-bold text-gray-500 focus:ring-0 p-0 cursor-pointer hover:text-orange-500 transition-colors outline-none uppercase tracking-tighter"
+                                                {{ empty($allowedTeamMemberIds) ? 'disabled' : '' }}
+                                                class="bg-transparent border-none text-[10px] font-bold text-gray-500 focus:ring-0 p-0 cursor-pointer hover:text-orange-500 transition-colors outline-none uppercase tracking-tighter disabled:cursor-not-allowed"
                                             >
                                                 <option value="">Sin asignar</option>
                                                 @foreach($assignableTeamMembers as $m)
-                                                    <option value="{{ $m->id }}" :selected="child.team_member_id == {{ $m->id }}">{{ $m->name }}</option>
+                                                    <option value="{{ $m->id }}" :selected="child.team_member_id == {{ $m->id }}" @unless(in_array($m->id, $allowedTeamMemberIds)) disabled @endunless>{{ $m->name }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -292,10 +270,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                </template>
                             </div>
                         </div>
-                        
+
                         <div class="flex items-center gap-1">
                             <button type="button" @click="openTaskPanel(child, currentTask.section_title, currentTask.title)" class="p-2 text-gray-400 hover:text-orange-500 transition-all" title="Ver detalle"><i class="fas fa-external-link-alt text-[10px]"></i></button>
                             <template x-if="'{{ Auth::user()->role }}' !== 'colaborador'">

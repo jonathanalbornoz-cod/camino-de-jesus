@@ -17,6 +17,7 @@ class Subtask extends Model
         'task_id',
         'parent_id',
         'team_member_id',
+        'assigned_by',
         'ai_suggestion',
         'is_approved',
         'approved_at',
@@ -72,6 +73,11 @@ class Subtask extends Model
     public function teamMember(): BelongsTo
     {
         return $this->belongsTo(TeamMember::class);
+    }
+
+    public function assignedByUser(): BelongsTo
+    {
+        return $this->belongsTo(User::class, 'assigned_by');
     }
 
     public function attachments(): HasMany
