@@ -1,7 +1,8 @@
 @php
     $teamMemberId = Auth::user()->teamMember ? Auth::user()->teamMember->id : null;
     $isCollab = Auth::user()->role === 'colaborador';
-    
+    $fullAccess = $fullAccess ?? false;
+
     // Función recursiva para verificar si la tarea debe ser visible
     if (!isset($shouldShow)) {
         $shouldShow = function($s, $tmId) use (&$shouldShow) {
@@ -17,7 +18,7 @@
 @foreach($subtasks as $subtask)
     @php 
         $level = $level ?? 0;
-        $isVisible = !$isCollab || $shouldShow($subtask, $teamMemberId);
+        $isVisible = !$isCollab || $fullAccess || $shouldShow($subtask, $teamMemberId);
     @endphp
 
     @if($isVisible)
@@ -127,7 +128,7 @@
 
         @if($subtask->children->count() > 0)
             <div x-show="showChildren" x-collapse>
-                @include('projects._subtask_recursive', ['subtasks' => $subtask->children, 'level' => $level + 1, 'section' => $section])
+                @include('projects._subtask_recursive', ['subtasks' => $subtask->children, 'level' => $level + 1, 'section' => $section, 'fullAccess' => $fullAccess])
             </div>
         @endif
     </div>

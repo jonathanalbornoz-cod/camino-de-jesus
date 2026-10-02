@@ -171,7 +171,7 @@
                     </div>
 
                     <div x-show="expanded" x-collapse class="space-y-[1px]">
-                        @include('projects._subtask_recursive', ['subtasks' => $section->subtasks->whereNull('parent_id'), 'level' => 0, 'section' => $section])
+                        @include('projects._subtask_recursive', ['subtasks' => $section->subtasks->whereNull('parent_id'), 'level' => 0, 'section' => $section, 'fullAccess' => $isInvitedMember])
                         @if(in_array(Auth::user()->role, ['admin', 'ceo', 'rrhh', 'contabilidad']))
                         <form action="{{ route('subtasks.store', $section) }}" method="POST" class="pl-12 pt-2 flex items-center gap-4 opacity-40 hover:opacity-100 transition-opacity">@csrf<button type="submit" class="w-7 h-7 rounded-lg flex items-center justify-center bg-black/5 dark:bg-white/5 hover:bg-orange-500 hover:text-black transition-all" title="Añadir tarea"><i class="fas fa-plus text-xs"></i></button><input type="text" name="title" placeholder="Agregar tarea..." required class="bg-transparent border-none text-[14px] text-gray-800 dark:text-gray-400 focus:ring-0 w-full"></form>
                         @endif
