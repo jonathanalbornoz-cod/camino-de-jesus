@@ -109,18 +109,22 @@
                     <template x-if="'{{ Auth::user()->role }}' !== 'colaborador'">
                         <div class="relative flex items-center group">
                             <i class="far fa-calendar absolute left-0 text-gray-500 group-hover:text-orange-500 transition-colors"></i>
-                            <input type="text" 
-                                   x-model="currentTask.start_date" 
-                                   x-init="flatpickr($el, { 
-                                        enableTime: true, 
-                                        time_24hr: false,
-                                        dateFormat: 'Y-m-d h:i K',
-                                        altInput: true,
-                                        altFormat: 'd M, h:i K',
-                                        locale: 'es',
-                                        theme: 'dark',
-                                        onChange: (selectedDates, dateStr) => { currentTask.start_date = dateStr; updateTask(); }
-                                   })"
+                            <input type="text"
+                                   x-model="currentTask.start_date"
+                                   x-init="
+                                        let fpStart = flatpickr($el, {
+                                            enableTime: true,
+                                            time_24hr: false,
+                                            dateFormat: 'Y-m-d h:i K',
+                                            altInput: true,
+                                            altFormat: 'd M, h:i K',
+                                            locale: 'es',
+                                            theme: 'dark',
+                                            defaultDate: currentTask.start_date,
+                                            onChange: (selectedDates, dateStr) => { currentTask.start_date = dateStr; updateTask(); }
+                                        });
+                                        $watch('currentTask.start_date', value => fpStart.setDate(value || null, false));
+                                   "
                                    class="bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 rounded-lg pl-8 pr-2 py-1 text-sm text-gray-700 dark:text-gray-300 focus:ring-1 focus:ring-orange-500 outline-none cursor-pointer hover:text-black dark:hover:text-white transition-colors">
                         </div>
                     </template>
@@ -139,18 +143,22 @@
                     <template x-if="'{{ Auth::user()->role }}' !== 'colaborador'">
                         <div class="relative flex items-center group">
                             <i class="far fa-calendar-alt absolute left-0 text-gray-500 group-hover:text-orange-500 transition-colors"></i>
-                            <input type="text" 
-                                   x-model="currentTask.due_date" 
-                                   x-init="flatpickr($el, { 
-                                        enableTime: true, 
-                                        time_24hr: false,
-                                        dateFormat: 'Y-m-d h:i K',
-                                        altInput: true,
-                                        altFormat: 'd M, h:i K',
-                                        locale: 'es',
-                                        theme: 'dark',
-                                        onChange: (selectedDates, dateStr) => { currentTask.due_date = dateStr; updateTask(); }
-                                   })"
+                            <input type="text"
+                                   x-model="currentTask.due_date"
+                                   x-init="
+                                        let fpDue = flatpickr($el, {
+                                            enableTime: true,
+                                            time_24hr: false,
+                                            dateFormat: 'Y-m-d h:i K',
+                                            altInput: true,
+                                            altFormat: 'd M, h:i K',
+                                            locale: 'es',
+                                            theme: 'dark',
+                                            defaultDate: currentTask.due_date,
+                                            onChange: (selectedDates, dateStr) => { currentTask.due_date = dateStr; updateTask(); }
+                                        });
+                                        $watch('currentTask.due_date', value => fpDue.setDate(value || null, false));
+                                   "
                                    class="bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 rounded-lg pl-8 pr-2 py-1 text-sm text-gray-700 dark:text-gray-300 focus:ring-1 focus:ring-orange-500 outline-none cursor-pointer hover:text-black dark:hover:text-white transition-colors">
                         </div>
                     </template>
