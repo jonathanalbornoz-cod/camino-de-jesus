@@ -71,11 +71,13 @@
                 
                 @php
                     $allProjects = \App\Models\Project::with('tasks.subtasks')->orderBy('position')->get();
-                    
+
                     if(Auth::user()->role === 'colaborador') {
                         $teamMemberId = Auth::user()->teamMember ? Auth::user()->teamMember->id : null;
-                        $allProjects = $allProjects->filter(function($p) use ($teamMemberId) {
-                            return $p->tasks->flatMap->subtasks->where('team_member_id', $teamMemberId)->count() > 0;
+                        $invitedProjectIds = Auth::user()->invitedProjects()->pluck('projects.id')->toArray();
+                        $allProjects = $allProjects->filter(function($p) use ($teamMemberId, $invitedProjectIds) {
+                            return in_array($p->id, $invitedProjectIds)
+                                || $p->tasks->flatMap->subtasks->where('team_member_id', $teamMemberId)->count() > 0;
                         });
                     }
                 @endphp
