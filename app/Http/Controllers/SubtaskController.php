@@ -6,6 +6,7 @@ use App\Models\Subtask;
 use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Notifications\TaskAssigned;
+use App\Notifications\TaskCompleted;
 use App\Notifications\NewCommentNotification;
 use App\Models\User;
 
@@ -41,12 +42,15 @@ class SubtaskController extends Controller
 
         $data = $request->only(['title', 'description', 'due_date', 'start_date', 'team_member_id']);
 
+        $wasCompleted = $subtask->is_completed;
         if ($request->has('is_completed')) {
             $data['is_completed'] = filter_var($request->is_completed, FILTER_VALIDATE_BOOLEAN);
         }
 
-        // Solo administradores pueden aprobar
-        if ($request->has('is_approved') && in_array(auth()->user()->role, ['admin', 'ceo'])) {
+        // Puede aprobar un rol de gestión, o quien asignó la tarea.
+        $canApprove = in_array(auth()->user()->role, ['admin', 'ceo', 'rrhh', 'contabilidad'])
+            || ($subtask->assigned_by && (int) $subtask->assigned_by === auth()->id());
+        if ($request->has('is_approved') && $canApprove) {
             $data['is_approved'] = filter_var($request->is_approved, FILTER_VALIDATE_BOOLEAN);
             if ($data['is_approved'] && !$subtask->is_approved) {
                 $data['approved_at'] = now();
@@ -66,6 +70,9 @@ class SubtaskController extends Controller
             }
 
             $data['team_member_id'] = $newTeamMemberId;
+            if ($newTeamMemberId) {
+                $data['assigned_by'] = auth()->id();
+            }
         }
 
         $oldMemberId = $subtask->team_member_id;
@@ -76,6 +83,16 @@ class SubtaskController extends Controller
             $member = \App\Models\TeamMember::find($data['team_member_id']);
             if ($member && $member->user) {
                 $member->user->notify(new TaskAssigned($subtask, auth()->user()));
+            }
+        }
+
+        // Notificar a quien asignó la tarea cuando se marca como finalizada, para que la apruebe.
+        if (($data['is_completed'] ?? false) && !$wasCompleted) {
+            if ($subtask->assigned_by && (int) $subtask->assigned_by !== auth()->id()) {
+                $assigner = User::find($subtask->assigned_by);
+                if ($assigner) {
+                    $assigner->notify(new TaskCompleted($subtask, auth()->user()));
+                }
             }
         }
 
