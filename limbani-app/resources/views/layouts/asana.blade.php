@@ -68,7 +68,14 @@
             </div>
 
             <nav class="flex-1 px-3 py-6 space-y-8 overflow-y-auto custom-scrollbar">
-                
+
+                <div class="space-y-1">
+                    <a href="{{ route('my-tasks.index') }}" class="flex items-center px-4 py-2 text-sm font-medium rounded-xl transition-all {{ request()->routeIs('my-tasks.index') ? 'text-orange-500 bg-orange-500/5 shadow-sm' : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-white/5 hover:text-gray-900 dark:hover:text-white' }}">
+                        <i class="fas fa-list-check w-6 text-center mr-2 opacity-70 {{ request()->routeIs('my-tasks.index') ? 'text-orange-500 opacity-100' : '' }}"></i>
+                        Mis Tareas
+                    </a>
+                </div>
+
                 @php
                     $allProjects = \App\Models\Project::with('tasks.subtasks')->orderBy('position')->get();
 
