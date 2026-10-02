@@ -144,9 +144,9 @@
                 <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest bg-gray-100 dark:bg-white/5 px-3 py-1.5 rounded-full">Sin fecha ({{ $noDateCount }})</span>
             </div>
 
-            <div class="grid grid-cols-7 gap-px bg-gray-200 dark:bg-white/5 rounded-xl overflow-hidden border border-gray-200 dark:border-white/5">
+            <div class="grid grid-cols-7 border-t border-l border-gray-200 dark:border-white/10 rounded-lg overflow-hidden bg-white dark:bg-[#0f1012]">
                 @foreach(['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'] as $dayName)
-                    <div class="bg-gray-50 dark:bg-[#141414] text-center py-2 text-[9px] font-bold uppercase tracking-widest text-gray-500">{{ $dayName }}</div>
+                    <div class="border-r border-b border-gray-200 dark:border-white/10 text-center py-2 text-[10px] font-bold uppercase tracking-widest text-gray-400 bg-gray-50/60 dark:bg-white/[0.02]">{{ $dayName }}</div>
                 @endforeach
 
                 @foreach($calendarWeeks as $week)
@@ -157,19 +157,24 @@
                             $inMonth = $day->month === $month->month;
                             $isToday = $day->isToday();
                         @endphp
-                        <div class="bg-white dark:bg-[#0f1012] min-h-[110px] p-2 {{ !$inMonth ? 'opacity-30' : '' }}">
-                            <div class="flex justify-end">
-                                <span class="w-6 h-6 flex items-center justify-center rounded-full text-[11px] font-bold {{ $isToday ? 'bg-orange-500 text-black' : 'text-gray-500' }}">{{ $day->day }}</span>
+                        <div class="border-r border-b border-gray-200 dark:border-white/10 min-h-[110px] p-2 {{ !$inMonth ? 'bg-gray-50/40 dark:bg-white/[0.01]' : '' }}">
+                            <div class="flex justify-end mb-1">
+                                @if($isToday)
+                                    <span class="flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-bold bg-orange-500 text-black capitalize">{{ $day->day }} {{ $day->translatedFormat('M') }}</span>
+                                @else
+                                    <span class="text-[11px] font-medium {{ $inMonth ? 'text-gray-500 dark:text-gray-400' : 'text-gray-300 dark:text-gray-700' }}">{{ $day->day }}</span>
+                                @endif
                             </div>
-                            <div class="space-y-1 mt-1">
+                            <div class="space-y-1">
                                 @foreach($dayTasks->take(3) as $task)
                                     <div @click="$dispatch('open-task', { task: @js($task), sectionTitle: @js($task->task->title ?? 'General'), parentTitle: @js($task->parent->title ?? '') })"
-                                         class="text-[9px] font-medium px-1.5 py-1 rounded-md truncate cursor-pointer {{ $task->is_completed ? 'bg-green-500/10 text-green-600 dark:text-green-400 line-through' : ($task->due_date->isPast() ? 'bg-red-500/10 text-red-500' : 'bg-orange-500/10 text-orange-500') }}">
-                                        {{ $task->title }}
+                                         class="flex items-center gap-1.5 text-[10px] font-medium truncate cursor-pointer {{ $task->is_completed ? 'text-gray-400 line-through' : ($task->due_date->isPast() ? 'text-red-500' : 'text-gray-700 dark:text-gray-300') }}">
+                                        <span class="w-1.5 h-1.5 rounded-full shrink-0 {{ $task->is_completed ? 'bg-gray-400' : ($task->due_date->isPast() ? 'bg-red-500' : 'bg-orange-500') }}"></span>
+                                        <span class="truncate">{{ $task->title }}</span>
                                     </div>
                                 @endforeach
                                 @if($dayTasks->count() > 3)
-                                    <div class="text-[9px] text-gray-500 font-bold pl-1.5">+{{ $dayTasks->count() - 3 }} más</div>
+                                    <div class="text-[9px] text-gray-500 font-bold pl-3">+{{ $dayTasks->count() - 3 }} más</div>
                                 @endif
                             </div>
                         </div>
