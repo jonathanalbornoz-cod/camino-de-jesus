@@ -42,7 +42,9 @@
 
     $('#anio').textContent = new Date().getFullYear();
     $('#portada-conteo').textContent = PRODUCTOS.length;
+    $('#portada-categorias').textContent = CATEGORIAS.length;
     $('#cifra-productos').textContent = PRODUCTOS.length;
+    $('#cifra-categorias').textContent = CATEGORIAS.length;
 
     $('#sellos').innerHTML = SELLOS.map((s) => `
       <article class="sello">

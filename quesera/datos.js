@@ -50,7 +50,7 @@ const MARCA = {
 
 /* La franja de sellos bajo la portada */
 const SELLOS = [
-  { icono: 'catalogo',  titulo: 'Portafolio amplio',   texto: 'Diez líneas de producto en un solo proveedor.' },
+  { icono: 'catalogo',  titulo: 'Portafolio amplio',   texto: 'Once líneas de producto en un solo proveedor.' },
   { icono: 'mayor',     titulo: 'Detal y por mayor',   texto: 'Atendemos al hogar y al negocio de comida.' },
   { icono: 'frio',      titulo: 'Cadena de frío',      texto: 'Refrigerados y congelados manejados como toca.' },
   { icono: 'whatsapp',  titulo: 'Pedido por WhatsApp', texto: 'Arme su lista y se la cotizamos al momento.' },

@@ -11,7 +11,7 @@ estilos.css             paleta y estilos
 app.js                  filtros, pedido y enlaces de WhatsApp
 datos.js                TODO el contenido editable
 imagenes/logo.*         el logotipo
-imagenes/productos/     las fotos de producto, ya sin la onda del set
+imagenes/productos/     las fotos de producto, tal como vienen del set
 ```
 
 ## De dónde salen los datos
@@ -51,37 +51,30 @@ muestra esa línea, así que no se ve rota, pero conviene llenarlas: es lo que e
 pregunta por WhatsApp. Faltan sobre todo los quesos (¿libra, kilo, bloque?), las salsas sin
 foto, los condimentos, el chorizo, la manguera y las copas salseras.
 
-**Fotos nuevas** — van en `imagenes/productos/`, y la ruta se pone en el campo `imagen`.
-
-Las fotos del set vienen con una onda dorada de fondo. En la web no se usa, así que antes
-de montarlas hay que quitarla:
+**Fotos nuevas** — se dejan en una carpeta y se preparan de una vez:
 
 ```bash
-python3 tools/quitar-onda.py carpeta-con-las-fotos carpeta-limpia
+python3 tools/preparar-fotos.py carpeta-con-los-originales
 ```
 
-Deja el fondo con un horizonte recto y no toca el producto ni su sombra. Si llega una foto
-donde el producto es del color de la onda —le pasa al cheddar—, se le añade una entrada al
-diccionario `AJUSTES` del propio script, que documenta los casos ya resueltos.
+Recorta a 3:4, deja el ancho nativo del set y guarda en WebP dentro de
+`imagenes/productos/`. Después se pone la ruta en el campo `imagen` del producto.
 
-Después se recortan a 3:4 y se pasan a `.webp`, que las deja por debajo de 150 KB. El
-recorte va desplazado hacia arriba (0.62) porque el producto vive en la mitad baja del
-encuadre:
+Las fotos **no se editan**: la onda dorada del fondo se conserva, que es como está
+tomado el set y como la quiere el cliente. La página la repite en la portada y en las
+tarjetas sin foto, y así el conjunto se lee como una sola pieza.
 
-```python
-from PIL import Image
-im = Image.open("foto-limpia.png").convert("RGB")
-w, h = im.size
-alto = int(w / 0.75)
-if alto < h:
-    arriba = int((h - alto) * 0.62)
-    im = im.crop((0, arriba, w, arriba + alto))
-im.thumbnail((900, 1200), Image.LANCZOS)
-im.save("quesera/imagenes/productos/nombre.webp", "WEBP", quality=82, method=6)
-```
+Sobre la calidad: hubo una versión anterior a 900 px con calidad 82 y se veían
+empastadas —40 KB para una imagen de un megapíxel, con la textura del queso deshecha—.
+Ahora van al ancho nativo (1024 px tras el recorte) con calidad 90, unos 150 KB cada
+una. En una pantalla retina la tarjeta pide unos 750 px y la portada unos 1080, así que
+1024 cubre bien. No conviene bajar de ahí.
 
-Los productos sin foto no quedan feos: muestran el icono de su categoría sobre un fondo
-crema, en el mismo formato 3:4 de las fotos.
+`tools/quitar-onda.py` quita esa onda del fondo y deja un horizonte recto. Se usó en una
+versión anterior y se conserva por si vuelve a hacer falta, pero **hoy no se aplica**.
+
+Los productos sin foto muestran el icono de su categoría sobre la onda, en el mismo
+formato 3:4 de las fotos.
 
 ## Cómo agregar o cambiar productos
 
@@ -128,10 +121,9 @@ tarjeta tiene además **Pedir**, que escribe sólo por ese producto.
 
 ## Decisiones de diseño
 
-La paleta sale del logotipo y de las fotos: vino `#45181F`, dorado `#F5B921` y crema. El
-dorado quedó para acentos —el botón de mayoristas, los antetítulos—; la onda dorada que
-traían las fotografías se quitó a petición del cliente, y los cortes entre secciones son
-rectos.
+La paleta sale del logotipo y de las fotos: vino `#45181F`, dorado `#F5B921` y crema. La
+onda dorada del set fotográfico se repite en la portada y en las tarjetas sin foto: es lo
+que amarra la página con la fotografía.
 
 De los referentes del brief: de **Cassini** el minimalismo, la fotografía limpia y los
 textos cortos; de **Bonanza** la organización por categorías con contadores y el aire de

@@ -1,8 +1,9 @@
 /*
  * Quesera Chiminangos — estilos
  * ------------------------------------------------------------------
- * La paleta sale del logotipo y de las fotos de producto: vino, dorado y
- * crema. La portada corta recto contra el crema, sin ornamento.
+ * La paleta sale del logotipo y de las fotos de producto: vino de fondo,
+ * onda dorada y crema abajo. La portada y las tarjetas sin foto repiten ese
+ * mismo gesto, que es lo que amarra la página con la fotografía.
  *
  * Referentes del brief: Cassini (minimalismo, foto limpia, información
  * corta) y Bonanza (categorías ordenadas, aire de mayorista).
@@ -145,7 +146,7 @@ h1 em { font-style: italic; color: var(--dorado); }
 }
 
 /* ---------- Portada ---------- */
-.portada { position: relative; background: var(--vino); color: var(--crema); padding: clamp(2.6rem, 6vw, 4.6rem) 0 clamp(3rem, 6vw, 4.6rem); overflow: hidden; }
+.portada { position: relative; background: var(--vino); color: var(--crema); padding: clamp(2.6rem, 6vw, 4.6rem) 0 clamp(4rem, 8vw, 6rem); overflow: hidden; }
 .portada::before {
   content: ""; position: absolute; inset: 0;
   background: radial-gradient(760px 420px at 78% 12%, rgba(245, 185, 33, .16), transparent 68%);
@@ -159,6 +160,10 @@ h1 em { font-style: italic; color: var(--dorado); }
 
 .portada__figura { justify-self: center; width: min(360px, 82%); }
 .portada__figura img { width: 100%; border-radius: var(--radio-g); box-shadow: var(--sombra-alta); }
+
+/* La onda dorada del set fotográfico, que la portada repite para que la
+   página y las fotos se lean como una sola pieza. */
+.onda { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: clamp(46px, 6vw, 86px); display: block; }
 
 @media (max-width: 960px) {
   .portada__grid { grid-template-columns: 1fr; gap: 2rem; }
@@ -222,7 +227,13 @@ h1 em { font-style: italic; color: var(--dorado); }
  * el icono de su categoría, en el mismo formato 3:4 de las fotos.
  */
 .tarjeta__figura--vacia { background: var(--crema); }
-.tarjeta__figura--vacia > svg { width: 34%; height: 34%; color: var(--vino); opacity: .34; }
+.tarjeta__figura--vacia > svg { position: relative; z-index: 1; width: 34%; height: 34%; color: var(--vino); opacity: .34; }
+.tarjeta__figura--vacia::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 32%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 40' preserveAspectRatio='none'%3E%3Cpath d='M0 10 Q30 0 60 11 T120 9 V40 H0 Z' fill='%23F5B921'/%3E%3Cpath d='M0 20 Q30 10 60 21 T120 19 V40 H0 Z' fill='%23EFE2CE'/%3E%3C/svg%3E");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
 .tarjeta__marca { position: absolute; top: 10px; left: 10px; z-index: 1; background: rgba(247, 238, 224, .94); color: var(--vino); font-size: .7rem; font-weight: 700; letter-spacing: .04em; padding: .26rem .6rem; border-radius: 999px; }
 .tarjeta__insignia { position: absolute; top: 10px; right: 10px; z-index: 1; background: var(--dorado); color: var(--vino); font-size: .66rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: .26rem .6rem; border-radius: 999px; }
 

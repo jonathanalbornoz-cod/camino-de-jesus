@@ -140,7 +140,7 @@
           <a class="boton boton--claro boton--grande" href="#catalogo">Ver el catálogo</a>
         </div>
         <p class="portada__nota">
-          <span id="portada-conteo"></span> productos en 10 categorías · Al detal y por mayor
+          <span id="portada-conteo"></span> productos en <span id="portada-categorias"></span> categorías · Al detal y por mayor
         </p>
       </div>
       <div class="portada__figura">
@@ -148,6 +148,10 @@
              width="900" height="1200" fetchpriority="high">
       </div>
     </div>
+    <svg class="onda" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
+      <path d="M0 44c180-38 340 26 520 26s300-58 470-58 270 44 450 30v48H0z" fill="var(--dorado)"/>
+      <path d="M0 62c180-38 340 26 520 26s300-52 470-52 270 40 450 26v28H0z" fill="var(--crema)"/>
+    </svg>
   </section>
 
   <section class="sellos">
@@ -209,7 +213,7 @@
       </div>
       <ul class="cifras">
         <li><strong id="cifra-productos"></strong><span>Productos en catálogo</span></li>
-        <li><strong>10</strong><span>Categorías</span></li>
+        <li><strong id="cifra-categorias"></strong><span>Categorías</span></li>
         <li><strong>Detal<br>y mayor</strong><span>Dos formas de atender</span></li>
         <li><strong>Cali</strong><span>Valle del Cauca</span></li>
       </ul>
