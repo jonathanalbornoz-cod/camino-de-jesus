@@ -14,12 +14,13 @@
 const MARCA = {
   nombre: 'Quesera Chiminangos',
   eslogan: 'Salsamentaria',
-  promesa: 'Todo para su cocina en un solo lugar: quesos, carnes frías, congelados y desechables.',
+  promesa: 'Variedad, disponibilidad y los mejores precios, aquí.',
+  // La franja bajo los botones de la portada
+  lineas: 'Carnes frías · Lácteos · Desechables · Repostería y más.',
   descripcion:
-    'Somos una salsamentaria de Cali que surte a hogares, restaurantes, ' +
-    'panaderías y negocios de comida. Manejamos un portafolio amplio —de los ' +
-    'quesos frescos a los empaques desechables— para que no tenga que pedirle ' +
-    'a cinco proveedores lo que le podemos despachar nosotros.',
+    'Con más de 20 años caracterizándonos por el buen servicio. Somos una ' +
+    'salsamentaría ubicada en La Chimisexta, donde encuentras todo para tu ' +
+    'hogar o negocio.',
 
   contacto: 'Alejandra Giraldo',
   cargo: 'Administradora',
@@ -31,14 +32,15 @@ const MARCA = {
   telefono: '446 6561',
   correo: 'queserasalsamentariachimi@gmail.com',
 
-  direccion: 'Calle 44 #1C-25, barrio Chiminangos',
+  direccion: 'Calle 62B #1A9-250, barrio Chiminangos II',
   ciudad: 'Cali, Colombia',
-  horario: 'PENDIENTE — horarios de atención',
+  horario: 'Lunes a sábado 7:00 a.m. – 9:00 p.m. · Domingos y lunes festivos 7:00 a.m. – 2:00 p.m.',
+  mediosPago: 'Efectivo · Transferencia · Datáfono',
 
   // Mapa. Esta URL busca la dirección en Google Maps; sirve sin necesidad de
   // una clave de API. Si el pin no cae exacto, se reemplaza por el iframe de
   // Google Maps → Compartir → Insertar un mapa → copiar sólo el src.
-  mapaEmbed: 'https://www.google.com/maps?q=Calle%2044%20%231C-25%2C%20Chiminangos%2C%20Cali%2C%20Valle%20del%20Cauca%2C%20Colombia&output=embed',
+  mapaEmbed: 'https://www.google.com/maps?q=Calle%2062B%20%231A9-250%2C%20Chiminangos%20II%2C%20Cali%2C%20Valle%20del%20Cauca%2C%20Colombia&output=embed',
 
   // Perfiles de redes. Los vacíos no se dibujan.
   instagram: '',
@@ -50,10 +52,19 @@ const MARCA = {
 
 /* La franja de sellos bajo la portada */
 const SELLOS = [
-  { icono: 'catalogo',  titulo: 'Portafolio amplio',   texto: 'Once líneas de producto en un solo proveedor.' },
-  { icono: 'mayor',     titulo: 'Detal y por mayor',   texto: 'Atendemos al hogar y al negocio de comida.' },
-  { icono: 'frio',      titulo: 'Cadena de frío',      texto: 'Refrigerados y congelados manejados como toca.' },
-  { icono: 'whatsapp',  titulo: 'Pedido por WhatsApp', texto: 'Arme su lista y se la cotizamos al momento.' },
+  { icono: 'catalogo', titulo: 'Portafolio amplio',    texto: 'Más de 15 categorías en un solo lugar.' },
+  { icono: 'mayor',    titulo: '+20 años de experiencia', texto: 'Somos su aliado.' },
+  { icono: 'moto',     titulo: 'Servicio a domicilio', texto: 'Su pedido, directo a su negocio.' },
+  { icono: 'whatsapp', titulo: 'Pedido por WhatsApp',  texto: 'Envíenos la lista y reciba su cotización.' },
+];
+
+/* Los pasos de «¿Cómo pedir?», en la sección de contacto */
+const PASOS = [
+  { titulo: 'Elige',              texto: 'Explore nuestras categorías y seleccione los productos que necesita.' },
+  { titulo: 'Arma tu lista',      texto: 'Agregue todos los productos que quiere pedir.' },
+  { titulo: 'Envíanos tu pedido', texto: 'Mándenos su lista por WhatsApp.' },
+  { titulo: 'Confirmamos',        texto: 'Le enviamos precios, disponibilidad y el total de su pedido.' },
+  { titulo: 'Recibe tu pedido',   texto: 'Coordinamos el despacho hasta donde lo necesite.' },
 ];
 
 /*

@@ -11,6 +11,7 @@ estilos.css             paleta y estilos
 app.js                  filtros, pedido y enlaces de WhatsApp
 datos.js                TODO el contenido editable
 imagenes/logo.*         el logotipo
+imagenes/equipo.webp    la foto del equipo, en la sección Nosotros
 imagenes/productos/     las fotos de producto, tal como vienen del set
 ```
 
@@ -26,20 +27,15 @@ imagenes/productos/     las fotos de producto, tal como vienen del set
 
 | Dato | Dónde se pone | Estado |
 |---|---|---|
-| Dirección del punto | `MARCA.direccion` | **Falta** |
-| Horarios de atención | `MARCA.horario` | **Falta** |
-| Mapa de ubicación | `MARCA.mapaEmbed` | **Falta** |
 | Redes sociales | `MARCA.instagram`, `.facebook`, `.tiktok` | **Falta** |
 | Presentaciones | `presentacion` de 15 productos | **Falta** |
 | Fotos | 45 de 54 productos | Parcial |
+| Pin del mapa | `MARCA.mapaEmbed` | Por verificar |
 
-Mientras algo de eso falte, la página muestra una franja arriba diciendo qué es. El aviso
-**desaparece solo** cuando estén los cuatro datos de marca. Los bloques que dependen de un
-dato ausente (dirección, horarios, mapa, redes) no se dibujan vacíos: simplemente no salen.
+Los bloques que dependen de un dato ausente no se dibujan vacíos: simplemente no salen.
+Lo que falte se avisa por la consola del navegador, no en pantalla.
 
 ## Cómo completar cada cosa
-
-**Dirección y horarios** — en `datos.js`, reemplazar el texto que empieza por `PENDIENTE`.
 
 **Mapa** — Google Maps → buscar el negocio → *Compartir* → *Insertar un mapa* → copiar sólo
 la URL del `src` y pegarla en `MARCA.mapaEmbed`. La sección aparece sola.

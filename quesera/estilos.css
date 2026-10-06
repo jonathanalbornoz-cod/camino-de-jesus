@@ -254,11 +254,14 @@ h1 em { font-style: italic; color: var(--dorado); }
 
 /* ---------- Nosotros ---------- */
 .nosotros { padding: clamp(2.5rem, 5vw, 4rem) 0; background: var(--crema-2); }
-.nosotros__grid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 3rem; align-items: start; }
+.nosotros__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 3rem; align-items: center; }
 .nosotros__texto p { margin-top: 1rem; color: var(--tinta-suave); }
 .lista-marcada { list-style: none; margin-top: 1.4rem; display: grid; gap: .55rem; }
 .lista-marcada li { position: relative; padding-left: 1.7rem; }
 .lista-marcada li::before { content: ""; position: absolute; left: 0; top: .55em; width: 9px; height: 9px; border-radius: 50%; background: var(--dorado); }
+
+.nosotros__foto { margin: 0; border-radius: var(--radio-g); overflow: hidden; box-shadow: var(--sombra-alta); }
+.nosotros__foto img { width: 100%; height: 100%; object-fit: cover; }
 
 .cifras { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .cifras li { background: var(--blanco); border: 1px solid var(--linea); border-radius: var(--radio); padding: 1.15rem; display: grid; gap: .25rem; }
@@ -297,6 +300,7 @@ h1 em { font-style: italic; color: var(--dorado); }
 .contacto__tarjeta h3 { font-size: 1.22rem; margin-bottom: 1rem; }
 .pasos { counter-reset: paso; list-style: none; display: grid; gap: .85rem; }
 .pasos li { position: relative; padding-left: 2.6rem; color: var(--tinta-suave); }
+.pasos strong { color: var(--tinta); font-weight: 700; }
 .pasos li::before { counter-increment: paso; content: counter(paso); position: absolute; left: 0; top: 0; width: 1.8rem; height: 1.8rem; border-radius: 50%; background: var(--vino); color: var(--crema); display: grid; place-items: center; font-size: .85rem; font-weight: 700; }
 .contacto__aparte { margin-top: 1.3rem; padding-top: 1.1rem; border-top: 1px solid var(--linea); font-size: .87rem; color: var(--tinta-suave); }
 
