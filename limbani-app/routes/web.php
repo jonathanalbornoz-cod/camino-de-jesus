@@ -14,7 +14,7 @@ use App\Http\Controllers\MyTasksController;
 
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route(auth()->check() ? 'dashboard' : 'login');
 });
 
 Route::get('/dashboard', [ProjectController::class, 'index'])
