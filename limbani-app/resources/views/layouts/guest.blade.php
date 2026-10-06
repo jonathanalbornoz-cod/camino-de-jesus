@@ -21,7 +21,8 @@
 
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 relative z-10">
             <div>
-                <a href="/">
+                <a href="/" class="flex items-center gap-3">
+                     <img src="{{ asset('logo.png') }}" alt="Limbani" class="w-14 h-14 rounded-2xl shadow-lg">
                      <h1 class="text-5xl font-black text-white uppercase tracking-tighter">Limbani<span class="text-orange-500">.</span></h1>
                 </a>
             </div>

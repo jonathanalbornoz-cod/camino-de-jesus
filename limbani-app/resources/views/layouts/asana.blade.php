@@ -61,7 +61,10 @@
             class="fixed md:relative w-64 h-full bg-gray-50 dark:bg-[#0a0a0a] border-r border-black/5 dark:border-white/5 text-gray-500 dark:text-gray-400 flex flex-col flex-shrink-0 transition-transform duration-300 ease-in-out z-50 shadow-xl dark:shadow-none">
             
             <div class="h-20 flex items-center justify-between px-8 border-b border-black/5 dark:border-white/5">
-                <a href="{{ route('dashboard') }}" class="text-gray-900 dark:text-white font-black text-2xl tracking-tighter hover:text-orange-500 transition-colors">LIMBANI<span class="text-orange-500">.</span></a>
+                <a href="{{ route('dashboard') }}" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
+                    <img src="{{ asset('logo.png') }}" alt="Limbani" class="w-9 h-9 rounded-xl shadow-sm shrink-0">
+                    <span class="text-gray-900 dark:text-white font-black text-2xl tracking-tighter">LIMBANI<span class="text-orange-500">.</span></span>
+                </a>
                 <button @click="mobileMenu = false" class="md:hidden text-gray-500 hover:text-gray-900 dark:hover:text-white">
                     <i class="fas fa-times text-xl"></i>
                 </button>
@@ -300,7 +303,10 @@
         <main class="flex-1 overflow-y-auto focus:outline-none relative w-full transition-colors duration-300 bg-transparent">
             <!-- Mobile Header -->
             <div class="md:hidden h-16 bg-gray-50 dark:bg-[#0a0a0a] border-b border-black/5 dark:border-white/5 flex items-center justify-between px-6 sticky top-0 z-30">
-                <span class="text-gray-900 dark:text-white font-black text-xl tracking-tighter">LIMBANI<span class="text-orange-500">.</span></span>
+                <div class="flex items-center gap-2">
+                    <img src="{{ asset('logo.png') }}" alt="Limbani" class="w-7 h-7 rounded-lg shrink-0">
+                    <span class="text-gray-900 dark:text-white font-black text-xl tracking-tighter">LIMBANI<span class="text-orange-500">.</span></span>
+                </div>
                 <button @click="mobileMenu = true" class="text-gray-400 hover:text-white p-2">
                     <i class="fas fa-bars text-xl"></i>
                 </button>
