@@ -1,8 +1,8 @@
 # High Smile · Clínica Odontológica (Cali) — sitio web
 
 Sitio web en **español e inglés** para High Smile Clínica Odontológica, en Santiago de Cali.
-Portada horizontal a pantalla completa, paleta **negro dominante, blanco y gris**, y el
-logotipo oficial de la clínica.
+Portada horizontal a pantalla completa, paleta **clara: blanco dominante, grises suaves y
+tinta negra**, y el logotipo oficial de la clínica.
 
 > **Versión de muestra, en un dominio de pruebas.** Mientras el sitio viva en
 > `injoepropuesta2.online` y no en el dominio definitivo de la clínica, las tres páginas van
@@ -73,7 +73,7 @@ Además: `agenda.html` (formulario de agendamiento en tres pasos) y `privacidad.
 | `assets/js/i18n.js` | Traducción español/inglés: motor y los dos diccionarios |
 | `assets/js/app.js` | Menú, acordeón, carruseles, carga de fotos y envío de imágenes |
 | `assets/js/agenda.js` | Formulario por pasos con validaciones |
-| `assets/img/logo-*.png` | Logotipos oficiales (horizontal blanco y negro, vertical blanco) |
+| `assets/img/logo-*.png` | Logotipos oficiales. Sobre fondo claro va `logo-horizontal-negro.png` (cabecera y pie); el blanco `logo-vertical.png` se reserva para la portada, que es la única zona oscura |
 | `assets/img/fotos/` | Fotografías de la clínica · ver `LEEME.md` dentro de la carpeta |
 | `assets/img/ilustraciones/` | Dibujos SVG de los ocho servicios |
 | `assets/fonts/` | Las dos tipografías del sitio, con sus licencias |
@@ -136,9 +136,15 @@ navegador elige una u otra con un `<picture>`; en el teléfono el encuadre ancho
 las personas fuera del cuadro.
 
 El velo oscuro que va encima está calibrado midiendo el contraste real de cada bloque de
-texto sobre la fotografía: en el peor punto, el titular queda en 6,9 : 1 y los textos
-pequeños en 5,6 : 1 o más, por encima del 4,5 : 1 que pide la norma de accesibilidad AA.
+texto sobre la fotografía: en el peor punto el titular queda en 7,0 : 1 y los textos
+pequeños en 5,9 : 1 o más, por encima del 4,5 : 1 que pide la norma de accesibilidad AA.
 Si se cambia la fotografía por una más clara, hay que volver a comprobarlo.
+
+**La portada es la única zona oscura del sitio.** El resto de la página es clara, así que
+dentro de `.heroe` el CSS vuelve a declarar los tokens de color con valores para fondo
+oscuro. Gracias a eso el titular, el rótulo, los botones y el indicador de scroll heredan
+solos el trato correcto, sin una sola regla repetida: para cambiar cómo se ve la portada
+basta con tocar ese bloque.
 
 > La fotografía muestra a dos personas identificables. Antes de publicar el sitio conviene
 > tener su autorización por escrito para usar su imagen, igual que con las fotos del equipo.

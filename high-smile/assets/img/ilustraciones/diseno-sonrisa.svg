@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" role="img" aria-label="Diseño de sonrisa">
   <title>Diseño de sonrisa</title>
-  <g fill="none" stroke="#f3f3f3" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+  <g fill="none" stroke="#2f2f2f" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
 
     <path d="M20 50c10 24 24 36 40 36s30-12 40-36c-12-7-25-10-40-10s-28 3-40 10z"/>
     <path d="M24 58h72" opacity=".5"/>
