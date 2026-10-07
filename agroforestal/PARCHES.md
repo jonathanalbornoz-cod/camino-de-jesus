@@ -76,9 +76,24 @@ de página, cuyo enlace es de navegación y no debe arrastrar nada.
 Eran dos problemas distintos:
 
 - **No aparecía** fuera de la portada porque el botón vive dentro del componente
-  `app-home`. `ajustes.js` añade uno propio, fijo abajo a la derecha, en todas las
-  demás páginas. En la portada se esconde para no duplicar el de la aplicación, que
-  además lleva su globo de «¿Te ayudo a cotizar?».
+  `app-home`. `ajustes.js` monta los suyos, fijos abajo a la derecha, en todas las
+  páginas, y esconde el de la aplicación para que en la portada no haya duplicados.
+
+**Actualización: son dos líneas de atención.** `data/settings.json` lleva ahora una
+lista `whatsapps`, y cada entrada se dibuja como un botón con su etiqueta, porque quien
+busca un repuesto no debería acabar escribiendo a ventas:
+
+| Etiqueta | Número |
+|---|---|
+| Ventas y cotizaciones | +57 318 804 3743 |
+| Repuestos y accesorios | +57 318 804 3270 |
+
+El primero de la lista es el principal y se dibuja abajo, donde estaba el botón de
+siempre; los demás se apilan encima (`flex-direction: column-reverse`). Cambiar un
+número o un texto es editar esa lista, sin tocar código.
+
+Al esconder el widget de la aplicación se va también su globo de «¿Te ayudo a
+cotizar?». La mascota sigue apareciendo en la sección «Nuestra historia».
 - **No comunicaba** porque el número no estaba configurado y la aplicación caía a su
   valor por defecto, `573000000000`. Ahora `data/settings.json` lleva el número real,
   y los dos botones apuntan al mismo sitio porque ambos lo leen de ahí.

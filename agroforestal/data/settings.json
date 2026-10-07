@@ -14,5 +14,15 @@
   "formularios": {
     "destino": "agroforestalventas@yahoo.com",
     "endpoint": "https://formsubmit.co/ajax/agroforestalventas@yahoo.com"
-  }
+  },
+  "whatsapps": [
+    {
+      "numero": "573188043743",
+      "etiqueta": "Ventas y cotizaciones"
+    },
+    {
+      "numero": "573188043270",
+      "etiqueta": "Repuestos y accesorios"
+    }
+  ]
 }

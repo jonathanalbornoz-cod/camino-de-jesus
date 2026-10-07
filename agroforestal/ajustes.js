@@ -5,7 +5,8 @@
  * y que tampoco justifican reescribir el bundle:
  *
  *   1. El botón de WhatsApp sólo aparecía en la portada, porque vive dentro del
- *      componente app-home. Aquí se añade uno propio, fijo, en el resto de páginas.
+ *      componente app-home. Aquí se montan dos propios, fijos y en todas las
+ *      páginas: ventas y repuestos, cada uno con su número y su etiqueta.
  *
  *   2. «Solicitar cotización» en la ficha de producto llevaba al formulario vacío: el
  *      cliente tenía que volver al catálogo y empezar de nuevo. El formulario ya sabe
@@ -32,46 +33,76 @@
     return base ? base.getAttribute('href') : '/';
   }
 
-  // --- 1. Botón de WhatsApp en todas las páginas ----------------------------
+  // --- 1. Botones de WhatsApp en todas las páginas --------------------------
+  //
+  // Son dos líneas de atención distintas, cada una con su número, así que cada
+  // botón lleva su etiqueta: quien busca un repuesto no debería acabar en ventas.
+  // Salen de data/settings.json, en `whatsapps`; el primero de la lista es el
+  // principal y se dibuja abajo, donde estaba el botón de siempre.
+  //
+  // Se esconde el botón que trae la aplicación en la portada: si no, allí habría
+  // tres. Su globo de «¿Te ayudo a cotizar?» se va con él; la mascota sigue
+  // apareciendo en la sección «Nuestra historia».
 
-  var boton = null;
-  var numero = null;
+  var pila = null;
+  var numeros = [];
 
-  function crearBoton() {
-    var a = document.createElement('a');
-    a.id = 'wa-flotante';
-    a.target = '_blank';
-    a.rel = 'noopener';
-    a.setAttribute('aria-label', 'Escríbenos por WhatsApp');
-    a.innerHTML =
-      '<svg viewBox="0 0 24 24" width="26" height="26" fill="currentColor" aria-hidden="true">' +
+  function icono() {
+    return '<svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true" style="flex:none">' +
       '<path d="M17.47 14.38c-.3-.15-1.75-.86-2.02-.96-.27-.1-.47-.15-.67.15-.2.3-.77.96-.94 1.16-.17.2-.35.22-.64.08-.3-.15-1.25-.46-2.38-1.47-.88-.78-1.47-1.75-1.65-2.05-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.6-.92-2.2-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.07 2.88 1.22 3.08c.15.2 2.1 3.2 5.08 4.49.71.3 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.75-.72 2-1.41.25-.69.25-1.28.17-1.41-.07-.13-.27-.2-.57-.35z"/>' +
       '<path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.46 1.32 4.96L2 22l5.25-1.38a9.9 9.9 0 0 0 4.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0 0 12.04 2zm0 18.13h-.01a8.23 8.23 0 0 1-4.19-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 0 1-1.26-4.36c0-4.54 3.7-8.24 8.25-8.24 2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 0 1 2.41 5.83c0 4.54-3.7 8.21-8.24 8.21z"/></svg>';
-    var s = a.style;
-    s.position = 'fixed';
-    s.bottom = '2rem';
-    s.right = '2rem';
-    s.zIndex = '50';
-    s.width = '3.5rem';
-    s.height = '3.5rem';
-    s.borderRadius = '9999px';
-    s.display = 'none';
-    s.alignItems = 'center';
-    s.justifyContent = 'center';
-    s.background = '#22c55e';
-    s.color = '#fff';
-    s.boxShadow = '0 20px 25px -5px rgba(34,197,94,.4)';
-    s.transition = 'transform .2s, background-color .2s';
+  }
+
+  function crearPila() {
+    var d = document.createElement('div');
+    d.id = 'wa-pila';
+    d.style.cssText =
+      'position:fixed;bottom:2rem;right:2rem;z-index:50;display:flex;' +
+      'flex-direction:column-reverse;align-items:flex-end;gap:.6rem';
+    document.body.appendChild(d);
+    return d;
+  }
+
+  function crearBoton(n) {
+    var a = document.createElement('a');
+    a.className = 'wa-boton';
+    a.target = '_blank';
+    a.rel = 'noopener';
+    a.href = 'https://wa.me/' + n.numero;
+    a.setAttribute('aria-label', n.etiqueta + ' por WhatsApp');
+    a.innerHTML = icono() + '<span></span>';
+    a.lastChild.textContent = n.etiqueta;          // textContent: la etiqueta es dato
+    a.style.cssText =
+      'display:inline-flex;align-items:center;gap:.5rem;padding:.7rem 1.05rem;' +
+      'border-radius:9999px;background:#22c55e;color:#fff;text-decoration:none;' +
+      'font-size:13px;font-weight:700;line-height:1;white-space:nowrap;' +
+      'box-shadow:0 20px 25px -5px rgba(34,197,94,.4);' +
+      'transition:transform .2s, background-color .2s';
     a.addEventListener('mouseenter', function () {
       a.style.background = '#16a34a';
-      a.style.transform = 'scale(1.1)';
+      a.style.transform = 'translateY(-2px)';
     });
     a.addEventListener('mouseleave', function () {
       a.style.background = '#22c55e';
       a.style.transform = 'none';
     });
-    document.body.appendChild(a);
     return a;
+  }
+
+  // El botón propio de la aplicación vive dentro de app-home; se oculta para no
+  // duplicar la atención por WhatsApp en la portada.
+  function ocultarElDeLaApp() {
+    var enlace = document.querySelector(SEL_WA_APP);
+    var caja = enlace && enlace.closest('.fixed');
+    if (caja && caja.id !== 'wa-pila') caja.style.display = 'none';
+  }
+
+  function revisarBoton() {
+    ocultarElDeLaApp();
+    if (!numeros.length) return;
+    if (pila) return;                              // ya montada
+    pila = crearPila();
+    numeros.forEach(function (n) { pila.appendChild(crearBoton(n)); });
   }
 
   // El número y el usuario de Instagram salen de los mismos ajustes que usa la
@@ -82,19 +113,18 @@
     return fetch(raiz() + 'data/settings.json', { cache: 'no-cache' })
       .then(function (r) { return r.ok ? r.json() : null; })
       .then(function (s) {
-        numero = ((s && s.whatsapp) || '').replace(/[^0-9]/g, '') || null;
+        var lista = (s && s.whatsapps) || [];
+        if (!lista.length && s && s.whatsapp) {       // respaldo: configuración antigua
+          lista = [{ numero: s.whatsapp, etiqueta: 'Escríbenos por WhatsApp' }];
+        }
+        numeros = lista
+          .map(function (n) {
+            return { numero: String(n.numero || '').replace(/[^0-9]/g, ''), etiqueta: n.etiqueta || 'WhatsApp' };
+          })
+          .filter(function (n) { return n.numero; });
         usuarioIg = ((s && s.instagram) || '').replace(/^@/, '').trim() || null;
       })
-      .catch(function () { numero = null; usuarioIg = null; });
-  }
-
-  // En la portada el botón lo pone la aplicación, con su globo de «¿Te ayudo a
-  // cotizar?». Ahí no duplicamos: sólo aparecemos donde no está el suyo.
-  function revisarBoton() {
-    if (!numero) return;
-    if (!boton) boton = crearBoton();
-    boton.href = 'https://wa.me/' + numero;
-    boton.style.display = document.querySelector(SEL_WA_APP) ? 'none' : 'flex';
+      .catch(function () { numeros = []; usuarioIg = null; });
   }
 
   // --- 2. «Solicitar cotización» con el producto puesto ---------------------
