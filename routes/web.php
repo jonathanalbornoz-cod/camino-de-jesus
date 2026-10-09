@@ -29,6 +29,8 @@ Route::middleware('auth')->group(function () {
 
     // 0b. Mis Tareas (Lista, Tablero y Calendario, estilo Asana)
     Route::get('/mis-tareas', [MyTasksController::class, 'index'])->name('my-tasks.index');
+    // Ver el cronograma de otro colaborador (solo quien puede asignarle tareas, o administración)
+    Route::get('/equipo/{member}/tareas', [MyTasksController::class, 'show'])->name('team.tasks');
 
     // 1. Perfil de Usuario
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

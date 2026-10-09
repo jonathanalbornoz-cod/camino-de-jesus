@@ -6,10 +6,21 @@
 
         <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
             <div class="flex items-center gap-4">
-                <div class="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500">
-                    <i class="fas fa-list-check"></i>
+                @if($viewingMember)
+                    <a href="{{ url()->previous() }}" class="w-10 h-10 rounded-xl bg-gray-100 dark:bg-white/5 border border-gray-200 dark:border-white/10 flex items-center justify-center text-gray-400 hover:text-orange-500 transition-colors">
+                        <i class="fas fa-arrow-left"></i>
+                    </a>
+                @else
+                    <div class="w-10 h-10 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-500">
+                        <i class="fas fa-list-check"></i>
+                    </div>
+                @endif
+                <div>
+                    <h1 class="text-2xl md:text-3xl font-medium tracking-tight text-gray-900 dark:text-white">{{ $viewingMember ? 'Tareas de ' . $viewingMember->name : 'Mis Tareas' }}</h1>
+                    @if($viewingMember)
+                        <p class="text-[11px] text-gray-500 uppercase tracking-widest font-bold">{{ $viewingMember->position ?? 'Colaborador' }}</p>
+                    @endif
                 </div>
-                <h1 class="text-2xl md:text-3xl font-medium tracking-tight text-gray-900 dark:text-white">Mis Tareas</h1>
             </div>
 
             <div class="flex items-center gap-2 bg-gray-100 dark:bg-white/[0.03] border border-gray-200 dark:border-white/10 rounded-full p-1 w-fit">
@@ -133,12 +144,16 @@
         </div>
 
         {{-- ===================== CALENDARIO ===================== --}}
+        @php
+            $scheduleRoute = $viewingMember ? 'team.tasks' : 'my-tasks.index';
+            $scheduleRouteBase = $viewingMember ? ['member' => $viewingMember->id] : [];
+        @endphp
         <div x-show="view === 'calendar'" x-cloak>
             <div class="flex items-center justify-between mb-4">
                 <div class="flex items-center gap-3">
-                    <a href="{{ route('my-tasks.index', ['view' => 'calendar', 'month' => $month->copy()->subMonth()->format('Y-m')]) }}" class="w-8 h-8 rounded-lg flex items-center justify-center bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 text-gray-500"><i class="fas fa-chevron-left text-xs"></i></a>
-                    <a href="{{ route('my-tasks.index', ['view' => 'calendar']) }}" class="px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 text-gray-500">Hoy</a>
-                    <a href="{{ route('my-tasks.index', ['view' => 'calendar', 'month' => $month->copy()->addMonth()->format('Y-m')]) }}" class="w-8 h-8 rounded-lg flex items-center justify-center bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 text-gray-500"><i class="fas fa-chevron-right text-xs"></i></a>
+                    <a href="{{ route($scheduleRoute, $scheduleRouteBase + ['view' => 'calendar', 'month' => $month->copy()->subMonth()->format('Y-m')]) }}" class="w-8 h-8 rounded-lg flex items-center justify-center bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 text-gray-500"><i class="fas fa-chevron-left text-xs"></i></a>
+                    <a href="{{ route($scheduleRoute, $scheduleRouteBase + ['view' => 'calendar']) }}" class="px-3 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-widest bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 text-gray-500">Hoy</a>
+                    <a href="{{ route($scheduleRoute, $scheduleRouteBase + ['view' => 'calendar', 'month' => $month->copy()->addMonth()->format('Y-m')]) }}" class="w-8 h-8 rounded-lg flex items-center justify-center bg-gray-100 dark:bg-white/5 hover:bg-gray-200 dark:hover:bg-white/10 text-gray-500"><i class="fas fa-chevron-right text-xs"></i></a>
                     <span class="text-sm font-medium text-gray-800 dark:text-white capitalize ml-2">{{ $month->translatedFormat('F Y') }}</span>
                 </div>
                 <span class="text-[10px] font-bold text-gray-500 uppercase tracking-widest bg-gray-100 dark:bg-white/5 px-3 py-1.5 rounded-full">Sin fecha ({{ $noDateCount }})</span>

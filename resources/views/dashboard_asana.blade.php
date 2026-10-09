@@ -380,8 +380,14 @@
                     @endif
                 </div>
                 <div class="space-y-4">
-                    @foreach($team->take(4) as $member)
-                        <div class="flex items-center gap-4 group cursor-pointer">
+                    @foreach($team->take(6) as $member)
+                        @php
+                            $canViewSchedule = in_array(Auth::user()->role, ['admin', 'ceo', 'rrhh', 'contabilidad'])
+                                || ($member->user_id && Auth::user()->canAssignTo($member->user));
+                        @endphp
+                        <a href="{{ $canViewSchedule ? route('team.tasks', $member) : '#' }}"
+                           class="flex items-center gap-4 group {{ $canViewSchedule ? 'cursor-pointer' : 'cursor-default' }}"
+                           title="{{ $canViewSchedule ? 'Ver cronograma de ' . $member->name : '' }}">
                             @if($member->photo)
                                 <img src="{{ asset('storage/' . $member->photo) }}" class="w-8 h-8 rounded-full object-cover border border-white/5 group-hover:border-orange-500/50 transition-colors">
                             @else
@@ -393,8 +399,10 @@
                                 <p class="text-sm font-light text-gray-700 dark:text-gray-300 group-hover:text-gray-900 dark:group-hover:text-white transition-colors">{{ $member->name }}</p>
                                 <p class="text-[10px] text-gray-500 dark:text-gray-600 uppercase tracking-wider">{{ $member->position ?? 'Staff' }}</p>
                             </div>
-                            <div class="w-1.5 h-1.5 rounded-full bg-green-900 group-hover:bg-green-500 transition-colors"></div>
-                        </div>
+                            @if($canViewSchedule)
+                                <i class="fas fa-calendar-alt text-[10px] text-gray-600 group-hover:text-orange-500 transition-colors"></i>
+                            @endif
+                        </a>
                     @endforeach
                 </div>
             </div>
