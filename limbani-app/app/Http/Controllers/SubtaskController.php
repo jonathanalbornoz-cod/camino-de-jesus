@@ -7,8 +7,10 @@ use App\Models\Task;
 use Illuminate\Http\Request;
 use App\Notifications\TaskAssigned;
 use App\Notifications\TaskCompleted;
+use App\Notifications\MentionNotification;
 use App\Notifications\NewCommentNotification;
 use App\Models\User;
+use App\Services\MentionService;
 
 class SubtaskController extends Controller
 {
@@ -42,6 +44,7 @@ class SubtaskController extends Controller
 
         $data = $request->only(['title', 'description', 'due_date', 'start_date', 'team_member_id']);
 
+        $oldDescription = $subtask->description;
         $wasCompleted = $subtask->is_completed;
         if ($request->has('is_completed')) {
             $data['is_completed'] = filter_var($request->is_completed, FILTER_VALIDATE_BOOLEAN);
@@ -92,6 +95,16 @@ class SubtaskController extends Controller
                 $assigner = User::find($subtask->assigned_by);
                 if ($assigner) {
                     $assigner->notify(new TaskCompleted($subtask, auth()->user()));
+                }
+            }
+        }
+
+        // Notificar a quien fue mencionado con "@Nombre" en la descripción (solo menciones nuevas).
+        if (array_key_exists('description', $data) && $data['description'] !== $oldDescription) {
+            $oldMentionIds = MentionService::extractMentionedUsers($oldDescription)->pluck('id');
+            foreach (MentionService::extractMentionedUsers($data['description']) as $mentionedUser) {
+                if ($mentionedUser->id !== auth()->id() && !$oldMentionIds->contains($mentionedUser->id)) {
+                    $mentionedUser->notify(new MentionNotification($subtask, auth()->user(), 'descripción'));
                 }
             }
         }

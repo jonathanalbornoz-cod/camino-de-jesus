@@ -342,10 +342,41 @@
 
     @include('components.task-panel-content')
     <script>
+        window.mentionableUsers = @json(\App\Models\TeamMember::whereNotNull('user_id')->orderBy('name')->get(['id', 'name', 'user_id'])->map(fn($m) => ['id' => $m->user_id, 'name' => $m->name]));
+
         document.addEventListener('alpine:init', () => {
             Alpine.data('asanaHandler', () => ({
                 mobileMenu: false, openPanel: false, currentTask: {}, newSubtaskTitle: '', newComment: '', isUploading: false, pastedImage: null, showDrawingModal: false, canvas: null, ctx: null, isDrawing: false, canvasColor: '#ff0000',
+                mentionShow: false, mentionField: null, mentionQuery: '', mentionStart: 0, mentionResults: [],
                 darkMode: localStorage.getItem('darkMode') === 'true',
+                handleMentionInput(field, el) {
+                    const value = el.value;
+                    const caret = el.selectionStart;
+                    const uptoCaret = value.slice(0, caret);
+                    const at = uptoCaret.lastIndexOf('@');
+                    if (at === -1 || /\s/.test(uptoCaret.slice(at + 1))) {
+                        this.mentionShow = false;
+                        return;
+                    }
+                    this.mentionField = field;
+                    this.mentionStart = at;
+                    this.mentionQuery = uptoCaret.slice(at + 1).toLowerCase();
+                    this.mentionResults = (window.mentionableUsers || []).filter(u => u.name.toLowerCase().includes(this.mentionQuery)).slice(0, 6);
+                    this.mentionShow = this.mentionResults.length > 0;
+                },
+                selectMention(user, el) {
+                    const value = el.value;
+                    const caret = el.selectionStart;
+                    const newValue = value.slice(0, this.mentionStart) + '@' + user.name + ' ' + value.slice(caret);
+                    if (this.mentionField === 'description') this.currentTask.description = newValue;
+                    else if (this.mentionField === 'comment') this.newComment = newValue;
+                    this.mentionShow = false;
+                    this.$nextTick(() => {
+                        el.focus();
+                        const pos = this.mentionStart + user.name.length + 2;
+                        el.setSelectionRange(pos, pos);
+                    });
+                },
                 toggleDarkMode() {
                     this.darkMode = !this.darkMode;
                     localStorage.setItem('darkMode', this.darkMode);
