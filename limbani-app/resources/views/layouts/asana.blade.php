@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Outfit:wght@200;300;400;500;600;700&display=swap">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <link rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
+    <link id="flatpickrDarkTheme" rel="stylesheet" type="text/css" href="https://npmcdn.com/flatpickr/dist/themes/dark.css">
     
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -25,12 +25,16 @@
         .custom-scroll::-webkit-scrollbar-thumb:hover { background: #ffaa00; }
         #drawingCanvas { cursor: crosshair; touch-action: none; background-color: #000; }
         
-        /* Estilos Flatpickr Personalizados */
-        .flatpickr-calendar {
+        /* Estilos Flatpickr Personalizados (solo en modo oscuro; en modo claro usa el tema claro por defecto) */
+        .dark .flatpickr-calendar {
             background: #1a1a1a !important;
             border: 1px solid rgba(255,255,255,0.1) !important;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5) !important;
             border-radius: 12px !important;
+        }
+        .flatpickr-calendar {
+            border-radius: 12px !important;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15) !important;
         }
         .flatpickr-day.selected {
             background: #f97316 !important;
@@ -388,6 +392,11 @@
                 toggleDarkMode() {
                     this.darkMode = !this.darkMode;
                     localStorage.setItem('darkMode', this.darkMode);
+                    this._syncFlatpickrTheme();
+                },
+                _syncFlatpickrTheme() {
+                    const themeLink = document.getElementById('flatpickrDarkTheme');
+                    if (themeLink) themeLink.disabled = !this.darkMode;
                 },
                 async openTaskPanel(task, sectionTitle = '', parentTitle = '') {
                     this._fillTaskData(task, sectionTitle, parentTitle);
@@ -656,6 +665,8 @@
                     animate();
                 },
                 init() {
+                    this._syncFlatpickrTheme();
+
                     // Start the constellation canvas hook directly upon component load
                     this.initConstellation();
 
