@@ -91,6 +91,9 @@ class User extends Authenticatable
      * ¿Puede este usuario asignar tareas al usuario dado, según su cargo jerárquico?
      * Un nivel más alto (número mayor) significa menor rango.
      */
+    // Cargos de colaborador (fuera de los roles de administración) autorizados a asignar tareas.
+    const ASSIGNER_POSITIONS = ['Community Manager', 'Director Creativo', 'Dirección General'];
+
     public function canAssignTo(?User $other): bool
     {
         if (!$other) {
@@ -99,6 +102,11 @@ class User extends Authenticatable
 
         if (in_array($this->role, ['admin', 'ceo', 'rrhh', 'contabilidad'])) {
             return true;
+        }
+
+        $position = $this->teamMember?->position;
+        if (!in_array($position, self::ASSIGNER_POSITIONS)) {
+            return false;
         }
 
         return $this->hierarchy_level !== null

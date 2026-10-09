@@ -1,21 +1,17 @@
 @php
     // El selector de Responsable siempre muestra a TODO el equipo, para que la persona
-    // asignada se vea correctamente sin importar la jerarquía de quien esté mirando.
-    // Lo que sí depende de la jerarquía es a quién puede REASIGNAR la tarea: admin/ceo/
-    // rrhh/contabilidad pueden a cualquiera; un colaborador solo a quienes están por
-    // debajo de él en el cargo (si tiene uno asignado); si no tiene, no puede reasignar
-    // a nadie y el selector queda deshabilitado (solo lectura).
+    // asignada se vea correctamente sin importar quién esté mirando.
+    // Lo que sí está restringido es a quién puede REASIGNAR la tarea (User::canAssignTo):
+    // administración puede a cualquiera; solo Community Manager, Director Creativo y
+    // Dirección General pueden asignar entre los colaboradores, y únicamente a quienes
+    // están por debajo de ellos en el cargo jerárquico. Cualquier otro colaborador no
+    // puede reasignar a nadie y el selector queda deshabilitado (solo lectura).
     $currentAuthUser = Auth::user();
-    $assignableTeamMembers = \App\Models\TeamMember::orderBy('name')->get();
-    if (in_array($currentAuthUser->role, ['admin', 'ceo', 'rrhh', 'contabilidad'])) {
-        $allowedTeamMemberIds = $assignableTeamMembers->pluck('id')->all();
-    } elseif ($currentAuthUser->hierarchy_level !== null) {
-        $allowedTeamMemberIds = \App\Models\TeamMember::whereHas('user', function($q) use ($currentAuthUser) {
-            $q->where('hierarchy_level', '>', $currentAuthUser->hierarchy_level);
-        })->pluck('id')->all();
-    } else {
-        $allowedTeamMemberIds = [];
-    }
+    $assignableTeamMembers = \App\Models\TeamMember::with('user')->orderBy('name')->get();
+    $allowedTeamMemberIds = $assignableTeamMembers
+        ->filter(fn($m) => $currentAuthUser->canAssignTo($m->user))
+        ->pluck('id')
+        ->all();
 @endphp
 <!-- PANEL LATERAL DE TAREA (Único y Global) -->
 <div x-show="openPanel" 
