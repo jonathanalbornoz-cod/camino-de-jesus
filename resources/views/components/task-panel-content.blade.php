@@ -159,9 +159,23 @@
             </div>
         </div>
 
-        <div class="space-y-3">
+        <div class="space-y-3 relative">
             <label class="text-xs font-bold text-gray-400 uppercase tracking-widest">Descripción</label>
-            <textarea x-model="currentTask.description" rows="4" class="w-full bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 rounded-xl p-4 text-sm text-gray-700 dark:text-gray-300 placeholder-gray-400 dark:placeholder-gray-600 focus:ring-1 focus:ring-orange-500 transition-all resize-none"></textarea>
+            <textarea x-model="currentTask.description" x-ref="descriptionInput" rows="4"
+                      @input="handleMentionInput('description', $el)"
+                      @keydown.escape="mentionShow = false"
+                      placeholder="Escribe @ para mencionar a alguien del equipo..."
+                      class="w-full bg-gray-50 dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 rounded-xl p-4 text-sm text-gray-700 dark:text-gray-300 placeholder-gray-400 dark:placeholder-gray-600 focus:ring-1 focus:ring-orange-500 transition-all resize-none"></textarea>
+            <div x-show="mentionShow && mentionField === 'description'" @click.away="mentionShow = false"
+                 class="absolute z-20 left-0 right-0 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 rounded-xl shadow-2xl overflow-hidden"
+                 style="display: none;">
+                <template x-for="user in mentionResults" :key="user.id">
+                    <button type="button" @click="selectMention(user, $refs.descriptionInput)"
+                            class="w-full text-left px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-orange-500/10 hover:text-orange-500 transition-colors">
+                        <i class="fas fa-at text-[10px] mr-2 opacity-50"></i><span x-text="user.name"></span>
+                    </button>
+                </template>
+            </div>
         </div>
 
         <div class="space-y-4 pt-6 border-t border-white/5">
@@ -375,12 +389,25 @@
                     <div class="flex-1 relative">
                         <textarea
                             x-model="newComment"
-                            @keydown.enter.prevent="sendComment()"
+                            x-ref="commentInput"
+                            @input="handleMentionInput('comment', $el)"
+                            @keydown.escape="mentionShow = false"
+                            @keydown.enter.prevent="(mentionShow && mentionField === 'comment') ? selectMention(mentionResults[0], $refs.commentInput) : sendComment()"
                             @paste="handlePaste($event)"
-                            placeholder="Escribe un comentario o pega una captura (Ctrl+V)..."
+                            placeholder="Escribe un comentario, @ para mencionar, o pega una captura (Ctrl+V)..."
                             class="w-full bg-gray-50 dark:bg-white/5 border border-gray-200 dark:border-white/10 rounded-2xl p-3 text-xs text-gray-700 dark:text-gray-300 focus:ring-1 focus:ring-orange-500 outline-none resize-none"
                             rows="2"
                         ></textarea>
+                        <div x-show="mentionShow && mentionField === 'comment'" @click.away="mentionShow = false"
+                             class="absolute z-20 bottom-full mb-2 left-0 right-0 bg-white dark:bg-[#1a1a1a] border border-gray-200 dark:border-white/10 rounded-xl shadow-2xl overflow-hidden"
+                             style="display: none;">
+                            <template x-for="user in mentionResults" :key="user.id">
+                                <button type="button" @click="selectMention(user, $refs.commentInput)"
+                                        class="w-full text-left px-4 py-2 text-xs text-gray-700 dark:text-gray-300 hover:bg-orange-500/10 hover:text-orange-500 transition-colors">
+                                    <i class="fas fa-at text-[10px] mr-2 opacity-50"></i><span x-text="user.name"></span>
+                                </button>
+                            </template>
+                        </div>
                         <div class="absolute bottom-2 right-3 text-[9px] text-gray-600">Enter para enviar | Ctrl+V para capturas</div>
                     </div>
                 </div>

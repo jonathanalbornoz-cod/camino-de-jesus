@@ -6,6 +6,8 @@ use App\Models\Comment;
 use App\Models\Subtask;
 use Illuminate\Http\Request;
 use App\Notifications\NewCommentNotification;
+use App\Notifications\MentionNotification;
+use App\Services\MentionService;
 use App\Models\User;
 
 class CommentController extends Controller
@@ -46,9 +48,12 @@ class CommentController extends Controller
             'image_path' => $imagePath
         ]);
 
+        $notifiedUserIds = [auth()->id()];
+
         // Notificar al responsable de la tarea
         if ($subtask->teamMember && $subtask->teamMember->user_id && $subtask->teamMember->user_id !== auth()->id()) {
             $subtask->teamMember->user->notify(new NewCommentNotification($comment, $subtask));
+            $notifiedUserIds[] = $subtask->teamMember->user_id;
         }
 
         // Notificar a Administrativos (opcional, pero útil para CEO)
@@ -57,7 +62,16 @@ class CommentController extends Controller
              // Solo notificar si no es el responsable ya notificado
              if (!$subtask->teamMember || $admin->id !== $subtask->teamMember->user_id) {
                  $admin->notify(new NewCommentNotification($comment, $subtask));
+                 $notifiedUserIds[] = $admin->id;
              }
+        }
+
+        // Notificar a quien fue mencionado con "@Nombre" en el comentario
+        foreach (MentionService::extractMentionedUsers($request->content) as $mentionedUser) {
+            if (!in_array($mentionedUser->id, $notifiedUserIds)) {
+                $mentionedUser->notify(new MentionNotification($subtask, auth()->user(), 'comentario'));
+                $notifiedUserIds[] = $mentionedUser->id;
+            }
         }
 
         return response()->json($comment->load('user'));

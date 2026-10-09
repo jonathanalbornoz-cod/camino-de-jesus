@@ -72,7 +72,7 @@
                      class="p-4 rounded-2xl bg-gray-50 dark:bg-white/5 border border-transparent hover:border-orange-500/30 hover:bg-white dark:hover:bg-white/10 cursor-pointer transition-all group">
                     <div class="flex gap-4">
                         <div class="w-10 h-10 rounded-xl bg-orange-500/10 flex items-center justify-center text-orange-500 text-sm shrink-0 shadow-inner">
-                            <i class="fas" :class="notif.data.type === 'task_assigned' ? 'fa-tasks shadow-[0_0_10px_rgba(249,115,22,0.3)]' : (notif.data.type === 'task_completed' ? 'fa-check-double shadow-[0_0_10px_rgba(249,115,22,0.3)]' : 'fa-comment-dots')"></i>
+                            <i class="fas" :class="notif.data.type === 'task_assigned' ? 'fa-tasks shadow-[0_0_10px_rgba(249,115,22,0.3)]' : (notif.data.type === 'task_completed' ? 'fa-check-double shadow-[0_0_10px_rgba(249,115,22,0.3)]' : (notif.data.type === 'mention' ? 'fa-at shadow-[0_0_10px_rgba(249,115,22,0.3)]' : 'fa-comment-dots'))"></i>
                         </div>
                         <div class="min-w-0 flex-1">
                             <div class="flex justify-between items-start mb-1">
