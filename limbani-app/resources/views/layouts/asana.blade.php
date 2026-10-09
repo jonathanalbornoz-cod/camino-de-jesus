@@ -344,6 +344,14 @@
     <script>
         window.mentionableUsers = @json(\App\Models\TeamMember::whereNotNull('user_id')->orderBy('name')->get(['id', 'name', 'user_id'])->map(fn($m) => ['id' => $m->user_id, 'name' => $m->name]));
 
+        // Las fechas que vienen del servidor llegan como "2026-10-06 14:00:00" (con espacio),
+        // formato que `new Date()` no garantiza poder interpretar en todos los navegadores.
+        // Esta función las normaliza a ISO ("...T...") antes de construir el objeto Date.
+        window.parseApiDate = function(value) {
+            if (!value) return null;
+            return new Date(typeof value === 'string' ? value.replace(' ', 'T') : value);
+        };
+
         document.addEventListener('alpine:init', () => {
             Alpine.data('asanaHandler', () => ({
                 mobileMenu: false, openPanel: false, currentTask: {}, newSubtaskTitle: '', newComment: '', isUploading: false, pastedImage: null, showDrawingModal: false, canvas: null, ctx: null, isDrawing: false, canvasColor: '#ff0000',

@@ -256,7 +256,7 @@
                                                     }
                                                  })">
                                                 <i class="far fa-clock text-[9px] text-orange-500"></i>
-                                                <span class="text-[9px] font-bold text-orange-500/80 uppercase" x-text="child.start_date ? new Date(child.start_date).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', hour12: true }) : 'Inicio'"></span>
+                                                <span class="text-[9px] font-bold text-orange-500/80 uppercase" x-text="child.start_date ? parseApiDate(child.start_date).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', hour12: true }) : 'Inicio'"></span>
                                             </div>
 
                                             <div class="flex items-center gap-1.5 py-0.5 px-2 rounded-lg bg-gray-500/5 border border-gray-500/10 cursor-pointer hover:bg-gray-500/10 transition-all"
@@ -280,7 +280,7 @@
                                                     }
                                                  })">
                                                 <i class="far fa-calendar-check text-[9px] text-gray-500"></i>
-                                                <span class="text-[9px] font-bold text-gray-500/80 uppercase" x-text="child.due_date ? new Date(child.due_date).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', hour12: true }) : 'Vencimiento'"></span>
+                                                <span class="text-[9px] font-bold text-gray-500/80 uppercase" x-text="child.due_date ? parseApiDate(child.due_date).toLocaleString('es-ES', { day: 'numeric', month: 'short', hour: 'numeric', minute: '2-digit', hour12: true }) : 'Vencimiento'"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -355,7 +355,7 @@
                         <div class="flex-1 bg-gray-50 dark:bg-white/5 rounded-2xl p-3 border border-gray-200 dark:border-white/5">
                             <div class="flex justify-between items-center mb-1.5">
                                 <span class="text-[13px] font-bold text-orange-500" x-text="comment.user ? comment.user.name : 'Usuario'"></span>
-                                <span class="text-[10px] text-gray-500 font-medium" x-text="new Date(comment.created_at).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })"></span>
+                                <span class="text-[10px] text-gray-500 font-medium" x-text="parseApiDate(comment.created_at).toLocaleString([], { dateStyle: 'medium', timeStyle: 'short' })"></span>
                             </div>
                             <p class="text-[14px] text-gray-700 dark:text-gray-300 leading-[1.6] mb-3" x-text="comment.content"></p>
                             <template x-if="comment.image_path">
