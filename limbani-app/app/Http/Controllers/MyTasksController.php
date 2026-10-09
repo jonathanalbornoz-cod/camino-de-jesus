@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Subtask;
+use App\Models\TeamMember;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -15,6 +16,24 @@ class MyTasksController extends Controller
         $user = Auth::user();
         $teamMemberId = $user->teamMember ? $user->teamMember->id : null;
 
+        return $this->renderSchedule($request, $teamMemberId, null);
+    }
+
+    // Ver el cronograma (Lista, Tablero y Calendario) de OTRO colaborador, sin tener que
+    // iniciar sesión con su cuenta. Solo para quien puede asignarle tareas (o administración).
+    public function show(Request $request, TeamMember $member)
+    {
+        $viewer = Auth::user();
+        $canView = in_array($viewer->role, ['admin', 'ceo', 'rrhh', 'contabilidad'])
+            || ($member->user_id && $viewer->canAssignTo($member->user));
+
+        abort_unless($canView, 403, 'No tienes permiso para ver el cronograma de este colaborador.');
+
+        return $this->renderSchedule($request, $member->id, $member);
+    }
+
+    private function renderSchedule(Request $request, ?int $teamMemberId, ?TeamMember $viewingMember)
+    {
         $tasks = $teamMemberId
             ? Subtask::where('team_member_id', $teamMemberId)->with(['task.project', 'parent'])->get()
             : collect();
@@ -48,7 +67,7 @@ class MyTasksController extends Controller
 
         return view('my_tasks.index', compact(
             'overdue', 'withDate', 'noDate', 'completed',
-            'view', 'month', 'calendarWeeks', 'tasksByDate', 'noDateCount'
+            'view', 'month', 'calendarWeeks', 'tasksByDate', 'noDateCount', 'viewingMember'
         ));
     }
 }
