@@ -345,8 +345,14 @@
     </div>
 
     @include('components.task-panel-content')
+    @php
+        $mentionableUsersForJs = \App\Models\TeamMember::whereNotNull('user_id')
+            ->orderBy('name')
+            ->get(['id', 'name', 'user_id'])
+            ->map(fn($m) => ['id' => $m->user_id, 'name' => $m->name]);
+    @endphp
     <script>
-        window.mentionableUsers = @json(\App\Models\TeamMember::whereNotNull('user_id')->orderBy('name')->get(['id', 'name', 'user_id'])->map(fn($m) => ['id' => $m->user_id, 'name' => $m->name]));
+        window.mentionableUsers = @json($mentionableUsersForJs);
 
         // Las fechas que vienen del servidor llegan como "2026-10-06 14:00:00" (con espacio),
         // formato que `new Date()` no garantiza poder interpretar en todos los navegadores.
