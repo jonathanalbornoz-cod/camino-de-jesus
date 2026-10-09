@@ -81,22 +81,40 @@ class SubtaskController extends Controller
         $oldMemberId = $subtask->team_member_id;
         $subtask->update($data);
 
-        // Notificar si hay un nuevo responsable asignado
+        // Notificar si hay un nuevo responsable asignado: al responsable y, además, a todos los
+        // demás usuarios del sistema (quien realiza la acción no se notifica a sí mismo).
         if (isset($data['team_member_id']) && $data['team_member_id'] != $oldMemberId) {
             $member = \App\Models\TeamMember::find($data['team_member_id']);
+            $alreadyNotified = [auth()->id()];
+
             if ($member && $member->user) {
                 $member->user->notify(new TaskAssigned($subtask, auth()->user()));
+                $alreadyNotified[] = $member->user_id;
             }
+
+            \Illuminate\Support\Facades\Notification::send(
+                User::whereNotIn('id', $alreadyNotified)->get(),
+                new TaskAssigned($subtask, auth()->user())
+            );
         }
 
-        // Notificar a quien asignó la tarea cuando se marca como finalizada, para que la apruebe.
+        // Notificar cuando se marca como finalizada: a quien asignó la tarea y a todos los
+        // demás usuarios del sistema (quien realiza la acción no se notifica a sí mismo).
         if (($data['is_completed'] ?? false) && !$wasCompleted) {
+            $alreadyNotified = [auth()->id()];
+
             if ($subtask->assigned_by && (int) $subtask->assigned_by !== auth()->id()) {
                 $assigner = User::find($subtask->assigned_by);
                 if ($assigner) {
                     $assigner->notify(new TaskCompleted($subtask, auth()->user()));
+                    $alreadyNotified[] = $assigner->id;
                 }
             }
+
+            \Illuminate\Support\Facades\Notification::send(
+                User::whereNotIn('id', $alreadyNotified)->get(),
+                new TaskCompleted($subtask, auth()->user())
+            );
         }
 
         // Notificar a quien fue mencionado con "@Nombre" en la descripción (solo menciones nuevas).
