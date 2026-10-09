@@ -228,13 +228,7 @@
                     <div class="bg-white dark:bg-white/[0.02] border border-gray-200 dark:border-white/5 rounded-3xl overflow-hidden group hover:border-orange-500/20 transition-all duration-500 shadow-sm dark:shadow-none">
                         <div class="p-6 border-b border-gray-100 dark:border-white/5 bg-gray-50/30 dark:bg-white/[0.01] flex justify-between items-center">
                             <div class="flex items-center gap-4">
-                                <div class="h-12 min-w-[3rem] max-w-[10rem] px-2 rounded-xl bg-white dark:bg-orange-500/10 border border-gray-200 dark:border-white/10 flex items-center justify-center text-orange-400 text-lg overflow-hidden shadow-sm">
-                                    @if($project->logo)
-                                        <img src="{{ asset('storage/' . $project->logo) }}" alt="{{ $project->name }}" class="h-full w-auto object-contain py-1">
-                                    @else
-                                        <i class="fas fa-layer-group text-sm"></i>
-                                    @endif
-                                </div>
+                                <x-project-icon :project="$project" size="h-12 w-12" rounded="rounded-xl" text="text-lg" class="shadow-sm" />
                                 <div>
                                     <h3 class="text-lg font-medium text-gray-900 dark:text-white">{{ $project->name }}</h3>
                                     <div class="flex items-center gap-3 mt-1">
