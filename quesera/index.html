@@ -65,6 +65,15 @@
       <path d="M18 16h28v34a4 4 0 0 1-4 4H22a4 4 0 0 1-4-4V16Z"/>
       <ellipse cx="32" cy="16" rx="14" ry="5"/><path d="M18 26h28" stroke-linecap="round"/>
     </symbol>
+    <symbol id="ic-domo" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 44h48M10 44a22 22 0 0 1 44 0"/><path d="M32 22v-6"/><circle cx="32" cy="13" r="3"/>
+    </symbol>
+    <symbol id="ic-carrito" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M8 10h8l7 28h26l6-20H20"/><circle cx="26" cy="50" r="4"/><circle cx="46" cy="50" r="4"/>
+    </symbol>
+    <symbol id="ic-institucion" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M6 24 32 10l26 14M10 24v24M22 24v24M42 24v24M54 24v24M6 52h52"/>
+    </symbol>
     <symbol id="ic-catalogo" viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round">
       <rect x="10" y="12" width="20" height="18" rx="3"/><rect x="34" y="12" width="20" height="18" rx="3"/>
       <rect x="10" y="34" width="20" height="18" rx="3"/><rect x="34" y="34" width="20" height="18" rx="3"/>
@@ -123,6 +132,7 @@
       <a href="#nosotros">Nosotros</a>
       <a href="#mayoristas">Mayoristas</a>
       <a href="#contacto">Contacto</a>
+      <a href="#redes">Síganos</a>
       <a class="boton boton--wa menu__cta" data-wa="general">
         <svg class="ic" aria-hidden="true"><use href="#ic-whatsapp"></use></svg>
         Pedir ahora
@@ -149,8 +159,8 @@
         <p class="portada__nota" data-campo="lineas"></p>
       </div>
       <div class="portada__figura">
-        <img src="imagenes/productos/queso-campesino.webp" alt="Queso campesino de Quesera Chiminangos"
-             width="900" height="1200" fetchpriority="high">
+        <img src="imagenes/portada-estanteria.webp" alt="Góndolas surtidas en el punto de Quesera Chiminangos"
+             width="941" height="1254" fetchpriority="high">
       </div>
     </div>
     <svg class="onda" viewBox="0 0 1440 90" preserveAspectRatio="none" aria-hidden="true">
@@ -211,36 +221,25 @@
   </section>
 
   <section class="mayoristas" id="mayoristas">
-    <div class="contenedor">
-      <header class="seccion__encabezado seccion__encabezado--claro">
-        <p class="antetitulo">Servicio a domicilio</p>
-        <h2>Le surtimos a:</h2>
-      </header>
-      <div class="mayoristas__grid">
-        <article class="servicio">
-          <h3>Restaurantes y comidas rápidas</h3>
-          <p>Carnes frías, congelados, salsas, aceites y el desechable para el domicilio.</p>
-        </article>
-        <article class="servicio">
-          <h3>Panaderías y reposterías</h3>
-          <p>Harinas, margarinas, azúcar, huevos, esencias y domos para torta.</p>
-        </article>
-        <article class="servicio">
-          <h3>Tiendas y minimercados</h3>
-          <p>Quesos y lácteos con la rotación de su punto, en las presentaciones que se venden.</p>
-        </article>
-        <article class="servicio">
-          <h3>Volumen institucional</h3>
-          <p>Aceites de 19 L, salsas de 4.000, hielo, bebidas y desechables.</p>
-        </article>
+    <div class="contenedor mayoristas__marco">
+      <div class="mayoristas__texto">
+        <header class="seccion__encabezado seccion__encabezado--claro">
+          <p class="antetitulo">Servicio a domicilio</p>
+          <h2>Le surtimos a:</h2>
+        </header>
+        <div class="mayoristas__grid" id="surtimos"></div>
+        <div class="mayoristas__pie">
+          <p>Cuéntenos qué maneja su negocio y le armamos la lista.</p>
+          <a class="boton boton--dorado boton--grande" data-wa="mayorista">
+            <svg class="ic" aria-hidden="true"><use href="#ic-whatsapp"></use></svg>
+            Cotizar por mayor
+          </a>
+        </div>
       </div>
-      <div class="mayoristas__pie">
-        <p>Cuéntenos qué maneja su negocio y le armamos la lista.</p>
-        <a class="boton boton--dorado boton--grande" data-wa="mayorista">
-          <svg class="ic" aria-hidden="true"><use href="#ic-whatsapp"></use></svg>
-          Cotizar por mayor
-        </a>
-      </div>
+      <figure class="mayoristas__foto">
+        <img src="imagenes/domicilio.webp" alt="Domiciliario de Quesera Chiminangos saliendo con un pedido"
+             width="1024" height="1248" loading="lazy">
+      </figure>
     </div>
   </section>
 
@@ -279,7 +278,6 @@
               <div><span>Medios de pago</span><p data-campo="mediosPago"></p></div>
             </li>
           </ul>
-          <div class="redes" id="redes" hidden></div>
           <a class="boton boton--wa boton--grande" data-wa="general">
             <svg class="ic" aria-hidden="true"><use href="#ic-whatsapp"></use></svg>
             Abrir conversación
@@ -296,6 +294,14 @@
     </div>
   </section>
 
+  <section class="redes-final" id="redes">
+    <div class="contenedor">
+      <p class="antetitulo">Síganos</p>
+      <h2>Lo nuevo, primero por nuestras redes</h2>
+      <div class="redes-final__lista" id="redes-lista"></div>
+    </div>
+  </section>
+
 </main>
 
 <footer class="pie">
@@ -309,6 +315,7 @@
       <a href="#nosotros">Nosotros</a>
       <a href="#mayoristas">Mayoristas</a>
       <a href="#contacto">Contacto</a>
+      <a href="#redes">Síganos</a>
     </nav>
     <div class="pie__contacto">
       <p data-campo="direccion"></p>

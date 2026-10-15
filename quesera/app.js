@@ -52,17 +52,18 @@
         <p>${s.texto}</p>
       </article>`).join('');
 
-    // Redes: sólo se dibujan las que tengan enlace
-    const redes = [
-      ['instagram', MARCA.instagram, 'Instagram'],
-      ['facebook', MARCA.facebook, 'Facebook'],
-      ['tiktok', MARCA.tiktok, 'TikTok'],
-    ].filter(([, url]) => url);
-    if (redes.length) {
-      $('#redes').hidden = false;
-      $('#redes').innerHTML = redes.map(([id, url, nombre]) =>
-        `<a href="${escapar(url)}" target="_blank" rel="noopener" aria-label="${nombre}">${icono(id)}</a>`).join('');
-    }
+    // Redes: salen de REDES, así que añadir o quitar una es tocar datos.js
+    $('#redes-lista').innerHTML = REDES.map((r) => `
+      <a class="red" href="${escapar(r.url)}" target="_blank" rel="noopener">
+        ${icono(r.id)}
+        <span><strong>${r.nombre}</strong><small>${escapar(r.usuario)}</small></span>
+      </a>`).join('');
+
+    $('#surtimos').innerHTML = SURTIMOS.map((x) => `
+      <article class="servicio">
+        <h3>${icono(x.icono)}<span>${x.titulo}</span></h3>
+        <p>${x.texto}</p>
+      </article>`).join('');
 
     if (MARCA.mapaEmbed) {
       $('#mapa').hidden = false;
@@ -78,7 +79,7 @@
     if (PENDIENTE(MARCA.direccion)) faltan.push('direccion');
     if (PENDIENTE(MARCA.horario)) faltan.push('horario');
     if (!MARCA.mapaEmbed) faltan.push('mapaEmbed');
-    if (!MARCA.instagram && !MARCA.facebook && !MARCA.tiktok) faltan.push('instagram / facebook / tiktok');
+    if (!REDES.length) faltan.push('redes sociales');
     if (faltan.length) {
       console.warn('[Quesera Chiminangos] Falta por configurar en datos.js: ' + faltan.join(', '));
     }

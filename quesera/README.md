@@ -12,6 +12,8 @@ app.js                  filtros, pedido y enlaces de WhatsApp
 datos.js                TODO el contenido editable
 imagenes/logo.*         el logotipo
 imagenes/equipo.webp    la foto del equipo, en la sección Nosotros
+imagenes/portada-estanteria.webp   la góndola de la portada
+imagenes/domicilio.webp la foto del domiciliario, en servicio a domicilio
 imagenes/productos/     las fotos de producto, tal como vienen del set
 ```
 
@@ -27,10 +29,14 @@ imagenes/productos/     las fotos de producto, tal como vienen del set
 
 | Dato | Dónde se pone | Estado |
 |---|---|---|
-| Redes sociales | `MARCA.instagram`, `.facebook`, `.tiktok` | **Falta** |
-| Presentaciones | `presentacion` de 15 productos | **Falta** |
+| URL de Facebook | `REDES`, entrada `facebook` | **Por confirmar** |
+| Presentaciones | `presentacion` de 7 productos | Falta |
 | Fotos | 45 de 54 productos | Parcial |
 | Pin del mapa | `MARCA.mapaEmbed` | Por verificar |
+
+El cliente dio Facebook por nombre de página («Quesera Chiminangos»), no por enlace, así
+que la URL que está puesta es la convención habitual para ese nombre y hay que
+comprobarla. Instagram y TikTok vienen con usuario exacto, esos no tienen duda.
 
 Los bloques que dependen de un dato ausente no se dibujan vacíos: simplemente no salen.
 Lo que falte se avisa por la consola del navegador, no en pantalla.

@@ -42,13 +42,24 @@ const MARCA = {
   // Google Maps → Compartir → Insertar un mapa → copiar sólo el src.
   mapaEmbed: 'https://www.google.com/maps?q=Calle%2062B%20%231A9-250%2C%20Chiminangos%20II%2C%20Cali%2C%20Valle%20del%20Cauca%2C%20Colombia&output=embed',
 
-  // Perfiles de redes. Los vacíos no se dibujan.
-  instagram: '',
-  facebook: '',
-  tiktok: '',
 
   logo: 'imagenes/logo.webp',
 };
+
+/*
+ * Redes sociales. Se dibujan en la sección del final y en contacto; las que
+ * se quiten de aquí desaparecen solas de los dos sitios.
+ */
+const REDES = [
+  { id: 'instagram', nombre: 'Instagram', usuario: '@quesera_chiminangos',
+    url: 'https://www.instagram.com/quesera_chiminangos/' },
+  { id: 'facebook',  nombre: 'Facebook',  usuario: 'Quesera Chiminangos',
+    // La página la dio el cliente por nombre, no por enlace: conviene que
+    // confirme que esta es su URL.
+    url: 'https://www.facebook.com/queserachiminangos' },
+  { id: 'tiktok',    nombre: 'TikTok',    usuario: '@queserachiminangos',
+    url: 'https://www.tiktok.com/@queserachiminangos' },
+];
 
 /* La franja de sellos bajo la portada */
 const SELLOS = [
@@ -56,6 +67,18 @@ const SELLOS = [
   { icono: 'mayor',    titulo: '+20 años de experiencia', texto: 'Somos su aliado.' },
   { icono: 'moto',     titulo: 'Servicio a domicilio', texto: 'Su pedido, directo a su negocio.' },
   { icono: 'whatsapp', titulo: 'Pedido por WhatsApp',  texto: 'Envíenos la lista y reciba su cotización.' },
+];
+
+/* A quién le surtimos, en la sección de servicio a domicilio */
+const SURTIMOS = [
+  { icono: 'domo',        titulo: 'Restaurantes y comidas rápidas',
+    texto: 'Carnes frías, congelados, salsas, aceites y el desechable para el domicilio.' },
+  { icono: 'reposteria',  titulo: 'Panadería y repostería',
+    texto: 'Harinas, margarinas, azúcar, huevos, esencias y domos para torta.' },
+  { icono: 'carrito',     titulo: 'Tiendas y mercados',
+    texto: 'Quesos y lácteos con la rotación de su punto, en las presentaciones que se venden.' },
+  { icono: 'institucion', titulo: 'Volumen institucional',
+    texto: 'Aceites de 19 L, salsas de 4.000, hielo, bebidas y desechables.' },
 ];
 
 /* Los pasos de «¿Cómo pedir?», en la sección de contacto */
@@ -108,27 +131,27 @@ const PRODUCTOS = [
   {
     id: 'queso-campesino', nombre: 'Queso campesino', categoria: 'quesos',
     descripcion: 'Fresco y de sal suave, el de la arepa y el desayuno.',
-    presentacion: '', imagen: 'imagenes/productos/queso-campesino.webp', destacado: true,
+    presentacion: '250 g · 500 g', imagen: 'imagenes/productos/queso-campesino.webp', destacado: true,
   },
   {
     id: 'queso-cuajada', nombre: 'Queso cuajada', categoria: 'quesos',
     descripcion: 'Cuajada fresca, para acompañar con melao o bocadillo.',
-    presentacion: '', imagen: 'imagenes/productos/queso-cuajada.webp', destacado: true,
+    presentacion: '250 g · 500 g', imagen: 'imagenes/productos/queso-cuajada.webp', destacado: true,
   },
   {
     id: 'queso-mozzarella', nombre: 'Queso mozzarella', categoria: 'quesos',
     descripcion: 'El que estira en la pizza, la lasaña y el sánduche caliente.',
-    presentacion: '', imagen: 'imagenes/productos/queso-mozarella.webp', destacado: true,
+    presentacion: '250 g · 500 g · 2.500 g', imagen: 'imagenes/productos/queso-mozarella.webp', destacado: true,
   },
   {
     id: 'queso-costeno', nombre: 'Queso costeño', categoria: 'quesos',
     descripcion: 'Salado y firme, para rallar sobre el sancocho o el arroz.',
-    presentacion: '', imagen: 'imagenes/productos/queso-costeno.webp', destacado: false,
+    presentacion: '125 g · 250 g · 500 g · 1.000 g', imagen: 'imagenes/productos/queso-costeno.webp', destacado: false,
   },
   {
     id: 'queso-cheddar', nombre: 'Queso cheddar', categoria: 'quesos',
     descripcion: 'En lonjas, para hamburguesas y sánduches.',
-    presentacion: '', imagen: 'imagenes/productos/queso-cheddar.webp', destacado: false,
+    presentacion: '400 g', imagen: 'imagenes/productos/queso-cheddar.webp', destacado: false,
   },
 
   /* ---------------- Carnes y embutidos ---------------- */
@@ -141,42 +164,42 @@ const PRODUCTOS = [
     id: 'carne-hamburguesa', nombre: 'Carne para hamburguesa', categoria: 'carnes',
     marca: 'Zenú',
     descripcion: 'Congelada, va directo a la plancha sin descongelar.',
-    presentacion: '500 g · 10 porciones', imagen: 'imagenes/productos/carne-hamburguesa.webp', destacado: true,
+    presentacion: '500 g · 5 porciones', imagen: 'imagenes/productos/carne-hamburguesa.webp', destacado: true,
   },
   {
-    id: 'salchicha-perro', nombre: 'Salchicha para perro', categoria: 'carnes',
+    id: 'salchicha-perro', nombre: 'Salchicha americana', categoria: 'carnes',
     marca: 'Zenú',
-    descripcion: 'Súper perro tipo americano, la de los negocios de comida rápida.',
-    presentacion: '1.600 g · 20 unidades', imagen: 'imagenes/productos/salchicha-perro.webp', destacado: false,
+    descripcion: 'Salchicha súper perro tipo americana para su negocio.',
+    presentacion: '22 unidades', imagen: 'imagenes/productos/salchicha-perro.webp', destacado: false,
   },
   {
     id: 'jamon', nombre: 'Jamón', categoria: 'carnes',
     marca: 'Rica Chef',
-    descripcion: 'Tajado parejo, rinde para el sánduche y la picada.',
+    descripcion: 'Tajado parejo, perfecto para la pizza.',
     presentacion: '500 g · 30 tajadas', imagen: 'imagenes/productos/jamon.webp', destacado: false,
   },
   {
     id: 'tocineta', nombre: 'Tocineta', categoria: 'carnes',
     marca: 'Titos',
     descripcion: 'De cerdo ahumada, en lonjas parejas.',
-    presentacion: '900 g', imagen: 'imagenes/productos/tocineta.webp', destacado: false,
+    presentacion: '250 g · 500 g · 1.000 g', imagen: 'imagenes/productos/tocineta.webp', destacado: false,
   },
   {
     id: 'chorizos', nombre: 'Chorizos', categoria: 'carnes',
     marca: 'El Paisa',
     descripcion: 'Chorizo santarrosano, para asar o freír.',
-    presentacion: 'Paquete', imagen: 'imagenes/productos/chorizo-santarosano.webp', destacado: true,
+    presentacion: '5 porciones', imagen: 'imagenes/productos/chorizo-santarosano.webp', destacado: true,
   },
   {
     id: 'salchichones', nombre: 'Salchichones', categoria: 'carnes',
     marca: 'Calinnas',
-    descripcion: 'Cervecero ahumado de res, en trozo para tajar.',
+    descripcion: 'Cervecero ahumado de cerdo.',
     presentacion: '1.000 g', imagen: 'imagenes/productos/salchichon-calimas.webp', destacado: false,
   },
   {
     id: 'manguera', nombre: 'Manguera', categoria: 'carnes',
-    descripcion: 'Salchicha en rollo, para la bandeja, la picada y el asado.',
-    presentacion: '', imagen: 'imagenes/productos/salchicha-manguera.webp', destacado: false,
+    descripcion: 'Salchicha larga para la salchipapa.',
+    presentacion: '250 g · 500 g · 1.000 g', imagen: 'imagenes/productos/salchicha-manguera.webp', destacado: false,
   },
 
   /* ---------------- Congelados ---------------- */
@@ -195,7 +218,7 @@ const PRODUCTOS = [
   {
     id: 'maiz', nombre: 'Maíz dulce', categoria: 'congelados',
     descripcion: 'Desgranado, para ensaladas, cremas y guarniciones.',
-    presentacion: '1.000 g', imagen: 'imagenes/productos/maiz-dulce.webp', destacado: false,
+    presentacion: '500 g · 1.000 g', imagen: 'imagenes/productos/maiz-dulce.webp', destacado: false,
   },
   {
     id: 'mix-verduras', nombre: 'Mix de verduras', categoria: 'congelados',
@@ -223,14 +246,14 @@ const PRODUCTOS = [
   {
     id: 'platos-desechables', nombre: 'Platos desechables', categoria: 'desechables',
     marca: 'Wau!',
-    descripcion: 'Plato pando de icopor, para eventos y para llevar.',
+    descripcion: 'Plato pando de icopor para eventos.',
     presentacion: '23 cm · 20 unidades', imagen: 'imagenes/productos/plato-de-icopor.webp', destacado: false,
   },
   {
     id: 'vasos-desechables', nombre: 'Vasos desechables', categoria: 'desechables',
     marca: 'Wau!',
     descripcion: 'Vaso translúcido reciclable, para bebidas frías.',
-    presentacion: '7 oz (207 ml) · 50 unidades', imagen: 'imagenes/productos/vaso-plastico.webp', destacado: false,
+    presentacion: '7 oz · 50 unidades', imagen: 'imagenes/productos/vaso-plastico.webp', destacado: false,
   },
   {
     id: 'servilletas', nombre: 'Servilletas', categoria: 'desechables',
@@ -244,15 +267,15 @@ const PRODUCTOS = [
     presentacion: 'Varios tamaños', imagen: 'imagenes/productos/moldes-de-aluminio.webp', destacado: false,
   },
   {
-    id: 'copas-salseras', nombre: 'Copas salseras', categoria: 'desechables',
-    descripcion: 'Para salsas y aderezos al empacar el domicilio.',
-    presentacion: '', imagen: 'imagenes/productos/copa-salsera.webp', destacado: false,
+    id: 'copas-salseras', nombre: 'Copa salsera con tapa', categoria: 'desechables',
+    descripcion: 'Para salsas y aderezos.',
+    presentacion: '½ oz · 1 oz · 2 oz', imagen: 'imagenes/productos/copa-salsera.webp', destacado: false,
   },
   {
     id: 'papel-aluminio', nombre: 'Papel aluminio', categoria: 'desechables',
     marca: 'House',
     descripcion: 'Rollo para horno, asado y para conservar.',
-    presentacion: '100 m × 30 cm', imagen: 'imagenes/productos/papel-aluminio.webp', destacado: false,
+    presentacion: '6 m · 16 m · 40 m · 100 m · 300 m', imagen: 'imagenes/productos/papel-aluminio.webp', destacado: false,
   },
 
   /* ---------------- Salsas y aderezos ---------------- */
@@ -269,10 +292,10 @@ const PRODUCTOS = [
     presentacion: '3.000 ml', imagen: 'imagenes/productos/vinagre.webp', destacado: false,
   },
   {
-    id: 'salsas-difier', nombre: 'Salsas Difier', categoria: 'salsas',
-    marca: 'Difier',
-    descripcion: 'Presentación institucional para negocios de comida.',
-    presentacion: '4.000 g', imagen: '', destacado: false,
+    id: 'salsas-difier', nombre: 'Salsas Differ', categoria: 'salsas',
+    marca: 'Differ',
+    descripcion: 'Presentación institucional de todos los sabores, para la comida rápida.',
+    presentacion: '500 g · 1.000 g · 4.000 g', imagen: '', destacado: false,
   },
   {
     id: 'pompeya-pina', nombre: 'Pompeya de piña', categoria: 'salsas',
@@ -293,14 +316,14 @@ const PRODUCTOS = [
   /* ---------------- Panadería y repostería ---------------- */
   {
     id: 'huevos', nombre: 'Huevos', categoria: 'reposteria',
-    descripcion: 'AA y AAA, por panal o por cubeta.',
-    presentacion: 'Panal de 30 unidades', imagen: 'imagenes/productos/huevos-aa-aaa.webp', destacado: true,
+    descripcion: 'AA y AAA.',
+    presentacion: 'Por unidad, medio panal o panal de 30', imagen: 'imagenes/productos/huevos-aa-aaa.webp', destacado: true,
   },
   {
     id: 'harinas', nombre: 'Harina de trigo', categoria: 'reposteria',
     marca: 'Haz de Oros',
     descripcion: 'Fortificada tradicional, para panadería y amasijos.',
-    presentacion: '2,5 kg', imagen: 'imagenes/productos/harina-de-trigo.webp', destacado: false,
+    presentacion: 'Bulto de 50 kg y por arroba', imagen: 'imagenes/productos/harina-de-trigo.webp', destacado: false,
   },
   {
     id: 'margarinas', nombre: 'Margarina', categoria: 'reposteria',
@@ -322,7 +345,7 @@ const PRODUCTOS = [
   {
     id: 'esencias', nombre: 'Esencias', categoria: 'reposteria',
     descripcion: 'Vainilla, mantequilla, coco y más sabores para repostería.',
-    presentacion: '', imagen: 'imagenes/productos/esencias-para-alimentos.webp', destacado: false,
+    presentacion: '60 ml · 500 ml', imagen: 'imagenes/productos/esencias-para-alimentos.webp', destacado: false,
   },
 
   /* ---------------- Panes ---------------- */
@@ -330,38 +353,38 @@ const PRODUCTOS = [
     id: 'pan-hamburguesa', nombre: 'Pan para hamburguesa', categoria: 'panes',
     marca: 'Pan del Valle',
     descripcion: 'Tipo brioche, del tamaño que maneja la comida rápida.',
-    presentacion: '', imagen: 'imagenes/productos/pan-hamburguesa.webp', destacado: false,
+    presentacion: '10 unidades', imagen: 'imagenes/productos/pan-hamburguesa.webp', destacado: false,
   },
   {
     id: 'pan-perro', nombre: 'Pan para perro', categoria: 'panes',
     marca: 'Bimbo',
-    descripcion: 'Suave y parejo, aguanta la salsa.',
+    descripcion: 'Suave y esponjoso, con ajonjolí.',
     presentacion: '10 unidades', imagen: 'imagenes/productos/pan-perro.webp', destacado: false,
   },
   {
     id: 'pan-tajado', nombre: 'Pan tajado', categoria: 'panes',
     marca: 'Pan Pullman',
     descripcion: 'Para sánduches y desayunos.',
-    presentacion: '680 g', imagen: 'imagenes/productos/pan-tajado.webp', destacado: false,
+    presentacion: '660 g · 28 porciones', imagen: 'imagenes/productos/pan-tajado.webp', destacado: false,
   },
   {
     id: 'pan-colita', nombre: 'Pan colita', categoria: 'panes',
-    descripcion: 'El clásico para el sánduche cubano y la picada.',
-    presentacion: '', imagen: '', destacado: false,
+    descripcion: 'El clásico para colitas cubanas.',
+    presentacion: '10 unidades', imagen: '', destacado: false,
   },
 
   /* ---------------- Aceites ---------------- */
   {
     id: 'aceite-industrial', nombre: 'Aceite industrial', categoria: 'aceites',
     marca: 'Celestial',
-    descripcion: 'Oleína de palma alto oleico, para freidora de negocio.',
+    descripcion: 'Aceite industrial para altas temperaturas.',
     presentacion: '19 litros', imagen: 'imagenes/productos/aceite-industrial-19lts.webp', destacado: true,
   },
   {
-    id: 'aceite-galon', nombre: 'Aceite de palma en garrafa', categoria: 'aceites',
+    id: 'aceite-galon', nombre: 'Aceite de palma', categoria: 'aceites',
     marca: 'Palma de Oro',
-    descripcion: 'El intermedio: casa grande o negocio pequeño.',
-    presentacion: '5.000 ml', imagen: 'imagenes/productos/aceite-de-palma-5000ml.webp', destacado: false,
+    descripcion: 'Perfecto para freír.',
+    presentacion: '900 ml · 3.000 ml · 5.000 ml', imagen: 'imagenes/productos/aceite-de-palma-5000ml.webp', destacado: false,
   },
   {
     id: 'aceite-cocina', nombre: 'Aceite de cocina', categoria: 'aceites',
@@ -373,13 +396,13 @@ const PRODUCTOS = [
   /* ---------------- Condimentos ---------------- */
   {
     id: 'color', nombre: 'Color', categoria: 'condimentos',
-    descripcion: 'Para el arroz, el guiso y la sopa.',
-    presentacion: '', imagen: '', destacado: false,
+    descripcion: 'Para condimentar sus preparaciones.',
+    presentacion: '250 g · 500 g · 1.000 g', imagen: '', destacado: false,
   },
   {
     id: 'acento', nombre: 'Acento', categoria: 'condimentos',
     descripcion: 'Sazonador de uso diario en cocina.',
-    presentacion: '', imagen: '', destacado: false,
+    presentacion: '250 g · 500 g', imagen: '', destacado: false,
   },
   {
     id: 'comino', nombre: 'Comino', categoria: 'condimentos',
@@ -389,10 +412,10 @@ const PRODUCTOS = [
 
   /* ---------------- Lácteos ---------------- */
   {
-    id: 'leche', nombre: 'Leche entera', categoria: 'lacteos',
+    id: 'leche', nombre: 'Leche', categoria: 'lacteos',
     marca: 'Alquería',
-    descripcion: 'En bolsa, para la casa y para el negocio.',
-    presentacion: 'Megalitro', imagen: 'imagenes/productos/leche-entera.webp', destacado: false,
+    descripcion: 'Entera, deslactosada y descremada, por bolsa y por paca.',
+    presentacion: '1.100 ml', imagen: 'imagenes/productos/leche-entera.webp', destacado: false,
   },
   {
     id: 'crema-leche', nombre: 'Crema de leche', categoria: 'lacteos',
@@ -403,8 +426,8 @@ const PRODUCTOS = [
   {
     id: 'yogur', nombre: 'Yogur', categoria: 'lacteos',
     marca: 'Lactodelicias',
-    descripcion: 'Sabor melocotón, con probióticos.',
-    presentacion: '1.750 g · 8 porciones', imagen: 'imagenes/productos/yogurt.webp', destacado: false,
+    descripcion: 'Sabores surtidos: fresa, mora, coco, melocotón, kiwi, frutos rojos y natural.',
+    presentacion: '1.750 g', imagen: 'imagenes/productos/yogurt.webp', destacado: false,
   },
 
   /* ---------------- Enlatados ---------------- */
