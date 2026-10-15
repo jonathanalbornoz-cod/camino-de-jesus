@@ -35,7 +35,6 @@ const MARCA = {
   direccion: 'Calle 62B #1A9-250, barrio Chiminangos II',
   ciudad: 'Cali, Colombia',
   horario: 'Lunes a sábado 7:00 a.m. – 9:00 p.m. · Domingos y lunes festivos 7:00 a.m. – 2:00 p.m.',
-  mediosPago: 'Efectivo · Transferencia · Datáfono',
 
   // Mapa. Esta URL busca la dirección en Google Maps; sirve sin necesidad de
   // una clave de API. Si el pin no cae exacto, se reemplaza por el iframe de
@@ -54,9 +53,7 @@ const REDES = [
   { id: 'instagram', nombre: 'Instagram', usuario: '@quesera_chiminangos',
     url: 'https://www.instagram.com/quesera_chiminangos/' },
   { id: 'facebook',  nombre: 'Facebook',  usuario: 'Quesera Chiminangos',
-    // La página la dio el cliente por nombre, no por enlace: conviene que
-    // confirme que esta es su URL.
-    url: 'https://www.facebook.com/queserachiminangos' },
+    url: 'https://www.facebook.com/quesera.chiminangos/' },
   { id: 'tiktok',    nombre: 'TikTok',    usuario: '@queserachiminangos',
     url: 'https://www.tiktok.com/@queserachiminangos' },
 ];
@@ -67,6 +64,21 @@ const SELLOS = [
   { icono: 'mayor',    titulo: '+20 años de experiencia', texto: 'Somos su aliado.' },
   { icono: 'moto',     titulo: 'Servicio a domicilio', texto: 'Su pedido, directo a su negocio.' },
   { icono: 'whatsapp', titulo: 'Pedido por WhatsApp',  texto: 'Envíenos la lista y reciba su cotización.' },
+];
+
+/*
+ * Medios de pago. «detalle» es la línea destacada de cada tarjeta y «copiar»
+ * marca la que lleva botón para copiarla —el número de cuenta, que nadie
+ * quiere transcribir a mano desde el celular.
+ */
+const PAGOS = [
+  { icono: 'efectivo', titulo: 'Efectivo',
+    texto: 'En el punto y contra entrega.' },
+  { icono: 'banco', titulo: 'Transferencia',
+    detalle: '741 878 65305', copiar: true,
+    texto: 'Bancolombia · Cuenta de ahorros' },
+  { icono: 'pago', titulo: 'Datáfono',
+    texto: 'Se reciben todas las tarjetas.' },
 ];
 
 /* A quién le surtimos, en la sección de servicio a domicilio */

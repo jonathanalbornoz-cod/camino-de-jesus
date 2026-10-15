@@ -59,6 +59,16 @@
         <span><strong>${r.nombre}</strong><small>${escapar(r.usuario)}</small></span>
       </a>`).join('');
 
+    $('#pagos-lista').innerHTML = PAGOS.map((p) => `
+      <article class="pago">
+        ${icono(p.icono)}
+        <h3>${p.titulo}</h3>
+        ${p.detalle ? `<p class="pago__detalle"><span>${escapar(p.detalle)}</span>${
+          p.copiar ? `<button type="button" class="pago__copiar" data-copiar="${escapar(p.detalle)}"
+                        aria-label="Copiar ${escapar(p.detalle)}">Copiar</button>` : ''}</p>` : ''}
+        <p class="pago__texto">${p.texto}</p>
+      </article>`).join('');
+
     $('#surtimos').innerHTML = SURTIMOS.map((x) => `
       <article class="servicio">
         <h3>${icono(x.icono)}<span>${x.titulo}</span></h3>
@@ -321,6 +331,23 @@
         return abrirWa(mensajes.producto(PRODUCTOS.find((x) => x.id === producto.dataset.producto)));
       }
 
+      const copiar = ev.target.closest('[data-copiar]');
+      if (copiar) {
+        const texto = copiar.dataset.copiar;
+        const hecho = () => {
+          copiar.textContent = 'Copiado';
+          setTimeout(() => { copiar.textContent = 'Copiar'; }, 2000);
+        };
+        // El portapapeles sólo existe en HTTPS; si no, se selecciona el número
+        // para que el cliente lo copie a mano y no se quede sin nada.
+        if (navigator.clipboard) {
+          navigator.clipboard.writeText(texto).then(hecho, () => seleccionar(copiar));
+        } else {
+          seleccionar(copiar);
+        }
+        return;
+      }
+
       const wa = ev.target.closest('[data-wa]');
       if (wa) {
         ev.preventDefault();
@@ -356,6 +383,15 @@
         menu.classList.remove('abierto');
       }
     });
+  }
+
+  function seleccionar(boton) {
+    const span = boton.parentElement.querySelector('span');
+    const rango = document.createRange();
+    rango.selectNodeContents(span);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(rango);
   }
 
   /* ---------------- Arranque ---------------- */

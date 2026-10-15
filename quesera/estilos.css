@@ -321,6 +321,31 @@ h1 em { font-style: italic; color: var(--dorado); }
 }
 @media (max-width: 560px) { .mayoristas__grid { grid-template-columns: 1fr; } }
 
+/* ---------- Medios de pago ---------- */
+.pagos { padding: clamp(2.4rem, 5vw, 3.6rem) 0; }
+.pagos .seccion__encabezado { margin-inline: auto; text-align: center; }
+.pagos__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.1rem; }
+.pago {
+  background: var(--blanco); border: 1px solid var(--linea); border-radius: var(--radio-g);
+  padding: 1.5rem; text-align: center; display: grid; gap: .5rem; justify-items: center;
+}
+.pago > svg { width: 34px; height: 34px; color: var(--dorado-2); }
+.pago h3 { font-family: var(--sans); font-size: 1.05rem; font-weight: 700; }
+.pago__detalle {
+  display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; justify-content: center;
+}
+.pago__detalle span {
+  font-family: var(--serif); font-size: 1.45rem; font-weight: 700; color: var(--vino);
+  letter-spacing: .02em;
+}
+.pago__copiar {
+  font: inherit; font-size: .78rem; font-weight: 600; cursor: pointer;
+  border: 1px solid var(--linea); background: var(--crema); color: var(--vino-3);
+  border-radius: 999px; padding: .3rem .7rem;
+}
+.pago__copiar:hover { background: var(--crema-2); border-color: var(--vino-3); }
+.pago__texto { font-size: .9rem; color: var(--tinta-suave); }
+
 /* ---------- Redes ---------- */
 .redes-final { padding: clamp(2.6rem, 5vw, 3.8rem) 0; background: var(--crema-2); text-align: center; }
 .redes-final h2 { margin-bottom: 1.8rem; }
