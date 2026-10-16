@@ -59,22 +59,21 @@
         <span><strong>${r.nombre}</strong><small>${escapar(r.usuario)}</small></span>
       </a>`).join('');
 
-    $('#pagos-lista').innerHTML = PAGOS.map((p) => {
-      // «copiar» puede traer su propio texto: la cuenta se muestra agrupada
-      // pero se copia en limpio, que es como la pide la app del banco
-      const aCopiar = typeof p.copiar === 'string' ? p.copiar : p.detalle;
-      return `
+    $('#pagos-lista').innerHTML = PAGOS.map((p) => `
       <article class="pago${p.qr ? ' pago--qr' : ''}">
         ${icono(p.icono)}
         <h3>${p.titulo}</h3>
         ${p.qr ? `<img class="pago__qr" src="${escapar(p.qr)}" width="760" height="760"
-                      loading="lazy" alt="Código QR para pagar a ${escapar(MARCA.nombre)} por Bancolombia">` : ''}
-        ${p.detalle ? `<p class="pago__detalle"><span>${escapar(p.detalle)}</span>${
-          p.copiar ? `<button type="button" class="pago__copiar" data-copiar="${escapar(aCopiar)}"
-                        aria-label="Copiar el número de cuenta">Copiar</button>` : ''}</p>` : ''}
+                      loading="lazy" alt="Código QR para pagarle a ${escapar(MARCA.nombre)}">` : ''}
+        ${(p.datos || []).map((d) => `
+          <p class="pago__dato">
+            <span class="pago__etiqueta">${d.etiqueta}</span>
+            <span class="pago__valor">${escapar(d.valor)}</span>
+            <button type="button" class="pago__copiar" data-copiar="${escapar(d.copiar || d.valor)}"
+                    aria-label="Copiar ${d.etiqueta}">Copiar</button>
+          </p>`).join('')}
         <p class="pago__texto">${p.texto}</p>
-      </article>`;
-    }).join('');
+      </article>`).join('');
 
     $('#surtimos').innerHTML = SURTIMOS.map((x) => `
       <article class="servicio">
@@ -393,7 +392,7 @@
   }
 
   function seleccionar(boton) {
-    const span = boton.parentElement.querySelector('span');
+    const span = boton.parentElement.querySelector('.pago__valor');
     const rango = document.createRange();
     rango.selectNodeContents(span);
     const sel = window.getSelection();

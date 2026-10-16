@@ -75,11 +75,16 @@ const PAGOS = [
   { icono: 'efectivo', titulo: 'Efectivo',
     texto: 'En el punto y contra entrega.' },
   { icono: 'banco', titulo: 'Transferencia',
+    // El QR es de Bre-B, así que la llave va primero: es lo que el código
+    // lleva dentro y lo que pide la app si no se puede escanear. La cuenta
+    // queda debajo para quien prefiera la transferencia de siempre.
     qr: 'imagenes/qr-bancolombia.webp',
-    // Se muestra agrupado como lo escribe el banco y se copia sin guiones,
-    // que es como lo pide la app
-    detalle: '741-878653-05', copiar: '74187865305',
-    texto: 'Bancolombia · Cuenta de ahorros · Edwin Zuluaga' },
+    datos: [
+      { etiqueta: 'Llave Bre-B', valor: '0092344673', copiar: '0092344673' },
+      // Se muestra agrupada como la escribe el banco y se copia sin guiones
+      { etiqueta: 'Cuenta de ahorros', valor: '741-878653-05', copiar: '74187865305' },
+    ],
+    texto: 'Bancolombia · Edwin Zuluaga Vásquez' },
   { icono: 'pago', titulo: 'Datáfono',
     texto: 'Se reciben todas las tarjetas.' },
 ];

@@ -340,19 +340,26 @@ h1 em { font-style: italic; color: var(--dorado); }
   margin: .2rem 0 .1rem;
 }
 
-.pago__detalle {
-  display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; justify-content: center;
+.pago__dato {
+  display: grid; grid-template-columns: auto auto; justify-content: center;
+  align-items: center; gap: .15rem .6rem; margin-top: .3rem;
 }
-.pago__detalle span {
-  font-family: var(--serif); font-size: 1.45rem; font-weight: 700; color: var(--vino);
+.pago__etiqueta {
+  grid-column: 1 / -1;
+  font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase;
+  color: var(--tinta-suave);
+}
+.pago__valor {
+  font-family: var(--serif); font-size: 1.35rem; font-weight: 700; color: var(--vino);
   letter-spacing: .02em;
 }
 .pago__copiar {
-  font: inherit; font-size: .78rem; font-weight: 600; cursor: pointer;
-  border: 1px solid var(--linea); background: var(--crema); color: var(--vino-3);
-  border-radius: 999px; padding: .3rem .7rem;
+  font: inherit; font-size: .76rem; font-weight: 600; cursor: pointer;
+  border: 1px solid var(--linea); background: var(--blanco); color: var(--vino-3);
+  border-radius: 999px; padding: .26rem .66rem;
 }
 .pago__copiar:hover { background: var(--crema-2); border-color: var(--vino-3); }
+
 .pago__texto { font-size: .9rem; color: var(--tinta-suave); }
 
 /* ---------- Redes ---------- */
