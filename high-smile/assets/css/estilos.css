@@ -303,6 +303,9 @@ a:hover { text-decoration-color: var(--tinta); }
 .rejilla--3 { grid-template-columns: repeat(3, 1fr); }
 .rejilla--4 { grid-template-columns: repeat(4, 1fr); }
 .rejilla--5 { grid-template-columns: repeat(5, 1fr); }
+/* Los nueve servicios cuadran en tres filas de tres; en cuatro columnas la
+   ultima fila se quedaba con una sola tarjeta suelta. */
+.rejilla--servicios { grid-template-columns: repeat(3, 1fr); }
 
 .tarjeta {
   background: var(--superficie); border: 1px solid var(--borde); border-radius: var(--radio);
@@ -555,7 +558,7 @@ a:hover { text-decoration-color: var(--tinta); }
 /* ---------- Responsive ---------- */
 @media (max-width: 1250px) {
   .contacto__grid, .agenda__grid { grid-template-columns: 1fr; }
-  .rejilla--4 { grid-template-columns: repeat(2, 1fr); }
+  .rejilla--4, .rejilla--servicios { grid-template-columns: repeat(2, 1fr); }
   /* Cinco perfiles en dos columnas dejan las fotos enormes: mejor tres. */
   .rejilla--5 { grid-template-columns: repeat(3, 1fr); }
   .pie__grid { grid-template-columns: repeat(2, 1fr); }
@@ -577,7 +580,7 @@ a:hover { text-decoration-color: var(--tinta); }
 }
 
 @media (max-width: 700px) {
-  .rejilla--2, .rejilla--3, .rejilla--4, .campo--dos, .opciones, .pie__grid { grid-template-columns: 1fr; }
+  .rejilla--2, .rejilla--3, .rejilla--4, .rejilla--servicios, .campo--dos, .opciones, .pie__grid { grid-template-columns: 1fr; }
   .cifras { grid-template-columns: repeat(2, 1fr); }
   .heroe__acciones .boton { width: 100%; }
   .flotante span { display: none; }

@@ -24,7 +24,7 @@ tinta negra**, y el logotipo oficial de la clínica.
 | Instagram | [@highsmile_co](https://www.instagram.com/highsmile_co/) |
 | Facebook | [High Smile Clínica Odontológica](https://www.facebook.com/people/High-Smile-Cl%C3%ADnica-Odontol%C3%B3gica/61579892912629/) |
 | Eslogan | Cuidamos tu sonrisa con detalle y confianza |
-| Especialidades | Ortodoncia · Periodoncia · Implantología oral · Rehabilitación oral · Cirugía oral y maxilofacial · Endodoncia · Diseño de sonrisa · Limpieza dental |
+| Especialidades | Ortodoncia · Periodoncia · Implantología oral · Rehabilitación oral · Cirugía oral y maxilofacial · Endodoncia · Odontopediatría · Diseño de sonrisa · Limpieza dental |
 | Trayectoria | 10 años de experiencia · más de 3.000 pacientes |
 
 ---
@@ -34,7 +34,7 @@ tinta negra**, y el logotipo oficial de la clínica.
 | Pestaña | Contenido |
 |---|---|
 | Portada | Fotografía del equipo en el mirador de Cali a pantalla completa, logotipo, eslogan y accesos a agenda y WhatsApp |
-| Servicios | Las ocho especialidades, cada una con su ilustración propia |
+| Servicios | Las nueve especialidades, cada una con su ilustración propia |
 | Reseña clínica | Quiénes son, método de trabajo y carrusel con las instalaciones (`clinica-1` … `clinica-4`) |
 | Casos de éxito | Carrusel de antes y después (`caso-1` … `caso-5`, cada diapositiva monta el antes y el después del caso) |
 | Antes y después | Carrusel con los pacientes que terminaron su tratamiento |
