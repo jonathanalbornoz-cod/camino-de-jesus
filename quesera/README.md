@@ -25,6 +25,26 @@ imagenes/productos/     las fotos de producto, tal como vienen del set
 - **`Categorias productos Quesera Chiminangos.pdf`**: las 10 categorías y los 50 productos.
 - **Las fotos de producto**: las marcas y los gramajes están impresos en cada empaque,
   de ahí salen (Zenú 500 g, Rica Chef 30 tajadas, Wau! 7 oz × 50, etc.).
+- **`TEXTOS_CATALOGO.docx`**: la primera ronda de textos del cliente, con lo que quería
+  cambiar marcado en verde. De ahí vienen el titular enfocado al negocio, los cuatro
+  sellos, el texto de Nosotros, los pasos de «¿Cómo pedir?», el horario y los medios de
+  pago.
+- **`MODIFICACIONES_FINALES.docx`**: la segunda ronda. La góndola en la portada, la barra
+  de filtros quieta, la distribución de servicio a domicilio —que venía dibujada en el
+  propio documento—, las redes sociales y 31 correcciones de presentaciones y
+  descripciones.
+
+Dos cosas que vienen de esos documentos y conviene contrastar con el cliente:
+
+- El sello dice «Más de 15 categorías en un solo lugar», pero el catálogo tiene 11. Es el
+  texto que pidió; si quiere que cuadre, hay que cambiar uno de los dos.
+- La dirección cambió dos veces. La que está puesta es la del último documento:
+  Calle 62B #1A9-250, barrio Chiminangos II. El mapa apunta ahí.
+- Los datos de pago están en `PAGOS`, en `datos.js`. El QR es de **Bre-B**, recortado de
+  la pieza «Paga aquí» que mandó el cliente, así que la llave va primero: es lo que el
+  código lleva dentro. Debajo queda la cuenta de ahorros para la transferencia de
+  siempre. Cada número se muestra como lo escribe el banco y su botón copia los dígitos
+  en limpio, que es como los pide la app.
 
 ## Lo que falta confirmar con el cliente
 
@@ -113,6 +133,12 @@ En vez de un carrito con precios, el cliente marca productos con **Agregar** y l
 inferior arma un solo mensaje de WhatsApp con toda la lista y sus presentaciones. Se guarda
 en el navegador (`localStorage`), así que sobrevive si recarga o vuelve más tarde. Cada
 tarjeta tiene además **Pedir**, que escribe sólo por ese producto.
+
+## Un apunte para quien edite esto
+
+Casi todo el contenido vive en `datos.js`: marca, redes, sellos, recuadros de
+mayoristas, pasos de «¿Cómo pedir?», medios de pago, categorías y productos. Si algo de
+la página hay que cambiar, mirar ahí primero; el HTML sólo tiene la estructura.
 
 ## Dónde se puede servir
 
