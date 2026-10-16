@@ -12,6 +12,7 @@ app.js                  filtros, pedido y enlaces de WhatsApp
 datos.js                TODO el contenido editable
 imagenes/logo.*         el logotipo
 imagenes/equipo.webp    la foto del equipo, en la sección Nosotros
+imagenes/qr-bancolombia.webp   el QR de pago, en medios de pago
 imagenes/portada-estanteria.webp   la góndola de la portada
 imagenes/domicilio.webp la foto del domiciliario, en servicio a domicilio
 imagenes/productos/     las fotos de producto, tal como vienen del set
@@ -29,9 +30,12 @@ imagenes/productos/     las fotos de producto, tal como vienen del set
 
 | Dato | Dónde se pone | Estado |
 |---|---|---|
-| Presentaciones | `presentacion` de 7 productos | Falta |
-| Fotos | 45 de 54 productos | Parcial |
+| Presentaciones | `presentacion` de 6 productos | Falta |
 | Pin del mapa | `MARCA.mapaEmbed` | Por verificar |
+
+Los 54 productos ya tienen foto. Faltan las presentaciones de la costilla, el aderezo de
+mayonesa, la margarina, los domos para torta, el atún y la arveja con zanahoria: ni el
+cliente las dio ni el empaque de la foto las dice.
 
 Los bloques que dependen de un dato ausente no se dibujan vacíos: simplemente no salen.
 Lo que falte se avisa por la consola del navegador, no en pantalla.

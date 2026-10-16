@@ -59,15 +59,22 @@
         <span><strong>${r.nombre}</strong><small>${escapar(r.usuario)}</small></span>
       </a>`).join('');
 
-    $('#pagos-lista').innerHTML = PAGOS.map((p) => `
-      <article class="pago">
+    $('#pagos-lista').innerHTML = PAGOS.map((p) => {
+      // «copiar» puede traer su propio texto: la cuenta se muestra agrupada
+      // pero se copia en limpio, que es como la pide la app del banco
+      const aCopiar = typeof p.copiar === 'string' ? p.copiar : p.detalle;
+      return `
+      <article class="pago${p.qr ? ' pago--qr' : ''}">
         ${icono(p.icono)}
         <h3>${p.titulo}</h3>
+        ${p.qr ? `<img class="pago__qr" src="${escapar(p.qr)}" width="760" height="760"
+                      loading="lazy" alt="Código QR para pagar a ${escapar(MARCA.nombre)} por Bancolombia">` : ''}
         ${p.detalle ? `<p class="pago__detalle"><span>${escapar(p.detalle)}</span>${
-          p.copiar ? `<button type="button" class="pago__copiar" data-copiar="${escapar(p.detalle)}"
-                        aria-label="Copiar ${escapar(p.detalle)}">Copiar</button>` : ''}</p>` : ''}
+          p.copiar ? `<button type="button" class="pago__copiar" data-copiar="${escapar(aCopiar)}"
+                        aria-label="Copiar el número de cuenta">Copiar</button>` : ''}</p>` : ''}
         <p class="pago__texto">${p.texto}</p>
-      </article>`).join('');
+      </article>`;
+    }).join('');
 
     $('#surtimos').innerHTML = SURTIMOS.map((x) => `
       <article class="servicio">

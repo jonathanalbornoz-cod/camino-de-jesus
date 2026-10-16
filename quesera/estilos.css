@@ -327,10 +327,19 @@ h1 em { font-style: italic; color: var(--dorado); }
 .pagos__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.1rem; }
 .pago {
   background: var(--blanco); border: 1px solid var(--linea); border-radius: var(--radio-g);
-  padding: 1.5rem; text-align: center; display: grid; gap: .5rem; justify-items: center;
+  padding: 1.5rem; text-align: center; display: grid; gap: .5rem;
+  justify-items: center; align-content: start;
 }
 .pago > svg { width: 34px; height: 34px; color: var(--dorado-2); }
 .pago h3 { font-family: var(--sans); font-size: 1.05rem; font-weight: 700; }
+/* La tarjeta con QR es la que manda en la fila: se le deja más aire y el
+   código a un tamaño que se escanee desde la pantalla del cliente. */
+.pago--qr { background: var(--crema); border-color: var(--dorado-suave); }
+.pago__qr {
+  width: min(210px, 70%); height: auto; border-radius: var(--radio);
+  margin: .2rem 0 .1rem;
+}
+
 .pago__detalle {
   display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; justify-content: center;
 }

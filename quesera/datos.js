@@ -75,8 +75,11 @@ const PAGOS = [
   { icono: 'efectivo', titulo: 'Efectivo',
     texto: 'En el punto y contra entrega.' },
   { icono: 'banco', titulo: 'Transferencia',
-    detalle: '741 878 65305', copiar: true,
-    texto: 'Bancolombia · Cuenta de ahorros' },
+    qr: 'imagenes/qr-bancolombia.webp',
+    // Se muestra agrupado como lo escribe el banco y se copia sin guiones,
+    // que es como lo pide la app
+    detalle: '741-878653-05', copiar: '74187865305',
+    texto: 'Bancolombia · Cuenta de ahorros · Edwin Zuluaga' },
   { icono: 'pago', titulo: 'Datáfono',
     texto: 'Se reciben todas las tarjetas.' },
 ];
@@ -240,8 +243,9 @@ const PRODUCTOS = [
   },
   {
     id: 'croquetas-yuca', nombre: 'Croquetas de yuca', categoria: 'congelados',
+    marca: 'Ricongelisto',
     descripcion: 'Congeladas, para freír al momento.',
-    presentacion: '', imagen: '', destacado: false,
+    presentacion: '500 g · 6 porciones', imagen: 'imagenes/productos/croquetas-de-yuca.webp', destacado: false,
   },
 
   /* ---------------- Desechables y empaques ---------------- */
@@ -306,23 +310,26 @@ const PRODUCTOS = [
   {
     id: 'salsas-difier', nombre: 'Salsas Differ', categoria: 'salsas',
     marca: 'Differ',
-    descripcion: 'Presentación institucional de todos los sabores, para la comida rápida.',
-    presentacion: '500 g · 1.000 g · 4.000 g', imagen: '', destacado: false,
+    descripcion: 'Mayonesa con ajo, tomate sabor Bar-BQ y fruta con piña, entre otros sabores.',
+    presentacion: '500 g · 1.000 g · 4.000 g', imagen: 'imagenes/productos/salsas-differ.webp', destacado: false,
   },
   {
     id: 'pompeya-pina', nombre: 'Pompeya de piña', categoria: 'salsas',
+    marca: 'Pompeya',
     descripcion: 'Para repostería y para acompañar carnes.',
-    presentacion: '', imagen: '', destacado: false,
+    presentacion: '400 g · 13 porciones', imagen: 'imagenes/productos/salsa-pompeya.webp', destacado: false,
   },
   {
     id: 'salsa-italiana', nombre: 'Salsa italiana', categoria: 'salsas',
-    descripcion: 'Para pastas, lasañas y pizzas.',
-    presentacion: '', imagen: '', destacado: false,
+    marca: 'Italiano',
+    descripcion: 'Salsita con tomate, para pastas, lasañas y pizzas.',
+    presentacion: '4 kg · 266 porciones', imagen: 'imagenes/productos/salsa-italiana.webp', destacado: false,
   },
   {
     id: 'salsa-bbq', nombre: 'Salsa BBQ', categoria: 'salsas',
-    descripcion: 'Presentación para restaurante.',
-    presentacion: '', imagen: '', destacado: false,
+    marca: 'Zafrán',
+    descripcion: 'BBQ dulce, en bolsa con asa para el restaurante.',
+    presentacion: '4,3 kg · 287 porciones', imagen: 'imagenes/productos/salsa-bbq-maleta.webp', destacado: false,
   },
 
   /* ---------------- Panadería y repostería ---------------- */
@@ -381,8 +388,9 @@ const PRODUCTOS = [
   },
   {
     id: 'pan-colita', nombre: 'Pan colita', categoria: 'panes',
+    marca: 'Pan Catalina',
     descripcion: 'El clásico para colitas cubanas.',
-    presentacion: '10 unidades', imagen: '', destacado: false,
+    presentacion: '10 unidades', imagen: 'imagenes/productos/pan-colita-catalina.webp', destacado: false,
   },
 
   /* ---------------- Aceites ---------------- */
@@ -408,18 +416,21 @@ const PRODUCTOS = [
   /* ---------------- Condimentos ---------------- */
   {
     id: 'color', nombre: 'Color', categoria: 'condimentos',
-    descripcion: 'Para condimentar sus preparaciones.',
-    presentacion: '250 g · 500 g · 1.000 g', imagen: '', destacado: false,
+    marca: 'Productos Libertad',
+    descripcion: 'Azafrán color extra, para condimentar sus preparaciones.',
+    presentacion: '250 g · 500 g · 1.000 g', imagen: 'imagenes/productos/color-sazonador.webp', destacado: false,
   },
   {
     id: 'acento', nombre: 'Acento', categoria: 'condimentos',
+    marca: 'La Granja Paisa',
     descripcion: 'Sazonador de uso diario en cocina.',
-    presentacion: '250 g · 500 g', imagen: '', destacado: false,
+    presentacion: '250 g · 500 g', imagen: 'imagenes/productos/acento-sazonador.webp', destacado: false,
   },
   {
     id: 'comino', nombre: 'Comino', categoria: 'condimentos',
+    marca: 'Productos Libertad',
     descripcion: 'Molido, para carnes y sopas.',
-    presentacion: '', imagen: '', destacado: false,
+    presentacion: '25 g', imagen: 'imagenes/productos/comino-molido.webp', destacado: false,
   },
 
   /* ---------------- Lácteos ---------------- */
