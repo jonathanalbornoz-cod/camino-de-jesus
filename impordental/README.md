@@ -101,10 +101,6 @@ producto de ejemplo y el usuario admin original.
 
 ## Pendientes del sitio original
 
-- **Pantalla de mantenimiento**: al entrar pide una clave (`j123`). Es solo un aviso
-  en el navegador: la clave se ve en el código de la página y cualquiera puede
-  saltarla. Para abrir el sitio al público hay que quitar el bloque «Maintenance
-  Overlay v13» de `resources/views/layouts/store.blade.php`.
 - **Datos de contacto de ejemplo** en el pie de página: «Calle Comercial #45-67,
   Bogotá» y «+57 (601) 123 4567». Hay que cambiarlos por los reales.
 - **Enlaces vacíos**: Equipos, Ortodoncia, Estética, Ofertas, «Ver detalles» y los
