@@ -1,22 +1,28 @@
 # Impordental
 
 Tienda en línea de insumos y equipos odontológicos para **impordental.com**.
-Reconstruida a partir del `deploy.zip` exportado del proyecto original
-(Laravel 12 + panel administrativo Filament 3).
+Recuperada del repositorio original `jonas0214/Impordental` (rama `main`, commit
+`27507e1` «corporate standard v20.1»), Laravel 12 + panel administrativo Filament 3.
 
 - `/` — portada con el catálogo (los 12 productos activos más recientes).
 - `/admin` — portal administrativo: marcas, categorías y productos con imágenes.
 
-## Qué se recuperó del ZIP y qué no
+## De dónde sale
 
-| Del ZIP | En este repositorio |
+Los ZIP de iLoveZIP traían todos los archivos sueltos, sin carpetas, pero entre
+ellos venía la carpeta `.git` del proyecto. Con sus objetos se reconstruyó el
+árbol exacto de `main` y se copió aquí.
+
+| Del proyecto original | En este repositorio |
 |---|---|
-| `app/`, `config/`, `routes/`, `resources/`, `public/`, migraciones | Tal cual |
-| `artisan`, `phpunit.xml`, `.gitignore` | Faltaban en el ZIP; son los de un Laravel 12 estándar |
-| `.env` | **No se sube** (lleva la clave de la app y datos de conexión). Use `.env.example` |
-| `impordental_database.sql` | **No se sube** (lleva el hash de la contraseña del admin y sesiones). Su catálogo está en `database/seeders/DatabaseSeeder.php` |
-| Imágenes de `storage/app/public/products` | En `database/seeders/imagenes/`; el seeder las copia al disco público |
-| `storage/logs/laravel.log`, `database.sqlite` | Descartados (log de errores y base vacía) |
+| Código, vistas, estilos, `public/build` (Vite ya compilado), `public/images`, `.htaccess`, `deploy.sh` | Tal cual |
+| `.env` | **No se sube** (lleva la clave de la app). Use `.env.example` |
+| `impordental_database.sql` | **No se sube** (lleva el hash de la contraseña del admin). Su catálogo está en `database/seeders/DatabaseSeeder.php` |
+| `composer.phar`, `deploy.zip` | Descartados: Composer se instala aparte y el ZIP se genera con `deploy.sh` |
+
+Cambio propio sobre el original: reglas para tabletas y celulares al final de
+`resources/css/app.css` (antes el menú se salía de la pantalla y la tarjeta de
+producto quedaba aplastada). Tras editar ese archivo hay que correr `npm run build`.
 
 ## Probarlo en el computador
 
@@ -59,12 +65,10 @@ Hostinger compartido corre PHP y MySQL, así que la app funciona tal cual.
    dominio, vacíela (o guarde una copia de lo que haya) y suba ahí el ZIP.
    Extráigalo y mueva el **contenido** de la carpeta `impordental` a `public_html`:
    debe quedar `public_html/artisan`, `public_html/public/index.php`, etc.
-4. **Enviar las visitas a `public/`**: cree `public_html/.htaccess` con:
-   ```apache
-   RewriteEngine On
-   RewriteRule ^(.*)$ public/$1 [L]
-   ```
-   Así nadie puede abrir `.env`, `storage/` ni el código: todo pasa por `public/`.
+4. **Enviar las visitas a `public/`**: el proyecto ya trae `.htaccess` en la raíz,
+   que manda todo a `public/`. Así nadie puede abrir `.env`, `storage/` ni el código.
+   Compruebe que quedó en `public_html/.htaccess` (el Administrador de archivos oculta
+   los archivos que empiezan por punto: actívelos en su configuración).
 5. **Configurar `.env`**: copie `.env.example` a `.env` y cambie:
    ```
    APP_ENV=production
@@ -91,13 +95,20 @@ Hostinger compartido corre PHP y MySQL, así que la app funciona tal cual.
 
 ### Si prefiere recuperar la base de datos original
 
-Importe `impordental_database.sql` (el del ZIP, no está en el repositorio) desde
-hPanel → **phpMyAdmin** → **Importar** en lugar de `migrate --seed`. Está en UTF-16;
-si phpMyAdmin da error, conviértalo antes a UTF-8. Las imágenes de ese producto
-habría que subirlas a `storage/app/public/products/`.
+Importe `impordental_database.sql` (está en los ZIP, no en el repositorio) desde
+hPanel → **phpMyAdmin** → **Importar** en lugar de `migrate --seed`. Trae el mismo
+producto de ejemplo y el usuario admin original.
 
 ## Pendientes del sitio original
 
-- Los enlaces del menú **Equipos** y **Educación** y el botón **Asesoría
-  Especializada** apuntan a `#`: no llevan a ninguna parte todavía.
-- No hay número de WhatsApp, correo ni dirección de contacto en la página.
+- **Pantalla de mantenimiento**: al entrar pide una clave (`j123`). Es solo un aviso
+  en el navegador: la clave se ve en el código de la página y cualquiera puede
+  saltarla. Para abrir el sitio al público hay que quitar el bloque «Maintenance
+  Overlay v13» de `resources/views/layouts/store.blade.php`.
+- **Datos de contacto de ejemplo** en el pie de página: «Calle Comercial #45-67,
+  Bogotá» y «+57 (601) 123 4567». Hay que cambiarlos por los reales.
+- **Enlaces vacíos**: Equipos, Ortodoncia, Estética, Ofertas, «Ver detalles» y los
+  enlaces del pie apuntan a `#`; no llevan a ninguna parte todavía.
+- El catálogo solo tiene el producto de prueba «Crema dental». En los ZIP venían
+  fotos de otros dos productos (Colgate Total 12 Econo Pack y una unidad
+  odontológica) que no están en la base de datos: se cargan desde `/admin`.

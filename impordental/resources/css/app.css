@@ -480,3 +480,54 @@ html { scroll-behavior: smooth; }
     background: var(--color-action-hover);
     transform: translateY(-2px);
 }
+
+/* Responsive: tabletas y celulares */
+@media (max-width: 1100px) {
+    .product-grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 860px) {
+    .product-grid { grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+
+    .top-bar-corporate { height: auto; padding: 0.5rem 0; }
+    .top-bar-info { width: 100%; justify-content: center; }
+    .top-bar-item:not(:first-child) { display: none; }
+
+    /* El menú pasa a una fila propia bajo el logo y se desliza de lado */
+    .header-flex { flex-wrap: wrap; height: auto; padding-top: 0.85rem; gap: 0.75rem 1rem; }
+    .nav-links {
+        order: 3;
+        width: 100%;
+        overflow-x: auto;
+        gap: 1.25rem;
+        padding-bottom: 0.75rem;
+        scrollbar-width: none;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a { white-space: nowrap; }
+    .nav-links a::after { bottom: -3px; }
+
+    .hero-banner-box { min-height: 0; }
+    .hero-banner-box::before { background: rgba(255,255,255,0.82); }
+    .hero-content-corporate { padding: 2.5rem 1.5rem; max-width: none; }
+
+    .footer-container { gap: 2.5rem; padding: 0 1.5rem; }
+}
+
+@media (max-width: 520px) {
+    .container { padding: 0 1rem; }
+    .corporate-logo { font-size: 1.4rem; }
+    .header-actions .btn-solid { padding: 0.5rem 0.9rem !important; font-size: 0.7rem !important; white-space: nowrap; }
+
+    .hero-h1 { font-size: 2rem; }
+    .btn-group-corporate { flex-wrap: wrap; gap: 0.75rem; }
+
+    .product-grid { gap: 0.75rem; }
+    .product-image { height: 150px; padding: 1rem; }
+    .product-info { padding: 0.9rem; }
+    .product-footer { flex-direction: column; align-items: stretch; gap: 0.6rem; }
+    .btn-card { justify-content: center; }
+    .product-card:hover { transform: none; }
+
+    .section-header h2 { font-size: 1.6rem; }
+}
