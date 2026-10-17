@@ -16,40 +16,6 @@
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="light-theme">
-    <!-- Maintenance Overlay v13 -->
-    <div id="maintenance-overlay" class="maintenance-overlay" style="display: none;">
-        <div class="maint-content">
-            <div class="maint-logo">Impor<span>dental</span></div>
-            <h2 class="maint-title">Página en Mantenimiento</h2>
-            <p class="maint-desc">Estamos preparando el catálogo más avanzado para tu clínica. Por favor, ingresa para ver el progreso.</p>
-            
-            <div class="maint-form">
-                <input type="password" id="maint-pass" class="maint-input" placeholder="••••">
-                <button onclick="checkMaintPass()" class="maint-btn">Acceder</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        // Maintenance logic v13
-        (function() {
-            const overlay = document.getElementById('maintenance-overlay');
-            if (localStorage.getItem('maint_bypass') !== 'granted') {
-                overlay.style.display = 'flex';
-                document.body.style.overflow = 'hidden';
-            }
-        })();
-
-        function checkMaintPass() {
-            const pass = document.getElementById('maint-pass').value;
-            if (pass === 'j123') {
-                localStorage.setItem('maint_bypass', 'granted');
-                location.reload();
-            } else {
-                alert('Contraseña incorrecta');
-            }
-        }
-    </script>
     <div class="top-bar-corporate">
         <div class="container top-bar-flex">
             <div class="top-bar-info">
