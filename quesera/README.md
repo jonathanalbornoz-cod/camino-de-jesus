@@ -61,12 +61,15 @@ Lo que falte se avisa por la consola del navegador, no en pantalla.
 
 ## Cómo completar cada cosa
 
-**Mapa** — apunta a las coordenadas del punto (3.4772945, -76.493339), no a la
-dirección: Google geocodifica «Calle 62B #1A9-250» unos 60 metros al oriente y el
-puntero caía en la cuadra de al lado. Si alguna vez hay que rehacerlo, se abre la ficha
-del negocio en Google Maps y se sacan las coordenadas de la URL (el último bloque
-`!3d...!4d...`). La otra vía: Google Maps → buscar el negocio → *Compartir* → *Insertar un mapa* → copiar sólo
-la URL del `src` y pegarla en `MARCA.mapaEmbed`. La sección aparece sola.
+**Mapa** — `MARCA.mapaEmbed` lleva el embed oficial de la ficha del negocio
+(`/maps/embed?pb=...`, place id `0x8e30a7513b8e757d:0x17a64a51b76f1f04`). Es el único
+formato en el que el puntero sale rotulado «QUESERA CHIMINAGOS»: con `?q=lat,lng` el
+globo muestra las coordenadas y con la dirección en texto el puntero se corre unos 60
+metros al oriente, porque Google geocodifica «Calle 62B #1A9-250» en la cuadra de al
+lado. Para rehacerlo: Google Maps → buscar el negocio → *Compartir* → *Insertar un
+mapa* → copiar sólo la URL del `src` del iframe y pegarla ahí. El `width`, el `height`
+y los demás atributos no se copian: los pone `app.js` y el tamaño sale de
+`.mapa iframe` en `estilos.css`. La sección aparece sola.
 
 **Redes** — pegar la URL completa del perfil. Los iconos aparecen solos; los vacíos no salen.
 

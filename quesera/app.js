@@ -84,7 +84,7 @@
     if (MARCA.mapaEmbed) {
       $('#mapa').hidden = false;
       $('#mapa').innerHTML =
-        `<iframe src="${escapar(MARCA.mapaEmbed)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        `<iframe src="${escapar(MARCA.mapaEmbed)}" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"
                  title="Ubicación de ${MARCA.nombre}" allowfullscreen></iframe>`;
     }
 

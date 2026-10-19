@@ -36,10 +36,12 @@ const MARCA = {
   ciudad: 'Cali, Colombia',
   horario: 'Lunes a sábado 7:00 a.m. – 9:00 p.m. · Domingos y lunes festivos 7:00 a.m. – 2:00 p.m.',
 
-  // Mapa. Apunta a las coordenadas del punto, no a la dirección: Google
-  // geocodifica «Calle 62B #1A9-250» unos 60 metros al oriente y el puntero
-  // caía en la cuadra de al lado. Estas salen del enlace del propio negocio.
-  mapaEmbed: 'https://www.google.com/maps?q=3.4772945,-76.493339&z=18&output=embed',
+  // Mapa. Es el embed oficial de la ficha del negocio en Google Maps
+  // (place id 0x8e30a7513b8e757d:0x17a64a51b76f1f04), por eso el puntero sale
+  // con el nombre «QUESERA CHIMINAGOS» y no como unas coordenadas sueltas.
+  // No se usa la dirección en texto porque Google geocodifica
+  // «Calle 62B #1A9-250» unos 60 metros al oriente, en la cuadra de al lado.
+  mapaEmbed: 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d497.8091068327769!2d-76.4932186!3d3.4772618!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e30a7513b8e757d%3A0x17a64a51b76f1f04!2sQUESERA%20CHIMINAGOS!5e0!3m2!1ses!2sco!4v1792377432870!5m2!1ses!2sco',
 
 
   logo: 'imagenes/logo.webp',
