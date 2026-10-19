@@ -1,0 +1,4 @@
+# El ZIP para Hostinger se arma a partir de quesera/ cada vez que hay cambios,
+# así que no se versiona: duplicaría ~9 MB de fotos ya guardadas en el repo.
+# Para rearmarlo: cd quesera && zip -rq ../quesera-chiminangos-hostinger.zip . -x 'README.md'
+quesera-chiminangos-hostinger.zip
