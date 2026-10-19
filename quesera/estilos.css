@@ -159,7 +159,7 @@ h1 em { font-style: italic; color: var(--dorado); }
 .portada__nota { margin-top: 1.5rem; font-size: .9rem; color: rgba(247, 238, 224, .62); }
 
 .portada__figura { justify-self: center; width: min(360px, 82%); }
-.portada__figura img { width: 100%; border-radius: var(--radio-g); box-shadow: var(--sombra-alta); }
+.portada__figura img { width: 100%; border-radius: var(--radio-g); box-shadow: var(--sombra-alta); border: 3px solid var(--dorado); }
 
 /* La onda dorada del set fotográfico, que la portada repite para que la
    página y las fotos se lean como una sola pieza. */
@@ -261,7 +261,7 @@ h1 em { font-style: italic; color: var(--dorado); }
 .lista-marcada li { position: relative; padding-left: 1.7rem; }
 .lista-marcada li::before { content: ""; position: absolute; left: 0; top: .55em; width: 9px; height: 9px; border-radius: 50%; background: var(--dorado); }
 
-.nosotros__foto { margin: 0; border-radius: var(--radio-g); overflow: hidden; box-shadow: var(--sombra-alta); }
+.nosotros__foto { margin: 0; border-radius: var(--radio-g); overflow: hidden; box-shadow: var(--sombra-alta); border: 3px solid var(--dorado); }
 .nosotros__foto img { width: 100%; height: 100%; object-fit: cover; }
 
 .cifras { list-style: none; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
@@ -324,10 +324,16 @@ h1 em { font-style: italic; color: var(--dorado); }
 /* ---------- Medios de pago ---------- */
 .pagos { padding: clamp(2.4rem, 5vw, 3.6rem) 0; }
 .pagos .seccion__encabezado { margin-inline: auto; text-align: center; }
-.pagos__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.1rem; }
+/* align-items: start para que cada tarjeta mida lo suyo: si se estiran, las de
+   efectivo y datáfono se vuelven dos cajas enormes medio vacías al lado de la
+   del QR, que es la única con contenido alto. */
+.pagos__grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+  gap: 1rem; max-width: 920px; margin-inline: auto; align-items: start;
+}
 .pago {
   background: var(--blanco); border: 1px solid var(--linea); border-radius: var(--radio-g);
-  padding: 1.5rem; text-align: center; display: grid; gap: .5rem;
+  padding: 1.3rem 1.1rem; text-align: center; display: grid; gap: .4rem;
   justify-items: center; align-content: start;
 }
 .pago > svg { width: 34px; height: 34px; color: var(--dorado-2); }
@@ -336,8 +342,8 @@ h1 em { font-style: italic; color: var(--dorado); }
    código a un tamaño que se escanee desde la pantalla del cliente. */
 .pago--qr { background: var(--crema); border-color: var(--dorado-suave); }
 .pago__qr {
-  width: min(210px, 70%); height: auto; border-radius: var(--radio);
-  margin: .2rem 0 .1rem;
+  width: min(160px, 62%); height: auto; border-radius: var(--radio);
+  margin: .2rem 0 0;
 }
 
 .pago__dato {
@@ -350,7 +356,7 @@ h1 em { font-style: italic; color: var(--dorado); }
   color: var(--tinta-suave);
 }
 .pago__valor {
-  font-family: var(--serif); font-size: 1.35rem; font-weight: 700; color: var(--vino);
+  font-family: var(--serif); font-size: 1.15rem; font-weight: 700; color: var(--vino);
   letter-spacing: .02em;
 }
 .pago__copiar {

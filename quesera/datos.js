@@ -250,7 +250,7 @@ const PRODUCTOS = [
     id: 'croquetas-yuca', nombre: 'Croquetas de yuca', categoria: 'congelados',
     marca: 'Ricongelisto',
     descripcion: 'Congeladas, para freír al momento.',
-    presentacion: '500 g · 6 porciones', imagen: 'imagenes/productos/croquetas-de-yuca.webp', destacado: false,
+    presentacion: '500 g · 1.000 g', imagen: 'imagenes/productos/croquetas-de-yuca.webp', destacado: false,
   },
 
   /* ---------------- Desechables y empaques ---------------- */
@@ -322,13 +322,13 @@ const PRODUCTOS = [
     id: 'pompeya-pina', nombre: 'Pompeya de piña', categoria: 'salsas',
     marca: 'Pompeya',
     descripcion: 'Para repostería y para acompañar carnes.',
-    presentacion: '400 g · 13 porciones', imagen: 'imagenes/productos/salsa-pompeya.webp', destacado: false,
+    presentacion: '4.000 g', imagen: 'imagenes/productos/salsa-pompeya.webp', destacado: false,
   },
   {
     id: 'salsa-italiana', nombre: 'Salsa italiana', categoria: 'salsas',
     marca: 'Italiano',
     descripcion: 'Salsita con tomate, para pastas, lasañas y pizzas.',
-    presentacion: '4 kg · 266 porciones', imagen: 'imagenes/productos/salsa-italiana.webp', destacado: false,
+    presentacion: '4.000 g', imagen: 'imagenes/productos/salsa-italiana.webp', destacado: false,
   },
   {
     id: 'salsa-bbq', nombre: 'Salsa BBQ', categoria: 'salsas',
