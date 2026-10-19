@@ -51,7 +51,6 @@ Dos cosas que vienen de esos documentos y conviene contrastar con el cliente:
 | Dato | Dónde se pone | Estado |
 |---|---|---|
 | Presentaciones | `presentacion` de 6 productos | Falta |
-| Pin del mapa | `MARCA.mapaEmbed` | Por verificar |
 
 Los 54 productos ya tienen foto. Faltan las presentaciones de la costilla, el aderezo de
 mayonesa, la margarina, los domos para torta, el atún y la arveja con zanahoria: ni el
@@ -62,7 +61,11 @@ Lo que falte se avisa por la consola del navegador, no en pantalla.
 
 ## Cómo completar cada cosa
 
-**Mapa** — Google Maps → buscar el negocio → *Compartir* → *Insertar un mapa* → copiar sólo
+**Mapa** — apunta a las coordenadas del punto (3.4772945, -76.493339), no a la
+dirección: Google geocodifica «Calle 62B #1A9-250» unos 60 metros al oriente y el
+puntero caía en la cuadra de al lado. Si alguna vez hay que rehacerlo, se abre la ficha
+del negocio en Google Maps y se sacan las coordenadas de la URL (el último bloque
+`!3d...!4d...`). La otra vía: Google Maps → buscar el negocio → *Compartir* → *Insertar un mapa* → copiar sólo
 la URL del `src` y pegarla en `MARCA.mapaEmbed`. La sección aparece sola.
 
 **Redes** — pegar la URL completa del perfil. Los iconos aparecen solos; los vacíos no salen.

@@ -36,10 +36,10 @@ const MARCA = {
   ciudad: 'Cali, Colombia',
   horario: 'Lunes a sábado 7:00 a.m. – 9:00 p.m. · Domingos y lunes festivos 7:00 a.m. – 2:00 p.m.',
 
-  // Mapa. Esta URL busca la dirección en Google Maps; sirve sin necesidad de
-  // una clave de API. Si el pin no cae exacto, se reemplaza por el iframe de
-  // Google Maps → Compartir → Insertar un mapa → copiar sólo el src.
-  mapaEmbed: 'https://www.google.com/maps?q=Calle%2062B%20%231A9-250%2C%20Chiminangos%20II%2C%20Cali%2C%20Valle%20del%20Cauca%2C%20Colombia&output=embed',
+  // Mapa. Apunta a las coordenadas del punto, no a la dirección: Google
+  // geocodifica «Calle 62B #1A9-250» unos 60 metros al oriente y el puntero
+  // caía en la cuadra de al lado. Estas salen del enlace del propio negocio.
+  mapaEmbed: 'https://www.google.com/maps?q=3.4772945,-76.493339&z=18&output=embed',
 
 
   logo: 'imagenes/logo.webp',
