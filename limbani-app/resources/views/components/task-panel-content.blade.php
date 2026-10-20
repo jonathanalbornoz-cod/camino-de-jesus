@@ -107,7 +107,7 @@
                                             locale: 'es',
                                             theme: 'dark',
                                             defaultDate: currentTask.start_date,
-                                            onChange: (selectedDates, dateStr) => { currentTask.start_date = dateStr; updateTask(); }
+                                            onChange: (selectedDates) => { currentTask.start_date = toLocalIsoString(selectedDates[0]); updateTask(); }
                                         });
                                         $watch('currentTask.start_date', value => fpStart.setDate(value || null, false));
                                    "
@@ -141,7 +141,7 @@
                                             locale: 'es',
                                             theme: 'dark',
                                             defaultDate: currentTask.due_date,
-                                            onChange: (selectedDates, dateStr) => { currentTask.due_date = dateStr; updateTask(); }
+                                            onChange: (selectedDates) => { currentTask.due_date = toLocalIsoString(selectedDates[0]); updateTask(); }
                                         });
                                         $watch('currentTask.due_date', value => fpDue.setDate(value || null, false));
                                    "
@@ -238,16 +238,17 @@
                                                     dateFormat: 'Y-m-d h:i K',
                                                     defaultDate: child.start_date,
                                                     locale: 'es',
-                                                    onChange: function(selectedDates, dateStr) {
-                                                        child.start_date = dateStr;
-                                                        fetch('{{ url('/subtasks') }}/'+child.id, { 
-                                                            method: 'PUT', 
-                                                            headers: { 
-                                                                'Content-Type': 'application/json', 
+                                                    onChange: function(selectedDates) {
+                                                        const isoDate = toLocalIsoString(selectedDates[0]);
+                                                        child.start_date = isoDate;
+                                                        fetch('{{ url('/subtasks') }}/'+child.id, {
+                                                            method: 'PUT',
+                                                            headers: {
+                                                                'Content-Type': 'application/json',
                                                                 'Accept': 'application/json',
-                                                                'X-CSRF-TOKEN': '{{ csrf_token() }}' 
-                                                            }, 
-                                                            body: JSON.stringify({ start_date: dateStr }) 
+                                                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                                            },
+                                                            body: JSON.stringify({ start_date: isoDate })
                                                         });
                                                     }
                                                  })">
@@ -262,16 +263,17 @@
                                                     dateFormat: 'Y-m-d h:i K',
                                                     defaultDate: child.due_date,
                                                     locale: 'es',
-                                                    onChange: function(selectedDates, dateStr) {
-                                                        child.due_date = dateStr;
-                                                        fetch('{{ url('/subtasks') }}/'+child.id, { 
-                                                            method: 'PUT', 
-                                                            headers: { 
-                                                                'Content-Type': 'application/json', 
+                                                    onChange: function(selectedDates) {
+                                                        const isoDate = toLocalIsoString(selectedDates[0]);
+                                                        child.due_date = isoDate;
+                                                        fetch('{{ url('/subtasks') }}/'+child.id, {
+                                                            method: 'PUT',
+                                                            headers: {
+                                                                'Content-Type': 'application/json',
                                                                 'Accept': 'application/json',
-                                                                'X-CSRF-TOKEN': '{{ csrf_token() }}' 
-                                                            }, 
-                                                            body: JSON.stringify({ due_date: dateStr }) 
+                                                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                                                            },
+                                                            body: JSON.stringify({ due_date: isoDate })
                                                         });
                                                     }
                                                  })">
