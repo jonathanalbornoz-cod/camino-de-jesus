@@ -372,22 +372,25 @@
                 </div>
             </div>
 
-            <div class="bg-white dark:bg-white/[0.03] backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl p-8 shadow-sm">
+            <div x-data="{ showAllTeam: false }" class="bg-white dark:bg-white/[0.03] backdrop-blur-md border border-gray-200 dark:border-white/10 rounded-2xl p-8 shadow-sm">
                 <div class="flex justify-between items-center mb-6">
                     <h3 class="text-sm font-medium text-gray-800 dark:text-white uppercase tracking-widest">Equipo</h3>
-                    @if(in_array(Auth::user()->role, ['admin', 'ceo', 'rrhh', 'contabilidad']))
-                    <a href="{{ route('team.index') }}" class="text-[10px] font-bold text-gray-600 hover:text-white transition-colors uppercase tracking-widest">Ver Todo</a>
+                    @if($team->count() > 6)
+                        <button @click="showAllTeam = !showAllTeam" class="text-[10px] font-bold text-orange-500 uppercase tracking-widest hover:text-orange-600">
+                            <span x-text="showAllTeam ? 'Mostrar menos' : 'Mostrar más'"></span>
+                        </button>
                     @endif
                 </div>
                 <div class="space-y-4">
-                    @foreach($team->take(6) as $member)
+                    @foreach($team as $index => $member)
                         @php
                             $canViewSchedule = in_array(Auth::user()->role, ['admin', 'ceo', 'rrhh', 'contabilidad'])
                                 || ($member->user_id && Auth::user()->canAssignTo($member->user));
                         @endphp
                         <a href="{{ $canViewSchedule ? route('team.tasks', $member) : '#' }}"
                            class="flex items-center gap-4 group {{ $canViewSchedule ? 'cursor-pointer' : 'cursor-default' }}"
-                           title="{{ $canViewSchedule ? 'Ver cronograma de ' . $member->name : '' }}">
+                           title="{{ $canViewSchedule ? 'Ver cronograma de ' . $member->name : '' }}"
+                           @if($index >= 6) x-show="showAllTeam" style="display: none;" @endif>
                             @if($member->photo)
                                 <img src="{{ asset('storage/' . $member->photo) }}" class="w-8 h-8 rounded-full object-cover border border-white/5 group-hover:border-orange-500/50 transition-colors">
                             @else
@@ -405,6 +408,9 @@
                         </a>
                     @endforeach
                 </div>
+                @if(in_array(Auth::user()->role, ['admin', 'ceo', 'rrhh', 'contabilidad']))
+                    <a href="{{ route('team.index') }}" class="block mt-6 text-center text-[10px] font-bold text-gray-500 hover:text-gray-800 dark:hover:text-white transition-colors uppercase tracking-widest">Gestionar Equipo</a>
+                @endif
             </div>
         </div>
     </div>
