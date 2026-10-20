@@ -373,6 +373,24 @@
                 + 'T' + pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':00';
         };
 
+        // Al soltar una tarea arrastrada a otro día en el calendario de "Mis Tareas",
+        // actualiza su vencimiento a esa fecha conservando la misma hora.
+        window.handleCalendarTaskDrop = function(evt) {
+            const taskId = evt.item.dataset.taskId;
+            const newDate = evt.to.dataset.date;
+            const time = evt.item.dataset.time || '09:00:00';
+            if (!taskId || !newDate) return;
+            fetch('{{ url('/subtasks') }}/' + taskId, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json',
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                body: JSON.stringify({ due_date: newDate + ' ' + time })
+            }).then(() => window.location.reload());
+        };
+
         document.addEventListener('alpine:init', () => {
             Alpine.data('asanaHandler', () => ({
                 mobileMenu: false, openPanel: false, currentTask: {}, newSubtaskTitle: '', newComment: '', isUploading: false, pastedImage: null, showDrawingModal: false, canvas: null, ctx: null, isDrawing: false, canvasColor: '#ff0000',

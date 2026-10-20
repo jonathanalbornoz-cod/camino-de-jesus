@@ -180,10 +180,12 @@
                                     <span class="text-[11px] font-medium {{ $inMonth ? 'text-gray-500 dark:text-gray-400' : 'text-gray-300 dark:text-gray-700' }}">{{ $day->day }}</span>
                                 @endif
                             </div>
-                            <div class="space-y-1">
+                            <div class="space-y-1 min-h-[20px]" data-date="{{ $dayKey }}"
+                                 x-init="new Sortable($el, { group: 'calendar-tasks', animation: 150, ghostClass: 'opacity-40', onEnd: handleCalendarTaskDrop })">
                                 @foreach($dayTasks->take(3) as $task)
                                     <div @click="$dispatch('open-task', { task: @js($task), sectionTitle: @js($task->task->title ?? 'General'), parentTitle: @js($task->parent->title ?? '') })"
-                                         class="flex items-center gap-1.5 text-[10px] font-medium truncate cursor-pointer {{ $task->is_completed ? 'text-gray-400 line-through' : ($task->due_date->isPast() ? 'text-red-500' : 'text-gray-700 dark:text-gray-300') }}">
+                                         data-task-id="{{ $task->id }}" data-time="{{ $task->due_date->format('H:i:s') }}"
+                                         class="flex items-center gap-1.5 text-[10px] font-medium truncate cursor-grab active:cursor-grabbing {{ $task->is_completed ? 'text-gray-400 line-through' : ($task->due_date->isPast() ? 'text-red-500' : 'text-gray-700 dark:text-gray-300') }}">
                                         <span class="w-1.5 h-1.5 rounded-full shrink-0 {{ $task->is_completed ? 'bg-gray-400' : ($task->due_date->isPast() ? 'bg-red-500' : 'bg-orange-500') }}"></span>
                                         <span class="truncate">{{ $task->title }}</span>
                                     </div>
