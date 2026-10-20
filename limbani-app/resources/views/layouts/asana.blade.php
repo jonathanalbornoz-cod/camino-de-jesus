@@ -40,6 +40,18 @@
             background: #f97316 !important;
             border-color: #f97316 !important;
         }
+        .dark .flatpickr-day {
+            color: #ffffff !important;
+        }
+        .dark .flatpickr-day.prevMonthDay,
+        .dark .flatpickr-day.nextMonthDay,
+        .dark .flatpickr-day.flatpickr-disabled {
+            color: rgba(255,255,255,0.3) !important;
+        }
+        .dark .flatpickr-day.selected,
+        .dark .flatpickr-day.selected:hover {
+            color: #000000 !important;
+        }
     </style>
     <script src="https://cdn.jsdelivr.net/npm/sortablejs@1.15.0/Sortable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
