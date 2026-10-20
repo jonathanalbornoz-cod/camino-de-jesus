@@ -48,7 +48,7 @@ const base = location.href.replace(/revision\.html.*$/, '');
 
 // Lo primero que hay que saber no es qué archivos hay, sino cómo se está viendo
 // la portada de verdad. Se abre en un marco oculto y se mira desde dentro.
-const VERSION_ESPERADA = '2026-10-20-4';
+const VERSION_ESPERADA = '2026-10-20-5';
 
 (function diagnosticarPortada() {
   const caja = document.getElementById('estilos');
@@ -84,7 +84,7 @@ const VERSION_ESPERADA = '2026-10-20-4';
                 (ancho > 400 ? ' (debería rondar los 264)' : '') + '</p>' +
                 '<p>Estilos dentro de la página: <b>' + (incrustado ? 'sí' : 'no') + '</b>' +
                 (rescatado ? ' · rescatados por ajustes.js' : '') + '</p>' +
-                '<p>Versión de <code>ajustes.js</code> que sirve el servidor: <b>' +
+                '<p>Versiones que sirve el servidor · <code>index.html</code>: <b>' + (v.__AGRO_INDEX || 'antigua') + '</b> · <code>ajustes.js</code>: <b>' +
                 (version || 'ninguna — es una copia antigua') + '</b>' +
                 (version === VERSION_ESPERADA ? ' (al día)' : ' · la de esta revisión es ' + VERSION_ESPERADA) + '</p>';
 

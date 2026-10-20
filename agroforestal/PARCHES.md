@@ -293,3 +293,19 @@ a 264x40 y las 1.039 reglas de diseño.
 
 El PNG original sigue en `storage/branding/logo-horizontal.png` y su ruta queda
 anotada en `logo_archivo`, para poder rehacer el data URI si algún día cambia.
+
+### Y por qué acabó dentro de index.html
+
+Meterlo en `settings.json` no bastó: el servidor seguía sirviendo el logotipo
+anterior en un navegador recién estrenado, sin caché que culpar. Lo que eso dice
+es que el `data/settings.json` de allí no es el que subimos; el `index.html` sí,
+porque el diseño nuevo —que también va dentro— se ve bien.
+
+Así que el logotipo pasa a `index.html`, que es el único archivo que se sirve
+siempre sin caché y el único del que se puede estar seguro. Un script de quince
+líneas lo pone en la cabecera y se queda vigilando el atributo `src`: si una
+versión vieja de `ajustes.js` o unos ajustes desfasados pintan otro, se corrige
+sola. No hay ida y vuelta, porque sólo actúa cuando el valor es distinto.
+
+Probado contra el peor servidor posible: `data/settings.json` viejo, `ajustes.js`
+viejo y sin el PNG del logotipo. Sale el logotipo nuevo igual.

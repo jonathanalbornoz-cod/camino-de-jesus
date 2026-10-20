@@ -29,7 +29,7 @@
   'use strict';
 
   // Para que revision.html pueda decir qué versión está sirviendo el servidor.
-  window.__AGRO_VERSION = '2026-10-20-4';
+  window.__AGRO_VERSION = '2026-10-20-5';
   'use strict';
 
   var CLAVE_CARRITO = 'agro_cart';
@@ -457,14 +457,16 @@
   // antes de tiempo—, así que al terminar se le pone el que dicen los ajustes.
 
   function corregirLogo() {
-    if (!logoDeAjustes) return;
+    // El de index.html manda: es el único archivo que se sirve siempre sin caché.
+    var logo = window.__AGRO_LOGO || logoDeAjustes;
+    if (!logo) return;
     var imgs = document.querySelectorAll('header img, nav img, footer img');
     Array.prototype.forEach.call(imgs, function (img) {
       var src = img.getAttribute('src') || '';
       if (!/logo|branding/i.test(src) && !/agroforestal/i.test(img.alt || '')) return;
-      if (src === logoDeAjustes) return;
+      if (src === logo) return;
       delete img.dataset.reserva;          // que la red de seguridad pueda volver a actuar
-      img.setAttribute('src', logoDeAjustes);
+      img.setAttribute('src', logo);
       img.style.display = '';
     });
   }
