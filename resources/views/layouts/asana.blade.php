@@ -362,6 +362,17 @@
             return new Date(typeof value === 'string' ? value.replace(' ', 'T') : value);
         };
 
+        // Convierte el objeto Date que entrega el selector de fecha (flatpickr) a un string
+        // "YYYY-MM-DDTHH:mm:ss" en hora local. Antes se guardaba el texto ya formateado para
+        // mostrar (ej. "2026-10-13 05:00 PM"), que `new Date()` no siempre logra volver a leer,
+        // causando que el conteo de "Faltan X días" mostrara "NaNh NaNm".
+        window.toLocalIsoString = function(date) {
+            if (!date) return '';
+            const pad = n => String(n).padStart(2, '0');
+            return date.getFullYear() + '-' + pad(date.getMonth() + 1) + '-' + pad(date.getDate())
+                + 'T' + pad(date.getHours()) + ':' + pad(date.getMinutes()) + ':00';
+        };
+
         document.addEventListener('alpine:init', () => {
             Alpine.data('asanaHandler', () => ({
                 mobileMenu: false, openPanel: false, currentTask: {}, newSubtaskTitle: '', newComment: '', isUploading: false, pastedImage: null, showDrawingModal: false, canvas: null, ctx: null, isDrawing: false, canvasColor: '#ff0000',
