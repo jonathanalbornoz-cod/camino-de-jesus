@@ -20,6 +20,9 @@
  *   4. Los enlaces de Instagram llevaban a una cuenta que no existe y el pie de página
  *      ni siquiera enlazaba. Se apuntan todos al perfil real.
  *
+ *   5. Si el archivo del logotipo no llega, el navegador pintaba el icono de imagen
+ *      rota. Se prueban los logos de reserva y, si falta todo, se oculta.
+ *
  * Se carga como script clásico desde index.html, después de offline-api.js.
  */
 (function () {
@@ -360,6 +363,36 @@
       break;
     }
   }
+
+  // --- 5. Red de seguridad para el logotipo ---------------------------------
+  //
+  // Si el archivo del logo no llega —no se subió, el servidor no lo sirve, una
+  // extracción incompleta—, el navegador pinta el icono de imagen rota con el
+  // texto alternativo al lado, que es peor que no tener logo. Aquí se intenta el
+  // logo anterior y, si tampoco está, se oculta la imagen: la cabecera queda
+  // limpia en vez de rota.
+  //
+  // Se escucha en fase de captura porque el evento `error` de una imagen no
+  // burbujea, así que un listener normal en document nunca lo vería.
+
+  var RESERVAS = [
+    'storage/branding/7d29288d-ca9b-49f6-9968-64ee22913285.png',   // logo anterior
+    'logo-agroforestal.svg'                                        // último recurso
+  ];
+
+  document.addEventListener('error', function (ev) {
+    var img = ev.target;
+    if (!img || img.tagName !== 'IMG') return;
+    if (!/logo|branding/i.test(img.getAttribute('src') || '')) return;
+
+    var intento = Number(img.dataset.reserva || 0);
+    if (intento < RESERVAS.length) {
+      img.dataset.reserva = intento + 1;
+      img.src = raiz() + RESERVAS[intento];
+    } else {
+      img.style.display = 'none';
+    }
+  }, true);
 
   // --- arranque -------------------------------------------------------------
 
