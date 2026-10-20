@@ -113,4 +113,17 @@ class User extends Authenticatable
             && $other->hierarchy_level !== null
             && $other->hierarchy_level > $this->hierarchy_level;
     }
+
+    /**
+     * ¿Puede este usuario crear, duplicar, reordenar o borrar secciones y tareas
+     * dentro de un proyecto? Mismo criterio de cargo que para asignar tareas.
+     */
+    public function canManageSections(): bool
+    {
+        if (in_array($this->role, ['admin', 'ceo', 'rrhh', 'contabilidad'])) {
+            return true;
+        }
+
+        return in_array($this->teamMember?->position, self::ASSIGNER_POSITIONS);
+    }
 }
