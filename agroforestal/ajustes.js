@@ -394,6 +394,54 @@
     }
   }, true);
 
+  // --- 6. Rescate de la hoja de estilos ------------------------------------
+  //
+  // El build de Angular pide styles-*.css con `media="print"` y lo pasa a
+  // `media="all"` desde un `onload` escrito en el atributo. Si ese onload no
+  // llega a correr, la hoja se descarga pero nunca se aplica: la página sale sin
+  // diseño, con el logotipo a tamaño natural y el menú como enlaces subrayados.
+  // Sale igual si el servidor devuelve la hoja con un tipo de contenido
+  // equivocado —el navegador la rechaza y no dice nada— o si una caché sigue
+  // sirviendo el 404 de antes de haberla subido.
+  //
+  // Los tres casos se arreglan igual: forzar `media="all"` y, si aun así no hay
+  // reglas, pedir el archivo con fetch —que no mira el tipo de contenido— y
+  // meterlo en un <style>, con un parámetro al final para saltarse la caché.
+
+  function hojaConReglas(hoja) {
+    try { return !!hoja && !!hoja.cssRules && hoja.cssRules.length > 0; }
+    catch (e) { return true; }   // de otra procedencia: no se puede mirar, se da por buena
+  }
+
+  function rescatarEstilos() {
+    var enlaces = document.querySelectorAll('link[rel~="stylesheet"][href*="styles-"]');
+
+    Array.prototype.forEach.call(enlaces, function (link) {
+      if (link.media && link.media !== 'all') link.media = 'all';   // el onload que no corrió
+      if (hojaConReglas(link.sheet) || link.dataset.rescatada) return;
+      link.dataset.rescatada = '1';
+
+      var url = link.href + (link.href.indexOf('?') < 0 ? '?' : '&') + 'r=' + Date.now();
+      fetch(url, { cache: 'reload' })
+        .then(function (r) { return r.ok ? r.text() : null; })
+        .then(function (css) {
+          // Si el servidor devolvió la página en vez del archivo, no hay nada que rescatar.
+          if (!css || /^\s*</.test(css)) return;
+          var style = document.createElement('style');
+          style.setAttribute('data-rescate', 'estilos');
+          style.textContent = css;
+          document.head.appendChild(style);
+        })
+        .catch(function () {});
+    });
+  }
+
+  // En cuanto se puede, por si el atributo media quedó en «print»; y otra vez con
+  // la página cargada, que es cuando ya se sabe si la hoja trajo reglas.
+  rescatarEstilos();
+  if (document.readyState === 'complete') setTimeout(rescatarEstilos, 0);
+  else window.addEventListener('load', function () { setTimeout(rescatarEstilos, 300); });
+
   // --- arranque -------------------------------------------------------------
 
   function iniciar() {
