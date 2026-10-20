@@ -28,6 +28,10 @@
 (function () {
   'use strict';
 
+  // Para que revision.html pueda decir qué versión está sirviendo el servidor.
+  window.__AGRO_VERSION = '2026-10-20-3';
+  'use strict';
+
   var CLAVE_CARRITO = 'agro_cart';
   var SEL_WA_APP = '.fixed.bottom-8.right-8 a[href*="wa.me"]';
 

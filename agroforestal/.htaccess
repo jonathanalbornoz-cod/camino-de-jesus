@@ -10,10 +10,33 @@ RewriteRule ^ index.html [QSA,L]
   Header set Expires "0"
 </Files>
 
-# Assets con hash (JS/CSS): caché 1 año (son inmutables por el hash en el nombre)
-<FilesMatch "\.(js|css|woff2|woff|ttf)$">
+# Archivos con hash en el nombre: caché 1 año. Cambiar el contenido les cambia el
+# nombre, así que el navegador pide el nuevo y nunca sirve uno viejo.
+<FilesMatch "^(main|polyfills|chunk|styles)-[A-Za-z0-9_-]+\.(js|css)$">
   Header set Cache-Control "public, max-age=31536000, immutable"
 </FilesMatch>
+
+# Nuestros scripts NO llevan hash: el nombre no cambia aunque cambie el contenido.
+# Con la regla de arriba el navegador se quedaba con la primera copia durante un año
+# y no veía ninguna corrección. Se revalidan siempre.
+<FilesMatch "^(ajustes|offline-api|formularios)\.js$">
+  Header set Cache-Control "no-cache, must-revalidate"
+</FilesMatch>
+
+# Tipografías
+<FilesMatch "\.(woff2|woff|ttf)$">
+  Header set Cache-Control "public, max-age=31536000"
+</FilesMatch>
+
+# Los datos del catálogo cambian al regenerarlos: media hora de caché
+<FilesMatch "\.json$">
+  Header set Cache-Control "public, max-age=1800, must-revalidate"
+</FilesMatch>
+
+# La página de revisión tiene que decir siempre la verdad del momento
+<Files "revision.html">
+  Header set Cache-Control "no-cache, no-store, must-revalidate"
+</Files>
 
 # Imágenes y fuentes: caché 30 días
 <FilesMatch "\.(png|jpg|jpeg|gif|svg|ico|webp)$">

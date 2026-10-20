@@ -46,70 +46,66 @@ const MANIFIESTO = [["404.html",2036],["ajustes.js",17661],["chunk-425OMZ2C.js",
 
 const base = location.href.replace(/revision\.html.*$/, '');
 
-// La hoja de estilos es la que más falla, así que se mira sola nada más abrir.
-(async function diagnosticarEstilos() {
-  const caja = document.getElementById('estilos');
-  const pinta = h => caja.innerHTML = '<h2>Hoja de estilos</h2>' + h;
-  let nombre = 'styles-BKVBEIHD.css';
-  try {
-    const idx = await (await fetch(base + '?v=' + Date.now(), { cache: 'reload' })).text();
-    const m = idx.match(/styles-[A-Za-z0-9_-]+\.css/);
-    if (m) nombre = m[0];
-  } catch (e) {}
-  try {
-    const r = await fetch(base + nombre + '?v=' + Date.now(), { cache: 'reload' });
-    const tipo = (r.headers.get('content-type') || '(sin tipo)').split(';')[0];
-    const txt = await r.text();
-    const esCss = !/^\s*</.test(txt) && /\{/.test(txt);
-    const ficha = '<p><code>' + nombre + '</code> · respuesta ' + r.status +
-                  ' · tipo <code>' + tipo + '</code> · ' + txt.length + ' caracteres</p>' +
-                  '<p>Empieza por: <code>' + txt.slice(0, 70).replace(/[<>&]/g, c => ({'<':'&lt;','>':'&gt;','&':'&amp;'}[c])) + '…</code></p>';
-    if (!r.ok)
-      pinta('<p class="veredicto mal">No está en el servidor (error ' + r.status + ').</p>' + ficha +
-            '<p><b>Solución:</b> vuelve a subir el sitio; ese archivo no llegó.</p>');
-    else if (!esCss)
-      pinta('<p class="veredicto mal">No está en el servidor.</p>' + ficha +
-            '<p>El servidor responde con la página de inicio en lugar del archivo, que es lo que hace ' +
-            'el <code>.htaccess</code> cuando algo no existe. <b>Solución:</b> vuelve a subir el sitio ' +
-            'y comprueba que <code>' + nombre + '</code> aparece en <code>public_html</code>.</p>');
-    else if (!tipo.includes('css'))
-      pinta('<p class="veredicto mal">Está, pero el servidor la sirve con el tipo equivocado.</p>' + ficha +
-            '<p>El navegador rechaza una hoja de estilos que no llega como <code>text/css</code>. ' +
-            'La versión actual del sitio ya se defiende de esto sola: si la página se sigue viendo ' +
-            'sin diseño, es que te falta subir <code>ajustes.js</code> e <code>index.html</code>.</p>');
-    else
-      pinta('<p class="veredicto ok">Correcta: está, es CSS y el tipo es el bueno.</p>' + ficha +
-            '<p>Si aun así la página se ve sin diseño, abre la portada con Ctrl+F5.</p>');
-  } catch (e) {
-    pinta('<p class="veredicto mal">No se pudo consultar: ' + e.message + '</p>');
-  }
-})();
-const esImagen = p => /\.(png|jpe?g|gif|webp|ico|svg)$/i.test(p);
-const tipoEsperado = p =>
-  /\.css$/i.test(p) ? 'css' : /\.js$/i.test(p) ? 'javascript' :
-  /\.json$/i.test(p) ? 'json' : esImagen(p) ? 'image' : 'html';
+// Lo primero que hay que saber no es qué archivos hay, sino cómo se está viendo
+// la portada de verdad. Se abre en un marco oculto y se mira desde dentro.
+const VERSION_ESPERADA = '2026-10-20-3';
 
-async function revisar(ruta, esperado) {
-  try {
-    const r = await fetch(base + ruta + '?v=' + Date.now(), { method: 'HEAD', cache: 'no-store' });
-    if (r.status === 404) return { estado: 'falta', nota: 'no existe (404)' };
-    if (!r.ok) return { estado: 'falta', nota: 'error ' + r.status };
-    const ct = (r.headers.get('content-type') || '').toLowerCase();
-    const quiero = tipoEsperado(ruta);
-    // El .htaccess devuelve index.html cuando el archivo no existe: se delata por el tipo.
-    if (quiero !== 'html' && ct.includes('text/html'))
-      return { estado: 'falta', nota: 'el servidor devolvió la página en su lugar' };
-    if (quiero === 'image' && ct && !ct.includes('image'))
-      return { estado: 'falta', nota: 'no es una imagen (' + ct.split(';')[0] + ')' };
-    // El tamaño sólo es fiable en imágenes: el texto puede venir comprimido.
-    const len = r.headers.get('content-length');
-    if (esImagen(ruta) && len && Math.abs(+len - esperado) > 64)
-      return { estado: 'distinto', nota: 'pesa ' + (+len) + ' y debería pesar ' + esperado };
-    return { estado: 'ok' };
-  } catch (e) {
-    return { estado: 'falta', nota: 'no se pudo consultar (' + e.message + ')' };
-  }
-}
+(function diagnosticarPortada() {
+  const caja = document.getElementById('estilos');
+  const pinta = h => caja.innerHTML = '<h2>Cómo se está viendo la portada</h2>' + h;
+
+  const marco = document.createElement('iframe');
+  marco.style.cssText = 'position:absolute;left:-9999px;width:1280px;height:900px;border:0';
+  marco.src = base + '?revision=' + Date.now();
+  document.body.appendChild(marco);
+
+  const fallo = setTimeout(() => pinta('<p class="veredicto mal">La portada no respondió en 25 segundos.</p>'), 25000);
+
+  marco.onload = () => setTimeout(() => {
+    clearTimeout(fallo);
+    let d;
+    try { d = marco.contentDocument; } catch (e) {
+      return pinta('<p class="veredicto mal">No se pudo mirar la portada: ' + e.message + '</p>');
+    }
+    const w = marco.contentWindow;
+    const img = d.querySelector('header img, nav img');
+    const caja2 = img && img.getBoundingClientRect();
+    const ancho = caja2 ? Math.round(caja2.width) : 0;
+    const reglas = [...d.styleSheets].reduce((n, s) => {
+      try { return n + (s.media.mediaText === 'print' ? 0 : s.cssRules.length); } catch (e) { return n; }
+    }, 0);
+    const version = w.__AGRO_VERSION || null;
+    const incrustado = !!d.querySelector('style[data-hoja]');
+    const rescatado = !!d.querySelector('style[data-rescate]');
+
+    const conDiseño = reglas > 300 && ancho > 0 && ancho < 400;
+
+    let ficha = '<p>' + reglas + ' reglas de estilo activas · logotipo dibujado a ' + ancho + ' px de ancho' +
+                (ancho > 400 ? ' (debería rondar los 264)' : '') + '</p>' +
+                '<p>Estilos dentro de la página: <b>' + (incrustado ? 'sí' : 'no') + '</b>' +
+                (rescatado ? ' · rescatados por ajustes.js' : '') + '</p>' +
+                '<p>Versión de <code>ajustes.js</code> que sirve el servidor: <b>' +
+                (version || 'ninguna — es una copia antigua') + '</b>' +
+                (version === VERSION_ESPERADA ? ' (al día)' : ' · la de esta revisión es ' + VERSION_ESPERADA) + '</p>';
+
+    if (conDiseño) {
+      pinta('<p class="veredicto ok">La portada se está viendo con su diseño.</p>' + ficha +
+            '<p>Si tú la ves sin diseño, tu navegador tiene guardada una copia vieja: ' +
+            'ábrela con <b>Ctrl+F5</b>, o en una ventana de incógnito.</p>');
+    } else if (version !== VERSION_ESPERADA) {
+      pinta('<p class="veredicto mal">La portada sale sin diseño, y el servidor tiene archivos viejos.</p>' + ficha +
+            '<p><b>Qué pasa:</b> no es el navegador, es el servidor: está entregando una copia ' +
+            'anterior. <b>Solución:</b> sube otra vez <code>arreglo-rapido.zip</code> a ' +
+            '<code>public_html</code> y asegúrate de <b>sobrescribir</b> al extraer. Si el extractor ' +
+            'pregunta, responde que sí a reemplazar.</p>');
+    } else {
+      pinta('<p class="veredicto mal">La portada sale sin diseño, aunque los archivos están al día.</p>' + ficha +
+            '<p>Esto ya no es ni el navegador ni una copia vieja. Pulsa «Revisar los 558 archivos» ' +
+            'aquí abajo y pásame el resultado.</p>');
+    }
+    marco.remove();
+  }, 4000);
+})();
 
 document.getElementById('ir').onclick = async function () {
   this.disabled = true; this.textContent = 'Revisando…';

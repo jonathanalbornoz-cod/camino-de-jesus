@@ -223,3 +223,46 @@ apunta el plan B y `endpoint` la del servicio. Cambiar la dirección es cambiar 
 rastreable por robots de spam. FormSubmit permite sustituirlo por un identificador
 aleatorio que oculta la dirección: si empieza a llegar correo basura, se pide ese
 identificador y se cambia sólo el `endpoint`.
+
+---
+
+## 9. La hoja de estilos deja de ser un archivo aparte
+
+**Archivos:** `index.html`, `ajustes.js`, `.htaccess`
+
+El sitio salía sin diseño en el servidor del cliente: logotipo a tamaño natural,
+menú como enlaces subrayados, el resto de la página bien pero sin colocar.
+Reproducido aquí rompiendo sólo la hoja de estilos, el resultado era idéntico al
+suyo hasta el 793x120 del logo.
+
+El build pedía el CSS con el truco de precarga de Critters:
+
+```html
+<link rel="stylesheet" href="styles-*.css" media="print" onload="this.media='all'">
+```
+
+Se descarga como hoja de impresión y sólo pasa a la pantalla cuando corre ese
+`onload` escrito en el atributo. Si no corre, el archivo llega entero y no se
+aplica nunca, sin error ni aviso.
+
+Tras dos intentos fallidos de arreglarlo por el lado del servidor, **el CSS pasa a
+ir dentro de `index.html`**, en un `<style>` de 102 KB. No hay archivo que pueda
+faltar, llegar con el tipo cambiado, quedarse en caché o no aplicarse: si la página
+carga, el diseño va con ella. Comprobado borrando `styles-BKVBEIHD.css` del
+servidor: la portada sigue saliendo entera, con sus 1.039 reglas activas.
+
+`styles-BKVBEIHD.css` se conserva en el repositorio, ya sin referenciar, para poder
+regenerar el `<style>` si cambia.
+
+### De paso, dos cosas que lo estaban tapando
+
+**El `.htaccess` congelaba nuestros propios scripts.** La regla de caché larga
+casaba con `\.(js|css)$`, es decir, con todos. Los archivos del build llevan hash en
+el nombre y por eso pueden cachearse un año; `ajustes.js`, `offline-api.js` y
+`formularios.js` no, así que el navegador se quedaba con la primera copia que
+hubiera visto —`immutable`, ni siquiera preguntaba— y ninguna corrección le
+llegaba. Ahora la regla larga exige el hash y esos tres se revalidan siempre.
+
+**Los tres scripts llevan `?v=` en `index.html`.** Como `index.html` no se cachea,
+subir una versión nueva basta para que el navegador pida los scripts otra vez, sin
+depender de que el servidor respete las cabeceras.
