@@ -106,7 +106,24 @@
             <div class="col-span-3 text-right">Cronograma</div>
         </div>
 
-        <div class="flex-1 overflow-y-auto custom-scroll p-4 md:p-8 space-y-4">
+        <div class="flex-1 overflow-y-auto custom-scroll p-4 md:p-8 space-y-4" x-ref="sectionsList"
+             @if(Auth::user()->canManageSections())
+             x-init="
+                new Sortable($refs.sectionsList, {
+                    animation: 150,
+                    handle: '.section-drag-handle',
+                    ghostClass: 'bg-orange-500/10',
+                    onEnd: (evt) => {
+                        let order = Array.from($refs.sectionsList.querySelectorAll('[data-section-id]')).map(el => el.dataset.sectionId);
+                        fetch('{{ route('tasks.reorder') }}', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                            body: JSON.stringify({ order: order })
+                        });
+                    }
+                })
+             "
+             @endif>
             @if($project->tasks->isEmpty())
                 <div class="flex flex-col items-center justify-center text-center py-16 px-4">
                     <div class="w-16 h-16 rounded-2xl bg-orange-500/10 flex items-center justify-center text-orange-500 mb-4">
@@ -135,11 +152,14 @@
                 <div x-data="{
                     expanded: localStorage.getItem('section_{{ $section->id }}') === 'false' ? false : true,
                     toggle() { this.expanded = !this.expanded; localStorage.setItem('section_{{ $section->id }}', this.expanded); }
-                }" class="mb-10">
+                }" class="mb-10" data-section-id="{{ $section->id }}">
                     <div class="flex items-center gap-3 mb-4 group/sec relative" x-data="{ editingTitle: false, newTitle: '{{ addslashes($section->title) }}' }">
                         <div class="flex items-center gap-3 flex-1">
+                            @if(Auth::user()->canManageSections())
+                                <i class="fas fa-grip-vertical section-drag-handle text-gray-600 hover:text-orange-500 cursor-grab active:cursor-grabbing text-[10px] opacity-0 group-hover/sec:opacity-100 transition-opacity"></i>
+                            @endif
                             <i @click="toggle()" class="fas fa-caret-down text-gray-500 transition-transform cursor-pointer" :class="{ '-rotate-90': !expanded }"></i>
-                            
+
                             <div x-show="!editingTitle" class="flex-1 flex items-center">
                                 <h3 @click="if('{{ Auth::user()->role }}' !== 'colaborador') { editingTitle = true; $nextTick(() => $refs.titleInput.focus()); }" class="text-[11px] font-bold text-gray-500 uppercase tracking-[0.2em] group-hover/sec:text-orange-500 transition-colors cursor-pointer">{{ $section->title }}</h3>
                                 <div @click="toggle()" class="h-[1px] flex-1 bg-white/5 ml-4 cursor-pointer"></div>
