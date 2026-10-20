@@ -5,10 +5,28 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class Brief extends Model
 {
     use HasFactory;
+
+    protected static function booted(): void
+    {
+        static::creating(function (Brief $brief) {
+            if (empty($brief->public_token)) {
+                $brief->public_token = (string) Str::uuid();
+            }
+        });
+    }
+
+    /**
+     * Enlace público donde el cliente puede llenar el brief sin iniciar sesión.
+     */
+    public function publicUrl(): string
+    {
+        return route('briefs.public.edit', $this->public_token);
+    }
 
     /**
      * The attributes that are mass assignable.
@@ -17,6 +35,7 @@ class Brief extends Model
      */
     protected $fillable = [
         'project_id',
+        'public_token',
         'answers',
         'objectives',
         'target_audience',

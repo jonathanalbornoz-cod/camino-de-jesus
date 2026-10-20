@@ -11,11 +11,16 @@ use App\Http\Controllers\TeamMemberController;
 use App\Http\Controllers\AttachmentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\MyTasksController;
+use App\Http\Controllers\PublicBriefController;
 
 
 Route::get('/', function () {
     return redirect()->route(auth()->check() ? 'dashboard' : 'login');
 });
+
+// Brief público: el cliente lo llena por medio de un enlace, sin iniciar sesión.
+Route::get('/brief/{token}', [PublicBriefController::class, 'edit'])->name('briefs.public.edit');
+Route::put('/brief/{token}', [PublicBriefController::class, 'update'])->name('briefs.public.update');
 
 Route::get('/dashboard', [ProjectController::class, 'index'])
     ->middleware(['auth', 'verified'])
