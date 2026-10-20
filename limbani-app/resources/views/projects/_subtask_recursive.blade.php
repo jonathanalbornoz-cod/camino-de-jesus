@@ -15,8 +15,24 @@
     }
 @endphp
 
+@php $canManageSections = Auth::user()->canManageSections(); @endphp
+<div @if($canManageSections) x-init="
+        new Sortable($el, {
+            animation: 150,
+            handle: '.subtask-drag-handle',
+            ghostClass: 'bg-orange-500/10',
+            onEnd: (evt) => {
+                let order = Array.from($el.children).map(el => el.dataset.subtaskId).filter(Boolean);
+                fetch('{{ route('subtasks.reorder') }}', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json', 'X-CSRF-TOKEN': '{{ csrf_token() }}' },
+                    body: JSON.stringify({ order: order })
+                });
+            }
+        })
+     " @endif>
 @foreach($subtasks as $subtask)
-    @php 
+    @php
         $level = $level ?? 0;
         $isVisible = !$isCollab || $fullAccess || $shouldShow($subtask, $teamMemberId);
     @endphp
@@ -25,11 +41,14 @@
     <div x-data="{
         showChildren: localStorage.getItem('task_children_{{ $subtask->id }}') === 'true' ? true : false,
         toggleChildren() { this.showChildren = !this.showChildren; localStorage.setItem('task_children_{{ $subtask->id }}', this.showChildren); }
-    }" class="border-b border-gray-100 dark:border-white/[0.03]">
-        <div @click="openTaskPanel(@js($subtask), @js($section->title), @js($subtask->parent ? $subtask->parent->title : ''))" 
+    }" class="border-b border-gray-100 dark:border-white/[0.03]" data-subtask-id="{{ $subtask->id }}">
+        <div @click="openTaskPanel(@js($subtask), @js($section->title), @js($subtask->parent ? $subtask->parent->title : ''))"
              class="group grid grid-cols-12 gap-4 {{ $level == 0 ? 'py-2 px-4' : 'py-1.5 px-4' }} hover:bg-gray-50 dark:hover:bg-white/[0.03] transition-all cursor-pointer items-center">
-            
+
             <div class="col-span-7 flex items-center gap-3 min-w-0" style="padding-left: {{ $level * 20 }}px">
+                @if($canManageSections)
+                    <i class="fas fa-grip-vertical subtask-drag-handle text-gray-600 hover:text-orange-500 cursor-grab active:cursor-grabbing text-[9px] opacity-0 group-hover:opacity-100 transition-opacity shrink-0" @click.stop></i>
+                @endif
                 @if($subtask->children->count() > 0)
                     <button @click.stop="toggleChildren()" class="w-4 h-4 flex items-center justify-center text-gray-600 hover:text-white transition-colors shrink-0">
                         <i class="fas fa-caret-right text-[10px] transition-transform" :class="showChildren ? 'rotate-90' : ''"></i>
@@ -106,7 +125,7 @@
                     </div>
                 @endif
 
-                @if(Auth::user()->role !== 'colaborador')
+                @if($canManageSections)
                     <button type="button"
                             @click.stop="fetch('{{ route('subtasks.duplicate', $subtask) }}', { method: 'POST', headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json' } }).then(() => window.location.reload())"
                             title="Duplicar"
@@ -115,7 +134,7 @@
                     </button>
                 @endif
 
-                @if($level > 0 && Auth::user()->role !== 'colaborador')
+                @if($level > 0 && $canManageSections)
                     <button type="button"
                             @click.stop="if(confirm('¿Borrar?')) fetch('{{ url('/subtasks') }}/{{ $subtask->id }}', { method: 'DELETE', headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json' } }).then(() => window.location.reload())"
                             title="Borrar"
@@ -134,3 +153,4 @@
     </div>
     @endif
 @endforeach
+</div>

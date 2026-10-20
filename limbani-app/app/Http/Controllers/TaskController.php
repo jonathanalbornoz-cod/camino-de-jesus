@@ -96,6 +96,21 @@ class TaskController extends Controller
         return back()->with('success', 'Sección movida.');
     }
 
+    // Reordenar secciones (arrastrar y soltar)
+    public function reorder(Request $request)
+    {
+        $request->validate([
+            'order' => 'required|array',
+            'order.*' => 'exists:tasks,id',
+        ]);
+
+        foreach ($request->order as $index => $id) {
+            Task::where('id', $id)->update(['position' => $index]);
+        }
+
+        return response()->json(['success' => true]);
+    }
+
     // Duplicar lista con sus subtareas
     public function duplicate(Task $task)
     {
