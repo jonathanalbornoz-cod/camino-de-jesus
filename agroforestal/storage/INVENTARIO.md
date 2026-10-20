@@ -5,11 +5,12 @@ que aparece en los campos `logo_url`, `hero_images`, `story_image`, `mascot_imag
 `feed_images` y `cover_image` que devuelve la API. Renombrarlas rompería esa
 correspondencia.
 
-## branding/ (12)
+## branding/ (13)
 
 | Archivo | Tamaño | Qué es |
 |---|---|---|
-| `7d29288d-…-64ee22913285.png` | 710×124 | **Logo horizontal** «AGROFORESTAL de Colombia S.A.S · 1977». El del navbar y el pie. |
+| `logo-horizontal.png` | 793×120 | **Logo en uso**, el de la barra superior. Fondo transparente y 26 KB. |
+| `7d29288d-…-64ee22913285.png` | 710×124 | Logo anterior. Se conserva por si hay que volver atrás; arrastraba un recuadro gris claro, visible sobre cualquier fondo que no fuera blanco. |
 | `efce8d97-…-9f0c081843a0.png` | 1073×1600 | **Mascota** 3D con fondo transparente (RGBA). La del globo de WhatsApp. |
 | `ba13cfee-…-b18aaf84ffe3.jpeg` | 1066×1600 | **Foto de historia**: hombre en el taller, sección «Nuestra historia». |
 | `a717d46f-…`, `b6308755-…` (jpeg) | 1073×1600 | Versiones anteriores de la mascota, con fondo de tienda. Sin uso. |
