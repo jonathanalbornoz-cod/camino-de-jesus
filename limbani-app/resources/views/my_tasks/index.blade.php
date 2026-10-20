@@ -180,18 +180,21 @@
                                     <span class="text-[11px] font-medium {{ $inMonth ? 'text-gray-500 dark:text-gray-400' : 'text-gray-300 dark:text-gray-700' }}">{{ $day->day }}</span>
                                 @endif
                             </div>
-                            <div class="space-y-1 min-h-[20px]" data-date="{{ $dayKey }}"
+                            <div class="space-y-1 min-h-[20px]" data-date="{{ $dayKey }}" x-data="{ expanded: false }"
                                  x-init="new Sortable($el, { group: 'calendar-tasks', animation: 150, ghostClass: 'opacity-40', onEnd: handleCalendarTaskDrop })">
-                                @foreach($dayTasks->take(3) as $task)
+                                @foreach($dayTasks as $index => $task)
                                     <div @click="$dispatch('open-task', { task: @js($task), sectionTitle: @js($task->task->title ?? 'General'), parentTitle: @js($task->parent->title ?? '') })"
                                          data-task-id="{{ $task->id }}" data-time="{{ $task->due_date->format('H:i:s') }}"
+                                         @if($index >= 3) x-show="expanded" style="display: none;" @endif
                                          class="flex items-center gap-1.5 text-[10px] font-medium truncate cursor-grab active:cursor-grabbing {{ $task->is_completed ? 'text-gray-400 line-through' : ($task->due_date->isPast() ? 'text-red-500' : 'text-gray-700 dark:text-gray-300') }}">
                                         <span class="w-1.5 h-1.5 rounded-full shrink-0 {{ $task->is_completed ? 'bg-gray-400' : ($task->due_date->isPast() ? 'bg-red-500' : 'bg-orange-500') }}"></span>
                                         <span class="truncate">{{ $task->title }}</span>
                                     </div>
                                 @endforeach
                                 @if($dayTasks->count() > 3)
-                                    <div class="text-[9px] text-gray-500 font-bold pl-3">+{{ $dayTasks->count() - 3 }} más</div>
+                                    <div @click="expanded = !expanded" class="text-[9px] text-gray-500 font-bold pl-3 cursor-pointer hover:text-orange-500 transition-colors">
+                                        <span x-text="expanded ? 'Mostrar menos' : '+{{ $dayTasks->count() - 3 }} más'"></span>
+                                    </div>
                                 @endif
                             </div>
                         </div>
