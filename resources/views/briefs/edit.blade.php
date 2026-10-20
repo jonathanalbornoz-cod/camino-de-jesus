@@ -19,7 +19,13 @@
                 <span class="text-xs font-bold uppercase tracking-widest text-gray-400">Volver al Proyecto</span>
             </div>
             <h2 class="text-2xl font-bold tracking-tight mb-2">Brief Mensual</h2>
-            <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed">Personaliza tu estrategia para este mes respondiendo estas 9 secciones clave.</p>
+            <p class="text-xs text-gray-500 dark:text-gray-400 leading-relaxed mb-4">Personaliza tu estrategia para este mes respondiendo estas 9 secciones clave.</p>
+            <button type="button"
+                    @click="navigator.clipboard.writeText('{{ $brief->publicUrl() }}'); linkCopied = true; setTimeout(() => linkCopied = false, 2000)"
+                    class="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-orange-500/10 border border-orange-500/20 text-orange-500 text-[10px] font-bold uppercase tracking-widest hover:bg-orange-500/20 transition-colors">
+                <i class="fas" :class="linkCopied ? 'fa-check' : 'fa-link'"></i>
+                <span x-text="linkCopied ? '¡Enlace copiado!' : 'Copiar enlace para el cliente'"></span>
+            </button>
         </div>
 
         <nav class="flex-1 overflow-y-auto custom-scroll px-4 space-y-2 pb-8">
@@ -353,6 +359,7 @@
             step: 1,
             isSaving: false,
             lastSaved: null,
+            linkCopied: false,
             formData: {
                 answers: {
                     q1: '{{ addslashes($brief->answers['q1'] ?? '') }}',
