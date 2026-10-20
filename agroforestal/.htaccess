@@ -28,9 +28,10 @@ RewriteRule ^ index.html [QSA,L]
   Header set Cache-Control "public, max-age=31536000"
 </FilesMatch>
 
-# Los datos del catálogo cambian al regenerarlos: media hora de caché
+# Los datos del catálogo cambian al regenerarlos y tampoco llevan hash. Dentro de
+# settings.json viaja además el logotipo, así que una copia vieja se nota.
 <FilesMatch "\.json$">
-  Header set Cache-Control "public, max-age=1800, must-revalidate"
+  Header set Cache-Control "no-cache, must-revalidate"
 </FilesMatch>
 
 # La página de revisión tiene que decir siempre la verdad del momento

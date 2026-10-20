@@ -266,3 +266,30 @@ llegaba. Ahora la regla larga exige el hash y esos tres se revalidan siempre.
 **Los tres scripts llevan `?v=` en `index.html`.** Como `index.html` no se cachea,
 subir una versión nueva basta para que el navegador pida los scripts otra vez, sin
 depender de que el servidor respete las cabeceras.
+
+---
+
+## 10. El logotipo viaja dentro de los ajustes
+
+**Archivos:** `data/settings.json` + `ajustes.js`
+
+En el servidor del cliente seguía saliendo el logotipo anterior: el de fondo blanco
+opaco, que en la barra translúcida se ve como un recuadro. No se podía distinguir
+desde fuera si era porque `storage/branding/logo-horizontal.png` no había llegado
+—y entonces saltaba la red de seguridad del punto 5, que es justo lo que hace— o
+porque el `settings.json` del servidor era viejo.
+
+Las dos causas desaparecen si el logotipo deja de ser un archivo que pedir: ahora
+`logo_url` es un data URI con el PNG dentro (35 KB en base64). No hay petición que
+falle, ni caché que devuelva otra cosa, ni extracción que lo deje fuera.
+
+`ajustes.js` además lo impone: al terminar de cargar, y en cada repintado, pone en
+la imagen de la cabecera el logotipo que digan los ajustes. Así, aunque la
+aplicación hubiera pintado otro antes, acaba ganando el bueno.
+
+Probado con cuatro servidores simulados —completo, sin `storage/branding`, sin la
+hoja de estilos suelta y sin las dos cosas—: en los cuatro sale el logotipo nuevo
+a 264x40 y las 1.039 reglas de diseño.
+
+El PNG original sigue en `storage/branding/logo-horizontal.png` y su ruta queda
+anotada en `logo_archivo`, para poder rehacer el data URI si algún día cambia.

@@ -29,7 +29,7 @@
   'use strict';
 
   // Para que revision.html pueda decir qué versión está sirviendo el servidor.
-  window.__AGRO_VERSION = '2026-10-20-3';
+  window.__AGRO_VERSION = '2026-10-20-4';
   'use strict';
 
   var CLAVE_CARRITO = 'agro_cart';
@@ -115,6 +115,7 @@
   // El número y el usuario de Instagram salen de los mismos ajustes que usa la
   // aplicación, para que nada apunte a un sitio distinto del suyo.
   var usuarioIg = null;
+  var logoDeAjustes = null;
 
   function cargarAjustes() {
     return fetch(raiz() + 'data/settings.json', { cache: 'no-cache' })
@@ -130,8 +131,9 @@
           })
           .filter(function (n) { return n.numero; });
         usuarioIg = ((s && s.instagram) || '').replace(/^@/, '').trim() || null;
+        logoDeAjustes = (s && s.logo_url) || null;
       })
-      .catch(function () { numeros = []; usuarioIg = null; });
+      .catch(function () { numeros = []; usuarioIg = null; logoDeAjustes = null; });
   }
 
   // --- 2. «Solicitar cotización» con el producto puesto ---------------------
@@ -446,6 +448,27 @@
   if (document.readyState === 'complete') setTimeout(rescatarEstilos, 0);
   else window.addEventListener('load', function () { setTimeout(rescatarEstilos, 300); });
 
+  // --- 7. Logotipo: el de los ajustes manda ---------------------------------
+  //
+  // El logotipo nuevo viaja dentro de data/settings.json como data URI, no como
+  // archivo suelto: así no depende de que una subida lo haya dejado en su sitio
+  // ni de que el servidor lo sirva. Aun así la aplicación puede haber pintado
+  // otro —porque guardó el anterior, porque la red de seguridad de arriba saltó
+  // antes de tiempo—, así que al terminar se le pone el que dicen los ajustes.
+
+  function corregirLogo() {
+    if (!logoDeAjustes) return;
+    var imgs = document.querySelectorAll('header img, nav img, footer img');
+    Array.prototype.forEach.call(imgs, function (img) {
+      var src = img.getAttribute('src') || '';
+      if (!/logo|branding/i.test(src) && !/agroforestal/i.test(img.alt || '')) return;
+      if (src === logoDeAjustes) return;
+      delete img.dataset.reserva;          // que la red de seguridad pueda volver a actuar
+      img.setAttribute('src', logoDeAjustes);
+      img.style.display = '';
+    });
+  }
+
   // --- arranque -------------------------------------------------------------
 
   function iniciar() {
@@ -457,6 +480,7 @@
     cargarAjustes().then(function () {
       revisarBoton();
       enlazarInstagram();
+      corregirLogo();
       // El botón de la aplicación aparece y desaparece al cambiar de ruta. El
       // observador se dispara muchísimo en una SPA, así que se agrupa por fotograma.
       var pendiente = false;
@@ -469,6 +493,7 @@
           montarBuscadorDeMarcas();   // el catálogo se monta y desmonta al navegar
           compactarCategorias();
           enlazarInstagram();
+          corregirLogo();
         });
       }
       new MutationObserver(revisarPronto).observe(document.body, { childList: true, subtree: true });
