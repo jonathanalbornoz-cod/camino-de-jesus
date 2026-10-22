@@ -308,7 +308,7 @@
                 <label class="text-xs font-bold text-gray-400 uppercase tracking-widest">Adjuntos <span class="ml-2 text-gray-600" x-text="(currentTask.attachments || []).length"></span></label>
                 <label class="cursor-pointer bg-white/5 hover:bg-white/10 p-2 rounded-lg transition-colors">
                     <i class="fas fa-plus text-[10px]"></i>
-                    <input type="file" class="hidden" @change="uploadFile($event)">
+                    <input type="file" multiple class="hidden" @change="uploadFile($event)">
                 </label>
             </div>
             

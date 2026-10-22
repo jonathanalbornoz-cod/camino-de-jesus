@@ -525,20 +525,22 @@
                     this.newSubtaskTitle = '';
                 },
                 async uploadFile(e) {
-                    const file = e.target.files[0];
-                    if (!file || !this.currentTask.id) return;
+                    const files = Array.from(e.target.files || []);
+                    if (!files.length || !this.currentTask.id) return;
                     this.isUploading = true;
-                    const formData = new FormData();
-                    formData.append('file', file);
                     try {
-                        const res = await fetch(`{{ url('/subtasks') }}/${this.currentTask.id}/attachments`, {
-                            method: 'POST',
-                            headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json' },
-                            body: formData
-                        });
-                        const data = await res.json();
-                        if (!this.currentTask.attachments) this.currentTask.attachments = [];
-                        this.currentTask.attachments.push(data);
+                        for (const file of files) {
+                            const formData = new FormData();
+                            formData.append('file', file);
+                            const res = await fetch(`{{ url('/subtasks') }}/${this.currentTask.id}/attachments`, {
+                                method: 'POST',
+                                headers: { 'X-CSRF-TOKEN': '{{ csrf_token() }}', 'Accept': 'application/json' },
+                                body: formData
+                            });
+                            const data = await res.json();
+                            if (!this.currentTask.attachments) this.currentTask.attachments = [];
+                            this.currentTask.attachments.push(data);
+                        }
                     } catch (e) { console.error(e); } finally { this.isUploading = false; e.target.value = ''; }
                 },
                 async deleteFile(id) {
