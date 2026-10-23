@@ -81,6 +81,17 @@
         <p>${x.texto}</p>
       </article>`).join('');
 
+    // Aliados: la sección entera se esconde si no hay ninguno, para que no
+    // quede un título suelto sobre un espacio vacío.
+    $('#aliados').hidden = !ALIADOS.length;
+    $('#aliados-lista').innerHTML = ALIADOS.map((a) => {
+      const logo = `<img src="${escapar(a.imagen)}" width="600" height="600" loading="lazy"
+                         alt="Logotipo de ${escapar(a.nombre)}">`;
+      return `<li class="aliado">${a.url
+        ? `<a href="${escapar(a.url)}" target="_blank" rel="noopener">${logo}</a>`
+        : logo}</li>`;
+    }).join('');
+
     if (MARCA.mapaEmbed) {
       $('#mapa').hidden = false;
       $('#mapa').innerHTML =

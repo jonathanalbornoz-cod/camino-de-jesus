@@ -384,6 +384,21 @@ h1 em { font-style: italic; color: var(--dorado); }
 .red strong { font-size: .95rem; color: var(--tinta); }
 .red small { font-size: .85rem; color: var(--tinta-suave); }
 
+/* ---------- Aliados ---------- */
+/* Los logos llegan ya cuadrados y con su propio fondo (dos en blanco, uno en
+   negro), así que la tarjeta no pinta fondo: sólo el borde dorado y el radio
+   que llevan las demás fotos de la página. */
+.aliados { padding: clamp(2.4rem, 4.5vw, 3.4rem) 0; background: var(--blanco); text-align: center; }
+.aliados__titulo { font-size: clamp(1.3rem, 2.6vw, 1.75rem); margin-bottom: 1.6rem; }
+.aliados__lista { list-style: none; display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(1rem, 3vw, 2rem); }
+.aliado { width: clamp(142px, 22vw, 196px); }
+.aliado img {
+  display: block; width: 100%; height: auto; aspect-ratio: 1;
+  border-radius: var(--radio-g); border: 3px solid var(--dorado); box-shadow: var(--sombra);
+  transition: transform .15s ease, box-shadow .15s ease;
+}
+.aliado a:hover img { transform: translateY(-3px); box-shadow: var(--sombra-alta); }
+
 /* ---------- Pie ---------- */
 .pie { background: var(--vino); color: rgba(247, 238, 224, .78); padding: 2.8rem 0 1.4rem; }
 .pie__grid { display: grid; grid-template-columns: 1fr .7fr 1.1fr; gap: 2rem; }

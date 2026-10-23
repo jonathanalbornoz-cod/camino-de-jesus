@@ -61,6 +61,17 @@ const REDES = [
 ];
 
 /* La franja de sellos bajo la portada */
+/*
+ * Empresas aliadas. Los logos van al final, antes del pie. Para agregar una
+ * se copia su logo a imagenes/aliados/ y se añade aquí; si alguna vez tienen
+ * sitio o red, se le pone «url» y el logo se vuelve enlace solo.
+ */
+const ALIADOS = [
+  { nombre: 'Colita Qbana Pilón',            imagen: 'imagenes/aliados/colita-qbana-pilon.webp' },
+  { nombre: '2 Grados · sal, fruta y helados', imagen: 'imagenes/aliados/2-grados.webp' },
+  { nombre: 'Asados Chimi Paisa',            imagen: 'imagenes/aliados/asados-chimi-paisa.webp' },
+];
+
 const SELLOS = [
   { icono: 'catalogo', titulo: 'Portafolio amplio',    texto: 'Más de 15 categorías en un solo lugar.' },
   { icono: 'mayor',    titulo: '+20 años de experiencia', texto: 'Somos su aliado.' },

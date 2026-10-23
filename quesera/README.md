@@ -73,6 +73,14 @@ y los demás atributos no se copian: los pone `app.js` y el tamaño sale de
 
 **Redes** — pegar la URL completa del perfil. Los iconos aparecen solos; los vacíos no salen.
 
+**Empresas que nos apoyan** — la lista `ALIADOS` de `datos.js`. Para sumar una se copia
+su logo a `imagenes/aliados/` y se agrega una línea con `nombre` e `imagen`; si tiene sitio
+o red social se le pone `url` y el logo se vuelve enlace. Los logos se normalizan antes de
+entrar, con `tools/preparar-aliados.py`: recorta el margen del color de fondo, vuelve a
+cuadrar con ese mismo color y deja un 7 % de aire, para que los tres pesen igual dentro de
+su tarjeta aunque lleguen con fondos y proporciones distintas (dos en blanco, uno en negro).
+La sección se esconde sola si la lista queda vacía.
+
 **Presentaciones** — el campo `presentacion` de cada producto. Si está vacío la tarjeta no
 muestra esa línea, así que no se ve rota, pero conviene llenarlas: es lo que el cliente
 pregunta por WhatsApp. Faltan sobre todo los quesos (¿libra, kilo, bloque?), las salsas sin
