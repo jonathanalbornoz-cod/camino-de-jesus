@@ -73,7 +73,8 @@ y los demás atributos no se copian: los pone `app.js` y el tamaño sale de
 
 **Redes** — pegar la URL completa del perfil. Los iconos aparecen solos; los vacíos no salen.
 
-**Empresas que nos apoyan** — la lista `ALIADOS` de `datos.js`. Para sumar una se copia
+**Nuestros clientes** — la lista `ALIADOS` de `datos.js` (el título de la sección cambió
+después de escribir el código; la lista conservó el nombre con que nació). Para sumar una se copia
 su logo a `imagenes/aliados/` y se agrega una línea con `nombre` e `imagen`; si tiene sitio
 o red social se le pone `url` y el logo se vuelve enlace. Los logos se normalizan antes de
 entrar, con `tools/preparar-aliados.py`: recorta el margen del color de fondo, vuelve a

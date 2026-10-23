@@ -62,9 +62,11 @@ const REDES = [
 
 /* La franja de sellos bajo la portada */
 /*
- * Empresas aliadas. Los logos van al final, antes del pie. Para agregar una
- * se copia su logo a imagenes/aliados/ y se añade aquí; si alguna vez tienen
- * sitio o red, se le pone «url» y el logo se vuelve enlace solo.
+ * Los negocios que le compran a la quesera. En pantalla la sección se llama
+ * «Nuestros clientes»; en el código quedó como ALIADOS, que fue el nombre con
+ * que nació. Los logos van al final, antes del pie: para agregar uno se copia
+ * su imagen a imagenes/aliados/ y se añade aquí; si el negocio tiene sitio o
+ * red, se le pone «url» y el logo se vuelve enlace solo.
  */
 const ALIADOS = [
   { nombre: 'Colita Qbana Pilón',            imagen: 'imagenes/aliados/colita-qbana-pilon.webp' },
