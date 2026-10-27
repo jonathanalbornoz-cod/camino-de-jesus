@@ -38,5 +38,7 @@ class DatabaseSeeder extends Seeder
             'category_id' => $category->id,
             'brand_id' => $brand->id,
         ]);
+
+        $this->call(CatalogoSeeder::class);
     }
 }

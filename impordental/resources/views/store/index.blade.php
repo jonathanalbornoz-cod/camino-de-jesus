@@ -66,9 +66,18 @@
         </div>
 
         @if($products->count() > 0)
+            @if($categories->count() > 1)
+            <div class="category-filter" role="group" aria-label="Filtrar por categoría">
+                <button type="button" class="filter-chip is-active" data-filter="todas">Todas <span>{{ $products->count() }}</span></button>
+                @foreach($categories as $category)
+                <button type="button" class="filter-chip" data-filter="{{ $category->slug }}">{{ $category->name }} <span>{{ $products->where('category_id', $category->id)->count() }}</span></button>
+                @endforeach
+            </div>
+            @endif
+
             <div class="product-grid" id="productGrid">
                 @foreach($products as $product)
-                <div class="product-card">
+                <div class="product-card" data-category="{{ $product->category->slug ?? '' }}">
                     <div class="product-image">
                         @if($product->main_image)
                             <img src="{{ Storage::url($product->main_image) }}" alt="{{ $product->name }}">
@@ -82,14 +91,32 @@
                         
                         <div class="product-footer">
                             <div>
-                                <span class="product-price">${{ number_format($product->price, 0, ',', '.') }}</span>
+                                @if($product->price > 0)
+                                    <span class="product-price">${{ number_format($product->price, 0, ',', '.') }}</span>
+                                @else
+                                    <span class="product-price product-price--consultar">Precio a consultar</span>
+                                @endif
                             </div>
-                            <a href="#" class="btn-card">Ver Detalles</a>
+                            <a href="#" class="btn-card">{{ $product->price > 0 ? 'Ver Detalles' : 'Cotizar' }}</a>
                         </div>
                     </div>
                 </div>
                 @endforeach
             </div>
+
+            <script>
+                document.querySelectorAll('.filter-chip').forEach(function (chip) {
+                    chip.addEventListener('click', function () {
+                        var filtro = chip.dataset.filter;
+                        document.querySelectorAll('.filter-chip').forEach(function (c) {
+                            c.classList.toggle('is-active', c === chip);
+                        });
+                        document.querySelectorAll('#productGrid .product-card').forEach(function (card) {
+                            card.hidden = filtro !== 'todas' && card.dataset.category !== filtro;
+                        });
+                    });
+                });
+            </script>
         @else
             <div class="empty-state" id="emptyState">
                 <div class="empty-icon">🦷</div>
