@@ -111,8 +111,9 @@ hPanel → **Rendimiento** → **Caché** / **CDN** → **Purgar todo**.
 
 ## Cambios futuros (editar `index.html` con clic derecho → **Editar**)
 
-- **Fecha y horario**: busque `Fecha y horario: pregúntanos por WhatsApp`
-  (las piezas oficiales no traen fecha).
+- **Fecha**: el congreso es el miércoles 2 de diciembre de 2026; aparece en la portada,
+  en los datos clave, en la inscripción y en el lugar (busque `2 de diciembre`).
+- **Horario**: cuando esté confirmado, busque `Horario: pregúntanos por WhatsApp`.
 - **WhatsApp**: `var numero = '573127935907';` al final del archivo
   (código de país + número, sin `+` ni espacios) y el texto visible `+57 (312) 793-5907`.
 - **Otro QR**: reemplace `img/qr-pago.png` y `img/qr-pago-bancolombia.jpg` con el mismo nombre.

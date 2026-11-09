@@ -104,6 +104,24 @@ p { margin: 0; }
 }
 .hero__grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 32px; align-items: center; position: relative; z-index: 1; }
 
+/* Fecha del congreso, como hoja de calendario */
+.fecha-hero { display: flex; align-items: center; gap: 14px; margin: 0 0 22px; }
+.fecha-hero__dia {
+  display: grid; place-items: center; flex: none;
+  grid-template-rows: 1fr auto;
+  width: 68px; height: 72px; border-radius: 14px; overflow: hidden;
+  background: #fff; border: 2px solid var(--azul);
+  box-shadow: var(--sombra-suave); line-height: 1;
+}
+.fecha-hero__dia b { font-size: 34px; font-weight: 900; letter-spacing: -.04em; color: var(--marino); align-self: center; }
+.fecha-hero__dia span {
+  align-self: stretch; width: 100%; display: grid; place-items: center;
+  background: var(--azul); color: #fff; font-size: 13px; font-weight: 800; letter-spacing: .14em; padding: 5px 0;
+}
+.fecha-hero__texto { display: grid; gap: 3px; font-size: 19px; font-weight: 800; letter-spacing: -.02em; color: var(--marino); line-height: 1.2; }
+.fecha-hero__texto small { font-size: 14px; font-weight: 500; letter-spacing: 0; color: var(--texto-suave); }
+.dato__fecha { font-size: 22px; font-weight: 800; letter-spacing: -.03em; color: var(--marino) !important; line-height: 1.15; }
+
 .titulo { text-transform: uppercase; color: var(--marino); letter-spacing: -.055em; line-height: .9; }
 .titulo span { display: block; }
 .titulo__latam { font-weight: 900; font-size: clamp(64px, 10vw, 128px); }
