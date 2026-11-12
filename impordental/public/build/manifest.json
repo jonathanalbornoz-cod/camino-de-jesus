@@ -8,6 +8,15 @@
       "app.css"
     ]
   },
+  "resources/css/tienda.css": {
+    "file": "assets/tienda-Df-E3nm8.css",
+    "src": "resources/css/tienda.css",
+    "isEntry": true,
+    "name": "tienda",
+    "names": [
+      "tienda.css"
+    ]
+  },
   "resources/js/app.js": {
     "file": "assets/app-BuG9aa18.js",
     "name": "app",

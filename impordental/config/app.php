@@ -16,6 +16,14 @@ return [
     'name' => env('APP_NAME', 'Laravel'),
 
     /*
+    | Número de WhatsApp de la tienda (código de país + número, sin + ni
+    | espacios, p. ej. 573001234567). Vacío: los botones abren WhatsApp para
+    | que el visitante elija el contacto.
+    */
+
+    'whatsapp' => env('WHATSAPP_NUMBER', ''),
+
+    /*
     |--------------------------------------------------------------------------
     | Application Environment
     |--------------------------------------------------------------------------
