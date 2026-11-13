@@ -99,6 +99,25 @@ Importe `impordental_database.sql` (está en los ZIP, no en el repositorio) desd
 hPanel → **phpMyAdmin** → **Importar** en lugar de `migrate --seed`. Trae el mismo
 producto de ejemplo y el usuario admin original.
 
+## Portal de clientes (cuentas, cotizaciones y contacto)
+
+- `/registro` y `/ingresar`: los clientes crean su cuenta con correo y contraseña.
+  No entran al panel: `/admin` solo admite usuarios con `is_admin`.
+- El catálogo tiene el botón «Cotizar» en cada producto. Los productos se juntan en
+  `/cotizacion` (también sin cuenta) y, al enviarla, quedan como una cotización del
+  cliente. El cliente ve el estado y la respuesta en `/mi-cuenta`.
+- Formulario de contacto al final de la portada.
+- En `/admin` aparecen **Cotizaciones** (para responder y cambiar el estado) y
+  **Mensajes de contacto**, con un contador de pendientes y de mensajes sin leer.
+
+Al publicarlo hay que correr `php artisan migrate --force` (crea las tablas
+`quotes`, `quote_items` y `contact_messages` y agrega teléfono, empresa y ciudad a
+`users`) y poner `APP_LOCALE=es` en el `.env` para que los mensajes de error salgan
+en español. `WHATSAPP_NUMBER` (opcional) muestra el botón flotante de WhatsApp.
+
+Todavía no hay recuperación de contraseña ni avisos por correo: necesitan configurar
+el correo saliente (`MAIL_*` en el `.env`).
+
 ## Pendientes del sitio original
 
 - **Datos de contacto de ejemplo** en el pie de página: «Calle Comercial #45-67,

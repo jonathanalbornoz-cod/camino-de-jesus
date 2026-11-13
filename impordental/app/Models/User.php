@@ -17,7 +17,12 @@ class User extends Authenticatable implements FilamentUser
 
     public function canAccessPanel(Panel $panel): bool
     {
-        return $this->is_admin;
+        return (bool) $this->is_admin;
+    }
+
+    public function quotes()
+    {
+        return $this->hasMany(Quote::class);
     }
 
     /**
@@ -25,11 +30,15 @@ class User extends Authenticatable implements FilamentUser
      *
      * @var list<string>
      */
+    // is_admin no es asignable en masa: un cliente que se registra en la tienda
+    // nunca debe poder darse acceso al panel.
     protected $fillable = [
         'name',
         'email',
+        'phone',
+        'company',
+        'city',
         'password',
-        'is_admin',
     ];
 
     /**
@@ -52,6 +61,7 @@ class User extends Authenticatable implements FilamentUser
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'is_admin' => 'boolean',
         ];
     }
 }

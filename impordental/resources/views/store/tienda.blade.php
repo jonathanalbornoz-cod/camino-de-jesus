@@ -1,8 +1,6 @@
 @extends('layouts.tienda')
 
 @php
-    $waBase = 'https://wa.me/'.(config('app.whatsapp') ?: '');
-
     // Íconos de línea (24×24) para cada categoría; las que no estén usan el diente.
     $iconos = [
         'resinas' => '<path d="M14 4l6 6-9 9H5v-6l9-9z"/><path d="M12 6l6 6"/>',
@@ -20,65 +18,79 @@
 
 @section('content')
 {{-- Portada --}}
-<section class="t-hero">
-    <div class="t-wrap t-hero__grid">
-        <div class="t-hero__copy">
-            <span class="t-eyebrow">Distribuidor odontológico · Colombia</span>
-            <h1>Todo lo que tu clínica necesita, <em>de las marcas en las que confías.</em></h1>
-            <p>Resinas, adhesivos, cementos, aclaramiento y equipos de BISCO, FGM, Ivoclar, 3M, Ultradent y NSK, con asesoría de especialistas y envío a todo el país.</p>
+<section class="hero">
+    <div class="wrap hero__grid">
+        <div class="hero__copy">
+            <span class="kicker"><i></i> Equipos y materiales odontológicos</span>
+            <h1>La odontología del futuro <span class="grad">empieza con el material correcto.</span></h1>
+            <p class="hero__lead">Distribuimos BISCO, FGM, Ivoclar, 3M, Ultradent y NSK. Crea tu cuenta, arma tu cotización en minutos y recibe respuesta de un asesor especializado.</p>
 
-            <div class="t-hero__actions">
-                <a href="#catalogo" class="t-btn t-btn--primary">Ver catálogo</a>
-                <a href="{{ $waBase }}?text={{ rawurlencode('Hola Impordental, quiero una cotización para mi clínica.') }}" class="t-btn t-btn--ghost-light" target="_blank" rel="noopener">Cotizar por WhatsApp</a>
+            <div class="hero__actions">
+                <a href="#catalogo" class="btn btn--primary">
+                    Explorar catálogo
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+                </a>
+                @guest
+                    <a href="{{ route('registro') }}" class="btn btn--glass">Crear cuenta gratis</a>
+                @else
+                    <a href="{{ route('cotizacion') }}" class="btn btn--glass">Ver mi cotización</a>
+                @endguest
             </div>
 
-            <dl class="t-hero__stats">
+            <dl class="hero__stats">
                 <div><dt>{{ $products->count() }}</dt><dd>productos</dd></div>
-                <div><dt>{{ $brands->count() }}</dt><dd>marcas</dd></div>
+                <div><dt>{{ $brands->count() }}</dt><dd>marcas líderes</dd></div>
                 <div><dt>{{ $categories->count() }}</dt><dd>categorías</dd></div>
             </dl>
         </div>
 
-        @if($destacados->count())
-        <div class="t-hero__showcase" aria-hidden="true">
+        <div class="hero__visual" aria-hidden="true">
+            <div class="orb">
+                <span class="orb__ring orb__ring--1"></span>
+                <span class="orb__ring orb__ring--2"></span>
+                <span class="orb__core">
+                    <svg viewBox="0 0 64 64" fill="none"><path d="M21 7C10.5 7 5.6 15 6.8 24c1 7.6 4.2 11.8 5.3 19.6C13.2 51.8 15.4 58 19.6 58c4.3 0 5.4-9.6 8.6-13.6 1.3-1.6 2.5-2.4 3.8-2.4s2.5.8 3.8 2.4c3.2 4 4.3 13.6 8.6 13.6 4.2 0 6.4-6.2 7.5-14.4 1.1-7.8 4.3-12 5.3-19.6C58.4 15 53.5 7 43 7c-5 0-7.6 3.2-11 3.2S26 7 21 7Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+                </span>
+            </div>
             @foreach($destacados as $i => $p)
-            <figure class="t-hero__card t-hero__card--{{ $i + 1 }}">
-                <img src="{{ Storage::url($p->main_image) }}" alt="">
-                <figcaption><span>{{ $p->brand->name ?? '' }}</span>{{ Str::limit($p->name, 32) }}</figcaption>
+            <figure class="float-card float-card--{{ $i + 1 }}">
+                <span class="float-card__img"><img src="{{ Storage::url($p->main_image) }}" alt=""></span>
+                <figcaption><small>{{ $p->brand->name ?? '' }}</small>{{ Str::limit($p->name, 30) }}</figcaption>
             </figure>
             @endforeach
         </div>
-        @endif
     </div>
 </section>
 
 {{-- Marcas --}}
-<section class="t-brands" id="marcas" aria-label="Marcas que distribuimos">
-    <div class="t-wrap">
-        <p class="t-brands__label">Marcas que distribuimos</p>
-        <ul class="t-brands__list">
-            @foreach($brands as $brand)
-                <li>{{ $brand }}</li>
-            @endforeach
-        </ul>
+<section class="brands" aria-label="Marcas que distribuimos">
+    <div class="brands__track">
+        @foreach([1, 2] as $vuelta)
+            <ul @if($vuelta === 2) aria-hidden="true" @endif>
+                @foreach($brands as $brand)
+                    <li>{{ $brand }}</li>
+                @endforeach
+            </ul>
+        @endforeach
     </div>
 </section>
 
 {{-- Categorías --}}
-<section class="t-section" id="categorias">
-    <div class="t-wrap">
-        <div class="t-section__head">
-            <span class="t-eyebrow t-eyebrow--dark">Explora por categoría</span>
-            <h2>Encuentra rápido lo que buscas</h2>
-        </div>
-        <div class="t-cats">
+<section class="section" id="categorias">
+    <div class="wrap">
+        <header class="section__head">
+            <span class="kicker"><i></i> Categorías</span>
+            <h2>Todo tu consultorio, <span class="grad">en un solo lugar.</span></h2>
+        </header>
+        <div class="cats">
             @foreach($categories as $category)
-            <a href="#catalogo" class="t-cat" data-go-filter="{{ $category->slug }}">
-                <span class="t-cat__icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">{!! $iconos[$category->slug] ?? $diente !!}</svg>
+            <a href="#catalogo" class="cat glass" data-go-filter="{{ $category->slug }}">
+                <span class="cat__icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">{!! $iconos[$category->slug] ?? $diente !!}</svg>
                 </span>
-                <span class="t-cat__name">{{ $category->name }}</span>
-                <span class="t-cat__count">{{ $category->products_count }} {{ $category->products_count === 1 ? 'producto' : 'productos' }}</span>
+                <span class="cat__name">{{ $category->name }}</span>
+                <span class="cat__count">{{ $category->products_count }} {{ $category->products_count === 1 ? 'producto' : 'productos' }}</span>
+                <svg class="cat__arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg>
             </a>
             @endforeach
         </div>
@@ -86,99 +98,145 @@
 </section>
 
 {{-- Catálogo --}}
-<section class="t-section t-section--tint" id="catalogo">
-    <div class="t-wrap">
-        <div class="t-section__head t-section__head--row">
+<section class="section" id="catalogo">
+    <div class="wrap">
+        <header class="section__head section__head--row">
             <div>
-                <span class="t-eyebrow t-eyebrow--dark">Catálogo</span>
-                <h2>Instrumental, insumos y equipos</h2>
+                <span class="kicker"><i></i> Catálogo</span>
+                <h2>Agrega productos <span class="grad">y cotiza en línea.</span></h2>
             </div>
-            <label class="t-search">
+            <label class="search glass">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
                 <input type="search" id="buscar" placeholder="Buscar producto o marca" autocomplete="off" aria-label="Buscar producto o marca">
             </label>
-        </div>
+        </header>
 
         @if($products->count())
-            <div class="t-chips" role="group" aria-label="Filtrar por categoría">
-                <button type="button" class="t-chip is-active" data-filter="todas">Todas <span>{{ $products->count() }}</span></button>
+            <div class="chips" role="group" aria-label="Filtrar por categoría">
+                <button type="button" class="chip is-active" data-filter="todas">Todas <span>{{ $products->count() }}</span></button>
                 @foreach($categories as $category)
-                <button type="button" class="t-chip" data-filter="{{ $category->slug }}">{{ $category->name }} <span>{{ $category->products_count }}</span></button>
+                <button type="button" class="chip" data-filter="{{ $category->slug }}">{{ $category->name }} <span>{{ $category->products_count }}</span></button>
                 @endforeach
             </div>
 
-            <div class="t-grid" id="productGrid">
+            <div class="grid" id="productGrid">
                 @foreach($products as $product)
-                <article class="t-card" data-category="{{ $product->category->slug ?? '' }}" data-search="{{ Str::lower(Str::ascii($product->name.' '.($product->brand->name ?? ''))) }}">
-                    <div class="t-card__media">
+                <article class="card" data-category="{{ $product->category->slug ?? '' }}" data-search="{{ Str::lower(Str::ascii($product->name.' '.($product->brand->name ?? ''))) }}">
+                    <div class="card__media">
                         @if($product->main_image)
                             <img src="{{ Storage::url($product->main_image) }}" alt="{{ $product->name }}" loading="lazy">
                         @else
-                            <svg class="t-card__placeholder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{!! $diente !!}</svg>
-                        @endif
-                        @if($product->category)
-                            <span class="t-card__tag">{{ $product->category->name }}</span>
+                            <svg class="card__placeholder" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">{!! $diente !!}</svg>
                         @endif
                     </div>
-                    <div class="t-card__body">
-                        <span class="t-card__brand">{{ $product->brand->name ?? 'Impordental' }}</span>
-                        <h3 class="t-card__name">{{ $product->name }}</h3>
-                        <div class="t-card__foot">
+                    <div class="card__body">
+                        <div class="card__meta">
+                            <span class="card__brand">{{ $product->brand->name ?? 'ImporDental' }}</span>
+                            @if($product->category)<span class="card__cat">{{ $product->category->name }}</span>@endif
+                        </div>
+                        <h3 class="card__name">{{ $product->name }}</h3>
+                        <div class="card__foot">
                             @if($product->price > 0)
-                                <span class="t-card__price">${{ number_format($product->price, 0, ',', '.') }}</span>
+                                <span class="card__price">${{ number_format($product->price, 0, ',', '.') }}</span>
                             @else
-                                <span class="t-card__price t-card__price--ask">Precio a consultar</span>
+                                <span class="card__price card__price--ask">Precio a cotizar</span>
                             @endif
-                            <a href="{{ $waBase }}?text={{ rawurlencode('Hola Impordental, quiero cotizar: '.$product->name.' ('.($product->brand->name ?? '').')') }}" class="t-card__cta" target="_blank" rel="noopener" aria-label="Cotizar {{ $product->name }} por WhatsApp">
-                                Cotizar
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
-                            </a>
+                            <form method="POST" action="{{ route('cotizacion.agregar', $product) }}" data-add-quote>
+                                @csrf
+                                <button type="submit" class="card__add" aria-label="Agregar {{ $product->name }} a la cotización">
+                                    <svg class="i-plus" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" aria-hidden="true"><path d="M12 5v14M5 12h14"/></svg>
+                                    <svg class="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12l5 5 9-10"/></svg>
+                                    <span>Cotizar</span>
+                                </button>
+                            </form>
                         </div>
                     </div>
                 </article>
                 @endforeach
             </div>
-            <p class="t-empty" id="sinResultados" hidden>No encontramos productos con esa búsqueda. Escríbenos y te ayudamos a conseguirlo.</p>
+            <p class="empty" id="sinResultados" hidden>No encontramos productos con esa búsqueda. <a href="#contacto">Escríbenos</a> y te ayudamos a conseguirlo.</p>
         @else
-            <p class="t-empty">Aún no hay productos en el catálogo. Ingresa al <a href="/admin">portal profesional</a> para registrarlos.</p>
+            <p class="empty">Aún no hay productos en el catálogo.</p>
         @endif
     </div>
 </section>
 
-{{-- Ventajas --}}
-<section class="t-section">
-    <div class="t-wrap t-perks">
-        <div class="t-perk">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="1" y="6" width="14" height="11" rx="1"/><path d="M15 10h4l3 3v4h-7z"/><circle cx="6" cy="19" r="2"/><circle cx="18" cy="19" r="2"/></svg>
-            <h3>Envío nacional</h3>
-            <p>Despachamos a clínicas y consultorios en toda Colombia.</p>
-        </div>
-        <div class="t-perk">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M9 12l2 2 4-4"/></svg>
-            <h3>Productos originales</h3>
-            <p>Insumos con garantía oficial de las marcas que distribuimos.</p>
-        </div>
-        <div class="t-perk">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-            <h3>Asesoría especializada</h3>
-            <p>Te ayudamos a elegir el material indicado para cada caso.</p>
-        </div>
-        <div class="t-perk">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
-            <h3>Pago seguro</h3>
-            <p>Compra con confianza, con pagos protegidos de principio a fin.</p>
-        </div>
+{{-- Cómo funciona --}}
+<section class="section" id="como-funciona">
+    <div class="wrap">
+        <header class="section__head section__head--center">
+            <span class="kicker"><i></i> Cómo cotizar</span>
+            <h2>Tres pasos. <span class="grad">Cero complicaciones.</span></h2>
+        </header>
+        <ol class="steps">
+            <li class="step glass">
+                <span class="step__num">01</span>
+                <h3>Crea tu cuenta</h3>
+                <p>Regístrate con tu correo y una contraseña. Solo toma un minuto.</p>
+            </li>
+            <li class="step glass">
+                <span class="step__num">02</span>
+                <h3>Arma tu cotización</h3>
+                <p>Agrega productos del catálogo, ajusta cantidades y déjanos tus comentarios.</p>
+            </li>
+            <li class="step glass">
+                <span class="step__num">03</span>
+                <h3>Recibe la respuesta</h3>
+                <p>Un asesor revisa tu solicitud y te responde con precios y disponibilidad en tu cuenta.</p>
+            </li>
+        </ol>
     </div>
 </section>
 
-{{-- Llamado final --}}
-<section class="t-wrap">
-    <div class="t-cta">
-        <div>
-            <h2>¿Necesitas una cotización para tu clínica?</h2>
-            <p>Envíanos tu lista de productos y te respondemos con precios y disponibilidad.</p>
+{{-- Contacto --}}
+<section class="section" id="contacto">
+    <div class="wrap contact">
+        <div class="contact__info">
+            <span class="kicker"><i></i> Contacto</span>
+            <h2>Hablemos de <span class="grad">tu clínica.</span></h2>
+            <p>¿Buscas un producto que no está en el catálogo o necesitas asesoría técnica? Escríbenos y un especialista te responde.</p>
+            <ul class="contact__list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-5.5 7-11a7 7 0 0 0-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Calle Comercial #45-67, Bogotá</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg>+57 (601) 123 4567</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>contacto@impordental.com</li>
+            </ul>
         </div>
-        <a href="{{ $waBase }}?text={{ rawurlencode('Hola Impordental, quiero enviar mi lista de productos para cotizar.') }}" class="t-btn t-btn--light" target="_blank" rel="noopener">Hablar con un asesor</a>
+
+        <form method="POST" action="{{ route('contacto') }}" class="form glass">
+            @csrf
+            @if(session('contacto_ok'))
+                <div class="flash flash--inline" role="status">{{ session('contacto_ok') }}</div>
+            @endif
+            <div class="form__row">
+                <label class="field">
+                    <span>Nombre</span>
+                    <input type="text" name="name" value="{{ old('name', auth()->user()->name ?? '') }}" required maxlength="255" autocomplete="name">
+                    @error('name')<small class="field__error">{{ $message }}</small>@enderror
+                </label>
+                <label class="field">
+                    <span>Correo</span>
+                    <input type="email" name="email" value="{{ old('email', auth()->user()->email ?? '') }}" required maxlength="255" autocomplete="email">
+                    @error('email')<small class="field__error">{{ $message }}</small>@enderror
+                </label>
+            </div>
+            <div class="form__row">
+                <label class="field">
+                    <span>Teléfono <em>(opcional)</em></span>
+                    <input type="tel" name="phone" value="{{ old('phone', auth()->user()->phone ?? '') }}" maxlength="30" autocomplete="tel">
+                </label>
+                <label class="field">
+                    <span>Asunto <em>(opcional)</em></span>
+                    <input type="text" name="subject" value="{{ old('subject') }}" maxlength="255">
+                </label>
+            </div>
+            <label class="field">
+                <span>Mensaje</span>
+                <textarea name="message" rows="5" required maxlength="3000">{{ old('message') }}</textarea>
+                @error('message')<small class="field__error">{{ $message }}</small>@enderror
+            </label>
+            <label class="hp" aria-hidden="true">No llenar <input type="text" name="website" tabindex="-1" autocomplete="off"></label>
+            <button type="submit" class="btn btn--primary btn--block">Enviar mensaje</button>
+        </form>
     </div>
 </section>
 
@@ -186,40 +244,31 @@
 (function () {
     var grid = document.getElementById('productGrid');
     if (!grid) return;
-    var cards = grid.querySelectorAll('.t-card');
-    var chips = document.querySelectorAll('.t-chip');
+    var cards = grid.querySelectorAll('.card');
+    var chips = document.querySelectorAll('.chip');
     var buscar = document.getElementById('buscar');
     var vacio = document.getElementById('sinResultados');
     var filtro = 'todas';
 
-    function normalizar(t) {
-        return t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
-    }
+    function normalizar(t) { return t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, ''); }
 
     function aplicar() {
         var q = normalizar(buscar.value.trim());
         var visibles = 0;
         cards.forEach(function (card) {
-            var ok = (filtro === 'todas' || card.dataset.category === filtro)
-                && (!q || card.dataset.search.indexOf(q) !== -1);
+            var ok = (filtro === 'todas' || card.dataset.category === filtro) && (!q || card.dataset.search.indexOf(q) !== -1);
             card.hidden = !ok;
             if (ok) visibles++;
         });
         vacio.hidden = visibles !== 0;
     }
-
     function elegir(slug) {
         filtro = slug;
         chips.forEach(function (c) { c.classList.toggle('is-active', c.dataset.filter === slug); });
         aplicar();
     }
-
-    chips.forEach(function (chip) {
-        chip.addEventListener('click', function () { elegir(chip.dataset.filter); });
-    });
-    document.querySelectorAll('[data-go-filter]').forEach(function (a) {
-        a.addEventListener('click', function () { elegir(a.dataset.goFilter); });
-    });
+    chips.forEach(function (chip) { chip.addEventListener('click', function () { elegir(chip.dataset.filter); }); });
+    document.querySelectorAll('[data-go-filter]').forEach(function (a) { a.addEventListener('click', function () { elegir(a.dataset.goFilter); }); });
     buscar.addEventListener('input', aplicar);
 })();
 </script>
