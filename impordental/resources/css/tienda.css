@@ -75,12 +75,8 @@ button, input, textarea { font: inherit; color: inherit; }
 .btn--glass:hover { background: rgb(255 255 255 / 0.12); border-color: rgb(186 230 253 / 0.4); }
 
 /* Logotipo */
-.logo { display: inline-flex; align-items: center; gap: 0.6rem; color: var(--white); line-height: 1; }
-.logo__tooth { width: 40px; height: 40px; flex: none; color: var(--white); filter: drop-shadow(0 0 10px rgb(56 189 248 / 0.55)); }
-.logo__text { display: flex; flex-direction: column; gap: 0.32rem; }
-.logo__name { font-family: var(--f-head); font-weight: 600; font-size: 1.45rem; letter-spacing: -0.01em; }
-.logo__name b { font-weight: 600; }
-.logo__tag { font-size: 0.56rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ice); opacity: 0.85; }
+.logo { display: block; width: 150px; height: auto; }
+.foot__brand .logo { width: 230px; }
 
 /* Navegación */
 .nav { position: sticky; top: 0; z-index: 50; padding: 14px 0; transition: background 0.3s; }
@@ -123,7 +119,7 @@ button, input, textarea { font: inherit; color: inherit; }
 .orb__ring { position: absolute; border-radius: 50%; border: 1px solid rgb(56 189 248 / 0.25); }
 .orb__ring--1 { inset: -8%; border-style: dashed; animation: spin 40s linear infinite; }
 .orb__ring--2 { inset: -18%; border-color: rgb(56 189 248 / 0.12); background: conic-gradient(from 0deg, transparent 0 80%, rgb(56 189 248 / 0.5) 92%, transparent 100%); mask: radial-gradient(circle, transparent 69.5%, black 70%, black 70.5%, transparent 71%); animation: spin 12s linear infinite; }
-.orb__core svg { width: 46%; margin: auto; color: var(--white); filter: drop-shadow(0 0 18px rgb(186 230 253 / 0.9)); }
+.orb__logo { width: 74%; height: auto; margin: auto; }
 .orb__core { width: 100%; display: grid; place-items: center; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @keyframes float { 50% { transform: translateY(-14px); } }
@@ -364,8 +360,7 @@ button, input, textarea { font: inherit; color: inherit; }
 @media (max-width: 600px) {
     .wrap { padding-inline: 16px; }
     .nav { padding: 10px 0; }
-    .logo__tooth { width: 32px; height: 32px; }
-    .logo__name { font-size: 1.2rem; }
+    .nav .logo { width: 118px; }
     .nav__quote-label, .nav__login { display: none; }
     .nav__quote { padding: 0.5rem 0.65rem; }
     .nav__actions { gap: 0.5rem; }
