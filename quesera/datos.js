@@ -34,6 +34,15 @@ const MARCA = {
 
   direccion: 'Calle 62B #1A9-250, barrio Chiminangos II',
   ciudad: 'Cali, Colombia',
+
+  // Identificación legal para la página «Legal». La Ley 1581 de 2012 pide
+  // nombre, domicilio, correo y teléfono del responsable, y todo eso ya está
+  // arriba; la razón social y el NIT son opcionales y sólo salen si se llenan.
+  razonSocial: '',
+  nit: '',
+  // Fecha de entrada en vigencia de la política, como la pide el decreto
+  // 1074 de 2015. Si se cambia el texto de la página, se cambia esta fecha.
+  vigenciaLegal: '20 de noviembre de 2026',
   horario: 'Lunes a sábado 7:00 a.m. – 9:00 p.m. · Domingos y lunes festivos 7:00 a.m. – 2:00 p.m.',
 
   // Mapa. Es el embed oficial de la ficha del negocio en Google Maps
@@ -150,12 +159,17 @@ const CATEGORIAS = [
  *   nombre        como va escrito en el pedido de WhatsApp
  *   categoria     un id de CATEGORIAS
  *   marca         opcional; sale como sello sobre la foto
- *   presentacion  opcional; si está vacío la tarjeta no muestra esa línea
+ *   presentacion  gramaje o tamaño; si falta, la tarjeta lo dice en vez
+ *                 de callarlo, para que todas muestren la misma ficha
+ *   cotizacion    true en lo que se corta y se pesa en el mostrador: el
+ *                 precio depende del peso, y la tarjeta lo advierte
  *   descripcion   una línea, corta
  *   imagen        ruta de la foto; vacío = ilustración de la categoría
  *   destacado     true lo sube al comienzo del catálogo
  *
- * SIN PRECIOS: es decisión del brief. El precio se da por WhatsApp.
+ * SIN PRECIOS: es decisión del brief. El precio se da por WhatsApp, y el
+ * catálogo lo dice de frente en su encabezado en vez de dejar al cliente
+ * buscando una cifra que no está.
  *
  * Las presentaciones que están puestas salen del empaque en la foto o del
  * PDF de categorías. Las que faltan las tiene que confirmar el cliente.
@@ -165,26 +179,31 @@ const PRODUCTOS = [
   /* ---------------- Quesos ---------------- */
   {
     id: 'queso-campesino', nombre: 'Queso campesino', categoria: 'quesos',
+    cotizacion: true,
     descripcion: 'Fresco y de sal suave, el de la arepa y el desayuno.',
     presentacion: '250 g · 500 g', imagen: 'imagenes/productos/queso-campesino.webp', destacado: true,
   },
   {
     id: 'queso-cuajada', nombre: 'Queso cuajada', categoria: 'quesos',
+    cotizacion: true,
     descripcion: 'Cuajada fresca, para acompañar con melao o bocadillo.',
     presentacion: '250 g · 500 g', imagen: 'imagenes/productos/queso-cuajada.webp', destacado: true,
   },
   {
     id: 'queso-mozzarella', nombre: 'Queso mozzarella', categoria: 'quesos',
+    cotizacion: true,
     descripcion: 'El que estira en la pizza, la lasaña y el sánduche caliente.',
     presentacion: '250 g · 500 g · 2.500 g', imagen: 'imagenes/productos/queso-mozarella.webp', destacado: true,
   },
   {
     id: 'queso-costeno', nombre: 'Queso costeño', categoria: 'quesos',
+    cotizacion: true,
     descripcion: 'Salado y firme, para rallar sobre el sancocho o el arroz.',
     presentacion: '125 g · 250 g · 500 g · 1.000 g', imagen: 'imagenes/productos/queso-costeno.webp', destacado: false,
   },
   {
     id: 'queso-cheddar', nombre: 'Queso cheddar', categoria: 'quesos',
+    cotizacion: true,
     descripcion: 'En lonjas, para hamburguesas y sánduches.',
     presentacion: '400 g', imagen: 'imagenes/productos/queso-cheddar.webp', destacado: false,
   },
@@ -192,6 +211,7 @@ const PRODUCTOS = [
   /* ---------------- Carnes y embutidos ---------------- */
   {
     id: 'costilla', nombre: 'Costilla ahumada', categoria: 'carnes',
+    cotizacion: true,
     descripcion: 'Ahumada de verdad, lista para hornear o para el asado.',
     presentacion: '', imagen: 'imagenes/productos/costilla-ahumada.webp', destacado: true,
   },
@@ -319,7 +339,7 @@ const PRODUCTOS = [
     id: 'mayonesa-san-jorge', nombre: 'Aderezo de mayonesa', categoria: 'salsas',
     marca: 'San Jorge',
     descripcion: 'La base de la salsa de la casa, en presentación para negocio.',
-    presentacion: '', imagen: 'imagenes/productos/aderezo-mayonesa.webp', destacado: true,
+    presentacion: '3.950 g', imagen: 'imagenes/productos/aderezo-mayonesa.webp', destacado: true,
   },
   {
     id: 'vinagre', nombre: 'Vinagre blanco', categoria: 'salsas',
@@ -368,7 +388,7 @@ const PRODUCTOS = [
     id: 'margarinas', nombre: 'Margarina', categoria: 'reposteria',
     marca: 'Astra',
     descripcion: 'Industrial para pastelería fina: hojaldre, ponqué y panadería.',
-    presentacion: '', imagen: 'imagenes/productos/margarina-astra.webp', destacado: false,
+    presentacion: 'Caja industrial', imagen: 'imagenes/productos/margarina-astra.webp', destacado: false,
   },
   {
     id: 'azucar', nombre: 'Azúcar blanco', categoria: 'reposteria',
@@ -478,7 +498,7 @@ const PRODUCTOS = [
     id: 'atun', nombre: 'Atún', categoria: 'enlatados',
     marca: 'Isabel',
     descripcion: 'Atún claro en lomitos, en aceite de girasol o en agua.',
-    presentacion: '', imagen: 'imagenes/productos/atun-isabel.webp', destacado: true,
+    presentacion: 'Lomitos en agua o en aceite de girasol', imagen: 'imagenes/productos/atun-isabel.webp', destacado: true,
   },
   {
     id: 'frijoles-enlatados', nombre: 'Frijoles antioqueños', categoria: 'enlatados',
@@ -490,6 +510,6 @@ const PRODUCTOS = [
     id: 'arveja-zanahoria', nombre: 'Arveja con zanahoria', categoria: 'enlatados',
     marca: 'San Jorge',
     descripcion: 'Enlatada, lista para la ensalada o el arroz.',
-    presentacion: '', imagen: 'imagenes/productos/arveja-y-zanahoria-enlatada.webp', destacado: false,
+    presentacion: 'Lata de 570 g · 348 g escurridos', imagen: 'imagenes/productos/arveja-y-zanahoria-enlatada.webp', destacado: false,
   },
 ];

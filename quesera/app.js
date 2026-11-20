@@ -194,6 +194,7 @@
       if (estado.busqueda) {
         const texto = normalizar([
           p.nombre, p.descripcion, p.presentacion, p.marca || '', cat(p.categoria).nombre,
+          p.cotizacion ? 'granel cotizacion peso' : '',
         ].join(' '));
         if (!texto.includes(estado.busqueda)) return false;
       }
@@ -213,14 +214,22 @@
     return `
       <article class="tarjeta">
         <div class="tarjeta__figura${p.imagen ? '' : ' tarjeta__figura--vacia'}">
-          ${p.marca ? `<span class="tarjeta__marca">${escapar(p.marca)}</span>` : ''}
+          ${p.marca
+            ? `<span class="tarjeta__marca">${escapar(p.marca)}</span>`
+            : p.cotizacion ? '<span class="tarjeta__marca">A granel</span>' : ''}
           ${p.destacado ? '<span class="tarjeta__insignia">Más pedido</span>' : ''}
           ${figura}
         </div>
         <div class="tarjeta__cuerpo">
           <p class="tarjeta__categoria">${c.nombre}</p>
           <h3 class="tarjeta__nombre">${escapar(p.nombre)}</h3>
-          ${p.presentacion ? `<p class="tarjeta__presentacion">${escapar(p.presentacion)}</p>` : ''}
+          <p class="tarjeta__presentacion">
+            <span class="tarjeta__etiqueta">Presentación</span>
+            ${p.presentacion ? escapar(p.presentacion) : 'consúltela por WhatsApp'}
+          </p>
+          ${p.cotizacion ? `<p class="tarjeta__cotizacion">
+            ${icono('pesa')}Se pesa al momento · consulte la cotización vigente
+          </p>` : ''}
           <p class="tarjeta__descripcion">${escapar(p.descripcion)}</p>
           <div class="tarjeta__acciones">
             <button type="button" class="marcar" data-marcar="${p.id}" aria-pressed="${marcado}">

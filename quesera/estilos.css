@@ -242,6 +242,16 @@ h1 em { font-style: italic; color: var(--dorado); }
 .tarjeta__categoria { font-size: .68rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--dorado-2); }
 .tarjeta__nombre { font-size: 1.1rem; }
 .tarjeta__presentacion { font-size: .84rem; font-weight: 600; color: var(--vino-3); }
+/* La etiqueta «Presentación» va en todas las tarjetas, tengan o no el dato,
+   para que la ficha se lea igual en todo el catálogo. */
+.tarjeta__etiqueta { display: block; font-size: .64rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tinta-suave); }
+.tarjeta__cotizacion {
+  display: flex; align-items: center; gap: .4rem;
+  font-size: .76rem; font-weight: 600; color: var(--vino);
+  background: var(--dorado-suave); border-radius: 999px; padding: .3rem .6rem;
+  align-self: flex-start;
+}
+.tarjeta__cotizacion svg { width: 15px; height: 15px; flex: none; }
 .tarjeta__descripcion { font-size: .88rem; color: var(--tinta-suave); }
 .tarjeta__acciones { display: flex; gap: .45rem; margin-top: auto; padding-top: .8rem; }
 .tarjeta__acciones .boton { flex: 1; padding: .58rem .8rem; font-size: .88rem; }
@@ -250,6 +260,16 @@ h1 em { font-style: italic; color: var(--dorado); }
 .marcar:hover { background: rgba(69, 24, 31, .07); }
 .marcar[aria-pressed="true"] { background: var(--vino); color: var(--crema); }
 .marcar[aria-pressed="true"]::before { content: "✓"; }
+
+.aviso-precio {
+  display: flex; align-items: flex-start; gap: .7rem;
+  margin-top: 1.1rem; max-width: 760px;
+  background: var(--crema); border: 1px solid var(--dorado-suave); border-left: 4px solid var(--dorado);
+  border-radius: var(--radio); padding: .85rem 1rem;
+  font-size: .9rem; color: var(--tinta);
+}
+.aviso-precio svg { width: 22px; height: 22px; flex: none; color: var(--dorado-2); }
+.seccion__encabezado--claro .aviso-precio { background: rgba(247, 238, 224, .12); border-color: rgba(245, 185, 33, .5); color: var(--crema); }
 
 .vacio { text-align: center; color: var(--tinta-suave); padding: 3rem 1rem; }
 
@@ -399,6 +419,40 @@ h1 em { font-style: italic; color: var(--dorado); }
 }
 .aliado a:hover img { transform: translateY(-3px); box-shadow: var(--sombra-alta); }
 
+/* ---------- Página legal ---------- */
+/* Una sola columna angosta: son textos largos y lo único que importa es que
+   se puedan leer de corrido y encontrar por el índice de arriba. */
+.legal { padding: clamp(2rem, 5vw, 3.4rem) 0 clamp(2.5rem, 6vw, 4rem); background: var(--crema); }
+.legal__contenedor { max-width: 760px; }
+.legal__portada { margin-bottom: 2.4rem; }
+.legal__portada h1 { font-size: clamp(1.7rem, 4vw, 2.4rem); margin-bottom: .9rem; }
+.legal__vigencia { font-size: .9rem; color: var(--tinta-suave); }
+.legal__indice { display: grid; gap: .4rem; margin-top: 1.5rem; padding: 1rem 1.2rem; background: var(--blanco); border: 1px solid var(--linea); border-left: 4px solid var(--dorado); border-radius: var(--radio); font-size: .92rem; }
+.legal__indice a { text-decoration: underline; text-underline-offset: 3px; }
+.legal__indice a:hover { color: var(--vino-3); }
+
+.legal__bloque { margin-bottom: 2.8rem; scroll-margin-top: 90px; }
+.legal__bloque h2 { font-size: clamp(1.3rem, 3vw, 1.7rem); padding-bottom: .6rem; margin-bottom: 1rem; border-bottom: 2px solid var(--dorado); }
+.legal__bloque h3 { font-family: var(--sans); font-size: 1rem; font-weight: 700; color: var(--vino); margin: 1.6rem 0 .5rem; }
+.legal__bloque p { margin-bottom: .8rem; font-size: .95rem; line-height: 1.7; }
+.legal__marco { background: var(--blanco); border: 1px solid var(--linea); border-radius: var(--radio); padding: .9rem 1.1rem; }
+.legal__lista { list-style: none; display: grid; gap: .5rem; margin: 0 0 1rem; font-size: .95rem; line-height: 1.6; }
+.legal__lista li { position: relative; padding-left: 1.3rem; }
+.legal__lista li::before { content: ""; position: absolute; left: 0; top: .6em; width: 7px; height: 7px; border-radius: 50%; background: var(--dorado); }
+.legal__bloque a:not(.boton) { text-decoration: underline; text-underline-offset: 3px; color: var(--vino-3); }
+.legal__bloque a:not(.boton):hover { color: var(--vino); }
+.legal__volver { margin-top: 1.6rem; }
+/* La página legal no lleva botón de hamburguesa, así que su menú no se
+   pliega: se queda en línea y, en pantallas angostas, suelta el botón de
+   WhatsApp, que de todos modos está repetido en el cuerpo y en el pie. */
+.menu--legal { display: flex; }
+@media (max-width: 960px) {
+  .menu--legal { position: static; flex-direction: row; align-items: center; gap: .9rem; background: none; border-bottom: 0; padding: 0; box-shadow: none; }
+  .menu--legal a:not(.boton) { padding: .3rem 0; border-bottom: 2px solid transparent; }
+  .menu--legal .menu__cta { margin-top: 0; }
+}
+@media (max-width: 600px) { .menu--legal .menu__cta { display: none; } }
+
 /* ---------- Pie ---------- */
 .pie { background: var(--vino); color: rgba(247, 238, 224, .78); padding: 2.8rem 0 1.4rem; }
 .pie__grid { display: grid; grid-template-columns: 1fr .7fr 1.1fr; gap: 2rem; }
@@ -408,6 +462,11 @@ h1 em { font-style: italic; color: var(--dorado); }
 .pie__enlaces a:hover { color: var(--dorado); }
 .pie__contacto { display: grid; gap: .45rem; font-size: .9rem; }
 .pie__contacto a:hover { color: var(--dorado); }
+.pie__legales { display: flex; flex-wrap: wrap; justify-content: center; gap: .5rem 1.6rem; margin-top: 2.2rem; padding-top: 1.4rem; border-top: 1px solid rgba(247, 238, 224, .16); font-size: .86rem; text-align: center; }
+.pie__legales a { text-decoration: underline; text-underline-offset: 3px; }
+.pie__legales a:hover { color: var(--dorado); }
+.pie__legales + .pie__legal { margin-top: 1rem; padding-top: 0; border-top: 0; }
+
 .pie__legal { margin-top: 2.2rem; padding-top: 1.2rem; border-top: 1px solid rgba(247, 238, 224, .16); text-align: center; font-size: .8rem; color: rgba(247, 238, 224, .55); }
 @media (max-width: 800px) { .pie__grid { grid-template-columns: 1fr; gap: 1.5rem; } }
 

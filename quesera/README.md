@@ -7,6 +7,7 @@ Sitio estático, sin build ni dependencias: se abre `index.html` y funciona.
 
 ```
 index.html              la página (no hay que tocarla para cambiar contenido)
+legal.html              política de datos y términos comerciales, enlazada desde el pie
 estilos.css             paleta y estilos
 app.js                  filtros, pedido y enlaces de WhatsApp
 datos.js                TODO el contenido editable
@@ -16,6 +17,7 @@ imagenes/qr-bancolombia.webp   el QR de pago, en medios de pago
 imagenes/portada-estanteria.webp   la góndola de la portada
 imagenes/domicilio.webp la foto del domiciliario, en servicio a domicilio
 imagenes/productos/     las fotos de producto, tal como vienen del set
+imagenes/aliados/       los logos de «Nuestros clientes»
 ```
 
 ## De dónde salen los datos
@@ -50,11 +52,25 @@ Dos cosas que vienen de esos documentos y conviene contrastar con el cliente:
 
 | Dato | Dónde se pone | Estado |
 |---|---|---|
-| Presentaciones | `presentacion` de 6 productos | Falta |
+| Presentación de 2 productos | `presentacion` en `PRODUCTOS` | Falta |
+| Marca de 9 productos | `marca` en `PRODUCTOS` | Falta |
+| Qué más se vende a granel | `cotizacion` en `PRODUCTOS` | Por revisar |
+| Razón social y NIT | `razonSocial` y `nit` en `MARCA` | Opcional |
+| Revisión del texto legal | `legal.html` | Por revisar |
 
-Los 54 productos ya tienen foto. Faltan las presentaciones de la costilla, el aderezo de
-mayonesa, la margarina, los domos para torta, el atún y la arveja con zanahoria: ni el
-cliente las dio ni el empaque de la foto las dice.
+Los 54 productos tienen foto y 52 tienen presentación. Faltan la de la **costilla
+ahumada** y la de los **domos para torta**: ni el cliente las dio ni el empaque de la
+foto las dice. Mientras tanto la tarjeta no se queda muda, dice «Presentación ·
+consúltela por WhatsApp», que es la verdad y no un hueco.
+
+Nueve productos no tienen marca porque son genéricos o se venden a granel: maíz dulce,
+salchicha manguera, contenedores, portacomidas, moldes de aluminio, copas salseras,
+huevos, domos para torta y esencias. Si el cliente trabaja una marca fija de alguno, se
+agrega y aparece sola sobre la foto.
+
+`cotizacion: true` está puesto en lo que se corta y se pesa en el mostrador: los cinco
+quesos y la costilla ahumada. Vale la pena que el cliente confirme si hay más (jamones,
+salchichón, huevos) y se agregan igual.
 
 Los bloques que dependen de un dato ausente no se dibujan vacíos: simplemente no salen.
 Lo que falte se avisa por la consola del navegador, no en pantalla.
@@ -70,6 +86,29 @@ lado. Para rehacerlo: Google Maps → buscar el negocio → *Compartir* → *Ins
 mapa* → copiar sólo la URL del `src` del iframe y pegarla ahí. El `width`, el `height`
 y los demás atributos no se copian: los pone `app.js` y el tamaño sale de
 `.mapa iframe` en `estilos.css`. La sección aparece sola.
+
+**Precios** — no se publican, por decisión del brief. Eso no se deja a la adivinanza: el
+encabezado del catálogo lo dice de frente y cada producto que se pesa en el mostrador
+lleva la advertencia «se pesa al momento · consulte la cotización vigente», que sale del
+campo `cotizacion` del producto. Si algún día el cliente quiere publicar rangos
+orientativos, el cambio es de fondo —toca el brief, no sólo el código— y conviene
+decidirlo con él: hoy la página promete una cotización, no una tarifa.
+
+**Página legal** (`legal.html`) — una sola página con tres partes: la política de
+tratamiento de datos personales (Ley 1581 de 2012 y Decreto 1074 de 2015), los términos
+y condiciones comerciales (Ley 1480 de 2011) y los datos de contacto. Los enlaces salen
+en el pie de **todas** las páginas. La dirección, el correo, el teléfono y el horario no
+están escritos ahí: los toma de `MARCA` en `datos.js`, para que no queden distintos en
+dos archivos. Lo que sí hay que mantener a mano:
+
+- `vigenciaLegal` en `MARCA`: la fecha desde la que rige. **Si se cambia el texto de la
+  página, se cambia también esta fecha.**
+- `razonSocial` y `nit` en `MARCA`: opcionales. Si se llenan, salen junto al nombre; si
+  se dejan vacíos, no se nota. La ley pide nombre, domicilio, correo y teléfono del
+  responsable, y eso ya está.
+- El texto es un borrador completo y redactado para este negocio, pero **lo tiene que
+  leer y adoptar el cliente** antes de darlo por definitivo: es él quien responde por lo
+  que ahí se promete (plazos de entrega, garantías, devoluciones).
 
 **Redes** — pegar la URL completa del perfil. Los iconos aparecen solos; los vacíos no salen.
 
