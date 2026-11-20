@@ -52,8 +52,8 @@ Dos cosas que vienen de esos documentos y conviene contrastar con el cliente:
 
 | Dato | Dónde se pone | Estado |
 |---|---|---|
-| Precio de 20 productos | `precio` en `PRODUCTOS` | Falta |
 | A qué presentación va cada precio | `presentacion` en `PRODUCTOS` | Por confirmar |
+| Si los precios llevan IVA | el aviso del catálogo | Por confirmar |
 | Presentación de 2 productos | `presentacion` en `PRODUCTOS` | Falta |
 | Marca de 9 productos | `marca` en `PRODUCTOS` | Falta |
 | Qué más se vende a granel | `cotizacion` en `PRODUCTOS` | Por revisar |
@@ -90,9 +90,10 @@ y los demás atributos no se copian: los pone `app.js` y el tamaño sale de
 `.mapa iframe` en `estilos.css`. La sección aparece sola.
 
 **Precios** — el brief los dejaba fuera y el cliente decidió después publicarlos. Están
-cargados **34 de los 54**, con la lista que mandó el cliente el 20 de noviembre de 2026;
-los otros 20 dicen «Consultar cotización vigente» hasta que lleguen. Se agregan dos campos
-al producto en `datos.js`:
+cargados **los 54**, con la lista que mandó el cliente el 20 de noviembre de 2026. El
+producto que se deje sin precio vuelve a decir «Consultar cotización vigente», y el aviso
+del encabezado recupera solo la frase que lo explica. Se agregan dos campos al producto en
+`datos.js`:
 
 ```js
 { id: 'queso-campesino', …, precio: 18900, unidad: 'kg' },   // se pesa → por kilo
@@ -113,9 +114,8 @@ granel va por kilo y desde cuándo rigen.
 
 **Lo que quedó por confirmar de la lista de precios:**
 
-- **«San Jorge $68.000»** se cargó en el *aderezo de mayonesa* (3.950 g). La *arveja con
-  zanahoria* también es San Jorge y quedó sin precio; si los $68.000 eran de ella, se
-  cambia.
+- **«San Jorge $68.000»** se cargó en el *aderezo de mayonesa* (3.950 g). Confirmado:
+  la *arveja con zanahoria*, que es de la misma marca, llegó después a $8.200.
 - **Huevos $17.000** se cargó como panal de 30, que es lo único que cuadra con ese
   precio. La presentación ofrece también unidad y medio panal.
 - **Portacomidas $500** se cargó por unidad. Falta saber a cuál referencia corresponde
@@ -125,10 +125,14 @@ granel va por kilo y desde cuándo rigen.
 - **Manguera $8.000** vino «por kilo», así que se le puso esa marca: ahora avisa que se
   pesa al momento.
 - El cliente escribió **«Salchichón Calima»** y en el catálogo la marca es **Calinnas**.
+- **Margarina Astra $14.800** vino «por kilo», así que se le puso la marca de venta a
+  granel, igual que a la manguera.
 - **Un precio para varias presentaciones.** Hay productos cuya tarjeta ofrece varios
   tamaños y recibió una sola cifra: tocineta (250/500/1.000 g), maíz dulce, croquetas de
   yuca, contenedores (8 a 24 oz), copa salsera (½ a 2 oz), papel aluminio (6 a 300 m),
-  moldes de aluminio («varios tamaños») y salsas Differ (500 a 4.000 g). Tal como está, el
+  moldes de aluminio («varios tamaños»), salsas Differ (500 a 4.000 g), harina de trigo
+  («bulto de 50 kg y por arroba»), esencias (60 y 500 ml), aceite de palma (900 a 5.000
+  ml), color (250 a 1.000 g) y acento (250 y 500 g). Tal como está, el
   cliente va a leer que ese precio vale para cualquiera de los tamaños. Hay que pedirle a
   qué presentación corresponde cada cifra y, en los que valga la pena, partirlos en
   productos separados.

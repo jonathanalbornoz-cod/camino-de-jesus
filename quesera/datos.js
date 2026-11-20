@@ -378,7 +378,7 @@ const PRODUCTOS = [
     presentacion: '4.000 g', imagen: 'imagenes/productos/salsa-italiana.webp', destacado: false,
   },
   {
-    id: 'salsa-bbq', nombre: 'Salsa BBQ', categoria: 'salsas',
+    id: 'salsa-bbq', precio: 73000, nombre: 'Salsa BBQ', categoria: 'salsas',
     marca: 'Zafrán',
     descripcion: 'BBQ dulce, en bolsa con asa para el restaurante.',
     presentacion: '4,3 kg · 287 porciones', imagen: 'imagenes/productos/salsa-bbq-maleta.webp', destacado: false,
@@ -391,55 +391,56 @@ const PRODUCTOS = [
     presentacion: 'Por unidad, medio panal o panal de 30', imagen: 'imagenes/productos/huevos-aa-aaa.webp', destacado: true,
   },
   {
-    id: 'harinas', nombre: 'Harina de trigo', categoria: 'reposteria',
+    id: 'harinas', precio: 132000, nombre: 'Harina de trigo', categoria: 'reposteria',
     marca: 'Haz de Oros',
     descripcion: 'Fortificada tradicional, para panadería y amasijos.',
     presentacion: 'Bulto de 50 kg y por arroba', imagen: 'imagenes/productos/harina-de-trigo.webp', destacado: false,
   },
   {
-    id: 'margarinas', nombre: 'Margarina', categoria: 'reposteria',
+    id: 'margarinas', precio: 14800, unidad: 'kg', nombre: 'Margarina', categoria: 'reposteria',
+    cotizacion: true,
     marca: 'Astra',
     descripcion: 'Industrial para pastelería fina: hojaldre, ponqué y panadería.',
     presentacion: 'Caja industrial', imagen: 'imagenes/productos/margarina-astra.webp', destacado: false,
   },
   {
-    id: 'azucar', nombre: 'Azúcar blanco', categoria: 'reposteria',
+    id: 'azucar', precio: 185000, nombre: 'Azúcar blanco', categoria: 'reposteria',
     marca: 'La Cabaña',
     descripcion: 'Bulto para negocio; también se despacha por menor.',
     presentacion: '50 kg', imagen: 'imagenes/productos/azucar.webp', destacado: false,
   },
   {
-    id: 'domos-torta', nombre: 'Domos para torta', categoria: 'reposteria',
+    id: 'domos-torta', precio: 3200, nombre: 'Domos para torta', categoria: 'reposteria',
     descripcion: 'Para transportar y exhibir la torta sin dañarla.',
     presentacion: '', imagen: 'imagenes/productos/domos-para-tortas.webp', destacado: false,
   },
   {
-    id: 'esencias', nombre: 'Esencias', categoria: 'reposteria',
+    id: 'esencias', precio: 7200, nombre: 'Esencias', categoria: 'reposteria',
     descripcion: 'Vainilla, mantequilla, coco y más sabores para repostería.',
     presentacion: '60 ml · 500 ml', imagen: 'imagenes/productos/esencias-para-alimentos.webp', destacado: false,
   },
 
   /* ---------------- Panes ---------------- */
   {
-    id: 'pan-hamburguesa', nombre: 'Pan para hamburguesa', categoria: 'panes',
+    id: 'pan-hamburguesa', precio: 12000, nombre: 'Pan para hamburguesa', categoria: 'panes',
     marca: 'Pan del Valle',
     descripcion: 'Tipo brioche, del tamaño que maneja la comida rápida.',
     presentacion: '10 unidades', imagen: 'imagenes/productos/pan-hamburguesa.webp', destacado: false,
   },
   {
-    id: 'pan-perro', nombre: 'Pan para perro', categoria: 'panes',
+    id: 'pan-perro', precio: 11000, nombre: 'Pan para perro', categoria: 'panes',
     marca: 'Bimbo',
     descripcion: 'Suave y esponjoso, con ajonjolí.',
     presentacion: '10 unidades', imagen: 'imagenes/productos/pan-perro.webp', destacado: false,
   },
   {
-    id: 'pan-tajado', nombre: 'Pan tajado', categoria: 'panes',
+    id: 'pan-tajado', precio: 6400, nombre: 'Pan tajado', categoria: 'panes',
     marca: 'Pan Pullman',
     descripcion: 'Para sánduches y desayunos.',
     presentacion: '660 g · 28 porciones', imagen: 'imagenes/productos/pan-tajado.webp', destacado: false,
   },
   {
-    id: 'pan-colita', nombre: 'Pan colita', categoria: 'panes',
+    id: 'pan-colita', precio: 8600, nombre: 'Pan colita', categoria: 'panes',
     marca: 'Pan Catalina',
     descripcion: 'El clásico para colitas cubanas.',
     presentacion: '10 unidades', imagen: 'imagenes/productos/pan-colita-catalina.webp', destacado: false,
@@ -453,13 +454,13 @@ const PRODUCTOS = [
     presentacion: '19 litros', imagen: 'imagenes/productos/aceite-industrial-19lts.webp', destacado: true,
   },
   {
-    id: 'aceite-galon', nombre: 'Aceite de palma', categoria: 'aceites',
+    id: 'aceite-galon', precio: 23000, nombre: 'Aceite de palma', categoria: 'aceites',
     marca: 'Palma de Oro',
     descripcion: 'Perfecto para freír.',
     presentacion: '900 ml · 3.000 ml · 5.000 ml', imagen: 'imagenes/productos/aceite-de-palma-5000ml.webp', destacado: false,
   },
   {
-    id: 'aceite-cocina', nombre: 'Aceite de cocina', categoria: 'aceites',
+    id: 'aceite-cocina', precio: 8000, nombre: 'Aceite de cocina', categoria: 'aceites',
     marca: 'Kindom',
     descripcion: 'La presentación de siempre para la casa.',
     presentacion: '1.000 ml', imagen: 'imagenes/productos/aceite-kindom-1000ml.webp', destacado: false,
@@ -467,19 +468,19 @@ const PRODUCTOS = [
 
   /* ---------------- Condimentos ---------------- */
   {
-    id: 'color', nombre: 'Color', categoria: 'condimentos',
+    id: 'color', precio: 5500, nombre: 'Color', categoria: 'condimentos',
     marca: 'Productos Libertad',
     descripcion: 'Azafrán color extra, para condimentar sus preparaciones.',
     presentacion: '250 g · 500 g · 1.000 g', imagen: 'imagenes/productos/color-sazonador.webp', destacado: false,
   },
   {
-    id: 'acento', nombre: 'Acento', categoria: 'condimentos',
+    id: 'acento', precio: 8200, nombre: 'Acento', categoria: 'condimentos',
     marca: 'La Granja Paisa',
     descripcion: 'Sazonador de uso diario en cocina.',
     presentacion: '250 g · 500 g', imagen: 'imagenes/productos/acento-sazonador.webp', destacado: false,
   },
   {
-    id: 'comino', nombre: 'Comino', categoria: 'condimentos',
+    id: 'comino', precio: 1800, nombre: 'Comino', categoria: 'condimentos',
     marca: 'Productos Libertad',
     descripcion: 'Molido, para carnes y sopas.',
     presentacion: '25 g', imagen: 'imagenes/productos/comino-molido.webp', destacado: false,
@@ -487,19 +488,19 @@ const PRODUCTOS = [
 
   /* ---------------- Lácteos ---------------- */
   {
-    id: 'leche', nombre: 'Leche', categoria: 'lacteos',
+    id: 'leche', precio: 5700, nombre: 'Leche', categoria: 'lacteos',
     marca: 'Alquería',
     descripcion: 'Entera, deslactosada y descremada, por bolsa y por paca.',
     presentacion: '1.100 ml', imagen: 'imagenes/productos/leche-entera.webp', destacado: false,
   },
   {
-    id: 'crema-leche', nombre: 'Crema de leche', categoria: 'lacteos',
+    id: 'crema-leche', precio: 16200, nombre: 'Crema de leche', categoria: 'lacteos',
     marca: 'Mr Quick',
     descripcion: 'Para salsas, postres y repostería.',
     presentacion: '900 ml', imagen: 'imagenes/productos/crema-de-leche.webp', destacado: false,
   },
   {
-    id: 'yogur', nombre: 'Yogur', categoria: 'lacteos',
+    id: 'yogur', precio: 11800, nombre: 'Yogur', categoria: 'lacteos',
     marca: 'Lactodelicias',
     descripcion: 'Sabores surtidos: fresa, mora, coco, melocotón, kiwi, frutos rojos y natural.',
     presentacion: '1.750 g', imagen: 'imagenes/productos/yogurt.webp', destacado: false,
@@ -513,13 +514,13 @@ const PRODUCTOS = [
     presentacion: 'Lomitos en agua o en aceite de girasol', imagen: 'imagenes/productos/atun-isabel.webp', destacado: true,
   },
   {
-    id: 'frijoles-enlatados', nombre: 'Frijoles antioqueños', categoria: 'enlatados',
+    id: 'frijoles-enlatados', precio: 9200, nombre: 'Frijoles antioqueños', categoria: 'enlatados',
     marca: 'Zenú',
     descripcion: 'Listos para calentar y servir.',
     presentacion: '310 g · 2 porciones', imagen: 'imagenes/productos/frijoles-enlatados.webp', destacado: false,
   },
   {
-    id: 'arveja-zanahoria', nombre: 'Arveja con zanahoria', categoria: 'enlatados',
+    id: 'arveja-zanahoria', precio: 8200, nombre: 'Arveja con zanahoria', categoria: 'enlatados',
     marca: 'San Jorge',
     descripcion: 'Enlatada, lista para la ensalada o el arroz.',
     presentacion: 'Lata de 570 g · 348 g escurridos', imagen: 'imagenes/productos/arveja-y-zanahoria-enlatada.webp', destacado: false,

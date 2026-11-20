@@ -113,11 +113,15 @@
     if (HAY_PRECIOS) {
       const fecha = MARCA.preciosActualizados
         ? ` Actualizados el ${escapar(MARCA.preciosActualizados)}.` : '';
+      // La frase de la cotización sólo tiene sentido si queda algún producto
+      // sin precio; con la lista completa sobra y se cae sola.
+      const faltaAlguno = PRODUCTOS.some((p) => !(Number(p.precio) > 0))
+        ? ' Lo que aparezca como <strong>«consultar cotización vigente»</strong> se lo ' +
+          'cotizamos por WhatsApp.' : '';
       $('#aviso-precio-texto').innerHTML =
         'Precios en pesos colombianos, por la unidad indicada en cada producto; lo que se ' +
         'vende a granel va <strong>por kilo</strong> y el total se ajusta al peso ' +
-        'despachado.' + fecha + ' Lo que aparezca como <strong>«consultar cotización ' +
-        'vigente»</strong> se lo cotizamos por WhatsApp.';
+        'despachado.' + fecha + faltaAlguno;
     }
 
     if (MARCA.mapaEmbed) {
