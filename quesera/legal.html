@@ -44,7 +44,7 @@
       <h1>Política de datos y términos comerciales</h1>
       <p class="legal__vigencia">
         Vigente desde el <span data-campo="vigenciaLegal"></span>.
-        Responsable: <strong data-campo="nombre"></strong><span id="legal-razon"></span><span id="legal-nit"></span>,
+        Responsable: <strong data-responsable></strong>,
         <span data-campo="direccion"></span>, <span data-campo="ciudad"></span>.
       </p>
       <nav class="legal__indice" aria-label="Contenido de esta página">
@@ -65,7 +65,7 @@
 
       <h3>1.1 Quién responde por sus datos</h3>
       <p>
-        El responsable del tratamiento es <strong data-campo="nombre"></strong>, con
+        El responsable del tratamiento es <strong data-responsable></strong>, con
         establecimiento de comercio en <span data-campo="direccion"></span>,
         <span data-campo="ciudad"></span>.
       </p>
@@ -350,13 +350,18 @@
       n.textContent = vacio(v) ? '' : v;
     });
 
-    // La razón social y el NIT son opcionales: si no están, no se nota.
-    if (!vacio(MARCA.razonSocial)) {
-      document.getElementById('legal-razon').textContent = ' (' + MARCA.razonSocial + ')';
-    }
-    if (!vacio(MARCA.nit)) {
-      document.getElementById('legal-nit').textContent = ', NIT ' + MARCA.nit;
-    }
+    /*
+     * Quién responde. En un documento legal manda la razón social; el nombre
+     * con que lo conoce el cliente va detrás, como nombre comercial. Los dos
+     * campos son opcionales: sin ellos queda sólo el nombre, que es lo que la
+     * Ley 1581 pide como mínimo junto con la dirección, el correo y el teléfono.
+     */
+    var responsable = vacio(MARCA.razonSocial) ? MARCA.nombre
+      : MARCA.razonSocial + ' (nombre comercial ' + MARCA.nombre + ')';
+    if (!vacio(MARCA.nit)) responsable += ', NIT ' + MARCA.nit;
+    document.querySelectorAll('[data-responsable]').forEach(function (n) {
+      n.textContent = responsable;
+    });
 
     document.querySelectorAll('[data-wa]').forEach(function (n) {
       n.href = 'https://wa.me/' + MARCA.whatsapp +

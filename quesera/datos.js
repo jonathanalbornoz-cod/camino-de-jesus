@@ -38,8 +38,8 @@ const MARCA = {
   // Identificación legal para la página «Legal». La Ley 1581 de 2012 pide
   // nombre, domicilio, correo y teléfono del responsable, y todo eso ya está
   // arriba; la razón social y el NIT son opcionales y sólo salen si se llenan.
-  razonSocial: '',
-  nit: '',
+  razonSocial: 'Quesera y Salsamentaria Chiminangos',
+  nit: '1002596521',
   // Fecha de entrada en vigencia de la política, como la pide el decreto
   // 1074 de 2015. Si se cambia el texto de la página, se cambia esta fecha.
   vigenciaLegal: '20 de noviembre de 2026',

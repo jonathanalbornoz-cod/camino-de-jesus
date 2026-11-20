@@ -55,7 +55,7 @@ Dos cosas que vienen de esos documentos y conviene contrastar con el cliente:
 | Presentación de 2 productos | `presentacion` en `PRODUCTOS` | Falta |
 | Marca de 9 productos | `marca` en `PRODUCTOS` | Falta |
 | Qué más se vende a granel | `cotizacion` en `PRODUCTOS` | Por revisar |
-| Razón social y NIT | `razonSocial` y `nit` en `MARCA` | Opcional |
+| Razón social y NIT | `razonSocial` y `nit` en `MARCA` | Puestos |
 | Revisión del texto legal | `legal.html` | Por revisar |
 
 Los 54 productos tienen foto y 52 tienen presentación. Faltan la de la **costilla
@@ -103,9 +103,10 @@ dos archivos. Lo que sí hay que mantener a mano:
 
 - `vigenciaLegal` en `MARCA`: la fecha desde la que rige. **Si se cambia el texto de la
   página, se cambia también esta fecha.**
-- `razonSocial` y `nit` en `MARCA`: opcionales. Si se llenan, salen junto al nombre; si
-  se dejan vacíos, no se nota. La ley pide nombre, domicilio, correo y teléfono del
-  responsable, y eso ya está.
+- `razonSocial` y `nit` en `MARCA`: ya están puestos (Quesera y Salsamentaria
+  Chiminangos, NIT 1002596521). En el documento manda la razón social y el nombre de
+  siempre queda detrás como nombre comercial. Siguen siendo opcionales: si se vacían, la
+  página no se rompe, queda sólo el nombre.
 - El texto es un borrador completo y redactado para este negocio, pero **lo tiene que
   leer y adoptar el cliente** antes de darlo por definitivo: es él quien responde por lo
   que ahí se promete (plazos de entrega, garantías, devoluciones).
