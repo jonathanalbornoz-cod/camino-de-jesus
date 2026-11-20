@@ -87,12 +87,35 @@ mapa* → copiar sólo la URL del `src` del iframe y pegarla ahí. El `width`, e
 y los demás atributos no se copian: los pone `app.js` y el tamaño sale de
 `.mapa iframe` en `estilos.css`. La sección aparece sola.
 
-**Precios** — no se publican, por decisión del brief. Eso no se deja a la adivinanza: el
-encabezado del catálogo lo dice de frente y cada producto que se pesa en el mostrador
-lleva la advertencia «se pesa al momento · consulte la cotización vigente», que sale del
-campo `cotizacion` del producto. Si algún día el cliente quiere publicar rangos
-orientativos, el cambio es de fondo —toca el brief, no sólo el código— y conviene
-decidirlo con él: hoy la página promete una cotización, no una tarifa.
+**Precios** — el brief los dejaba fuera y el cliente decidió después publicarlos. El
+mecanismo está montado y **la lista todavía no ha llegado**, así que hoy las 54 tarjetas
+dicen «Consultar cotización vigente». Para cargarlos se le agregan dos campos al producto
+en `datos.js`:
+
+```js
+{ id: 'queso-campesino', …, precio: 18900, unidad: 'kg' },   // se pesa → por kilo
+{ id: 'jamon',           …, precio: 9800 },                  // empacado → sin unidad
+```
+
+- `precio` va como número pelado, sin puntos ni comillas: `18900`, no `'$18.900'`. La
+  página lo formatea sola como `$18.900`.
+- `unidad` es opcional y sólo aclara a qué corresponde la cifra: `kg`, `libra`, `caja`.
+  En todo lo que lleve `cotizacion: true` va `'kg'`, que fue lo que pidió el cliente.
+- El producto que se deje sin `precio` sigue mostrando «Consultar cotización vigente».
+- `preciosActualizados` en `MARCA`: la fecha de la lista. Sale junto a los precios en el
+  encabezado del catálogo. **Si se tocan los precios, se toca esa fecha.**
+
+El encabezado del catálogo cambia solo: mientras no haya ni un precio dice que cotizamos
+por WhatsApp; apenas entra el primero, pasa a explicar en qué moneda están, que lo de
+granel va por kilo y desde cuándo rigen.
+
+Dos cosas para hablar con el cliente antes de publicar la lista:
+
+- **El IVA.** El Estatuto del Consumidor exige mostrarle al consumidor el precio total,
+  impuestos incluidos. Hay que confirmar si las cifras que entregue ya lo traen y, si
+  aplica, decirlo en la página.
+- **El precio publicado obliga.** Mientras esté en la página hay que respetarlo, así que
+  conviene actualizarlo apenas cambie; por eso la fecha.
 
 **Página legal** (`legal.html`) — una sola página con tres partes: la política de
 tratamiento de datos personales (Ley 1581 de 2012 y Decreto 1074 de 2015), los términos

@@ -245,6 +245,15 @@ h1 em { font-style: italic; color: var(--dorado); }
 /* La etiqueta «Presentación» va en todas las tarjetas, tengan o no el dato,
    para que la ficha se lea igual en todo el catálogo. */
 .tarjeta__etiqueta { display: block; font-size: .64rem; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: var(--tinta-suave); }
+/* El precio es lo primero que busca el ojo en una tarjeta de catálogo, así
+   que pesa más que la presentación y menos que el nombre. Cuando no hay
+   precio, el mismo renglón lleva el aviso de cotización, para que la tarjeta
+   mida igual con cifra y sin cifra. */
+.tarjeta__precio { display: flex; align-items: baseline; gap: .3rem; flex-wrap: wrap; }
+.tarjeta__precio strong { font-size: 1.15rem; font-weight: 800; color: var(--vino); letter-spacing: -.01em; }
+.tarjeta__unidad { font-size: .8rem; font-weight: 600; color: var(--tinta-suave); }
+.tarjeta__consultar { font-size: .84rem; font-weight: 700; color: var(--dorado-2); }
+
 .tarjeta__cotizacion {
   display: flex; align-items: center; gap: .4rem;
   font-size: .76rem; font-weight: 600; color: var(--vino);

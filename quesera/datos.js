@@ -40,6 +40,12 @@ const MARCA = {
   // arriba; la razón social y el NIT son opcionales y sólo salen si se llenan.
   razonSocial: 'Quesera y Salsamentaria Chiminangos',
   nit: '1002596521',
+  // Fecha de la última actualización de la lista de precios. Sale junto a los
+  // precios en el catálogo: un precio sin fecha no le dice nada al cliente y,
+  // si queda viejo, el negocio igual tiene que respetarlo. Si se tocan los
+  // precios, se toca esta fecha. Vacío = no se muestra.
+  preciosActualizados: '',
+
   // Fecha de entrada en vigencia de la política, como la pide el decreto
   // 1074 de 2015. Si se cambia el texto de la página, se cambia esta fecha.
   vigenciaLegal: '20 de noviembre de 2026',
@@ -163,13 +169,19 @@ const CATEGORIAS = [
  *                 de callarlo, para que todas muestren la misma ficha
  *   cotizacion    true en lo que se corta y se pesa en el mostrador: el
  *                 precio depende del peso, y la tarjeta lo advierte
+ *   precio        número en pesos, sin puntos ni comillas: 28900, no '$28.900'.
+ *                 Si falta, la tarjeta dice «Consultar cotización vigente»
+ *   unidad        a qué corresponde ese precio: 'kg', 'libra', 'und', 'caja'…
+ *                 En lo que se vende a granel va el precio por kilo
  *   descripcion   una línea, corta
  *   imagen        ruta de la foto; vacío = ilustración de la categoría
  *   destacado     true lo sube al comienzo del catálogo
  *
- * SIN PRECIOS: es decisión del brief. El precio se da por WhatsApp, y el
- * catálogo lo dice de frente en su encabezado en vez de dejar al cliente
- * buscando una cifra que no está.
+ * PRECIOS: el brief los dejaba fuera y el cliente decidió después publicarlos.
+ * El campo «precio» está listo en cada producto pero todavía vacío, porque la
+ * lista no ha llegado. Mientras esté vacío la tarjeta dice «Consultar
+ * cotización vigente», que es lo que el cliente pidió para lo que no tenga
+ * precio, y el encabezado del catálogo cambia solo según haya precios o no.
  *
  * Las presentaciones que están puestas salen del empaque en la foto o del
  * PDF de categorías. Las que faltan las tiene que confirmar el cliente.

@@ -18,6 +18,18 @@
   const escapar = (t) => String(t).replace(/[&<>"]/g, (c) =>
     ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
+  /*
+   * Precio en pesos colombianos: «28900» sale como «$28.900». Sin decimales,
+   * que en pesos no se usan, y con el punto de miles que espera el cliente.
+   */
+  const formatoPesos = new Intl.NumberFormat('es-CO', {
+    style: 'currency', currency: 'COP', minimumFractionDigits: 0, maximumFractionDigits: 0,
+  });
+  // El formateador mete un espacio duro entre el signo y la cifra; acá se
+  // escribe pegado, «$18.900», que es como se ve en cualquier vitrina.
+  const pesos = { format: (v) => formatoPesos.format(v).replace(/\u00a0/g, '') };
+  const HAY_PRECIOS = PRODUCTOS.some((p) => Number(p.precio) > 0);
+
   /* Quita tildes para que «jamon» encuentre «jamón» */
   const normalizar = (t) => String(t).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
@@ -91,6 +103,22 @@
         ? `<a href="${escapar(a.url)}" target="_blank" rel="noopener">${logo}</a>`
         : logo}</li>`;
     }).join('');
+
+    /*
+     * El aviso del catálogo cambia según haya precios cargados o no. Con la
+     * lista vacía dice que cotizamos; con precios, explica a qué corresponden
+     * y desde cuándo rigen, que es lo que el cliente necesita saber para
+     * confiar en la cifra.
+     */
+    if (HAY_PRECIOS) {
+      const fecha = MARCA.preciosActualizados
+        ? ` Actualizados el ${escapar(MARCA.preciosActualizados)}.` : '';
+      $('#aviso-precio-texto').innerHTML =
+        'Precios en pesos colombianos, por la unidad indicada en cada producto; lo que se ' +
+        'vende a granel va <strong>por kilo</strong> y el total se ajusta al peso ' +
+        'despachado.' + fecha + ' Lo que aparezca como <strong>«consultar cotización ' +
+        'vigente»</strong> se lo cotizamos por WhatsApp.';
+    }
 
     if (MARCA.mapaEmbed) {
       $('#mapa').hidden = false;
@@ -227,8 +255,15 @@
             <span class="tarjeta__etiqueta">Presentación</span>
             ${p.presentacion ? escapar(p.presentacion) : 'consúltela por WhatsApp'}
           </p>
+          <p class="tarjeta__precio">
+            ${Number(p.precio) > 0
+              ? `<strong>${pesos.format(p.precio)}</strong>${p.unidad ? `<span class="tarjeta__unidad">/ ${escapar(p.unidad)}</span>` : ''}`
+              : '<span class="tarjeta__consultar">Consultar cotización vigente</span>'}
+          </p>
           ${p.cotizacion ? `<p class="tarjeta__cotizacion">
-            ${icono('pesa')}Se pesa al momento · consulte la cotización vigente
+            ${icono('pesa')}${Number(p.precio) > 0
+              ? 'Se pesa al momento: el total va según el peso despachado'
+              : 'Se pesa al momento · consulte la cotización vigente'}
           </p>` : ''}
           <p class="tarjeta__descripcion">${escapar(p.descripcion)}</p>
           <div class="tarjeta__acciones">
