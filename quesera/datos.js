@@ -44,7 +44,7 @@ const MARCA = {
   // precios en el catálogo: un precio sin fecha no le dice nada al cliente y,
   // si queda viejo, el negocio igual tiene que respetarlo. Si se tocan los
   // precios, se toca esta fecha. Vacío = no se muestra.
-  preciosActualizados: '',
+  preciosActualizados: '20 de noviembre de 2026',
 
   // Fecha de entrada en vigencia de la política, como la pide el decreto
   // 1074 de 2015. Si se cambia el texto de la página, se cambia esta fecha.
@@ -190,111 +190,111 @@ const PRODUCTOS = [
 
   /* ---------------- Quesos ---------------- */
   {
-    id: 'queso-campesino', nombre: 'Queso campesino', categoria: 'quesos',
+    id: 'queso-campesino', precio: 25000, unidad: 'kg', nombre: 'Queso campesino', categoria: 'quesos',
     cotizacion: true,
     descripcion: 'Fresco y de sal suave, el de la arepa y el desayuno.',
     presentacion: '250 g · 500 g', imagen: 'imagenes/productos/queso-campesino.webp', destacado: true,
   },
   {
-    id: 'queso-cuajada', nombre: 'Queso cuajada', categoria: 'quesos',
+    id: 'queso-cuajada', precio: 18000, unidad: 'kg', nombre: 'Queso cuajada', categoria: 'quesos',
     cotizacion: true,
     descripcion: 'Cuajada fresca, para acompañar con melao o bocadillo.',
     presentacion: '250 g · 500 g', imagen: 'imagenes/productos/queso-cuajada.webp', destacado: true,
   },
   {
-    id: 'queso-mozzarella', nombre: 'Queso mozzarella', categoria: 'quesos',
+    id: 'queso-mozzarella', precio: 26000, unidad: 'kg', nombre: 'Queso mozzarella', categoria: 'quesos',
     cotizacion: true,
     descripcion: 'El que estira en la pizza, la lasaña y el sánduche caliente.',
     presentacion: '250 g · 500 g · 2.500 g', imagen: 'imagenes/productos/queso-mozarella.webp', destacado: true,
   },
   {
-    id: 'queso-costeno', nombre: 'Queso costeño', categoria: 'quesos',
+    id: 'queso-costeno', precio: 28000, unidad: 'kg', nombre: 'Queso costeño', categoria: 'quesos',
     cotizacion: true,
     descripcion: 'Salado y firme, para rallar sobre el sancocho o el arroz.',
     presentacion: '125 g · 250 g · 500 g · 1.000 g', imagen: 'imagenes/productos/queso-costeno.webp', destacado: false,
   },
   {
-    id: 'queso-cheddar', nombre: 'Queso cheddar', categoria: 'quesos',
-    cotizacion: true,
+    id: 'queso-cheddar', precio: 13800, nombre: 'Queso cheddar', categoria: 'quesos',
     descripcion: 'En lonjas, para hamburguesas y sánduches.',
     presentacion: '400 g', imagen: 'imagenes/productos/queso-cheddar.webp', destacado: false,
   },
 
   /* ---------------- Carnes y embutidos ---------------- */
   {
-    id: 'costilla', nombre: 'Costilla ahumada', categoria: 'carnes',
+    id: 'costilla', precio: 38700, unidad: 'kg', nombre: 'Costilla ahumada', categoria: 'carnes',
     cotizacion: true,
     descripcion: 'Ahumada de verdad, lista para hornear o para el asado.',
     presentacion: '', imagen: 'imagenes/productos/costilla-ahumada.webp', destacado: true,
   },
   {
-    id: 'carne-hamburguesa', nombre: 'Carne para hamburguesa', categoria: 'carnes',
+    id: 'carne-hamburguesa', precio: 16200, nombre: 'Carne para hamburguesa', categoria: 'carnes',
     marca: 'Zenú',
     descripcion: 'Congelada, va directo a la plancha sin descongelar.',
     presentacion: '500 g · 5 porciones', imagen: 'imagenes/productos/carne-hamburguesa.webp', destacado: true,
   },
   {
-    id: 'salchicha-perro', nombre: 'Salchicha americana', categoria: 'carnes',
+    id: 'salchicha-perro', precio: 53000, nombre: 'Salchicha americana', categoria: 'carnes',
     marca: 'Zenú',
     descripcion: 'Salchicha súper perro tipo americana para su negocio.',
     presentacion: '22 unidades', imagen: 'imagenes/productos/salchicha-perro.webp', destacado: false,
   },
   {
-    id: 'jamon', nombre: 'Jamón', categoria: 'carnes',
+    id: 'jamon', precio: 16500, nombre: 'Jamón', categoria: 'carnes',
     marca: 'Rica Chef',
     descripcion: 'Tajado parejo, perfecto para la pizza.',
     presentacion: '500 g · 30 tajadas', imagen: 'imagenes/productos/jamon.webp', destacado: false,
   },
   {
-    id: 'tocineta', nombre: 'Tocineta', categoria: 'carnes',
+    id: 'tocineta', precio: 16500, nombre: 'Tocineta', categoria: 'carnes',
     marca: 'Titos',
     descripcion: 'De cerdo ahumada, en lonjas parejas.',
     presentacion: '250 g · 500 g · 1.000 g', imagen: 'imagenes/productos/tocineta.webp', destacado: false,
   },
   {
-    id: 'chorizos', nombre: 'Chorizos', categoria: 'carnes',
+    id: 'chorizos', precio: 11300, nombre: 'Chorizos', categoria: 'carnes',
     marca: 'El Paisa',
     descripcion: 'Chorizo santarrosano, para asar o freír.',
     presentacion: '5 porciones', imagen: 'imagenes/productos/chorizo-santarosano.webp', destacado: true,
   },
   {
-    id: 'salchichones', nombre: 'Salchichones', categoria: 'carnes',
+    id: 'salchichones', precio: 11800, nombre: 'Salchichones', categoria: 'carnes',
     marca: 'Calinnas',
     descripcion: 'Cervecero ahumado de cerdo.',
     presentacion: '1.000 g', imagen: 'imagenes/productos/salchichon-calimas.webp', destacado: false,
   },
   {
-    id: 'manguera', nombre: 'Manguera', categoria: 'carnes',
+    id: 'manguera', precio: 8000, unidad: 'kg', nombre: 'Manguera', categoria: 'carnes',
+    cotizacion: true,
     descripcion: 'Salchicha larga para la salchipapa.',
     presentacion: '250 g · 500 g · 1.000 g', imagen: 'imagenes/productos/salchicha-manguera.webp', destacado: false,
   },
 
   /* ---------------- Congelados ---------------- */
   {
-    id: 'papas-francesa', nombre: 'Papas a la francesa', categoria: 'congelados',
+    id: 'papas-francesa', precio: 20000, nombre: 'Papas a la francesa', categoria: 'congelados',
     marca: 'Bart\'s Tradition',
     descripcion: 'Prefritas congeladas, van directo al aceite.',
     presentacion: '2,5 kg · 31 porciones', imagen: 'imagenes/productos/papas-francesas-2-500g.webp', destacado: true,
   },
   {
-    id: 'empanadas', nombre: 'Empanadas', categoria: 'congelados',
+    id: 'empanadas', precio: 10600, nombre: 'Empanadas', categoria: 'congelados',
     marca: 'Jiménez',
     descripcion: 'Congeladas, listas para freír.',
     presentacion: '1.000 g · 20 porciones', imagen: 'imagenes/productos/empanadas.webp', destacado: true,
   },
   {
-    id: 'maiz', nombre: 'Maíz dulce', categoria: 'congelados',
+    id: 'maiz', precio: 9500, nombre: 'Maíz dulce', categoria: 'congelados',
     descripcion: 'Desgranado, para ensaladas, cremas y guarniciones.',
     presentacion: '500 g · 1.000 g', imagen: 'imagenes/productos/maiz-dulce.webp', destacado: false,
   },
   {
-    id: 'mix-verduras', nombre: 'Mix de verduras', categoria: 'congelados',
+    id: 'mix-verduras', precio: 7300, nombre: 'Mix de verduras', categoria: 'congelados',
     marca: 'Ricongelisto',
     descripcion: 'Arveja, zanahoria, maíz y habichuela, ya picados.',
     presentacion: '500 g', imagen: 'imagenes/productos/mix-de-verduras.webp', destacado: false,
   },
   {
-    id: 'croquetas-yuca', nombre: 'Croquetas de yuca', categoria: 'congelados',
+    id: 'croquetas-yuca', precio: 5200, nombre: 'Croquetas de yuca', categoria: 'congelados',
     marca: 'Ricongelisto',
     descripcion: 'Congeladas, para freír al momento.',
     presentacion: '500 g · 1.000 g', imagen: 'imagenes/productos/croquetas-de-yuca.webp', destacado: false,
@@ -302,45 +302,45 @@ const PRODUCTOS = [
 
   /* ---------------- Desechables y empaques ---------------- */
   {
-    id: 'contenedores', nombre: 'Contenedores', categoria: 'desechables',
+    id: 'contenedores', precio: 11300, nombre: 'Contenedores', categoria: 'desechables',
     descripcion: 'De icopor con tapa, para sopas, guisos y domicilios.',
     presentacion: '8 oz · 12 oz · 16 oz · 24 oz', imagen: 'imagenes/productos/contenedores-8-16-24oz.webp', destacado: true,
   },
   {
-    id: 'portacomidas', nombre: 'Portacomidas', categoria: 'desechables',
+    id: 'portacomidas', precio: 500, unidad: 'unidad', nombre: 'Portacomidas', categoria: 'desechables',
     descripcion: 'De icopor con tapa y divisiones, para almuerzos y domicilios.',
     presentacion: 'C1 · J2 · P1 · K1', imagen: 'imagenes/productos/porta-comida-c1-k1-j2-p1.webp', destacado: false,
   },
   {
-    id: 'platos-desechables', nombre: 'Platos desechables', categoria: 'desechables',
+    id: 'platos-desechables', precio: 7200, nombre: 'Platos desechables', categoria: 'desechables',
     marca: 'Wau!',
     descripcion: 'Plato pando de icopor para eventos.',
     presentacion: '23 cm · 20 unidades', imagen: 'imagenes/productos/plato-de-icopor.webp', destacado: false,
   },
   {
-    id: 'vasos-desechables', nombre: 'Vasos desechables', categoria: 'desechables',
+    id: 'vasos-desechables', precio: 2500, nombre: 'Vasos desechables', categoria: 'desechables',
     marca: 'Wau!',
     descripcion: 'Vaso translúcido reciclable, para bebidas frías.',
     presentacion: '7 oz · 50 unidades', imagen: 'imagenes/productos/vaso-plastico.webp', destacado: false,
   },
   {
-    id: 'servilletas', nombre: 'Servilletas', categoria: 'desechables',
+    id: 'servilletas', precio: 4300, nombre: 'Servilletas', categoria: 'desechables',
     marca: 'Popular',
     descripcion: 'Servilleta partida, la de mayor rotación en el negocio.',
     presentacion: '300 unidades', imagen: 'imagenes/productos/servilleta-desechables.webp', destacado: false,
   },
   {
-    id: 'moldes-aluminio', nombre: 'Moldes de aluminio', categoria: 'desechables',
+    id: 'moldes-aluminio', precio: 3500, nombre: 'Moldes de aluminio', categoria: 'desechables',
     descripcion: 'Redondos y rectangulares, de la porción individual a la bandeja.',
     presentacion: 'Varios tamaños', imagen: 'imagenes/productos/moldes-de-aluminio.webp', destacado: false,
   },
   {
-    id: 'copas-salseras', nombre: 'Copa salsera con tapa', categoria: 'desechables',
+    id: 'copas-salseras', precio: 4600, nombre: 'Copa salsera con tapa', categoria: 'desechables',
     descripcion: 'Para salsas y aderezos.',
     presentacion: '½ oz · 1 oz · 2 oz', imagen: 'imagenes/productos/copa-salsera.webp', destacado: false,
   },
   {
-    id: 'papel-aluminio', nombre: 'Papel aluminio', categoria: 'desechables',
+    id: 'papel-aluminio', precio: 26500, nombre: 'Papel aluminio', categoria: 'desechables',
     marca: 'House',
     descripcion: 'Rollo para horno, asado y para conservar.',
     presentacion: '6 m · 16 m · 40 m · 100 m · 300 m', imagen: 'imagenes/productos/papel-aluminio.webp', destacado: false,
@@ -348,31 +348,31 @@ const PRODUCTOS = [
 
   /* ---------------- Salsas y aderezos ---------------- */
   {
-    id: 'mayonesa-san-jorge', nombre: 'Aderezo de mayonesa', categoria: 'salsas',
+    id: 'mayonesa-san-jorge', precio: 68000, nombre: 'Aderezo de mayonesa', categoria: 'salsas',
     marca: 'San Jorge',
     descripcion: 'La base de la salsa de la casa, en presentación para negocio.',
     presentacion: '3.950 g', imagen: 'imagenes/productos/aderezo-mayonesa.webp', destacado: true,
   },
   {
-    id: 'vinagre', nombre: 'Vinagre blanco', categoria: 'salsas',
+    id: 'vinagre', precio: 4500, nombre: 'Vinagre blanco', categoria: 'salsas',
     marca: 'Distrivalle',
     descripcion: 'Para aderezos, encurtidos y limpieza de cocina.',
     presentacion: '3.000 ml', imagen: 'imagenes/productos/vinagre.webp', destacado: false,
   },
   {
-    id: 'salsas-difier', nombre: 'Salsas Differ', categoria: 'salsas',
+    id: 'salsas-difier', precio: 40100, nombre: 'Salsas Differ', categoria: 'salsas',
     marca: 'Differ',
     descripcion: 'Mayonesa con ajo, tomate sabor Bar-BQ y fruta con piña, entre otros sabores.',
     presentacion: '500 g · 1.000 g · 4.000 g', imagen: 'imagenes/productos/salsas-differ.webp', destacado: false,
   },
   {
-    id: 'pompeya-pina', nombre: 'Pompeya de piña', categoria: 'salsas',
+    id: 'pompeya-pina', precio: 22000, nombre: 'Pompeya de piña', categoria: 'salsas',
     marca: 'Pompeya',
     descripcion: 'Para repostería y para acompañar carnes.',
     presentacion: '4.000 g', imagen: 'imagenes/productos/salsa-pompeya.webp', destacado: false,
   },
   {
-    id: 'salsa-italiana', nombre: 'Salsa italiana', categoria: 'salsas',
+    id: 'salsa-italiana', precio: 31200, nombre: 'Salsa italiana', categoria: 'salsas',
     marca: 'Italiano',
     descripcion: 'Salsita con tomate, para pastas, lasañas y pizzas.',
     presentacion: '4.000 g', imagen: 'imagenes/productos/salsa-italiana.webp', destacado: false,
@@ -386,7 +386,7 @@ const PRODUCTOS = [
 
   /* ---------------- Panadería y repostería ---------------- */
   {
-    id: 'huevos', nombre: 'Huevos', categoria: 'reposteria',
+    id: 'huevos', precio: 17000, unidad: 'panal de 30', nombre: 'Huevos', categoria: 'reposteria',
     descripcion: 'AA y AAA.',
     presentacion: 'Por unidad, medio panal o panal de 30', imagen: 'imagenes/productos/huevos-aa-aaa.webp', destacado: true,
   },
@@ -447,7 +447,7 @@ const PRODUCTOS = [
 
   /* ---------------- Aceites ---------------- */
   {
-    id: 'aceite-industrial', nombre: 'Aceite industrial', categoria: 'aceites',
+    id: 'aceite-industrial', precio: 123000, nombre: 'Aceite industrial', categoria: 'aceites',
     marca: 'Celestial',
     descripcion: 'Aceite industrial para altas temperaturas.',
     presentacion: '19 litros', imagen: 'imagenes/productos/aceite-industrial-19lts.webp', destacado: true,
@@ -507,7 +507,7 @@ const PRODUCTOS = [
 
   /* ---------------- Enlatados ---------------- */
   {
-    id: 'atun', nombre: 'Atún', categoria: 'enlatados',
+    id: 'atun', precio: 6500, nombre: 'Atún', categoria: 'enlatados',
     marca: 'Isabel',
     descripcion: 'Atún claro en lomitos, en aceite de girasol o en agua.',
     presentacion: 'Lomitos en agua o en aceite de girasol', imagen: 'imagenes/productos/atun-isabel.webp', destacado: true,
