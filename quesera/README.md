@@ -53,7 +53,7 @@ Dos cosas que vienen de esos documentos y conviene contrastar con el cliente:
 | Dato | Dónde se pone | Estado |
 |---|---|---|
 | A qué presentación va cada precio | `presentacion` en `PRODUCTOS` | Por confirmar |
-| Si los precios llevan IVA | el aviso del catálogo | Por confirmar |
+| Si los precios llevan IVA | el aviso del catálogo | Confirmado: sí |
 | Presentación de 2 productos | `presentacion` en `PRODUCTOS` | Falta |
 | Marca de 9 productos | `marca` en `PRODUCTOS` | Falta |
 | Qué más se vende a granel | `cotizacion` en `PRODUCTOS` | Por revisar |
@@ -127,21 +127,21 @@ granel va por kilo y desde cuándo rigen.
 - El cliente escribió **«Salchichón Calima»** y en el catálogo la marca es **Calinnas**.
 - **Margarina Astra $14.800** vino «por kilo», así que se le puso la marca de venta a
   granel, igual que a la manguera.
-- **Un precio para varias presentaciones.** Hay productos cuya tarjeta ofrece varios
-  tamaños y recibió una sola cifra: tocineta (250/500/1.000 g), maíz dulce, croquetas de
-  yuca, contenedores (8 a 24 oz), copa salsera (½ a 2 oz), papel aluminio (6 a 300 m),
-  moldes de aluminio («varios tamaños»), salsas Differ (500 a 4.000 g), harina de trigo
-  («bulto de 50 kg y por arroba»), esencias (60 y 500 ml), aceite de palma (900 a 5.000
-  ml), color (250 a 1.000 g) y acento (250 y 500 g). Tal como está, el
-  cliente va a leer que ese precio vale para cualquiera de los tamaños. Hay que pedirle a
-  qué presentación corresponde cada cifra y, en los que valga la pena, partirlos en
-  productos separados.
+- **Un precio para varias presentaciones.** Dieciséis productos ofrecen varios tamaños y
+  recibieron una sola cifra, así que llevan `variosPrecios: true` y la tarjeta agrega
+  «varias presentaciones · consultar cotización vigente» debajo del precio: tocineta, maíz
+  dulce, croquetas de yuca, contenedores, portacomidas, moldes de aluminio, copa salsera,
+  papel aluminio, salsas Differ, huevos, harina de trigo, domos para torta, esencias,
+  aceite de palma, color y acento. La etiqueta evita que la cifra se lea como válida para
+  cualquier tamaño, pero es un parche: lo que de verdad resuelve el catálogo es saber a
+  qué presentación corresponde cada precio y, donde valga la pena, partirlos en productos
+  separados (papel aluminio de 6 m, de 16 m, etc.).
 
 Dos cosas para hablar con el cliente antes de publicar la lista:
 
-- **El IVA.** El Estatuto del Consumidor exige mostrarle al consumidor el precio total,
-  impuestos incluidos. Hay que confirmar si las cifras que entregue ya lo traen y, si
-  aplica, decirlo en la página.
+- **El IVA.** Confirmado por el cliente: los precios ya lo incluyen, y así lo dicen el
+  aviso del catálogo y la cláusula 2.2 de `legal.html`. Si algún día dejaran de
+  incluirlo, hay que cambiar los dos textos.
 - **El precio publicado obliga.** Mientras esté en la página hay que respetarlo, así que
   conviene actualizarlo apenas cambie; por eso la fecha.
 

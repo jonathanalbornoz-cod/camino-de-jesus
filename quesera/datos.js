@@ -40,6 +40,10 @@ const MARCA = {
   // arriba; la razón social y el NIT son opcionales y sólo salen si se llenan.
   razonSocial: 'Quesera y Salsamentaria Chiminangos',
   nit: '1002596521',
+  // Los precios de PRODUCTOS llevan IVA incluido, confirmado por el cliente.
+  // Si algún día dejaran de llevarlo, hay que cambiar el aviso del catálogo y
+  // la cláusula 2.2 de legal.html, que hoy lo dicen de frente.
+  //
   // Fecha de la última actualización de la lista de precios. Sale junto a los
   // precios en el catálogo: un precio sin fecha no le dice nada al cliente y,
   // si queda viejo, el negocio igual tiene que respetarlo. Si se tocan los
@@ -173,6 +177,9 @@ const CATEGORIAS = [
  *                 Si falta, la tarjeta dice «Consultar cotización vigente»
  *   unidad        a qué corresponde ese precio: 'kg', 'libra', 'und', 'caja'…
  *                 En lo que se vende a granel va el precio por kilo
+ *   variosPrecios true cuando la tarjeta ofrece varias presentaciones y el
+ *                 precio no puede valer para todas: la tarjeta agrega
+ *                 «consultar cotización vigente» debajo de la cifra
  *   descripcion   una línea, corta
  *   imagen        ruta de la foto; vacío = ilustración de la categoría
  *   destacado     true lo sube al comienzo del catálogo
@@ -255,6 +262,7 @@ const PRODUCTOS = [
   },
   {
     id: 'tocineta', nombre: 'Tocineta', categoria: 'carnes',
+    variosPrecios: true,
     precio: 16500,
     marca: 'Titos',
     descripcion: 'De cerdo ahumada, en lonjas parejas.',
@@ -299,6 +307,7 @@ const PRODUCTOS = [
   },
   {
     id: 'maiz', nombre: 'Maíz dulce', categoria: 'congelados',
+    variosPrecios: true,
     precio: 9500,
     descripcion: 'Desgranado, para ensaladas, cremas y guarniciones.',
     presentacion: '500 g · 1.000 g', imagen: 'imagenes/productos/maiz-dulce.webp', destacado: false,
@@ -312,6 +321,7 @@ const PRODUCTOS = [
   },
   {
     id: 'croquetas-yuca', nombre: 'Croquetas de yuca', categoria: 'congelados',
+    variosPrecios: true,
     precio: 5200,
     marca: 'Ricongelisto',
     descripcion: 'Congeladas, para freír al momento.',
@@ -321,12 +331,14 @@ const PRODUCTOS = [
   /* ---------------- Desechables y empaques ---------------- */
   {
     id: 'contenedores', nombre: 'Contenedores', categoria: 'desechables',
+    variosPrecios: true,
     precio: 11300,
     descripcion: 'De icopor con tapa, para sopas, guisos y domicilios.',
     presentacion: '8 oz · 12 oz · 16 oz · 24 oz', imagen: 'imagenes/productos/contenedores-8-16-24oz.webp', destacado: true,
   },
   {
     id: 'portacomidas', nombre: 'Portacomidas', categoria: 'desechables',
+    variosPrecios: true,
     precio: 500, unidad: 'unidad',
     descripcion: 'De icopor con tapa y divisiones, para almuerzos y domicilios.',
     presentacion: 'C1 · J2 · P1 · K1', imagen: 'imagenes/productos/porta-comida-c1-k1-j2-p1.webp', destacado: false,
@@ -354,18 +366,21 @@ const PRODUCTOS = [
   },
   {
     id: 'moldes-aluminio', nombre: 'Moldes de aluminio', categoria: 'desechables',
+    variosPrecios: true,
     precio: 3500,
     descripcion: 'Redondos y rectangulares, de la porción individual a la bandeja.',
     presentacion: 'Varios tamaños', imagen: 'imagenes/productos/moldes-de-aluminio.webp', destacado: false,
   },
   {
     id: 'copas-salseras', nombre: 'Copa salsera con tapa', categoria: 'desechables',
+    variosPrecios: true,
     precio: 4600,
     descripcion: 'Para salsas y aderezos.',
     presentacion: '½ oz · 1 oz · 2 oz', imagen: 'imagenes/productos/copa-salsera.webp', destacado: false,
   },
   {
     id: 'papel-aluminio', nombre: 'Papel aluminio', categoria: 'desechables',
+    variosPrecios: true,
     precio: 26500,
     marca: 'House',
     descripcion: 'Rollo para horno, asado y para conservar.',
@@ -389,6 +404,7 @@ const PRODUCTOS = [
   },
   {
     id: 'salsas-difier', nombre: 'Salsas Differ', categoria: 'salsas',
+    variosPrecios: true,
     precio: 40100,
     marca: 'Differ',
     descripcion: 'Mayonesa con ajo, tomate sabor Bar-BQ y fruta con piña, entre otros sabores.',
@@ -419,12 +435,14 @@ const PRODUCTOS = [
   /* ---------------- Panadería y repostería ---------------- */
   {
     id: 'huevos', nombre: 'Huevos', categoria: 'reposteria',
+    variosPrecios: true,
     precio: 17000, unidad: 'panal de 30',
     descripcion: 'AA y AAA.',
     presentacion: 'Por unidad, medio panal o panal de 30', imagen: 'imagenes/productos/huevos-aa-aaa.webp', destacado: true,
   },
   {
     id: 'harinas', nombre: 'Harina de trigo', categoria: 'reposteria',
+    variosPrecios: true,
     precio: 132000,
     marca: 'Haz de Oros',
     descripcion: 'Fortificada tradicional, para panadería y amasijos.',
@@ -447,12 +465,14 @@ const PRODUCTOS = [
   },
   {
     id: 'domos-torta', nombre: 'Domos para torta', categoria: 'reposteria',
+    variosPrecios: true,
     precio: 3200,
     descripcion: 'Para transportar y exhibir la torta sin dañarla.',
     presentacion: '', imagen: 'imagenes/productos/domos-para-tortas.webp', destacado: false,
   },
   {
     id: 'esencias', nombre: 'Esencias', categoria: 'reposteria',
+    variosPrecios: true,
     precio: 7200,
     descripcion: 'Vainilla, mantequilla, coco y más sabores para repostería.',
     presentacion: '60 ml · 500 ml', imagen: 'imagenes/productos/esencias-para-alimentos.webp', destacado: false,
@@ -498,6 +518,7 @@ const PRODUCTOS = [
   },
   {
     id: 'aceite-galon', nombre: 'Aceite de palma', categoria: 'aceites',
+    variosPrecios: true,
     precio: 23000,
     marca: 'Palma de Oro',
     descripcion: 'Perfecto para freír.',
@@ -514,6 +535,7 @@ const PRODUCTOS = [
   /* ---------------- Condimentos ---------------- */
   {
     id: 'color', nombre: 'Color', categoria: 'condimentos',
+    variosPrecios: true,
     precio: 5500,
     marca: 'Productos Libertad',
     descripcion: 'Azafrán color extra, para condimentar sus preparaciones.',
@@ -521,6 +543,7 @@ const PRODUCTOS = [
   },
   {
     id: 'acento', nombre: 'Acento', categoria: 'condimentos',
+    variosPrecios: true,
     precio: 8200,
     marca: 'La Granja Paisa',
     descripcion: 'Sazonador de uso diario en cocina.',

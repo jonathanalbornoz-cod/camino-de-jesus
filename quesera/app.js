@@ -119,9 +119,10 @@
         ? ' Lo que aparezca como <strong>«consultar cotización vigente»</strong> se lo ' +
           'cotizamos por WhatsApp.' : '';
       $('#aviso-precio-texto').innerHTML =
-        'Precios en pesos colombianos, por la unidad indicada en cada producto; lo que se ' +
-        'vende a granel va <strong>por kilo</strong> y el total se ajusta al peso ' +
-        'despachado.' + fecha + faltaAlguno;
+        'Precios en pesos colombianos, <strong>IVA incluido</strong>, por la unidad ' +
+        'indicada en cada producto; lo que se vende a granel va <strong>por kilo</strong> ' +
+        'y el total se ajusta al peso despachado. Donde hay varias presentaciones, la ' +
+        'cifra es de referencia y el precio exacto va en la cotización.' + fecha + faltaAlguno;
     }
 
     if (MARCA.mapaEmbed) {
@@ -264,6 +265,9 @@
               ? `<strong>${pesos.format(p.precio)}</strong>${p.unidad ? `<span class="tarjeta__unidad">/ ${escapar(p.unidad)}</span>` : ''}`
               : '<span class="tarjeta__consultar">Consultar cotización vigente</span>'}
           </p>
+          ${p.variosPrecios ? `<p class="tarjeta__cotizacion">
+            ${icono('catalogo')}Varias presentaciones · consultar cotización vigente
+          </p>` : ''}
           ${p.cotizacion ? `<p class="tarjeta__cotizacion">
             ${icono('pesa')}${Number(p.precio) > 0
               ? 'Se pesa al momento: el total va según el peso despachado'
